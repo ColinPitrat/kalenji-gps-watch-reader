@@ -1,0 +1,27 @@
+78 
+00 d8 // Size without header nor checksum (216)
+// One line per session. Example from first line:
+// 0b 0c 12 = Date (11 12 18 = 18 DEC 2011)
+// 15 3a 1F = Hour (21 58 31 = 21:58:31)
+// 05 00 = Number of points (00 05 = 5)
+// 64 00 00 00 = Duration in tenth of seconds (00 64 = 100 = 10 seconds). I suspect this is on 4 bytes: TODO: test on more than 2 hours (6600 seconds)
+// 00 00 00 00 = Distance in meters. I also suspect this is on 4 bytes: TODO: test on more than 66 km !
+// 01 00 = number of laps. I guess it's on 2 bytes: TODO: test on more than 255 laps (that's going to be fun !)
+
+// Still fuzzy (probably somewhere, whether it has already been loaded or not):
+// 00 00 = (A) An identifier used by later request to select sessions to retrieve.
+// 00 00 = (B) Also some kind of identifier. First guess is that (A) always increments (but I saw some jumps !) whereas (B) takes smallest value available (so decrease when some sessions are removed). But it doesn't seem to be used anywhere ...
+// 00 = Not always 00 ! I saw different values for this byte. Probably depend on the kind of session done.
+// 03 = Always 03 ? I never saw anything else yet ...
+
+0b 0c 12   15 3a 1f   05 00   64 00 00 00   00 00 00 00   01 00   00 00   00 00   00 03     // 18 DEC 2011 21:58:31
+0b 0c 12   15 3b 07   0f 00   2f 01 00 00   1e 00 00 00   01 00   01 00   01 00   00 03     // 18 DEC 2011 21:59:07
+0b 0c 12   16 00 00   02 00   22 00 00 00   00 00 00 00   01 00   02 00   02 00   00 03     // 18 DEC 2011 22:00:00
+0b 0c 12   16 00 1e   09 00   b4 00 00 00   1d 00 00 00   01 00   03 00   03 00   00 03     // 18 DEC 2011 22:00:30
+0b 0c 13   0c 13 24   ba 03   6a 4c 00 00   97 07 00 00   01 00   04 00   04 00   00 03     // 19 DEC 2011 12:19:36
+0b 0c 13   0e 0f 3a   0d 00   fd 00 00 00   65 01 00 00   01 00   0b 00   05 00   00 03     // 19 DEC 2011 14:15:58
+0b 0c 13   0e 10 36   08 00   98 00 00 00   15 00 00 00   01 00   0c 00   06 00   00 03     // 19 DEC 2011 14:16:54
+0b 0c 13   0e 11 22   05 00   5d 00 00 00   0c 00 00 00   01 00   0d 00   07 00   00 03     // 19 DEC 2011 14:17:34
+0b 0c 13   0e 12 10   1e 00   5a 02 00 00   31 00 00 00   01 00   0e 00   08 00   00 03     // 19 DEC 2011 14:18:16
+
+3b    // Checksum: as in all request, a XOR of all bytes of the content including the size

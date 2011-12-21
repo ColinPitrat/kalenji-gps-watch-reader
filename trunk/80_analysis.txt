@@ -1,0 +1,153 @@
+There are 3 types of request 80
+
+ ===== type 1: session data =====
+80 
+00 5c                                            // Size without header nor checksum
+0b 0c 13                                         // Date (11 12 19 = 19 DEC 2011)
+0c 13 24                                         // Hour (12 19 36 = 12:19:36)
+ba 03                                            // Number of points of measure (3BA = 954)
+6a 4c 00 00                                      // Duration (4C6A = 19562 tenth of seconds = 32'36")
+97 07 00 00                                      // Length in meters (797 = 1943m)
+01 00                                            // Number of laps
+04 00 04 00                                      // IDs (first two bytes is an ID that is always incrementing, second two bytes is an ID that is taking the smallest free value)
+00 03                                            // Magic number representating type of session ?
+61 64 76 65 72 73 61 69 72 65                    // ASCII: adversaire
+00 00 00 00 00 00                                // Always 0 ?
+00 00 00 00                                      // Duration for adversaire
+00 00 00 00                                      // Max speed and average speed of adversaire ?
+00 00 00 00                                      // Repeated ?!
+97 03 66 01                                      // Max speed and average speed of runner ?
+97 03 66 01                                      // Repeated ?!
+00 00 ae 00 
+57 01
+55 01                                            // Calories spent
+70 00                                            // Grams lost
+5a 00                                            // Ascent
+64 00                                            // Descent
+00 00 
+49 6e 74 65 72 76 61 6c 6c 65 20 33 30 20 2f 00  // ASCII: Intervalle 30 /
+8e                                               // Checksum: as in all request, a XOR of all bytes of the content including the size
+
+ ===== type 2: laps data =====
+80 
+00 44                                            // Size without header nor checksum
+0b 0c 13                                         // Date (11 12 19 = 19 DEC 2011)
+0c 13 24                                         // Hour (12 19 36 = 12:19:36)
+ba 03                                            // Number of points of measure (3BA = 954)
+6a 4c 00 00                                      // Duration (4C6A = 19562 tenth of seconds = 32'36")
+97 07 00 00                                      // Length in meters (797 = 1943m)
+01 00                                            // Number of laps
+00 00 00 00 aa 03 
+// -8<-- For each lap :
+6a 4c 00 00                                      // Time at which the lap ends
+6a 4c 00 00                                      // Duration of the lap
+97 07 00 00                                      // Length of the lap in meters
+97 03 66 01                                      // Max speed and average speed of the lap
+97 03 66 01                                      // Why repeated ?
+00 00 00 00                                      // Always 0 ?
+57 01 
+55 01                                            // Calories spent in the lap
+70 00                                            // Grams lost in the lap
+64 00                                            // Descent of the lap
+5a 00                                            // Ascent of the lap
+00 00 07 00 97 00 
+00 00 b9 03                                      // Interval of points in the lap (from 0 to 3B9 included: there are 3BA points)
+// -->8- For each lap :
+3a                                               // Checksum: as in all request, a XOR of all bytes of the content including the size 
+
+ ===== type 3: list of points =====
+80 
+05 cc                                            // Size without header nor checksum (1484)
+0b 0c 13                                         // Date (11 12 19 = 19 DEC 2011)
+0c 13 24                                         // Hour (12 19 36 = 12:19:36)
+ba 03                                            // Number of points of measure (3BA = 954)
+6a 4c 00 00                                      // Duration (4C6A = 19562 tenth of seconds = 32'36")
+97 07 00 00                                      // Length in meters (797 = 1943m)
+01 00                                            // Number of laps
+49 00                                            // First point in this exchange
+91 00                                            // Last point in this exchange
+55 03 
+// -8<-- For each point :
+// 32 8A B9 02 = 2B98A32 = 45713970 = 45.713970 * 10^6 = latitude
+// FD 0A 43 00 = 430AFD = 4393725 = 4.393725 * 10^6 = longitude
+// 60 02 = 260 = 608 = altitude
+// 45 02 = 245 = 581 = vitesse (5,81 km/h)
+// 00 03 00 00 = ?? 
+// 15 00 = 15 = duration since previous measure = 20 = 2.1s (2 bytes ?)
+// 00 00 = ??
+// There is probably some place for heartrate somewhere
+32 8a b9 02   fd 0a 43 00   60 02   45 02   00 03 00 00 15 00 00 00 
+44 8a b9 02   1b 0b 43 00   60 02   4a 02   00 03 00 00 14 00 00 00 
+58 8a b9 02   39 0b 43 00   60 02   4f 02   00 03 00 00 15 00 00 00 
+6c 8a b9 02   55 0b 43 00   60 02   53 02   00 03 00 00 14 00 00 00 
+80 8a b9 02   72 0b 43 00   60 02   48 02   00 03 00 00 15 00 00 00 
+94 8a b9 02   8c 0b 43 00   5f 02   40 02   00 03 00 00 14 00 00 00 
+aa 8a b9 02   a9 0b 43 00   5f 02   3b 02   00 03 00 00 15 00 00 00 
+be 8a b9 02   c3 0b 43 00   5f 02   2b 02   00 03 00 00 14 00 00 00 
+d0 8a b9 02   dc 0b 43 00   5f 02   1d 02   00 03 00 00 15 00 00 00 
+e6 8a b9 02   f5 0b 43 00   5e 02   13 02   00 03 00 00 14 00 00 00 
+fc 8a b9 02   0e 0c 43 00   5e 02   0b 02   00 03 00 00 15 00 00 00 
+10 8b b9 02   27 0c 43 00   5e 02   05 02   00 03 00 00 15 00 00 00 
+25 8b b9 02   42 0c 43 00   5d 02   06 02   00 03 00 00 14 00 00 00 
+39 8b b9 02   5d 0c 43 00   5d 02   0e 02   00 03 00 00 15 00 00 00 
+4c 8b b9 02   74 0c 43 00   5d 02   12 02   00 03 00 00 14 00 00 00 
+61 8b b9 02   86 0c 43 00   5c 02   13 02   00 03 00 00 15 00 00 00 
+83 8b b9 02   a1 0c 43 00   5c 02   1d 02   00 03 00 00 14 00 00 00 
+98 8b b9 02   b8 0c 43 00   5c 02   24 02   00 03 00 00 15 00 00 00 
+b0 8b b9 02   ce 0c 43 00   5c 02   2a 02   00 03 00 00 15 00 00 00 
+c5 8b b9 02   e0 0c 43 00   5c 02   2c 02   00 03 00 00 14 00 00 00 
+d9 8b b9 02   f8 0c 43 00   5c 02   2e 02   00 03 00 00 15 00 00 00 
+ed 8b b9 02   08 0d 43 00   5b 02   29 02   00 03 00 00 14 00 00 00 
+03 8c b9 02   20 0d 43 00   5b 02   1e 02   00 03 00 00 15 00 00 00 
+19 8c b9 02   3a 0d 43 00   5b 02   19 02   00 03 00 00 15 00 00 00 
+2d 8c b9 02   55 0d 43 00   5b 02   0f 02   00 03 00 00 14 00 00 00 
+41 8c b9 02   6e 0d 43 00   5b 02   04 02   00 03 00 00 15 00 00 00 
+53 8c b9 02   89 0d 43 00   5b 02   fc 01   00 03 00 00 14 00 00 00 
+67 8c b9 02   a5 0d 43 00   5b 02   f9 01   00 03 00 00 15 00 00 00 
+7b 8c b9 02   be 0d 43 00   5b 02   f7 01   00 03 00 00 14 00 00 00 
+91 8c b9 02   d0 0d 43 00   5b 02   f2 01   00 03 00 00 15 00 00 00 
+a3 8c b9 02   e8 0d 43 00   5b 02   f9 01   00 03 00 00 14 00 00 00 
+ba 8c b9 02   fd 0d 43 00   5a 02   ff 01   00 03 00 00 15 00 00 00 
+ce 8c b9 02   11 0e 43 00   5a 02   01 02   00 03 00 00 14 00 00 00 
+eb 8c b9 02   2f 0e 43 00   59 02   05 02   00 03 00 00 15 00 00 00 
+ff 8c b9 02   47 0e 43 00   59 02   0e 02   00 03 00 00 15 00 00 00 
+0f 8d b9 02   63 0e 43 00   59 02   14 02   00 03 00 00 15 00 00 00 
+22 8d b9 02   7e 0e 43 00   58 02   19 02   00 03 00 00 14 00 00 00 
+34 8d b9 02   97 0e 43 00   58 02   1d 02   00 03 00 00 15 00 00 00 
+46 8d b9 02   ac 0e 43 00   57 02   1e 02   00 03 00 00 14 00 00 00 
+59 8d b9 02   c4 0e 43 00   57 02   14 02   00 03 00 00 15 00 00 00 
+6b 8d b9 02   d9 0e 43 00   56 02   0b 02   00 03 00 00 14 00 00 00 
+7c 8d b9 02   f7 0e 43 00   55 02   04 02   00 03 00 00 15 00 00 00 
+8c 8d b9 02   17 0f 43 00   55 02   f4 01   00 03 00 00 14 00 00 00 
+9f 8d b9 02   38 0f 43 00   55 02   ee 01   00 03 00 00 15 00 00 00 
+ae 8d b9 02   55 0f 43 00   56 02   eb 01   00 03 00 00 14 00 00 00 
+bb 8d b9 02   71 0f 43 00   56 02   e9 01   00 03 00 00 15 00 00 00 
+c7 8d b9 02   96 0f 43 00   57 02   e8 01   00 03 00 00 15 00 00 00 
+d1 8d b9 02   b9 0f 43 00   58 02   f0 01   00 03 00 00 14 00 00 00 
+d7 8d b9 02   dd 0f 43 00   58 02   f7 01   00 03 00 00 15 00 00 00 
+db 8d b9 02   0e 10 43 00   59 02   02 02   00 03 00 00 14 00 00 00 
+e3 8d b9 02   37 10 43 00   5a 02   10 02   00 03 00 00 15 00 00 00 
+f0 8d b9 02   78 10 43 00   5b 02   32 02   00 03 00 00 15 00 00 00 
+f9 8d b9 02   a4 10 43 00   5c 02   4e 02   00 03 00 00 14 00 00 00 
+ff 8d b9 02   cc 10 43 00   5d 02   67 02   00 03 00 00 15 00 00 00 
+0b 8e b9 02   ef 10 43 00   5e 02   75 02   00 03 00 00 14 00 00 00 
+18 8e b9 02   0d 11 43 00   5e 02   79 02   00 03 00 00 15 00 00 00 
+1c 8e b9 02   33 11 43 00   5f 02   6d 02   00 03 00 00 14 00 00 00 
+21 8e b9 02   56 11 43 00   5f 02   58 02   00 03 00 00 15 00 00 00 
+26 8e b9 02   79 11 43 00   5f 02   43 02   00 03 00 00 15 00 00 00 
+29 8e b9 02   a1 11 43 00   60 02   2c 02   00 03 00 00 14 00 00 00 
+2c 8e b9 02   cc 11 43 00   60 02   19 02   00 03 00 00 15 00 00 00 
+31 8e b9 02   f4 11 43 00   61 02   0f 02   00 03 00 00 14 00 00 00 
+3b 8e b9 02   17 12 43 00   62 02   08 02   00 03 00 00 15 00 00 00 
+40 8e b9 02   3c 12 43 00   63 02   05 02   00 03 00 00 14 00 00 00 
+47 8e b9 02   5d 12 43 00   63 02   00 02   00 03 00 00 15 00 00 00 
+51 8e b9 02   7f 12 43 00   64 02   06 02   00 03 00 00 14 00 00 00 
+58 8e b9 02   a2 12 43 00   64 02   06 02   00 03 00 00 16 00 00 00 
+65 8e b9 02   d0 12 43 00   63 02   0e 02   00 03 00 00 15 00 00 00 
+67 8e b9 02   e8 12 43 00   63 02   0b 02   00 03 00 00 15 00 00 00 
+6c 8e b9 02   06 13 43 00   62 02   04 02   00 03 00 00 15 00 00 00 
+74 8e b9 02   29 13 43 00   61 02   00 02   00 03 00 00 14 00 00 00 
+79 8e b9 02   47 13 43 00   61 02   fa 01   00 03 00 00 15 00 00 00 
+80 8e b9 02   6b 13 43 00   60 02   ef 01   00 03 00 00 14 00 00 00 
+// -->8- For each point :
+50                                               // Checksum: as in all request, a XOR of all bytes of the content including the size
