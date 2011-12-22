@@ -44,7 +44,7 @@ ba 03                                            // Number of points of measure 
 97 07 00 00                                      // Length of the lap in meters
 97 03 66 01                                      // Max speed and average speed of the lap
 97 03 66 01                                      // Why repeated ?
-00 00 00 00                                      // Always 0 ?
+00 00 00 00                                      // Always 0 ? Heart-rate in CW 700 ?
 57 01 
 55 01                                            // Calories spent in the lap
 70 00                                            // Grams lost in the lap
@@ -72,7 +72,7 @@ ba 03                                            // Number of points of measure 
 // FD 0A 43 00 = 430AFD = 4393725 = 4.393725 * 10^6 = longitude
 // 60 02 = 260 = 608 = altitude
 // 45 02 = 245 = 581 = vitesse (5,81 km/h)
-// 00 03 00 00 = ?? 
+// 00 03 00 00 = ?? Number of satellites ?
 // 15 00 = 15 = duration since previous measure = 20 = 2.1s (2 bytes ?)
 // 00 00 = ??
 // There is probably some place for heartrate somewhere
