@@ -714,7 +714,9 @@ bool createGPX(SessionInfo *session)
 			mystream << "      <gpxdata:distance>" << it->getLength() << "</gpxdata:distance>" << std::endl;
 			// Heart rate is not available on my device but would be nice to add:
 			mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
-			mystream << "      <gpxdata:trigger kind=\"manual\" />" << std::endl;
+            // As far as I know, manual trigger of laps is the only option possible on those devices
+			mystream << "      <gpxdata:trigger>Manual</gpxdata:trigger>" << std::endl;
+            // What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
 			mystream << "      <gpxdata:intensity>active</gpxdata:intensity>" << std::endl;
 			mystream << "    </gpxdata:lap>" << std::endl;
 		}
