@@ -712,11 +712,11 @@ bool createGPX(SessionInfo *session)
 			mystream << "      <gpxdata:elapsedTime>" << it->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 			mystream << "      <gpxdata:calories>" << it->getCalories() << "</gpxdata:calories>" << std::endl;
 			mystream << "      <gpxdata:distance>" << it->getLength() << "</gpxdata:distance>" << std::endl;
-			// Heart rate is not available on my device but would be nice to add:
+			// Heart rate is not available on my device but would be nice to add for CW 700:
 			mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
-            // As far as I know, manual trigger of laps is the only option possible on those devices
+			// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
 			mystream << "      <gpxdata:trigger>Manual</gpxdata:trigger>" << std::endl;
-            // What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
+			// What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
 			mystream << "      <gpxdata:intensity>active</gpxdata:intensity>" << std::endl;
 			mystream << "    </gpxdata:lap>" << std::endl;
 		}
@@ -733,7 +733,7 @@ int main(int argc, char *argv[])
 	libusb_device_handle *USBDevice;
 	if(!openUSBDevice(&USBDevice))
 	{
-		std::cerr << "Device not found or error opening USB device. Is your Kalenji 300 correctly plugged ?" << std::endl;
+		std::cerr << "Device not found or error opening USB device. Is your watch correctly plugged ?" << std::endl;
 		return -1;
 	}
 
