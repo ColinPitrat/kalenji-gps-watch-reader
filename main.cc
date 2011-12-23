@@ -9,6 +9,7 @@
 #include <list>
 #include <fstream>
 #include <sstream>
+#include <cerrno>
 
 #define DEBUG 0
 
@@ -120,7 +121,6 @@ class SessionInfo
 			time.tm_mday = line[2];
 			time.tm_hour = line[3];
 			time.tm_min = line[4];
-			// TODO: Are seconds given (line[5] ? (can't check with geonautes ...)
 			time.tm_sec = line[5];
 			time.tm_isdst = -1;
 			//std::cout << "TM is:" << time.tm_year << "-" << time.tm_mon << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec << std::endl;
@@ -135,21 +135,12 @@ class SessionInfo
 		{
 			char timeString[255];
 			size_t length = strftime(timeString, 255, "%c", &time);
-			// TODO: Also display seconds (get frequency of points somewhere !)
 			std::cout << std::hex << std::setw(8) << num << std::dec;
 			std::cout << " " << timeString << " (" << measures << " points) " << std::endl;
 			for(std::list<Point>::iterator it = points.begin(); it != points.end(); ++it)
 			{
 				std::cout << "    (" << it->getLatitude() << ", " << it->getLongitude() << ", " << it->getAltitude() << ")" << std::endl;
 			}
-			/*
-			std::cout << std::hex;
-			for(int i = 0; i < id.size(); ++i)
-			{
-				std::cout << std::setw(2) << std::setfill('0') << id[i] << std::endl;
-			}
-			std::cout << std::dec;
-			*/
 			std::cout << std::endl;
 		}
 
@@ -304,6 +295,7 @@ const int lengthDataList2 = 5;
 unsigned char dataList2[lengthDataList2] = { 0x02, 0x00, 0x01, 0x78, 0x79 };
 const int lengthMoreData = 5;
 unsigned char moreData[lengthMoreData] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
+std::string directory = "/tmp/kalenji_import/";
 
 bool USBsend(libusb_device_handle *USBDevice, unsigned char *data, size_t length)
 {
@@ -543,7 +535,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 
 	do
 	{
-		// TODO: Find out what this first call retrieves (type of session and more details)
+		// TODO: Store info retrieved by this first call somewhere (some data global to the session)
 		USBreceive(USBDevice);
 		if(responseData[0] == 0x8A) break;
 
@@ -606,7 +598,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 			{
 				++lap;
 			}
-			// TODO: i is not ID, it's restarting from 0 at each message
+			// TODO: Cleaner way to handle id_point ?
 			for(int i = 0; i < nbRecords; ++i)
 			{
 				//std::cout << "We should have " << lap->getFirstPointId() << " <= " << id_point << " <= " << lap->getLastPointId() << std::endl;
@@ -646,15 +638,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 bool createGPX(SessionInfo *session)
 {
 	std::stringstream filename;
-	std::string directory = "/tmp/kalenji_import";
-	if(access(directory.c_str(), W_OK | X_OK) != 0)
-	{
-		std::cerr << "Error: Can't write files in " << directory << std::endl;
-		return false;
-	}
-	// TODO: Create dir if it doesn't exist, make its path an option
-	std::string separator = "/";
-	filename << directory << separator;
+	filename << directory;
 	filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
 	filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".gpx";
 	std::cout << "Creating " << filename.str() << std::endl;
@@ -729,18 +713,39 @@ bool createGPX(SessionInfo *session)
 
 int main(int argc, char *argv[])
 {
+	// TODO: Create dir if it doesn't exist, make its path an option
+	if(access(directory.c_str(), W_OK) != 0)
+	{
+		switch(errno)
+		{
+			case EACCES:
+			case EROFS:
+				std::cerr << "Error: Don't have write access in " << directory << std::endl;
+				return -1;
+			case ENOENT:
+				std::cerr << "Error: Directory " << directory << " doesn't exist" << std::endl;
+				return -1;
+			case ENOTDIR:
+				std::cerr << "Error: " << directory << " is not a directory" << std::endl;
+				return -1;
+			default:
+				std::cerr << "Error: Unknown reason (" << errno << ") preventing write access to " << directory << std::endl;
+				return -1;
+		}
+	}
+
 	// TODO: add options handling (target directory, debug, interactive mode to choose sessions to import ...)
 	libusb_device_handle *USBDevice;
 	if(!openUSBDevice(&USBDevice))
 	{
 		std::cerr << "Device not found or error opening USB device. Is your watch correctly plugged ?" << std::endl;
-		return -1;
+		return -2;
 	}
 
 	if(!initSequence(USBDevice))
 	{
 		std::cerr << "Error while playing init sequence" << std::endl;
-		return -2;
+		return -3;
 	}
 
 	getDeviceInfo(USBDevice);

@@ -1,0 +1,9 @@
+ * Clean code: separated files, no global var
+ * Use info retrieved by the first 80 call
+ * Cleaner way to handle id_point (used to find first and last point of a lap)
+ * Create dir if it doesn't exist, make its path an option
+ * Improve metadata (add link among others)
+ * More info on point (cadence, hr when available) ? What is cadence ? Different from pace and speed ?
+ * Add options handling (target directory, debug, interactive mode to choose sessions to import ...) and rc file
+ * In case of error we should finish reading until getting 8Axxx so that the device is in a clean state
+ * Provide an interactive mode giving the list of sessions with ID and asking which ones should be retrieved
