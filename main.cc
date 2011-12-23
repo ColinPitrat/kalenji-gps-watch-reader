@@ -79,7 +79,7 @@ class Lap
 		uint32_t getFirstPointId() { return firstPoint; };
 		uint32_t getLastPointId() { return lastPoint; };
 		Point *getStartPoint() { return start; };
-		Point *getEndPoint() { return start; };
+		Point *getEndPoint() { return end; };
 		double getDuration() { return duration; };
 		uint32_t getCalories() { return calories; };
 		uint32_t getLength() { return length; };
@@ -159,6 +159,7 @@ class SessionInfo
 
 		void addLap(unsigned char* line)
 		{
+			static uint32_t sum_calories = 0;
 			// time_t lap_end = lap_start + (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 10;
 			double duration = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 10;
 			// last_lap_end = lap_end;
@@ -167,6 +168,22 @@ class SessionInfo
 			double max_speed = (line[12] + (line[13] << 8)) / 100;
 			double avg_speed = (line[14] + (line[15] << 8)) / 100;
 			uint32_t calories = line[26] + (line[27] << 8);
+			// Calories for lap given by watch is the sum of alll past laps (this looks like a bug ?! this may change with later firmwares !)
+			if(laps.empty())
+			{
+				sum_calories = 0;
+			}
+			else
+			{
+				if(calories < sum_calories)
+				{
+					std::cerr << "Error: Calories for this lap is smaller than previous one ! It means a firmware bug has been fixed !" << std::endl;
+					std::cerr << "       Please notify project maintainer. If possible provide your firmware version." << std::endl;
+					std::cerr << "       Info concerning calories will be wrong." << std::endl;
+				}
+				calories -= sum_calories;
+			}
+			sum_calories += calories;
 			uint32_t grams = line[28] + (line[29] << 8);
 			uint32_t descent = line[30] + (line[31] << 8);
 			uint32_t ascent = line[32] + (line[33] << 8);
@@ -691,7 +708,7 @@ bool createGPX(SessionInfo *session)
 			mystream << "    <gpxdata:lap>" << std::endl;
 			mystream << "      <gpxdata:index>" << lap << "</gpxdata:index>" << std::endl;
 			mystream << "      <gpxdata:startPoint lat=\"" << it->getStartPoint()->getLatitude() << "\" lon=\"" << it->getStartPoint()->getLongitude() << "\"/>" << std::endl;
-			mystream << "      <gpxdata:endPoint lat=\"" << it->getEndPoint()->getLatitude() << "\" lon=\"" << it->getStartPoint()->getLongitude() << "\" />" << std::endl;
+			mystream << "      <gpxdata:endPoint lat=\"" << it->getEndPoint()->getLatitude() << "\" lon=\"" << it->getEndPoint()->getLongitude() << "\" />" << std::endl;
 			mystream << "      <gpxdata:startTime>" << it->getStartPoint()->getTime() << "</gpxdata:startTime>" << std::endl;
 			mystream << "      <gpxdata:elapsedTime>" << it->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 			mystream << "      <gpxdata:calories>" << it->getCalories() << "</gpxdata:calories>" << std::endl;
