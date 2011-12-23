@@ -552,7 +552,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 
 	do
 	{
-		// TODO: Store info retrieved by this first call somewhere (some data global to the session)
+		// TODO: Store info retrieved by this first call somewhere (some data global to the session: max & avg speed, calories, grams, ascent, descent ...)
 		USBreceive(USBDevice);
 		if(responseData[0] == 0x8A) break;
 
@@ -759,11 +759,14 @@ int main(int argc, char *argv[])
 		return -2;
 	}
 
+/*
+	// TODO: initSequence seems totally useless ! To remove ?
 	if(!initSequence(USBDevice))
 	{
 		std::cerr << "Error while playing init sequence" << std::endl;
 		return -3;
 	}
+*/
 
 	getDeviceInfo(USBDevice);
 	// Returns the list of sessions

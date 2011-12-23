@@ -14,8 +14,8 @@ ba 03                                            // Number of points of measure 
 61 64 76 65 72 73 61 69 72 65                    // ASCII: adversaire
 00 00 00 00 00 00                                // Always 0 ?
 00 00 00 00                                      // Duration for adversaire
+00 00 00 00                                      // Length for adversaire
 00 00 00 00                                      // Max speed and average speed of adversaire ?
-00 00 00 00                                      // Repeated ?!
 97 03 66 01                                      // Max speed and average speed of runner ?
 97 03 66 01                                      // Repeated ?!
 00 00 ae 00 
