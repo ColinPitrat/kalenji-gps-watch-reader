@@ -24,7 +24,7 @@ directory=/home/toto/Running
 
 ==Default import behavior==
 *Name:* import
-*Default value:* ask
+*Default value:* all
 
 You can decide wether you prefer to always:
   * be prompted for sessions to import each time you run kalenji_import
