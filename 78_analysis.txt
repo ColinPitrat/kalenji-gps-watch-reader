@@ -11,8 +11,8 @@
 
 // Still fuzzy:
 // 00 00 = (B) Also some kind of identifier. First guess is that (A) always increments (but I saw some jumps !) whereas (B) takes smallest value available (so decrease when some sessions are removed). But it doesn't seem to be used anywhere ...
-// 00 = 00 for free session, 01 for defi with opponent (at least both unlimited and distance), other types to be tested ...
-// 03 = Always 03 ? I recently saw a 00 for defi with opponent and distance. Could be 00 = distance, 03 = unlimited, what else ???
+// 00 = Position: 00 = no opponent, 01 = win (first place), 02 = loose (second place)
+// 03 = Could be 00 = distance or route, 01 = vs myself, 03 = unlimited, what else ???
 
 0b 0c 12   15 3a 1f   05 00   64 00 00 00   00 00 00 00   01 00   00 00   00 00   00 03     // 18 DEC 2011 21:58:31
 0b 0c 12   15 3b 07   0f 00   2f 01 00 00   1e 00 00 00   01 00   01 00   01 00   00 03     // 18 DEC 2011 21:59:07
@@ -25,3 +25,7 @@
 0b 0c 13   0e 12 10   1e 00   5a 02 00 00   31 00 00 00   01 00   0e 00   08 00   00 03     // 19 DEC 2011 14:18:16
 
 3b    // Checksum: as in all request, a XOR of all bytes of the content including the size
+
+// Remain to be tested:
+//  - VMA test
+//  - All training sessions !

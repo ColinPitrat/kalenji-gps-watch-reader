@@ -10,7 +10,8 @@ ba 03                                            // Number of points of measure 
 97 07 00 00                                      // Length in meters (797 = 1943m)
 01 00                                            // Number of laps
 04 00 04 00                                      // IDs (first two bytes is an ID that is always incrementing, second two bytes is an ID that is taking the smallest free value)
-00 03                                            // Magic number representating type of session ?
+00                                               // Position in the race (00 = no opponent, 01 = first place: win, 02 = second place: loose)
+03                                               // Magic number representating type of session ?
 61 64 76 65 72 73 61 69 72 65                    // ASCII: adversaire
 00 00 00 00 00 00                                // Always 0 ?
 00 00 00 00                                      // Duration for adversaire
@@ -37,7 +38,9 @@ ba 03                                            // Number of points of measure 
 6a 4c 00 00                                      // Duration (4C6A = 19562 tenth of seconds = 32'36")
 97 07 00 00                                      // Length in meters (797 = 1943m)
 01 00                                            // Number of laps
-00 00 00 00 aa 03 
+00 00 00 00 
+aa                                               // Identify type 2 ?
+03                                               // Magic number representating type of session ?
 // -8<-- For each lap :
 6a 4c 00 00                                      // Time at which the lap ends
 6a 4c 00 00                                      // Duration of the lap
@@ -66,13 +69,16 @@ ba 03                                            // Number of points of measure 
 01 00                                            // Number of laps
 49 00                                            // First point in this exchange
 91 00                                            // Last point in this exchange
-55 03 
+55                                               // Identify type 3 ?
+03                                               // Magic number representating type of session ?
 // -8<-- For each point :
 // 32 8A B9 02 = 2B98A32 = 45713970 = 45.713970 * 10^6 = latitude
 // FD 0A 43 00 = 430AFD = 4393725 = 4.393725 * 10^6 = longitude
 // 60 02 = 260 = 608 = altitude
 // 45 02 = 245 = 581 = vitesse (5,81 km/h)
-// 00 03 00 00 = ?? Number of satellites ?
+// 00 = ??
+// 03 = ?? Number of satellites ?
+// 00 00 = ?? 
 // 15 00 = 15 = duration since previous measure = 20 = 2.1s (2 bytes ?)
 // 00 00 = ??
 // There is probably some place for heartrate somewhere
