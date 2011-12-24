@@ -28,7 +28,7 @@ directory=/home/toto/Running
 
 *Default value:* all
 
-You can decide wether you prefer to always:
+You can decide whether you prefer to always:
   * be prompted for sessions to import each time you run kalenji_import
 {{{
 import=ask
