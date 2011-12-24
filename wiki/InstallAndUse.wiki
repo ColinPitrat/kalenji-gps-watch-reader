@@ -29,9 +29,13 @@ GPX files are created in /tmp/kalenji_import and can be imported in your favorit
 In case you notice a bug and you want to report it or if you have a CW 700 and you want to help me add the support for heartrate, you will need to use debug mode to produce a file containing debug information.
 
 For this, edit the file main.cc and replace the following line
+{{{
 #define DEBUG 0
+}}}
 by
+{{{
 #define DEBUG 1
+}}}
 
 Then rebuild and run the tool:
 {{{
