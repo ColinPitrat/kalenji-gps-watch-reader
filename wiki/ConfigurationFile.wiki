@@ -14,6 +14,7 @@ For example for a user called toto, the configuration file will be:
 
 ==Output directory==
 *Name:* directory
+
 *Default value:* /tmp/kalenji_import
 
 You can configure the directory where the imported file will be put. For example, if the user toto wants the import to be done in a subdirectory Running of his home directory, he will put the following in his configuration file:
@@ -24,6 +25,7 @@ directory=/home/toto/Running
 
 ==Default import behavior==
 *Name:* import
+
 *Default value:* all
 
 You can decide wether you prefer to always:
