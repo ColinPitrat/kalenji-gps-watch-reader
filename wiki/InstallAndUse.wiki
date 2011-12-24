@@ -13,12 +13,11 @@ make
 
 = Using =
 
-For now, data is imported in /tmp/kalenji_import. You have to create the directory before using the tool (probaly at each usage as tmp is usually wiped out at startup).
+By default, data is imported in /tmp/kalenji_import. You can modify it by editing your ConfigurationFile. If the directory doesn't exist, it will be created.
 
 *From the directory where you built the tool*:
 
 {{{
-mkdir -p /tmp/kalenji_import
 ./kalenji_reader
 }}}
 
