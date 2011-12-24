@@ -5,6 +5,6 @@
  * More info on point (cadence, hr when available) ? What is cadence ? Different from pace and speed ?
  * Add command line options handling 
  * In case of error we should finish reading until getting 8Axxx so that the device is in a clean state
- * Provide an interactive mode giving the list of sessions with ID and asking which ones should be retrieved
- * Add configuration options for default trigger type (Manual, Distance, HR, Location, Time)
+ * Improve display of sessions when import=ask
+ * Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
  * Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
