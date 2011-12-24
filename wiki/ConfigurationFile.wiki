@@ -12,8 +12,28 @@ For example for a user called toto, the configuration file will be:
 
 =Options available=
 
-Currently, the only thing you can configure is the directory where the imported file will be put. For example, if the user toto wants the import to be done in a subdirectory Running of his home directory, he will put the following in his configuration file:
+==Output directory==
+*Name:* directory
+*Default value:* /tmp/kalenji_import
+
+You can configure the directory where the imported file will be put. For example, if the user toto wants the import to be done in a subdirectory Running of his home directory, he will put the following in his configuration file:
 
 {{{
 directory=/home/toto/Running
 }}} 
+
+==Default import behavior==
+*Name:* import
+*Default value:* ask
+
+You can decide wether you prefer to always:
+  * be prompted for sessions to import each time you run kalenji_import
+{{{
+import=ask
+}}}
+  * import all sessions available on the watch 
+{{{
+import=all
+}}}
+
+The later is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
