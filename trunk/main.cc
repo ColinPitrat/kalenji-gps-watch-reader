@@ -11,7 +11,9 @@
 #include <sstream>
 #include <cerrno>
 
+#ifndef DEBUG
 #define DEBUG 0
+#endif
 
 typedef std::vector<char> SessionId;
 
@@ -216,7 +218,7 @@ class SessionInfo
 		std::list<Point> &getPoints() { return points; };
 
 		SessionId getId() { return id; };
-		std::string getName() { return std::string("temp name " + num); };
+		std::string getName() { return "No name"; };
 		//tm *getTime() { return &time; };
 		int getYear() { return time.tm_year + 1900; };
 		int getMonth() { return time.tm_mon; };
