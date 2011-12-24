@@ -1,0 +1,19 @@
+#summary Configuration file
+#labels Phase-Deploy,Configuration
+
+=Where to place your configuration file=
+
+You can modify the default behavior of kalenji_reader by putting a .kalenji_readerrc file in your home directory. 
+
+For example for a user called toto, the configuration file will be:
+{{{
+/home/toto/.kalenjirc
+}}}
+
+=Options available=
+
+Currently, the only thing you can configure is the directory where the imported file will be put. For example, if the user toto wants the import to be done in a subdirectory Running of his home directory, he will put the following in his configuration file:
+
+{{{
+directory=/home/toto/Running
+}}} 
