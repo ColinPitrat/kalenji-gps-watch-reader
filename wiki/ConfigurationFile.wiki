@@ -39,3 +39,15 @@ import=all
 }}}
 
 The later is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
+
+==Default trigger type==
+*Name:* trigger
+
+*Default value:* manual
+
+The information of the kind of event that triggered the end of a lap is, as far as I know, not given by the watch. This setting provide the value that will always be used. It must be one of:
+  * manual: user pressing the "end of lap" button of the watch
+  * distance: a distance being run
+  * time: a time being elapsed
+  * location: a given location being reached (not possible with those watch)
+  * hr: a given heartrate being reached (not possible with those watch)
