@@ -635,7 +635,7 @@ bool createGPX(SessionInfo *session)
 			// Heart rate is not available on my device but would be nice to add for CW 700:
 			mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
 			// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
-			mystream << "      <gpxdata:trigger>Manual</gpxdata:trigger>" << std::endl;
+			mystream << "      <gpxdata:trigger kind=\"manual\" />" << std::endl;
 			// What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
 			mystream << "      <gpxdata:intensity>active</gpxdata:intensity>" << std::endl;
 			mystream << "    </gpxdata:lap>" << std::endl;
