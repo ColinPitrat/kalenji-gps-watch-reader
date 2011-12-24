@@ -10,6 +10,8 @@
 #include <fstream>
 #include <sstream>
 #include <cerrno>
+#include <cstdlib>
+#include <sys/stat.h>
 
 #ifndef DEBUG
 #define DEBUG 0
@@ -241,12 +243,10 @@ class SessionInfo
 typedef std::map<SessionId, SessionInfo> SessionsMap;
 typedef std::pair<SessionId, SessionInfo> SessionsMapElement;
 
-bool checkUSBOperation(int rc, unsigned char *data = NULL, size_t dataLength = 0, unsigned char *refdata = NULL, size_t refDataLength = 0)
+bool checkUSBOperation(int rc)
 {
-	bool operation_ok = true;
 	if(rc < 0)
 	{
-		operation_ok = false;
 		std::cerr << "Transmission error at init time: " << rc << " - " << errno;
 		switch(rc)
 		{
@@ -270,38 +270,9 @@ bool checkUSBOperation(int rc, unsigned char *data = NULL, size_t dataLength = 0
 				break;
 		}
 		std::cerr << std::endl;
+		return false;
 	}
-	if(refdata != NULL)
-	{
-		// Reference data given, compare to it
-		bool dataIsWrong = true;
-		if(dataLength != refDataLength)
-		{
-			std::cerr << "Answer has not the expected size: " << dataLength << " instead of " << refDataLength << std::endl;
-			operation_ok = false;
-		}
-		else
-		{
-			if(memcmp(data, refdata, dataLength) != 0) 
-			{
-				std::cerr << "Unexpected answer at init time: " << std::endl; 
-				std::cout << std::hex;
-				for(int i = 0; i < dataLength; ++i)
-				{
-					std::cout << std::setw(2) << std::setfill('0') << (int) data[i] << " ";
-				}
-				std::cout << std::dec << std::endl;
-				//std::cerr.write(reinterpret_cast<char*>(data), dataLength);
-				operation_ok = false;
-			}
-			else
-			{
-				// Same length and same content as expected
-				dataIsWrong = false;
-			}
-		}
-	}
-	return operation_ok;
+	return true;
 }
 
 // TODO: Yes I know, all those global vars are ugly ... 
@@ -314,7 +285,7 @@ const int lengthDataList2 = 5;
 unsigned char dataList2[lengthDataList2] = { 0x02, 0x00, 0x01, 0x78, 0x79 };
 const int lengthMoreData = 5;
 unsigned char moreData[lengthMoreData] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
-std::string directory = "/tmp/kalenji_import/";
+std::map<std::string, std::string> configuration;
 
 bool USBsend(libusb_device_handle *USBDevice, unsigned char *data, size_t length)
 {
@@ -432,60 +403,6 @@ bool closeUSBDevice(libusb_device_handle *USBHandle)
 		libusb_close(USBHandle);
 	}
 	libusb_exit(NULL); 
-}
-
-bool initSequence(libusb_device_handle *USBDevice)
-{
-	// Init sequence (from USBLyzer) is 4xGLC, SLC, GLC, SCLS, SLC, 3xGLC, SLC, GLC, SCLS, SLC, GLC
-	// Could be nice to check if it can be simplified, this looks absurd ! Only one GLC, SLC & SCLS should be enough !
-	int rc;
-	unsigned char data[7];
-	unsigned char refdata[7] = { 0x00, 0xC2, 0x01, 0x00, 0x00, 0x0, 0x08 };
-	// 4 x GLC
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	checkUSBOperation(rc, data, rc, refdata, 7);
-
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	checkUSBOperation(rc, data, rc, refdata, 7);
-
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	checkUSBOperation(rc, data, rc, refdata, 7);
-
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	checkUSBOperation(rc, data, rc, refdata, 7);
-
-	// SLC
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x20, 0, 0, refdata, 7, TIMEOUT);
-	// GLC
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	if(memcmp(data, refdata, 7) != 0)
-	{
-		std::cerr << "Unexpected second answer at init time :*" << data << "*" << std::endl;
-	}
-	// SCLS
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x22, 0, 0, NULL, 0, TIMEOUT);
-	// SLC
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x20, 0, 0, refdata, 7, TIMEOUT);
-	// 3 x GLC
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	// SLC
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x20, 0, 0, refdata, 7, TIMEOUT);
-	// GLC
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	// SCLS
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x22, 0, 0, NULL, 0, TIMEOUT);
-	// SLC
-	rc = libusb_control_transfer (USBDevice, 0x21, 0x20, 0, 0, refdata, 7, TIMEOUT);
-	// GLC
-	rc = libusb_control_transfer (USBDevice, 0xA1, 0x21, 0, 0, data, 7, TIMEOUT);
-	if(memcmp(data, refdata, 7) != 0)
-	{
-		std::cerr << "Unexpected final answer at init time :*" << data << "*" << std::endl;
-		return false;
-	}
-	return true;
 }
 
 bool getDeviceInfo(libusb_device_handle *USBDevice)
@@ -657,7 +574,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 bool createGPX(SessionInfo *session)
 {
 	std::stringstream filename;
-	filename << directory;
+	filename << configuration["directory"];
 	filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
 	filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".gpx";
 	std::cout << "Creating " << filename.str() << std::endl;
@@ -730,45 +647,99 @@ bool createGPX(SessionInfo *session)
 	return true;
 }
 
-int main(int argc, char *argv[])
+int testDir(std::string path, bool create_if_not_exist)
 {
-	// TODO: Create dir if it doesn't exist, make its path an option
-	if(access(directory.c_str(), W_OK) != 0)
+	if(access(path.c_str(), W_OK) != 0)
 	{
 		switch(errno)
 		{
+			case ENOENT:
+				if(create_if_not_exist)
+				{
+					mkdir(path.c_str(), 0777);
+					return 1;
+				}
+				else
+				{
+					std::cerr << "Error: " << path << " doesn't exist and I couldn't create it" << std::endl;
+					return -1;
+				}
 			case EACCES:
 			case EROFS:
-				std::cerr << "Error: Don't have write access in " << directory << std::endl;
-				return -1;
-			case ENOENT:
-				std::cerr << "Error: Directory " << directory << " doesn't exist" << std::endl;
+				std::cerr << "Error: Don't have write access in " << path << std::endl;
 				return -1;
 			case ENOTDIR:
-				std::cerr << "Error: " << directory << " is not a directory" << std::endl;
+				std::cerr << "Error: " << path << " is not a directory" << std::endl;
 				return -1;
 			default:
-				std::cerr << "Error: Unknown reason (" << errno << ") preventing write access to " << directory << std::endl;
+				std::cerr << "Error: Unknown reason (" << errno << ") preventing write access to " << path << std::endl;
 				return -1;
 		}
 	}
+	return 0;
+}
 
-	// TODO: add options handling (target directory, debug, interactive mode to choose sessions to import ...)
+bool readConf()
+{
+	// TODO: other options ?
+	// Default conf
+	configuration["directory"] = "/tmp/kalenji_import";
+
+	// Load from ~/.kalenji_readerrc
+	char *homeDir = getenv("HOME");
+	if(!homeDir)
+	{
+		std::cerr << "No home dir found ! This is strange ... Why would $HOME not be set for your user ?" << std::endl;
+		return false;
+	}
+
+	std::string rcfile = std::string(homeDir) + "/.kalenji_readerrc";
+	if(access(rcfile.c_str(), R_OK) == 0)
+	{
+		std::string line;
+		std::ifstream conf_file(rcfile.c_str());
+		if (conf_file.is_open())
+		{
+			while ( conf_file.good() )
+			{
+				getline(conf_file, line);
+				size_t cut_place = line.find("=");
+				if(cut_place != std::string::npos)
+				{
+					std::string key = line.substr(0, cut_place);
+					std::string value = line.substr(cut_place+1);
+					std::cout << "Key / value: " << key << " / " << value << std::endl;
+				}
+			}
+			conf_file.close();
+		}
+		else 
+		{
+			std::cerr << "Unable to open " << rcfile; 
+			return false;
+		}
+		return true;
+	}
+	return false;
+}
+
+int main(int argc, char *argv[])
+{
+	// TODO: Handle command line options
+	readConf();
+
+	// First attempt, creating dir if it doesn't exist
+	int dir_status = testDir(configuration["directory"], true);
+	// If dir was tentatively created, second attempt
+	if(dir_status > 0) dir_status = testDir(configuration["directory"], false);
+	if(dir_status < 0) return -1;
+
 	libusb_device_handle *USBDevice;
 	if(!openUSBDevice(&USBDevice))
 	{
 		std::cerr << "Device not found or error opening USB device. Is your watch correctly plugged ?" << std::endl;
 		return -2;
 	}
-
-/*
-	// TODO: initSequence seems totally useless ! To remove ?
-	if(!initSequence(USBDevice))
-	{
-		std::cerr << "Error while playing init sequence" << std::endl;
-		return -3;
-	}
-*/
 
 	getDeviceInfo(USBDevice);
 	// Returns the list of sessions
