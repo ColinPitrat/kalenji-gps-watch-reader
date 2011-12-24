@@ -12,6 +12,8 @@
 #include <cerrno>
 #include <cstdlib>
 #include <sys/stat.h>
+#include <algorithm>
+#include <iterator>
 
 #ifndef DEBUG
 #define DEBUG 0
@@ -635,7 +637,7 @@ bool createGPX(SessionInfo *session)
 			// Heart rate is not available on my device but would be nice to add for CW 700:
 			mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
 			// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
-			mystream << "      <gpxdata:trigger kind=\"manual\" />" << std::endl;
+			mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;
 			// What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
 			mystream << "      <gpxdata:intensity>active</gpxdata:intensity>" << std::endl;
 			mystream << "    </gpxdata:lap>" << std::endl;
@@ -684,6 +686,8 @@ bool readConf()
 	// TODO: other options ?
 	// Default conf
 	configuration["directory"] = "/tmp/kalenji_import";
+	configuration["import"] = "all";
+	configuration["trigger"] = "manual";
 
 	// Load from ~/.kalenji_readerrc
 	char *homeDir = getenv("HOME");
@@ -708,7 +712,7 @@ bool readConf()
 				{
 					std::string key = line.substr(0, cut_place);
 					std::string value = line.substr(cut_place+1);
-					std::cout << "Key / value: " << key << " / " << value << std::endl;
+					configuration[key] = value;
 				}
 			}
 			conf_file.close();
@@ -721,6 +725,58 @@ bool readConf()
 		return true;
 	}
 	return false;
+}
+
+void filterSessionsToImport(SessionsMap *sessions)
+{
+	std::string to_import_string;
+	if(configuration["import"] == "ask")
+	{
+		// Display sessions that can be imported, prompt for list of sessions to import
+		std::cout << "Sessions available for import:" << std::endl;
+		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
+		{
+			// TODO: Display more info: distance, duration, number of laps ...
+			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime() << std::endl;
+		}
+		std::cout << "List of sessions to import (space separated - 'all' to import everything): " << std::endl;
+
+/*
+		// It's a pity, but this doesn't work (only stops after a wrong entry)
+		std::copy(std::istream_iterator<uint32_t>(std::cin), std::istream_iterator<uint32_t>(), std::back_inserter(to_import));
+*/
+		getline(std::cin, to_import_string);
+	}
+	else
+	{
+		to_import_string = configuration["import"];
+	}
+
+	if(to_import_string != "all")
+	{
+		std::vector<uint32_t> to_import;
+		std::stringstream iss(to_import_string);
+		std::copy(std::istream_iterator<uint32_t>(iss), std::istream_iterator<uint32_t>(), std::back_inserter(to_import));
+
+		// TODO: Check for error in user entry. Re-ask if there is one !
+
+		std::cout << "Filtering ..." << std::endl;
+
+		// Remove sessions that are not in the list of selected sessions
+		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); )
+		{
+			bool keep = false;
+			for(std::vector<uint32_t>::iterator it2 = to_import.begin(); it2 != to_import.end(); ++it2)
+			{
+				if(it->second.getNum() == *it2)
+				{
+					keep = true;
+				}
+			}
+			if(!keep) sessions->erase(it++);
+			else ++it;
+		}
+	}
 }
 
 int main(int argc, char *argv[])
@@ -742,9 +798,14 @@ int main(int argc, char *argv[])
 	}
 
 	getDeviceInfo(USBDevice);
-	// Returns the list of sessions
 	SessionsMap sessions;
+	// Returns the list of sessions
 	getList(USBDevice, &sessions);
+
+	// Prompt the user (unless import = all) for sessions to import
+	// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
+        filterSessionsToImport(&sessions);
+
 	getSessionsDetails(USBDevice, &sessions);
 	// TODO: in case of error we should finish reading until getting 8Axxx so that the device is in a clean state
 
