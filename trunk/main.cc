@@ -760,8 +760,6 @@ void filterSessionsToImport(SessionsMap *sessions)
 
 		// TODO: Check for error in user entry. Re-ask if there is one !
 
-		std::cout << "Filtering ..." << std::endl;
-
 		// Remove sessions that are not in the list of selected sessions
 		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); )
 		{
@@ -804,7 +802,7 @@ int main(int argc, char *argv[])
 
 	// Prompt the user (unless import = all) for sessions to import
 	// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
-        filterSessionsToImport(&sessions);
+	filterSessionsToImport(&sessions);
 
 	getSessionsDetails(USBDevice, &sessions);
 	// TODO: in case of error we should finish reading until getting 8Axxx so that the device is in a clean state
