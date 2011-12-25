@@ -637,7 +637,9 @@ bool createGPX(SessionInfo *session)
 			// Heart rate is not available on my device but would be nice to add for CW 700:
 			mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
 			// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
-			mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;
+			// This is the correct syntax, but pytrainer doesn't support it
+			//mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;
+			mystream << "      <gpxdata:trigger>" << configuration["trigger"] << "</gpxdata:trigger>" << std::endl;
 			// What can I tell about this ?! Mandatory when using gpxdata (as the two previous one) so I put it with a default value ...
 			mystream << "      <gpxdata:intensity>active</gpxdata:intensity>" << std::endl;
 			mystream << "    </gpxdata:lap>" << std::endl;
