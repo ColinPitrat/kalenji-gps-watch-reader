@@ -576,7 +576,7 @@ bool getSessionsDetails(libusb_device_handle *USBDevice, SessionsMap *sessions)
 bool createGPX(SessionInfo *session)
 {
 	std::stringstream filename;
-	filename << configuration["directory"];
+	filename << configuration["directory"] << "/"; 
 	filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
 	filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".gpx";
 	std::cout << "Creating " << filename.str() << std::endl;
