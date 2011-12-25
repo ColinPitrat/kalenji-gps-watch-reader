@@ -9,7 +9,6 @@
 #include <list>
 #include <fstream>
 #include <sstream>
-#include <cerrno>
 #include <cstdlib>
 #include <sys/stat.h>
 #include <algorithm>
@@ -20,6 +19,31 @@
 #endif
 
 typedef std::vector<char> SessionId;
+
+std::string durationAsString(double sec, bool with_hundredth = false)
+{
+	uint32_t days = sec / (24*3600);
+	sec -= days * 24 * 3600; 
+	uint32_t hours = sec / 3600;
+	sec -= hours * 3600; 
+	uint32_t minutes = sec / 60;
+	sec -= minutes * 60; 
+	uint32_t seconds = sec;
+	sec -= seconds;
+	uint32_t hundredth = sec * 100;
+	std::string result;
+	std::ostringstream oss;
+	if(days != 0)
+		oss << days << "d ";
+	if(hours != 0 or days != 0)
+		oss << hours << "h";
+	if(minutes != 0 or hours != 0 or days !=0)
+		oss << minutes << "m";
+	oss << seconds << "s";
+	if(with_hundredth)
+		oss << std::setw(2) << std::setfill('0') << hundredth;
+	return oss.str();
+}
 
 class Point
 {
@@ -131,7 +155,13 @@ class SessionInfo
 			time.tm_isdst = -1;
 			//std::cout << "TM is:" << time.tm_year << "-" << time.tm_mon << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec << std::endl;
 
-			measures = line[6] + (line[7] << 8);
+			nb_points = line[6] + (line[7] << 8);
+			duration = (line [8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24)) / 10;
+			distance = line [12] + (line[13] << 8) + (line[14] << 16) + (line[15] << 24);
+
+			// nb_laps has no interest as we read laps later except to display it in the list of sessions before import
+			nb_laps = line[16] + (line[17] << 8);
+			// TODO: also read race type and runner's place (if opponent)
 
 			current_time = mktime(&time);
 			cumulated_tenth = 0;
@@ -142,7 +172,7 @@ class SessionInfo
 			char timeString[255];
 			size_t length = strftime(timeString, 255, "%c", &time);
 			std::cout << std::hex << std::setw(8) << num << std::dec;
-			std::cout << " " << timeString << " (" << measures << " points) " << std::endl;
+			std::cout << " " << timeString << " (" << nb_points << " points) " << std::endl;
 			for(std::list<Point>::iterator it = points.begin(); it != points.end(); ++it)
 			{
 				std::cout << "    (" << it->getLatitude() << ", " << it->getLongitude() << ", " << it->getAltitude() << ")" << std::endl;
@@ -199,12 +229,15 @@ class SessionInfo
 			laps.push_back(lap);
 		}
 
-		std::string getBeginTime() 
+		std::string getBeginTime(bool human_readable=false) 
 		{ 
 			time_t begin_time = mktime(&time);
 			char buffer[256];
 			tm *begin_time_tm = localtime(&begin_time);
-			strftime(buffer, 256, "%Y-%m-%dT%H:%M:%SZ", begin_time_tm);
+			if(human_readable)
+				strftime(buffer, 256, "%Y-%m-%d %H:%M:%S", begin_time_tm);
+			else
+				strftime(buffer, 256, "%Y-%m-%dT%H:%M:%SZ", begin_time_tm);
 			return std::string(buffer);
 		};
 
@@ -213,9 +246,9 @@ class SessionInfo
 		{ 
 			if(DEBUG == 1)
 			{
-				std::cout << "isComplete on " << num << ": " << measures << " == " << points.size() << std::endl; 
+				std::cout << "isComplete on " << num << ": " << nb_points << " == " << points.size() << std::endl; 
 			}
-			return measures == points.size(); 
+			return nb_points == points.size(); 
 		};
 
 		std::list<Lap> &getLaps() { return laps; };
@@ -230,12 +263,18 @@ class SessionInfo
 		int getHour() { return time.tm_hour; };
 		int getMinutes() { return time.tm_min; };
 		int getSeconds() { return time.tm_sec; };
+		double getDuration() { return duration; };
+		uint32_t getDistance() { return distance; };
+		uint32_t getNbLaps() { return nb_laps; };
 
 	private:
 		SessionId id;
 		uint32_t num;
 		tm time;
-		int measures;
+		uint32_t nb_points;
+		double duration;
+		uint32_t distance;
+		uint32_t nb_laps;
 		std::list<Lap> laps;
 		std::list<Point> points;
 		time_t current_time;
@@ -738,8 +777,11 @@ void filterSessionsToImport(SessionsMap *sessions)
 		std::cout << "Sessions available for import:" << std::endl;
 		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
 		{
-			// TODO: Display more info: distance, duration, number of laps ...
-			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime() << std::endl;
+			// TODO: Use a SessionInfo method instead !
+			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime(true); 
+			std::cout << " " << std::setw(5) << it->second.getNbLaps() << " laps ";
+			std::cout << std::setw(10) << (double)it->second.getDistance() / 1000 << " km ";
+			std::cout << std::setw(15) << durationAsString(it->second.getDuration()) << std::endl;
 		}
 		std::cout << "List of sessions to import (space separated - 'all' to import everything): " << std::endl;
 
@@ -799,10 +841,11 @@ int main(int argc, char *argv[])
 
 	getDeviceInfo(USBDevice);
 	SessionsMap sessions;
-	// Returns the list of sessions
+	// Retrieve the list of sessions
 	getList(USBDevice, &sessions);
 
-	// Prompt the user (unless import = all) for sessions to import
+	// If import = ask, prompt the user for sessions to import. 
+	// TODO: could filter already imported sessions (for example import = new)
 	// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
 	filterSessionsToImport(&sessions);
 
