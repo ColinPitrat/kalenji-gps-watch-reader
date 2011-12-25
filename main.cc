@@ -249,7 +249,7 @@ bool checkUSBOperation(int rc)
 {
 	if(rc < 0)
 	{
-		std::cerr << "Transmission error at init time: " << rc << " - " << errno;
+		std::cerr << "Transmission error: " << rc << " - " << errno;
 		switch(rc)
 		{
 			case LIBUSB_ERROR_IO:
