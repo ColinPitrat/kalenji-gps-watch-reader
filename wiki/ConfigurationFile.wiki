@@ -51,3 +51,19 @@ The information of the kind of event that triggered the end of a lap is, as far 
   * *time*: a time being elapsed
   * *location*: a given location being reached (not possible with those watch)
   * *hr*: a given heartrate being reached (not possible with those watch)
+
+==Log transactions==
+*Name:* log_transactions
+
+*Default value:* yes
+
+If set to yes, the raw information read from the watch is logged in hexadecimal in log files. The purpose is to allow reimporting the data later even if it has been removed from the watch. It can also be usefull for debugging purpose.
+
+By default, the log files are created in a subdirectory logs of the output directory but this can be configured with configuration variable described next.
+
+==Log transactions directory==
+*Name:* log_transactions_directory
+
+*Default value:* logs subdirectory in output directory
+
+The directory where raw data from the watch is logged if this functionality is activated.
