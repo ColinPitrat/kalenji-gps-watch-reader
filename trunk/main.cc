@@ -797,7 +797,10 @@ bool readConf()
 			std::cerr << "Unable to open " << rcfile; 
 			return false;
 		}
-		configuration["log_transactions_directory"] = configuration["directory"] + "/logs";
+		if(configuration.count("log_transactions_directory") == 0)
+		{
+			configuration["log_transactions_directory"] = configuration["directory"] + "/logs";
+		}
 		initLogFile();
 		return true;
 	}
