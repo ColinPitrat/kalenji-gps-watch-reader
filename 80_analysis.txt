@@ -13,7 +13,7 @@ ba 03                                            // Number of points of measure 
 00                                               // Position in the race (00 = no opponent, 01 = first place: win, 02 = second place: loose)
 03                                               // Magic number representating type of session ?
 61 64 76 65 72 73 61 69 72 65                    // ASCII: adversaire
-00 00 00 00 00 00                                // Always 0 ?
+00 00 00 00 00 00                                // Always 0 ? Found 31 31 00 00 00 00 for VMA test
 00 00 00 00                                      // Duration for adversaire
 00 00 00 00                                      // Length for adversaire
 00 00 00 00                                      // Max speed and average speed of adversaire ?

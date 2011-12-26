@@ -327,6 +327,7 @@ unsigned char dataList2[lengthDataList2] = { 0x02, 0x00, 0x01, 0x78, 0x79 };
 const int lengthMoreData = 5;
 unsigned char moreData[lengthMoreData] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
 std::map<std::string, std::string> configuration;
+std::string logfilename;
 
 bool USBsend(libusb_device_handle *USBDevice, unsigned char *data, size_t length)
 {
@@ -380,6 +381,17 @@ int USBreceive(libusb_device_handle *USBDevice)
 			std::cout << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
 		}
 		std::cout << std::dec << std::endl;
+	}
+	if(configuration["log_transactions"] == "yes")
+	{
+		std::ofstream log_file_stream(logfilename.c_str(), std::ios_base::out | std::ios_base::app);
+		log_file_stream << std::hex;
+		for(int i = 0; i < transferred; ++i)
+		{
+			log_file_stream << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
+		}
+		log_file_stream << std::dec << std::endl;
+		log_file_stream.close();
 	}
 	return transferred;
 }
@@ -722,6 +734,26 @@ int testDir(std::string path, bool create_if_not_exist)
 	return 0;
 }
 
+bool checkAndCreateDir(std::string path)
+{
+	int dir_status = testDir(path, true);
+	// If dir was tentatively created, second attempt
+	if(dir_status > 0) dir_status = testDir(path, false);
+	if(dir_status < 0) return false;
+	return true;
+}
+
+void initLogFile()
+{
+	char buffer[256];
+	time_t t = time(NULL);
+	strftime(buffer, 256, "%Y%m%d_%H%M%S", localtime(&t));
+	std::stringstream log_filename;
+	log_filename << configuration["log_transactions_directory"] << "/"; 
+	log_filename << "kalenji_reader_" << buffer << ".log";
+	logfilename = log_filename.str();
+}
+
 bool readConf()
 {
 	// TODO: other options ?
@@ -729,6 +761,8 @@ bool readConf()
 	configuration["directory"] = "/tmp/kalenji_import";
 	configuration["import"] = "all";
 	configuration["trigger"] = "manual";
+	configuration["log_transactions"] = "yes";
+	// Default value for log_transactions_directory is defined later (depends on directory)
 
 	// Load from ~/.kalenji_readerrc
 	char *homeDir = getenv("HOME");
@@ -763,6 +797,8 @@ bool readConf()
 			std::cerr << "Unable to open " << rcfile; 
 			return false;
 		}
+		configuration["log_transactions_directory"] = configuration["directory"] + "/logs";
+		initLogFile();
 		return true;
 	}
 	return false;
@@ -827,10 +863,8 @@ int main(int argc, char *argv[])
 	readConf();
 
 	// First attempt, creating dir if it doesn't exist
-	int dir_status = testDir(configuration["directory"], true);
-	// If dir was tentatively created, second attempt
-	if(dir_status > 0) dir_status = testDir(configuration["directory"], false);
-	if(dir_status < 0) return -1;
+	if(!checkAndCreateDir(configuration["directory"])) return -1;
+	if(configuration["log_transactions"] == "yes" && !checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
 
 	libusb_device_handle *USBDevice;
 	if(!openUSBDevice(&USBDevice))
