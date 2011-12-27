@@ -48,7 +48,7 @@ std::string durationAsString(double sec, bool with_hundredth = false)
 class Point
 {
 	public:
-		Point(double _lat, double _lon, uint32_t _alt, double _speed, time_t _time, uint32_t _tenth) 
+		Point(double _lat, double _lon, int16_t _alt, double _speed, time_t _time, uint32_t _tenth) 
 		{ 
 			lat = _lat; 
 			lon = _lon; 
@@ -59,7 +59,7 @@ class Point
 		};
 		double getLatitude() { return lat; };
 		double getLongitude() { return lon; };
-		uint32_t getAltitude() { return alt; };
+		int16_t getAltitude() { return alt; };
 		double getSpeed() { return speed; };
 		std::string getTime() 
 		{  
@@ -78,7 +78,7 @@ class Point
 	private:
 		double lat;
 		double lon;
-		uint32_t alt;
+		int16_t alt;
 		double speed;
 		time_t time;
 		uint32_t tenth;
@@ -184,7 +184,8 @@ class SessionInfo
 		{
 			double lat = ((double)(line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24))) / 1000000;
 			double lon = ((double)(line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24))) / 1000000;
-			int alt = line[8] + (line[9] << 8);
+			// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
+			int16_t alt = line[8] + (line[9] << 8);
 			double speed = ((double)(line[10] + (line[11] << 8)) / 100);
 			cumulated_tenth += line[16] + (line[17] << 8);
 			current_time += cumulated_tenth / 10;
