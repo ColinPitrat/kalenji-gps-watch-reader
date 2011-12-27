@@ -19,8 +19,8 @@ ba 03                                            // Number of points of measure 
 00 00 00 00                                      // Max speed and average speed of adversaire ?
 97 03 66 01                                      // Max speed and average speed of runner ?
 97 03 66 01                                      // Repeated ?!
-00 00 ae 00 
-57 01
+00 00                                            // Max heart rate, average heart rate
+ae 00 57 01
 55 01                                            // Calories spent
 70 00                                            // Grams lost
 5a 00                                            // Ascent
@@ -28,6 +28,16 @@ ba 03                                            // Number of points of measure 
 00 00 
 49 6e 74 65 72 76 61 6c 6c 65 20 33 30 20 2f 00  // ASCII: Intervalle 30 /
 8e                                               // Checksum: as in all request, a XOR of all bytes of the content including the size
+
+// On my CW Kalenji 700, for the first attempt, I have (and also I think on 300 at the very beginning, I have to check on my firsts dumps):
+(...)
+63 68 61 6c 6c 65 6e 67 65                       // ASCII: challenge
+00 00 00 00 00 00 00                             // Always 0 ? (one more than with 300 as challenge is one char smaller than adversaire)
+(...)
+74 72 61 69 6e 69 6e 67                          // ASCII: training
+00 00 00 00 00 00 00 00                          // Place for longer strings ?!
+(...)
+// Moreover, magic number is 00 for an unlimited free race !
 
  ===== type 2: laps data =====
 80 
@@ -47,7 +57,8 @@ aa                                               // Identify type 2 ?
 97 07 00 00                                      // Length of the lap in meters
 97 03 66 01                                      // Max speed and average speed of the lap
 97 03 66 01                                      // Why repeated ?
-00 00 00 00                                      // Always 0 ? Heart-rate in CW 700 ?
+00 00                                            // Max heart rate, average heart rate
+00 00                                            
 57 01 
 55 01                                            // Calories spent in the lap
 70 00                                            // Grams lost in the lap
@@ -76,8 +87,8 @@ ba 03                                            // Number of points of measure 
 // FD 0A 43 00 = 430AFD = 4393725 = 4.393725 * 10^6 = longitude
 // 60 02 = 260 = 608 = altitude
 // 45 02 = 245 = 581 = vitesse (5,81 km/h)
-// 00 = ??
-// 03 = ?? Number of satellites ?
+// 00 = heartrate
+// 03 = ?? Number of satellites ? Was always 03 on my 300, is 0 on my 700 (with heart rate) in interior
 // 00 00 = ?? 
 // 15 00 = 15 = duration since previous measure = 20 = 2.1s (2 bytes ?)
 // 00 00 = ??
