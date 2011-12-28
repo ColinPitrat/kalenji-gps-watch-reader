@@ -88,7 +88,7 @@ ba 03                                            // Number of points of measure 
 // 60 02 = 260 = 608 = altitude
 // 45 02 = 245 = 581 = vitesse (5,81 km/h)
 // 00 = heartrate
-// 03 = ?? Number of satellites ? Was always 03 on my 300, is 0 on my 700 (with heart rate) in interior
+// 03 = ?? Number of satellites ? I only saw 03 and 00, and from points with 00 it seems that it means a bad data quality !
 // 00 00 = ?? 
 // 15 00 = 15 = duration since previous measure = 20 = 2.1s (2 bytes ?)
 // 00 00 = ??
