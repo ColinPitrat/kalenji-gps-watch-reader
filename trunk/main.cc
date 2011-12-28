@@ -48,7 +48,7 @@ std::string durationAsString(double sec, bool with_hundredth = false)
 class Point
 {
 	public:
-		Point(double _lat, double _lon, int16_t _alt, double _speed, time_t _time, uint32_t _tenth) 
+		Point(double _lat, double _lon, int16_t _alt, double _speed, time_t _time, uint32_t _tenth, uint16_t _bpm) 
 		{ 
 			lat = _lat; 
 			lon = _lon; 
@@ -56,11 +56,13 @@ class Point
 			speed = _speed; 
 			time = _time; 
 			tenth = _tenth; 
+			bpm = _bpm;
 		};
 		double getLatitude() { return lat; };
 		double getLongitude() { return lon; };
 		int16_t getAltitude() { return alt; };
 		double getSpeed() { return speed; };
+		uint16_t getHeartRate() { return bpm; };
 		std::string getTime() 
 		{  
 			char buffer[256];
@@ -82,6 +84,7 @@ class Point
 		double speed;
 		time_t time;
 		uint32_t tenth;
+		uint16_t bpm;
 };
 
 class Lap
@@ -187,10 +190,11 @@ class SessionInfo
 			// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
 			int16_t alt = line[8] + (line[9] << 8);
 			double speed = ((double)(line[10] + (line[11] << 8)) / 100);
+			uint16_t bpm = line[12];
 			cumulated_tenth += line[16] + (line[17] << 8);
 			current_time += cumulated_tenth / 10;
 			cumulated_tenth = cumulated_tenth % 10;
-			Point point(lat, lon, alt, speed, current_time, cumulated_tenth);
+			Point point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm);
 			points.push_back(point);
 		}
 
@@ -657,6 +661,9 @@ bool createGPX(SessionInfo *session)
 		mystream << "      <trkpt lat=\"" << it->getLatitude() << "\" lon=\"" << it->getLongitude() << "\">" << std::endl;
 		mystream << "        <ele>" << it->getAltitude() << "</ele>" << std::endl;
 		mystream << "        <time>" << it->getTime() << "</time>" << std::endl;
+		mystream << "        <extensions>" << std::endl;
+		mystream << "          <gpxdata:hr>" << it->getHeartRate() << "</gpxdata:hr>" << std::endl;
+		mystream << "        </extensions>" << std::endl;
 		mystream << "      </trkpt>" << std::endl;
 	}
 	mystream << "    </trkseg>" << std::endl;
