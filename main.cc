@@ -48,7 +48,7 @@ std::string durationAsString(double sec, bool with_hundredth = false)
 class Point
 {
 	public:
-		Point(double _lat, double _lon, int16_t _alt, double _speed, time_t _time, uint32_t _tenth, uint16_t _bpm) 
+		Point(double _lat, double _lon, int16_t _alt, double _speed, time_t _time, uint32_t _tenth, uint16_t _bpm, uint16_t _fiability) 
 		{ 
 			lat = _lat; 
 			lon = _lon; 
@@ -57,12 +57,14 @@ class Point
 			time = _time; 
 			tenth = _tenth; 
 			bpm = _bpm;
+			fiability = _fiability;
 		};
 		double getLatitude() { return lat; };
 		double getLongitude() { return lon; };
 		int16_t getAltitude() { return alt; };
 		double getSpeed() { return speed; };
 		uint16_t getHeartRate() { return bpm; };
+		uint16_t getFiability() { return fiability; };
 		std::string getTime() 
 		{  
 			char buffer[256];
@@ -85,6 +87,7 @@ class Point
 		time_t time;
 		uint32_t tenth;
 		uint16_t bpm;
+		uint16_t fiability;
 };
 
 class Lap
@@ -185,16 +188,18 @@ class SessionInfo
 
 		void addPoint(unsigned char* line)
 		{
+			// TODO: All this decoding should be in point constructor !
 			double lat = ((double)(line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24))) / 1000000;
 			double lon = ((double)(line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24))) / 1000000;
 			// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
 			int16_t alt = line[8] + (line[9] << 8);
 			double speed = ((double)(line[10] + (line[11] << 8)) / 100);
 			uint16_t bpm = line[12];
+			uint16_t fiability = line[13];
 			cumulated_tenth += line[16] + (line[17] << 8);
 			current_time += cumulated_tenth / 10;
 			cumulated_tenth = cumulated_tenth % 10;
-			Point point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm);
+			Point point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
 			points.push_back(point);
 		}
 
@@ -658,13 +663,17 @@ bool createGPX(SessionInfo *session)
 	for(std::list<Point>::iterator it = points.begin(); it != points.end(); ++it)
 	{
 		// TODO: More info on point ? (cadence, hr when available)
-		mystream << "      <trkpt lat=\"" << it->getLatitude() << "\" lon=\"" << it->getLongitude() << "\">" << std::endl;
-		mystream << "        <ele>" << it->getAltitude() << "</ele>" << std::endl;
-		mystream << "        <time>" << it->getTime() << "</time>" << std::endl;
-		mystream << "        <extensions>" << std::endl;
-		mystream << "          <gpxdata:hr>" << it->getHeartRate() << "</gpxdata:hr>" << std::endl;
-		mystream << "        </extensions>" << std::endl;
-		mystream << "      </trkpt>" << std::endl;
+		// TODO: Give an option to filter on fiability, or add it in GPX ?
+		if(it->getFiability() == 3)
+		{
+			mystream << "      <trkpt lat=\"" << it->getLatitude() << "\" lon=\"" << it->getLongitude() << "\">" << std::endl;
+			mystream << "        <ele>" << it->getAltitude() << "</ele>" << std::endl;
+			mystream << "        <time>" << it->getTime() << "</time>" << std::endl;
+			mystream << "        <extensions>" << std::endl;
+			mystream << "          <gpxdata:hr>" << it->getHeartRate() << "</gpxdata:hr>" << std::endl;
+			mystream << "        </extensions>" << std::endl;
+			mystream << "      </trkpt>" << std::endl;
+		}
 	}
 	mystream << "    </trkseg>" << std::endl;
 	mystream << "  </trk>" << std::endl;
