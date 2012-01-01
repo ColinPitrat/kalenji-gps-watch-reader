@@ -10,3 +10,4 @@
  * Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
  * Remove laps with distance = 0, elapsed = 0, startPoint = endPoint ... (think about it !)
  * Option to import from import logs instead of from device in order to be able to reimport it later with newer version of the soft
+ * Only put extensions - heartrate if info is present and non zero
