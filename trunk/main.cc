@@ -642,6 +642,8 @@ bool createGPX(SessionInfo *session)
 	filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".gpx";
 	std::cout << "Creating " << filename.str() << std::endl;
 	std::ofstream mystream(filename.str().c_str());
+	// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
+	mystream.precision(8);
 	mystream << "<?xml version=\"1.0\"?>" << std::endl;
 	mystream << "<gpx version=\"1.1\"" << std::endl;
 	mystream << "     creator=\"Kalenji 300 Reader\"" << std::endl;
