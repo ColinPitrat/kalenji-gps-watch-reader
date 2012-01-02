@@ -268,7 +268,7 @@ class SessionInfo
 		std::string getName() { return "No name"; };
 		//tm *getTime() { return &time; };
 		int getYear() { return time.tm_year + 1900; };
-		int getMonth() { return time.tm_mon; };
+		int getMonth() { return time.tm_mon + 1; };
 		int getDay() { return time.tm_mday; };
 		int getHour() { return time.tm_hour; };
 		int getMinutes() { return time.tm_min; };
@@ -330,41 +330,49 @@ bool checkUSBOperation(int rc)
 #define TIMEOUT 5000
 #define RESPONSE_BUFFER_SIZE 4096
 unsigned char responseData[RESPONSE_BUFFER_SIZE];
-const int lengthDataList1 = 5;
-unsigned char dataList1[lengthDataList1] = { 0x02, 0x00, 0x01, 0x85, 0x84 };
-const int lengthDataList2 = 5;
-unsigned char dataList2[lengthDataList2] = { 0x02, 0x00, 0x01, 0x78, 0x79 };
+const int lengthDataDevice = 5;
+unsigned char dataDevice[lengthDataDevice] = { 0x02, 0x00, 0x01, 0x85, 0x84 };
+const int lengthDataList = 5;
+unsigned char dataList[lengthDataList] = { 0x02, 0x00, 0x01, 0x78, 0x79 };
 const int lengthMoreData = 5;
 unsigned char moreData[lengthMoreData] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
 std::map<std::string, std::string> configuration;
 std::string logfilename;
+// Used if input file is given
+bool useInputStream;
+std::vector<std::string> inputStream;
+uint32_t inputIndex;
 
 bool USBsend(libusb_device_handle *USBDevice, unsigned char *data, size_t length)
 {
-	// Display what is sent
-	if(DEBUG == 1)
+	bool ok = true;
+	if(!useInputStream)
 	{
-		std::cout << "Sending data: " << std::endl;
-
-		/*
-		std::cout.write(reinterpret_cast<char*>(data), length);
-		std::cout << std::endl;
-		*/
-
-		std::cout << std::hex;
-		for(int i = 0; i < length; ++i)
+		// Display what is sent
+		if(DEBUG == 1)
 		{
-			std::cout << std::setw(2) << std::setfill('0') << (int) data[i] << " ";
+			std::cout << "Sending data: " << std::endl;
+
+			/*
+			   std::cout.write(reinterpret_cast<char*>(data), length);
+			   std::cout << std::endl;
+			 */
+
+			std::cout << std::hex;
+			for(int i = 0; i < length; ++i)
+			{
+				std::cout << std::setw(2) << std::setfill('0') << (int) data[i] << " ";
+			}
+			std::cout << std::dec << std::endl;
 		}
-		std::cout << std::dec << std::endl;
-	}
-	int transferred;
-	int rc = libusb_bulk_transfer(USBDevice, 0x03, data, length, &transferred, TIMEOUT);
-	bool ok = checkUSBOperation(rc);
-	if(transferred != length)
-	{
-		std::cerr << "Error: transferred (" << transferred << ") != length (" << length << ")" << std::endl;
-		ok = false;
+		int transferred;
+		int rc = libusb_bulk_transfer(USBDevice, 0x03, data, length, &transferred, TIMEOUT);
+		ok = checkUSBOperation(rc);
+		if(transferred != length)
+		{
+			std::cerr << "Error: transferred (" << transferred << ") != length (" << length << ")" << std::endl;
+			ok = false;
+		}
 	}
 	return ok;
 }
@@ -372,36 +380,45 @@ bool USBsend(libusb_device_handle *USBDevice, unsigned char *data, size_t length
 int USBreceive(libusb_device_handle *USBDevice)
 {
 	int transferred;
-	int rc = libusb_bulk_transfer(USBDevice, 0x81, responseData, RESPONSE_BUFFER_SIZE, &transferred, TIMEOUT);
-	checkUSBOperation(rc);
-
-	// Display result of call
-	if(DEBUG == 1)
+	if(useInputStream)
 	{
-		std::cout << "Received data: " << std::endl;
-
-		/*
-		std::cout.write(reinterpret_cast<char*>(responseData), transferred);
-		std::cout << std::endl;
-		*/
-
-		std::cout << std::hex;
-		for(int i = 0; i < transferred; ++i)
-		{
-			std::cout << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
-		}
-		std::cout << std::dec << std::endl;
+		transferred = inputStream[inputIndex].length();
+		memcpy(responseData, inputStream[inputIndex].c_str(), transferred);
+		inputIndex++;
 	}
-	if(configuration["log_transactions"] == "yes")
+	else
 	{
-		std::ofstream log_file_stream(logfilename.c_str(), std::ios_base::out | std::ios_base::app);
-		log_file_stream << std::hex;
-		for(int i = 0; i < transferred; ++i)
+		int rc = libusb_bulk_transfer(USBDevice, 0x81, responseData, RESPONSE_BUFFER_SIZE, &transferred, TIMEOUT);
+		checkUSBOperation(rc);
+
+		// Display result of call
+		if(DEBUG == 1)
 		{
-			log_file_stream << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
+			std::cout << "Received data: " << std::endl;
+
+			/*
+			   std::cout.write(reinterpret_cast<char*>(responseData), transferred);
+			   std::cout << std::endl;
+			 */
+
+			std::cout << std::hex;
+			for(int i = 0; i < transferred; ++i)
+			{
+				std::cout << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
+			}
+			std::cout << std::dec << std::endl;
 		}
-		log_file_stream << std::dec << std::endl;
-		log_file_stream.close();
+		if(configuration["log_transactions"] == "yes")
+		{
+			std::ofstream log_file_stream(logfilename.c_str(), std::ios_base::out | std::ios_base::app);
+			log_file_stream << std::hex;
+			for(int i = 0; i < transferred; ++i)
+			{
+				log_file_stream << std::setw(2) << std::setfill('0') << (int) responseData[i] << " ";
+			}
+			log_file_stream << std::dec << std::endl;
+			log_file_stream.close();
+		}
 	}
 	return transferred;
 }
@@ -470,7 +487,7 @@ bool closeUSBDevice(libusb_device_handle *USBHandle)
 
 bool getDeviceInfo(libusb_device_handle *USBDevice)
 {
-	USBsend(USBDevice, dataList1, lengthDataList1);
+	USBsend(USBDevice, dataDevice, lengthDataDevice);
 	USBreceive(USBDevice);
 
 	return true;
@@ -478,7 +495,7 @@ bool getDeviceInfo(libusb_device_handle *USBDevice)
 
 bool getList(libusb_device_handle *USBDevice, SessionsMap *sessions)
 {
-	USBsend(USBDevice, dataList2, lengthDataList2);
+	USBsend(USBDevice, dataList, lengthDataList);
 	int received = USBreceive(USBDevice);
 
 	if(responseData[0] != 0x78)
@@ -773,9 +790,57 @@ void initLogFile()
 	logfilename = log_filename.str();
 }
 
-bool readConf()
+void usage(char *progname)
 {
-	// TODO: other options ?
+	std::cout << "Usage: " << progname << " [-h | -i <input_file>]" << std::endl;
+	std::cout << "  - h: help:       Show this help message " << std::endl;
+	std::cout << "  - i: input file: Provide input file instead of reading from device" << std::endl;
+}
+
+bool readConf(int argc, char** argv)
+{
+	useInputStream = false;
+	int option;
+	while((option = getopt(argc, argv, ":hi:")) != -1)
+	{
+		switch(option)
+		{
+			case 'i':
+				useInputStream = true;
+				inputIndex = 0;
+				if(access(optarg, R_OK) == 0)
+				{
+					std::string line;
+					std::ifstream inputfile(optarg);
+					if (inputfile.is_open())
+					{
+						while ( inputfile.good() )
+						{
+							std::string thisLine;
+							getline(inputfile, line);
+							std::stringstream iss(line);
+							iss >> std::hex;
+							std::copy(std::istream_iterator<unsigned int>(iss), std::istream_iterator<unsigned int>(), std::back_inserter(thisLine));
+							inputStream.push_back(thisLine);
+						}
+						inputfile.close();
+					}
+					else 
+					{
+						std::cerr << "Unable to open " << inputfile; 
+						return false;
+					}
+				}
+				break;
+			case 'h':
+				usage(argv[0]);
+				break;
+			case '?':
+				std::cerr << " Error, unknown option " << (char)optopt << std::endl;
+				usage(argv[0]);
+				return false;
+		}
+	}
 	// Default conf
 	configuration["directory"] = "/tmp/kalenji_import";
 	configuration["import"] = "all";
@@ -820,6 +885,11 @@ bool readConf()
     if(configuration.count("log_transactions_directory") == 0)
     {
         configuration["log_transactions_directory"] = configuration["directory"] + "/logs";
+    }
+    if(useInputStream)
+    {
+	    // When using an input stream, we don't want the user to be prompted as we read everything and ignore all sending
+	    configuration["import"] = "all";
     }
     initLogFile();
     return true;
@@ -881,14 +951,14 @@ void filterSessionsToImport(SessionsMap *sessions)
 int main(int argc, char *argv[])
 {
 	// TODO: Handle command line options
-	readConf();
+	if(!readConf(argc, argv)) return -1;
 
 	// First attempt, creating dir if it doesn't exist
 	if(!checkAndCreateDir(configuration["directory"])) return -1;
 	if(configuration["log_transactions"] == "yes" && !checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
 
 	libusb_device_handle *USBDevice;
-	if(!openUSBDevice(&USBDevice))
+	if(!openUSBDevice(&USBDevice) && !useInputStream)
 	{
 		std::cerr << "Device not found or error opening USB device. Is your watch correctly plugged ?" << std::endl;
 		return -2;
