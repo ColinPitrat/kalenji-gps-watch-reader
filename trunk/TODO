@@ -1,11 +1,10 @@
+ * Implement options to override configuration
+ * Documentation on options
  * Clean code: separated files, no global var
  * Use info retrieved by the first 80 call and by 78 call
  * Cleaner way to handle id_point (used to find first and last point of a lap)
  * Improve metadata (add link among others)
- * More info on point (cadence, hr when available) ? What is cadence ? Different from pace and speed ?
- * Add command line options handling 
  * In case of error we should finish reading until getting 8Axxx so that the device is in a clean state
- * Improve display of sessions when import=ask
  * Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
  * Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
  * Remove laps with distance = 0, elapsed = 0, startPoint = endPoint ... (think about it !)
