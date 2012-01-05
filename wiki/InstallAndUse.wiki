@@ -1,9 +1,23 @@
 #summary How to install and use kalenji_reader.
 #labels Featured,Phase-Deploy
 
-= Installing =
+You can either install featured versions from a distributed package or current development version from SVN.
 
-There is no package distributed (yet ?) so you have to get latest release from svn.
+= Installing from package =
+
+Download a package from [http://code.google.com/p/kalenji-gps-watch-reader/downloads/list Downloads section]
+
+For example, if you downloaded version 1.0:
+
+{{{
+tar -xvzf kalenji-gps-watch-reader-1.0.tar.gz
+cd kalenji-gps-watch-reader
+make
+}}}
+
+= Installing from SVN =
+
+If you prefer to get the latest version, with bleeding edge features but also potentially more bugs:
 
 {{{
 svn checkout http://kalenji-gps-watch-reader.googlecode.com/svn/trunk/ kalenji-gps-watch-reader-read-only
@@ -21,17 +35,17 @@ By default, data is imported in /tmp/kalenji_import. You can modify it by editin
 ./kalenji_reader
 }}}
 
-GPX files are created in /tmp/kalenji_import and can be imported in your favorite software.
+GPX files created can be imported in your favorite software.
 
 = Debug mode =
 
-In case you notice a bug and you want to report it or if you have a CW 700 and you want to help me add the support for heartrate, you will need to use debug mode to produce a file containing debug information.
+In case you encounter a core and you want to report it, you will need to use debug mode to produce a file containing debug information.
 
 Then rebuild and run the tool:
 {{{
 make debug
 mkdir -p /tmp/kalenji_import
-./kalenji_reader | tee debug_information.txt
+./kalenji_reader 2>&1 | tee kalenji_reader_output.txt
 }}}
 
-You will see a lot of information that will also be written in the file debug_information.txt. You can attach this file to a bug report to provide more information on what was the content of the communication between the GPS device and your computer.
+The output of kalenji_reader will be written in kalenji_reader_output.txt. You can attach this file, an eventual core and logs of the import to a bug report to provide more information on the problem.
