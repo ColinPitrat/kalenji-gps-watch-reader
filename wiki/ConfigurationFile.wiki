@@ -52,6 +52,26 @@ The information of the kind of event that triggered the end of a lap is, as far 
   * *location*: a given location being reached (not possible with those watch)
   * *hr*: a given heartrate being reached (not possible with those watch)
 
+==Filters==
+*Name:* filters
+
+*Default value:* UnreliablePoints,EmptyLaps
+
+List of filters to apply on imported data before exporting it.
+Available filters are:
+  * *EmptyLaps*: Remove laps with null distance or null duration
+  * *UnreliablePoints*: Remove points for which the device gives a low reliability
+
+==Outputs==
+*Name:* outputs
+*Default value:* GPX,GoogleMap
+
+List of formats to which data should be exported.
+Outputs can be:
+  * *GPX*: GPX format, an XML file conforming to GPX and GPXDATA standards
+  * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
+  * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
+
 ==Log transactions==
 *Name:* log_transactions
 
