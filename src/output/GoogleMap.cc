@@ -1,0 +1,137 @@
+#include "GoogleMap.h"
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+#include <fstream>
+
+namespace output
+{
+	REGISTER_OUTPUT(GoogleMap);
+
+	void GoogleMap::dump(Session *session, std::map<std::string, std::string> &configuration)
+	{
+		std::stringstream filename;
+		filename << configuration["directory"] << "/"; 
+		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
+		filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".html";
+		std::cout << "Creating " << filename.str() << std::endl;
+
+		std::ofstream mystream(filename.str().c_str());
+		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
+		mystream.precision(8);
+		mystream << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" << std::endl;
+		mystream << "<html xmlns=\"http://www.w3.org/1999/xhtml\"  xmlns:v=\"urn:schemas-microsoft-com:vml\">" << std::endl;
+		mystream << "<head>" << std::endl;
+		mystream << "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" << std::endl;
+		mystream << "<title>Session from " << session->getBeginTime() << "</title>" << std::endl;
+		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>" << std::endl;
+		mystream << "<script type=\"text/javascript\">" << std::endl;
+
+		std::list<Point*> points = session->getPoints();
+		uint32_t point = 0;
+		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		{
+			// Point is latitude, longitude, color, weight
+			mystream << "point" << point << " = Array(";
+			mystream << (*it)->getLatitude() << "," << (*it)->getLongitude() << ",";
+			mystream << "\"#"; 
+			// TODO: Use max speed and min speed to determine the color range
+			int16_t sp = ((*it)->getSpeed() - 8) * 10;
+			if(sp < 0) sp = 0;
+			if(sp > 0xFF) sp = 0xFF;
+			mystream << std::hex << std::setw(2) << std::setfill('0') << sp;
+			mystream << "0000\"" << std::dec << std::setw(0) << std::setfill(' ');
+			// TODO: Use max hr and min hr to determine the width range
+			uint16_t hr = (*it)->getHeartRate();
+			if(hr <= 60) hr = 60;
+			mystream << "," << hr/20 << ");" << std::endl;
+
+			mystream << "function popup_callback_" << point << "(event)" << std::endl;
+			mystream << "{" << std::endl;
+			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
+			mystream << "                                            content: \"<b>Speed:</b> ";
+			mystream << (*it)->getSpeed() << " km/h<br /><b>Heartrate:</b> " << (*it)->getHeartRate();
+			mystream << " bpm<br/><b>Elevation:</b> " << (*it)->getAltitude() << " m\"});" << std::endl;
+			mystream << "    popup.open(map);" << std::endl;
+			mystream << "}" << std::endl;
+			++point;
+		}
+		mystream << "pointsList = Array (";
+		for(uint32_t i = 0; i < point; ++i)
+		{
+			if(i > 0) mystream << ",";
+			mystream << "point" << i;
+		}
+		mystream << ");" << std::endl;
+		mystream << "popup_callbacks = Array (";
+		for(uint32_t i = 0; i < point; ++i)
+		{
+			if(i > 0) mystream << ",";
+			mystream << "popup_callback_" << i;
+		}
+		mystream << ");" << std::endl;
+
+		std::list<Lap*> laps = session->getLaps();
+		uint32_t lap = 0;
+		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		{
+			mystream << "waypoint" << lap << " = Array (";
+			mystream << (*it)->getEndPoint()->getLatitude() << ", " << (*it)->getEndPoint()->getLongitude() << ", " << lap;
+			mystream << ");" << std::endl;
+			++lap;
+		}
+		mystream << "waypointsList = Array (";
+		for(uint32_t i = 0; i < lap; ++i)
+		{
+			if(i > 0) mystream << ",";
+			mystream << "waypoint" << i;
+		}
+		mystream << ");" << std::endl << std::endl;;
+
+		mystream << "function load() " << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "	var centerLatLng = new google.maps.LatLng(pointsList[0][0], pointsList[0][1]);" << std::endl;
+		mystream << "	var myOptions = {" << std::endl;
+		mystream << "	      zoom: 14," << std::endl;
+		mystream << "	      center: centerLatLng," << std::endl;
+		mystream << "	      scaleControl: true," << std::endl;
+		mystream << "	      mapTypeId: google.maps.MapTypeId.HYBRID" << std::endl;
+		mystream << "	};" << std::endl << std::endl;
+		mystream << "	map = new google.maps.Map(document.getElementById(\"map\"), myOptions);" << std::endl;
+		mystream << "	for (i=0; i<waypointsList.length; i++)" << std::endl;
+		mystream << "	{" << std::endl;
+		mystream << "		var point = new google.maps.LatLng(waypointsList[i][0], waypointsList[i][1]);" << std::endl;
+		mystream << "		var markerOptions = {" << std::endl;
+		// TODO: Use something else for the icon of lap ending
+		mystream << "			icon: \"/usr/share/pytrainer/glade/waypoint.png\"," << std::endl;
+		mystream << "			position: point}" << std::endl;
+		mystream << "		var markerD = new google.maps.Marker(markerOptions); " << std::endl;
+		mystream << "		markerD.setMap(map);" << std::endl;
+		mystream << "	}" << std::endl << std::endl;
+		mystream << "	for (i=0; i<pointsList.length; i++)" << std::endl;
+		mystream << "	{" << std::endl;
+		mystream << "		if(i > 0)" << std::endl;
+		mystream << "		{" << std::endl;
+		mystream << "			var startPoint = new google.maps.LatLng(pointsList[i-1][0], pointsList[i-1][1]);" << std::endl;
+		mystream << "			var endPoint = new google.maps.LatLng(pointsList[i][0], pointsList[i][1]);" << std::endl;
+		mystream << "			var pathArray = Array(startPoint, endPoint);" << std::endl;
+		mystream << "			var polyline = new google.maps.Polyline({path: pathArray," << std::endl;
+		mystream << "					strokeColor: pointsList[i][2]," << std::endl;
+		mystream << "					strokeOpacity: 0.9," << std::endl;
+		mystream << "					strokeWeight: pointsList[i][3]," << std::endl;
+		mystream << "					});" << std::endl;
+		mystream << "			polyline.setMap(map);" << std::endl;
+		mystream << "			google.maps.event.addListener(polyline, 'click', popup_callbacks[i]);" << std::endl;
+		mystream << "		}" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "//]]>" << std::endl;
+		mystream << "</script>" << std::endl;
+		mystream << "</head>" << std::endl;
+		mystream << "<body onload=\"load()\" style=\"cursor:crosshair\" border=\"0\">" << std::endl;
+		mystream << "<div id=\"map\" style=\"width: 100%; height: 600px; top: 0px; left: 0px\"></div>" << std::endl;
+		mystream << "</body>" << std::endl;
+		mystream << "</html>" << std::endl;
+
+	}
+}

@@ -1,12 +1,25 @@
- * Implement options to override configuration
- * Documentation on options
- * Clean code: separated files, no global var
- * Use info retrieved by the first 80 call and by 78 call
- * Cleaner way to handle id_point (used to find first and last point of a lap)
- * Improve metadata (add link among others)
- * In case of error we should finish reading until getting 8Axxx so that the device is in a clean state
- * Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
- * Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
- * Remove laps with distance = 0, elapsed = 0, startPoint = endPoint ... (think about it !)
- * Option to import from import logs instead of from device in order to be able to reimport it later with newer version of the soft
- * Only put extensions - heartrate if info is present and non zero
+ *                       Documentation on options
+ * device::Kalenji:      Do a test with more than 32 laps: multiple 80 messages of type 2 ?
+ * device::Kalenji:      Use info retrieved by the first 80 call and by 78 call
+ * device::Kalenji:      Cleaner way to handle id_point (used to find first and last point of a lap)
+ * device::Kalenji:      In case of error we should finish reading until getting 8Axxx so that the device is in a clean state (== implement release ?)
+ * output::GPX:          Improve metadata (add link among others)
+ * output::GPX:          Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
+ * output::GPX:          Only put extensions - heartrate if info is present and non zero
+ *                       Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
+ *                       Setup a non-regression testing (is there something available with google code ?)
+ * device::GPX           Create a device to "import" from GPX file (would allow creating a GoogleMap from GPX for example)
+ *                       Export of route to the device (source = File, device = GPX, output = Kalenji ? therefore, output would use source = USB ... to generalize for file too ?)
+ *                       Factorize code converting date to string (calls to strftime - to put in some utils part ?)
+ *                       Find which header is needed for uint32_t
+ * bom::Session          Improve interface
+ * bom::Session          Method to remove point (handling adjusting laps)
+ *                       Check configuration file syntax (allowing comments)
+ *                       Add import = new option (importing only session that have not already been imported - define how we want it to behave exactly)
+ *                       Add some exceptions to handle error cases
+ * output::KML           KML file format support for export (and import too ?) - Need to find some example files ...
+ * output::GoogleMap     Use max speed and min speed to determine the color range
+ * output::GoogleMap     Use max hr and min hr to determine the width range
+ * output::GoogleMap     Use something else for the icon of lap ending
+ *                       Use singleton for configuration ? Instead of passing it to output as argument of dump.
+ *                       Support environment variables and references to other variables in configuration ?
