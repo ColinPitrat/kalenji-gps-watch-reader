@@ -20,37 +20,13 @@
 #include "filter/Filter.h"
 #include "output/Output.h"
 #include "Registry.h"
+#include "Utils.h"
 
 #ifndef DEBUG
 #define DEBUG 0
 #endif
 
 std::map<std::string, std::string> configuration;
-
-std::string durationAsString(double sec, bool with_hundredth = false)
-{
-	uint32_t days = sec / (24*3600);
-	sec -= days * 24 * 3600; 
-	uint32_t hours = sec / 3600;
-	sec -= hours * 3600; 
-	uint32_t minutes = sec / 60;
-	sec -= minutes * 60; 
-	uint32_t seconds = sec;
-	sec -= seconds;
-	uint32_t hundredth = sec * 100;
-	std::string result;
-	std::ostringstream oss;
-	if(days != 0)
-		oss << days << "d ";
-	if(hours != 0 or days != 0)
-		oss << hours << "h";
-	if(minutes != 0 or hours != 0 or days !=0)
-		oss << minutes << "m";
-	oss << seconds << "s";
-	if(with_hundredth)
-		oss << std::setw(2) << std::setfill('0') << hundredth;
-	return oss.str();
-}
 
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",")
 {
@@ -62,7 +38,11 @@ std::list<std::string> splitString(std::string toSplit, std::string separator = 
         end = toSplit.find(separator, begin);
         std::string value = toSplit.substr(begin, end-begin);
         begin = end + separator.length();
-        result.push_back(value);
+	// none is a special value to specify empty lists
+	if(value != "none")
+	{
+		result.push_back(value);
+	}
     }
     return result;
 }
@@ -110,42 +90,50 @@ bool checkAndCreateDir(std::string path)
 
 void usage(char *progname)
 {
-	std::cout << "Usage: " << progname << " [-h | -i <input_file>]" << std::endl;
-	std::cout << "  - h: help:       Show this help message " << std::endl;
-	std::cout << "  - i: input file: Provide input file instead of reading from device" << std::endl;
-	std::cout << "  - c: conf file:  Provide alternate configuration file instead of ~/.kalenji_readerrc" << std::endl;
+	std::cout << "Usage: " << progname << " [ -h | [ -c <rc_file> ] [ -d <output_directory> ] [ -f <filters> ] [ -i <input_file> ] [ -o <outputs> ] [ -t <trigger_type> ] ]" << std::endl;
+	std::cout << "  - h: help:        Show this help message " << std::endl;
+	std::cout << "  - c: conf file:   Provide alternate configuration file instead of ~/.kalenji_readerrc" << std::endl;
+	std::cout << "  - d: output dir:  Directory to which output files should be produced" << std::endl;
+	std::cout << "  - f: filters:     Comma separated list of filters to apply on data before the export. Use 'none' for empty list" << std::endl;
+	std::cout << "  - i: input file:  Provide input file instead of reading from device" << std::endl;
+	std::cout << "  - o: outputs:     Comma separated list of output formats to produce for each session." << std::endl;
+	std::cout << "  - t: trigger:     Override the type of trigger (possible values: manual, distance, time, location, hr)" << std::endl;
 }
 
 std::map<std::string, std::string> readOptions(int argc, char **argv)
 {
 	std::map<std::string, std::string> options;
 	int option;
-	while((option = getopt(argc, argv, ":hi:c:")) != -1)
+	while((option = getopt(argc, argv, ":c:d:f:i:o:t:h")) != -1)
 	{
 		switch(option)
 		{
 			case 'c':
-			{
 				options["rcfile"] = std::string(optarg);
 				break;
-			}
+			case 'd':
+				options["directory"] = std::string(optarg);
+				break;
+			case 'f':
+				options["filters"] = std::string(optarg);
+				break;
 			case 'i':
-			{
 				options["source"] = "File";
 				options["sourcefile"] = std::string(optarg);
 				break;
-			}
+			case 'o':
+				options["outputs"] = std::string(optarg);
+				break;
+			case 't':
+				options["trigger"] = std::string(optarg);
+				break;
 			case 'h':
-			{
 				usage(argv[0]);
 				exit(0);
-			}
 			case '?':
-			{
 				std::cerr << " Error, unknown option " << (char)optopt << std::endl;
 				usage(argv[0]);
 				exit(-1);
-			}
 		}
 	}
 	return options;
@@ -174,6 +162,10 @@ bool readConf()
 	}
 
 	std::string rcfile = std::string(homeDir) + "/.kalenji_readerrc";
+	if(configuration.count("rcfile") != 0)
+	{
+		rcfile = configuration["rcfile"];
+	}
 	if(access(rcfile.c_str(), F_OK) == 0)
 	{
 		std::string line;

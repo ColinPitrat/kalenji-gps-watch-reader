@@ -1,3 +1,4 @@
+#include "../Utils.h"
 #include "GoogleMap.h"
 #include <sstream>
 #include <iostream>
@@ -8,8 +9,7 @@ namespace output
 {
 	REGISTER_OUTPUT(GoogleMap);
 
-	void GoogleMap::dump(Session *session, std::map<std::string, std::string> &configuration)
-	{
+	void GoogleMap::dump(Session *session, std::map<std::string, std::string> &configuration) {
 		std::stringstream filename;
 		filename << configuration["directory"] << "/"; 
 		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
@@ -35,8 +35,11 @@ namespace output
 			mystream << "point" << point << " = Array(";
 			mystream << (*it)->getLatitude() << "," << (*it)->getLongitude() << ",";
 			mystream << "\"#"; 
-			// TODO: Use max speed and min speed to determine the color range
-			int16_t sp = ((*it)->getSpeed() - 8) * 10;
+			// Max speed is bright red, 5 km/h or less is black
+			// TODO: Dynamic way to find lower bound ?
+			double min_speed = 5;
+			double speed_factor = 0xFF / (session->getMaxSpeed() - min_speed);
+			int16_t sp = ((*it)->getSpeed() - min_speed) * speed_factor;
 			if(sp < 0) sp = 0;
 			if(sp > 0xFF) sp = 0xFF;
 			mystream << std::hex << std::setw(2) << std::setfill('0') << sp;
@@ -46,12 +49,14 @@ namespace output
 			if(hr <= 60) hr = 60;
 			mystream << "," << hr/20 << ");" << std::endl;
 
-			mystream << "function popup_callback_" << point << "(event)" << std::endl;
+			mystream << "function point_popup_callback_" << point << "(event)" << std::endl;
 			mystream << "{" << std::endl;
 			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
-			mystream << "                                            content: \"<b>Speed:</b> ";
-			mystream << (*it)->getSpeed() << " km/h<br /><b>Heartrate:</b> " << (*it)->getHeartRate();
-			mystream << " bpm<br/><b>Elevation:</b> " << (*it)->getAltitude() << " m\"});" << std::endl;
+			mystream << "                                            content: \"";
+			mystream << "<b>Speed:</b> " << (*it)->getSpeed() << " km/h<br />";
+			mystream << "<b>Heartrate:</b> " << (*it)->getHeartRate() << " bpm<br/>";
+			mystream << "<b>Elevation:</b> " << (*it)->getAltitude() << " m";
+			mystream << "\"});" << std::endl;
 			mystream << "    popup.open(map);" << std::endl;
 			mystream << "}" << std::endl;
 			++point;
@@ -63,11 +68,11 @@ namespace output
 			mystream << "point" << i;
 		}
 		mystream << ");" << std::endl;
-		mystream << "popup_callbacks = Array (";
+		mystream << "point_popup_callbacks = Array (";
 		for(uint32_t i = 0; i < point; ++i)
 		{
 			if(i > 0) mystream << ",";
-			mystream << "popup_callback_" << i;
+			mystream << "point_popup_callback_" << i;
 		}
 		mystream << ");" << std::endl;
 
@@ -78,6 +83,20 @@ namespace output
 			mystream << "waypoint" << lap << " = Array (";
 			mystream << (*it)->getEndPoint()->getLatitude() << ", " << (*it)->getEndPoint()->getLongitude() << ", " << lap;
 			mystream << ");" << std::endl;
+
+			mystream << "function lap_popup_callback_" << lap << "(event)" << std::endl;
+			mystream << "{" << std::endl;
+			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
+			mystream << "                                            content: \"";
+			mystream << "<b>Distance:</b> " << (*it)->getLength()/1000.0 << " km<br/>";
+			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
+			mystream << "<b>Average speed:</b> " << (*it)->getAvgSpeed() << " km/h<br/>";
+			mystream << "<b>Maximum speed:</b> " << (*it)->getMaxSpeed() << " km/h<br/>";
+			mystream << "<b>Average heartrate:</b> " << (*it)->getAvgHeartrate() << " bpm<br/>";
+			mystream << "<b>Maximum heartrate:</b> " << (*it)->getMaxHeartrate() << " bpm<br/>";
+			mystream << "\"});" << std::endl;
+			mystream << "    popup.open(map);" << std::endl;
+			mystream << "}" << std::endl;
 			++lap;
 		}
 		mystream << "waypointsList = Array (";
@@ -87,6 +106,13 @@ namespace output
 			mystream << "waypoint" << i;
 		}
 		mystream << ");" << std::endl << std::endl;;
+		mystream << "lap_popup_callbacks = Array (";
+		for(uint32_t i = 0; i < lap; ++i)
+		{
+			if(i > 0) mystream << ",";
+			mystream << "lap_popup_callback_" << i;
+		}
+		mystream << ");" << std::endl;
 
 		mystream << "function load() " << std::endl;
 		mystream << "{" << std::endl;
@@ -107,6 +133,7 @@ namespace output
 		mystream << "			position: point}" << std::endl;
 		mystream << "		var markerD = new google.maps.Marker(markerOptions); " << std::endl;
 		mystream << "		markerD.setMap(map);" << std::endl;
+		mystream << "		google.maps.event.addListener(markerD, 'click', lap_popup_callbacks[i]);" << std::endl;
 		mystream << "	}" << std::endl << std::endl;
 		mystream << "	for (i=0; i<pointsList.length; i++)" << std::endl;
 		mystream << "	{" << std::endl;
@@ -121,7 +148,7 @@ namespace output
 		mystream << "					strokeWeight: pointsList[i][3]," << std::endl;
 		mystream << "					});" << std::endl;
 		mystream << "			polyline.setMap(map);" << std::endl;
-		mystream << "			google.maps.event.addListener(polyline, 'click', popup_callbacks[i]);" << std::endl;
+		mystream << "			google.maps.event.addListener(polyline, 'click', point_popup_callbacks[i]);" << std::endl;
 		mystream << "		}" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "}" << std::endl;
