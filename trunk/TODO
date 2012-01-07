@@ -21,5 +21,6 @@
  * output::GoogleMap     Use max speed and min speed to determine the color range
  * output::GoogleMap     Use max hr and min hr to determine the width range
  * output::GoogleMap     Use something else for the icon of lap ending
+ * output::GoogleMap     Add a flag at the beginning with race information (~ same as lap for the whole race + date and more if available)
  *                       Use singleton for configuration ? Instead of passing it to output as argument of dump.
  *                       Support environment variables and references to other variables in configuration ?

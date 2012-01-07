@@ -37,16 +37,17 @@ class Session
 		void addPoint(Point* point) { _points.push_back(point); }
 		void addLap(Lap *lap)       { _laps.push_back(lap); }
 
+		double setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
+		double setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
+
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
 		std::string getBeginTime(bool human_readable=false) 
 		{ 
-			time_t begin_time = mktime(&_time);
 			char buffer[256];
-			tm *begin_time_tm = localtime(&begin_time);
 			if(human_readable)
-				strftime(buffer, 256, "%Y-%m-%d %H:%M:%S", begin_time_tm);
+				strftime(buffer, 256, "%Y-%m-%d %H:%M:%S", &_time);
 			else
-				strftime(buffer, 256, "%Y-%m-%dT%H:%M:%SZ", begin_time_tm);
+				strftime(buffer, 256, "%Y-%m-%dT%H:%M:%SZ", &_time);
 			return std::string(buffer);
 		};
 
@@ -67,6 +68,8 @@ class Session
 		int getSeconds()       { return _time.tm_sec; };
 		double getDuration()   { return _duration; };
 		uint32_t getDistance() { return _distance; };
+		double getMaxSpeed()   { return _max_speed; };
+		double getAvgSpeed()   { return _avg_speed; };
 		uint32_t getNbLaps()   { return _nb_laps; };
 		time_t getTime()       { return _time_t; };
 
@@ -78,6 +81,8 @@ class Session
 		uint32_t _nb_points;
 		double _duration;
 		uint32_t _distance;
+		double _max_speed;
+		double _avg_speed;
 		uint32_t _nb_laps;
 		std::list<Lap*> _laps;
 		std::list<Point*> _points;
