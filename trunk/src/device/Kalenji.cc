@@ -205,7 +205,6 @@ namespace device
 
 			// Third response 80 retrieves info concerning the points of the session. There can be many.
 			Session *session;
-			_dataSource->write_data(dataMore, lengthDataMore);
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
