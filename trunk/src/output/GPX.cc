@@ -75,8 +75,10 @@ namespace output
 				mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 				mystream << "      <gpxdata:calories>" << (*it)->getCalories() << "</gpxdata:calories>" << std::endl;
 				mystream << "      <gpxdata:distance>" << (*it)->getLength() << "</gpxdata:distance>" << std::endl;
-				// Heart rate is not available on my device but would be nice to add for CW 700:
-				mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">0</gpxdata:summary>" << std::endl;
+				mystream << "      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">" << (*it)->getAvgSpeed() << "</gpxdata:summary>" << std::endl;
+				mystream << "      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">" << (*it)->getMaxSpeed() << "</gpxdata:summary>" << std::endl;
+				mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">" << (*it)->getAvgHeartrate() << "</gpxdata:summary>" << std::endl;
+				mystream << "      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">" << (*it)->getMaxHeartrate() << "</gpxdata:summary>" << std::endl;
 				// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
 				// This is the correct syntax, but pytrainer doesn't support it
 				//mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;
