@@ -31,7 +31,7 @@ namespace output
 		uint32_t point = 0;
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
-			// Point is latitude, longitude, color, weight
+			// Point is latitude, longitude, color
 			mystream << "point" << point << " = Array(";
 			mystream << (*it)->getLatitude() << "," << (*it)->getLongitude() << ",";
 			mystream << "\"#"; 
@@ -47,7 +47,7 @@ namespace output
 			// TODO: Use max hr and min hr to determine the width range
 			uint16_t hr = (*it)->getHeartRate();
 			if(hr <= 60) hr = 60;
-			mystream << "," << hr/20 << ");" << std::endl;
+			mystream << ");" << std::endl;
 
 			mystream << "function point_popup_callback_" << point << "(event)" << std::endl;
 			mystream << "{" << std::endl;
@@ -124,12 +124,16 @@ namespace output
 		mystream << "	      mapTypeId: google.maps.MapTypeId.HYBRID" << std::endl;
 		mystream << "	};" << std::endl << std::endl;
 		mystream << "	map = new google.maps.Map(document.getElementById(\"map\"), myOptions);" << std::endl;
+		mystream << "	var image_size = new google.maps.Size(32, 32);" << std::endl;
+		mystream << "	var image_origin = new google.maps.Point(0, 0);" << std::endl;
+		mystream << "	var image_anchor = new google.maps.Point(3, 25);" << std::endl;
 		mystream << "	for (i=0; i<waypointsList.length; i++)" << std::endl;
 		mystream << "	{" << std::endl;
 		mystream << "		var point = new google.maps.LatLng(waypointsList[i][0], waypointsList[i][1]);" << std::endl;
-		mystream << "		var markerOptions = {" << std::endl;
 		// TODO: Use something else for the icon of lap ending
-		mystream << "			icon: \"/usr/share/pytrainer/glade/waypoint.png\"," << std::endl;
+		mystream << "		var markerImage = new google.maps.MarkerImage(\"http://www.icone-gif.com/icone/isometrique/32x32/green-flag.png\", image_size, image_origin, image_anchor);" << std::endl;
+		mystream << "		var markerOptions = {" << std::endl;
+		mystream << "			icon: markerImage," << std::endl;
 		mystream << "			position: point}" << std::endl;
 		mystream << "		var markerD = new google.maps.Marker(markerOptions); " << std::endl;
 		mystream << "		markerD.setMap(map);" << std::endl;
@@ -145,7 +149,7 @@ namespace output
 		mystream << "			var polyline = new google.maps.Polyline({path: pathArray," << std::endl;
 		mystream << "					strokeColor: pointsList[i][2]," << std::endl;
 		mystream << "					strokeOpacity: 0.9," << std::endl;
-		mystream << "					strokeWeight: pointsList[i][3]," << std::endl;
+		mystream << "					strokeWeight: 5," << std::endl;
 		mystream << "					});" << std::endl;
 		mystream << "			polyline.setMap(map);" << std::endl;
 		mystream << "			google.maps.event.addListener(polyline, 'click', point_popup_callbacks[i]);" << std::endl;
