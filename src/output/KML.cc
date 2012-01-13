@@ -1,4 +1,5 @@
 #include "KML.h"
+#include "../Utils.h"
 #include <sstream>
 #include <iostream>
 #include <iomanip>
@@ -58,6 +59,14 @@ namespace output
 			mystream << "<Placemark>" << std::endl;
 			mystream << "<name>Lap " << i << "</name>" << std::endl;
 			mystream << "<styleUrl>kalenji_lap</styleUrl>" << std::endl;
+			mystream << "<description>" << std::endl;
+			mystream << "<b>Distance:</b> " << (*it)->getLength()/1000.0 << " km<br/>";
+			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
+			mystream << "<b>Average speed:</b> " << (*it)->getAvgSpeed() << " km/h<br/>";
+			mystream << "<b>Maximum speed:</b> " << (*it)->getMaxSpeed() << " km/h<br/>";
+			mystream << "<b>Average heartrate:</b> " << (*it)->getAvgHeartrate() << " bpm<br/>";
+			mystream << "<b>Maximum heartrate:</b> " << (*it)->getMaxHeartrate() << " bpm<br/>";
+			mystream << "</description>" << std::endl;
 			mystream << "<Point>" << std::endl;
 			mystream << "<coordinates>" << (*it)->getEndPoint()->getLongitude() << "," << (*it)->getEndPoint()->getLatitude() << "," << (*it)->getEndPoint()->getAltitude() << "</coordinates>" << std::endl;
 			mystream << "</Point>" << std::endl;
