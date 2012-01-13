@@ -11,7 +11,7 @@ class Point
 			 : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability)
 		{ };
 
-		void setHeartRate(uint16_t bp) { _bpm = bpm; };
+		void setHeartRate(uint16_t bpm) { _bpm = bpm; };
 
 		double getLatitude()    { return _lat; };
 		double getLongitude()   { return _lon; };
