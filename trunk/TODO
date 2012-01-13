@@ -7,17 +7,15 @@
  * output::GPX:          Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
  * output::GPX:          Only put extensions - heartrate if info is present and non zero
  *                       Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
- *                       Setup a non-regression testing (is there something available with google code ?)
+ *                       Setup an automatic build and non-regression testing (is there something available with google code ?)
  * device::GPX           Create a device to "import" from GPX file (would allow creating a GoogleMap from GPX for example)
  *                       Export of route to the device (source = File, device = GPX, output = Kalenji ? therefore, output would use source = USB ... to generalize for file too ?)
  *                       Factorize code converting date to string (calls to strftime - to put in some utils part ?)
- *                       Find which header is needed for uint32_t
  * bom::Session          Improve interface
  * bom::Session          Method to remove point (handling adjusting laps)
  *                       Check configuration file syntax (allowing comments)
  *                       Add import = new option (importing only session that have not already been imported - define how we want it to behave exactly)
  *                       Add some exceptions to handle error cases
- * output::KML           KML file format support for export (and import too ?) - Need to find some example files ...
  * output::GoogleMap     Use max speed and min speed to determine the color range
  * output::GoogleMap     Use max hr and min hr to determine the width range
  * output::GoogleMap     Use something else for the icon of lap ending

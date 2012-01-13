@@ -1,8 +1,7 @@
 #ifndef _SOURCE_SOURCE_HPP_
 #define _SOURCE_SOURCE_HPP_
 
-// TODO: Only for uint32_t, this is sad ...
-#include <libusb.h>
+#include <stdint.h>
 #include <string>
 
 namespace source

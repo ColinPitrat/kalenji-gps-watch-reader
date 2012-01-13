@@ -4,8 +4,7 @@
 #include <vector>
 #include <list>
 #include <map>
-// TODO: Just for uint32_t, there must be a better way !
-#include <libusb.h>
+#include <stdint.h>
 #include "../bom/Lap.h"
 #include "../bom/Point.h"
 
