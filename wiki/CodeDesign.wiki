@@ -14,18 +14,23 @@ There's obviously one single source and one single device.
 *Import from a Kalenji GPS watch*
 
 Source = USB
+
 Device = Kalenji
 
 *Export a GPX to a Kalenji GPS watch* (not supported yet)
 
 Source = File
+
 Device = GPX
+
 Output = Kalenji
 
 *Convert GPX to KML*
 
 Source = File
+
 Device = GPX
+
 Output = KML
 
 = Code source organisation =
