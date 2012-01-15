@@ -1,6 +1,5 @@
 #include "Kalenji.h"
 
-
 namespace device
 {
 	REGISTER_DEVICE(Kalenji);
@@ -240,7 +239,7 @@ namespace device
 					// TODO: throw an exception
 				}
 				std::list<Lap*>::iterator lap = session->getLaps().begin();
-				while(id_point >= (*lap)->getLastPointId() && lap != session->getLaps().end())
+				while(id_point > (*lap)->getLastPointId() && lap != session->getLaps().end())
 				{
 					++lap;
 				}
