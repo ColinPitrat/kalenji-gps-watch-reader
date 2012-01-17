@@ -61,6 +61,7 @@ List of filters to apply on imported data before exporting it.
 Available filters are:
   * *EmptyLaps*: Remove laps with null distance or null duration
   * *UnreliablePoints*: Remove points for which the device gives a low reliability
+  * *NullHeartrate*: Replace null heartrate measures by previous non-null value
 
 ==Outputs==
 *Name:* outputs
@@ -71,6 +72,7 @@ Outputs can be:
   * *GPX*: GPX format, an XML file conforming to GPX and GPXDATA standards
   * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
   * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
+  * *KML*: a KML file readable, among others, by GoogleEarth
 
 ==Log transactions==
 *Name:* log_transactions
