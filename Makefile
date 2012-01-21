@@ -15,7 +15,7 @@ all: check_deps $(OBJECTS)
 
 check_deps:
 	@pkg-config --libs libusb-1.0 >/dev/null 2>&1 || (echo "Error: missing dependency libusb-1.0" && false)
-#	@pkg-config --libs libxml-2.0 >/dev/null 2>&1 || (echo "Error: missing dependency libxml2" && false)
+	@pkg-config --libs libxml-2.0 >/dev/null 2>&1 || (echo "Error: missing dependency libxml2" && false)
 
 $(OBJECTS): %.o:%.cc $(HEADERS)
 	g++ $(CFLAGS) -c $(INCPATH) -o $@ $<
