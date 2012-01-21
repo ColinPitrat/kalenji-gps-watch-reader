@@ -90,11 +90,12 @@ bool checkAndCreateDir(std::string path)
 
 void usage(char *progname)
 {
-	std::cout << "Usage: " << progname << " [ -h | [ -c <rc_file> ] [ -d <output_directory> ] [ -f <filters> ] [ -i <input_file> ] [ -o <outputs> ] [ -t <trigger_type> ] ]" << std::endl;
+	std::cout << "Usage: " << progname << " [ -h | [ -c <rc_file> ] [ -d <output_directory> ] [ -f <filters> ] [-D <device> ] [ -i <input_file> ] [ -o <outputs> ] [ -t <trigger_type> ] ]" << std::endl;
 	std::cout << "  - h: help:        Show this help message " << std::endl;
 	std::cout << "  - c: conf file:   Provide alternate configuration file instead of ~/.kalenji_readerrc" << std::endl;
 	std::cout << "  - d: output dir:  Directory to which output files should be produced" << std::endl;
 	std::cout << "  - f: filters:     Comma separated list of filters to apply on data before the export. Use 'none' for empty list" << std::endl;
+	std::cout << "  - D: device:      Type of device to use (e.g: GPX, Kalenji)" << std::endl;
 	std::cout << "  - i: input file:  Provide input file instead of reading from device" << std::endl;
 	std::cout << "  - o: outputs:     Comma separated list of output formats to produce for each session." << std::endl;
 	std::cout << "  - t: trigger:     Override the type of trigger (possible values: manual, distance, time, location, hr)" << std::endl;
@@ -104,7 +105,7 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 {
 	std::map<std::string, std::string> options;
 	int option;
-	while((option = getopt(argc, argv, ":c:d:f:i:o:t:h")) != -1)
+	while((option = getopt(argc, argv, ":c:d:f:D:i:o:t:h")) != -1)
 	{
 		switch(option)
 		{
@@ -116,6 +117,9 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 				break;
 			case 'f':
 				options["filters"] = std::string(optarg);
+				break;
+			case 'D':
+				options["device"] = std::string(optarg);
 				break;
 			case 'i':
 				options["source"] = "File";

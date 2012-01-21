@@ -13,10 +13,16 @@ typedef std::vector<char> SessionId;
 class Session
 {
 	public:
+		Session() : _id(0), _num(0), _nb_points(0), _duration(0), _distance(0), _nb_laps(0)
+		{
+			_name = "No name";
+		}
+
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) : 
 			         _id(id), _num(num), _time(time), _nb_points(nb_points), _duration(duration), _distance(distance), _nb_laps(nb_laps) 
 		{
-			_time_t = mktime(&time);
+			_name = "No name";
+			_time_t = mktime(&_time);
 		}
 
 		~Session()
@@ -36,8 +42,10 @@ class Session
 		void addPoint(Point* point) { _points.push_back(point); }
 		void addLap(Lap *lap)       { _laps.push_back(lap); }
 
-		double setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
-		double setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
+		void setName(std::string name)       { _name = name; };
+		void setTime(tm time)                { _time = time; _time_t = mktime(&_time); };
+		void setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
+		void setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
 
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
 		std::string getBeginTime(bool human_readable=false) 
@@ -58,7 +66,7 @@ class Session
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		SessionId getId()      { return _id; };
-		std::string getName()  { return "No name"; };
+		std::string getName()  { return _name; };
 		int getYear()          { return _time.tm_year + 1900; };
 		int getMonth()         { return _time.tm_mon + 1; };
 		int getDay()           { return _time.tm_mday; };
@@ -74,6 +82,7 @@ class Session
 
 	private:
 		SessionId _id;
+		std::string _name;
 		uint32_t _num;
 		tm _time;
 		time_t _time_t;
