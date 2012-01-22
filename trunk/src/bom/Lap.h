@@ -6,6 +6,15 @@
 class Lap
 {
 	public:
+		Lap() : _firstPointId(0), _lastPointId(0), 
+		        _start(NULL), _end(NULL), 
+			_duration(0), _length(0), 
+			_max_speed(0), _avg_speed(0), 
+			_max_hr(0), _avg_hr(0), 
+			_calories(0), _grams(0), 
+			_descent(0), _ascent(0)
+		{ };
+
 		Lap(uint32_t firstPointId, uint32_t lastPointId, 
 		    double duration, uint32_t length, 
 		    double max_speed, double avg_speed, 
@@ -20,8 +29,15 @@ class Lap
 							 _descent(descent), _ascent(ascent)
 		{ };
 
-		void setStartPoint(Point *start) { _start = start; };
-		void setEndPoint(Point *end)     { _end = end; };
+		void setStartPoint(Point *start)        { _start = start; };
+		void setEndPoint(Point *end)            { _end = end; };
+		void setDuration(double duration)       { _duration = duration; };
+		void setCalories(uint32_t calories)     { _calories = calories; };
+		void setLength(uint32_t length)         { _length = length; };
+		void setMaxSpeed(uint32_t max_speed)    { _max_speed = max_speed; };
+		void setAvgSpeed(uint32_t avg_speed)    { _avg_speed = avg_speed; };
+		void setMaxHeartrate(uint32_t max_hr)   { _max_hr = max_hr; };
+		void setAvgHeartrate(uint32_t avg_hr)   { _avg_hr = avg_hr; };
 
 		uint32_t getFirstPointId() { return _firstPointId; };
 		uint32_t getLastPointId()  { return _lastPointId; };

@@ -15,6 +15,7 @@
 #include "source/Logger.h"
 #include "source/USB.h"
 #include "source/File.h"
+#include "source/HexdumpFile.h"
 #include "bom/Session.h"
 #include "device/Device.h"
 #include "filter/Filter.h"
@@ -219,6 +220,10 @@ bool parseConfAndOptions(int argc, char** argv)
 		// When using a file as input, we don't want the user to be prompted as we read everything and ignore all sending
 		configuration["import"] = "all";
 	}
+	if(configuration["source"] == "File" && configuration["device"] == "Kalenji")
+	{
+		configuration["source"] == "HexdumpFile";
+	}
 	return true;
 }
 
@@ -287,6 +292,10 @@ int main(int argc, char *argv[])
 	if(configuration["source"] == "File")
 	{
 		dataSource = new source::File(configuration["sourcefile"]);
+	}
+	else if(configuration["source"] == "HexdumpFile")
+	{
+		dataSource = new source::HexdumpFile(configuration["sourcefile"]);
 	}
 	else
 	{

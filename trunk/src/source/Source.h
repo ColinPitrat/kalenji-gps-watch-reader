@@ -27,7 +27,7 @@ namespace source
 			  @param oData Address of a pointer that will be set to point to read data after the call
 			  @param oLength Address of a variable that will contain the size of the data after the call
 			 */ 
-			virtual void read_data(unsigned char **oData, size_t *oLength) = 0;
+			virtual bool read_data(unsigned char **oData, size_t *oLength) = 0;
 			/** 
 			  Send data to the source. 
 			  @param iData A pointer to data to be sent

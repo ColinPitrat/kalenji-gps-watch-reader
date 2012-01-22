@@ -17,12 +17,8 @@ namespace source
 			{
 				while ( inputfile.good() )
 				{
-					std::string thisLine;
 					getline(inputfile, line);
-					std::stringstream iss(line);
-					iss >> std::hex;
-					std::copy(std::istream_iterator<unsigned int>(iss), std::istream_iterator<unsigned int>(), std::back_inserter(thisLine));
-					_inputStream.push_back(thisLine);
+					_inputStream.push_back(line);
 				}
 				inputfile.close();
 			}
@@ -34,10 +30,14 @@ namespace source
 		}
 	}
 
-	void File::read_data(unsigned char **oData, size_t *oLength)
+	bool File::read_data(unsigned char **oData, size_t *oLength)
 	{
-		*oLength = _inputStream[_index].length();
-		*oData = (unsigned char*) _inputStream[_index].c_str();
-		_index++;
+		if(_index < _inputStream.size())
+		{
+			*oLength = _inputStream[_index].length();
+			*oData = (unsigned char*) _inputStream[_index].c_str();
+			_index++;
+		}
+		return _index < _inputStream.size();
 	}
 }
