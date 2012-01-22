@@ -222,7 +222,7 @@ bool parseConfAndOptions(int argc, char** argv)
 	}
 	if(configuration["source"] == "File" && configuration["device"] == "Kalenji")
 	{
-		configuration["source"] == "HexdumpFile";
+		configuration["source"] = "HexdumpFile";
 	}
 	return true;
 }

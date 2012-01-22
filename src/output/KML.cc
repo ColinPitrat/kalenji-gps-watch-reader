@@ -37,6 +37,16 @@ namespace output
 		mystream << "</IconStyle>" << std::endl;
 		mystream << "</Style>" << std::endl;
 
+		mystream << "<Style id=\"kalenji_runner\">" << std::endl;
+		mystream << "<IconStyle>" << std::endl;
+		mystream << "<color>ff0000ff</color>" << std::endl;
+		mystream << "<scale>1.0</scale>" << std::endl;
+		mystream << "<Icon>" << std::endl;
+		mystream << "<href>http://maps.google.com/mapfiles/kml/pal2/icon57.png</href>" << std::endl;
+		mystream << "</Icon>" << std::endl;
+		mystream << "</IconStyle>" << std::endl;
+		mystream << "</Style>" << std::endl;
+
 		mystream << "<Style id=\"kalenji_trajet\">" << std::endl;
 		mystream << "<IconStyle>" << std::endl;
 		mystream << "<scale>1.1</scale>" << std::endl;
@@ -87,6 +97,40 @@ namespace output
 		mystream << "</coordinates>" << std::endl;
 		mystream << "</LineString>" << std::endl;
 		mystream << "</Placemark>" << std::endl;
+
+		mystream << "<Placemark>" << std::endl;
+		mystream << "<name>Runner</name>" << std::endl;
+		mystream << "<styleUrl>kalenji_runner</styleUrl>" << std::endl;
+		mystream << "<Point id=\"runner\">" << std::endl;
+		mystream << "<coordinates>7.117468,43.576687,29</coordinates>" << std::endl;
+		mystream << "</Point>" << std::endl;
+		mystream << "</Placemark>" << std::endl << std::endl;
+
+		mystream << "<gx:Tour>" << std::endl;
+		mystream << "<name>Animation</name>" << std::endl;
+		mystream << "<gx:Playlist>" << std::endl;
+		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		{
+			double duration = 0.1;
+			mystream << "<gx:AnimatedUpdate>" << std::endl;
+			mystream << "<gx:duration>" << duration << "</gx:duration>" << std::endl;
+			mystream << "<Update>" << std::endl;
+			mystream << "<targetHref></targetHref>" << std::endl;
+			mystream << "<Change>" << std::endl;
+			mystream << "<Point targetId=\"runner\"> " << std::endl;
+			mystream << "<coordinates>" << (*it)->getLongitude() << "," << (*it)->getLatitude() << "," << (*it)->getAltitude() << "</coordinates> " << std::endl;
+			mystream << "</Point>" << std::endl;
+			mystream << "</Change> " << std::endl;
+			mystream << "</Update>" << std::endl;
+			mystream << "<gx:delayedStart>0</gx:delayedStart>" << std::endl;
+			mystream << "</gx:AnimatedUpdate>" << std::endl << std::endl;
+
+			mystream << "<gx:Wait>" << std::endl;
+			mystream << "<gx:duration>" << duration << "</gx:duration>" << std::endl;
+			mystream << "</gx:Wait>" << std::endl;
+		}
+		mystream << "</gx:Playlist>" << std::endl;
+		mystream << "</gx:Tour>" << std::endl;
 
 		mystream << "</Document>" << std::endl;
 		mystream << "</kml>" << std::endl;

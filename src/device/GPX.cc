@@ -70,7 +70,6 @@ namespace device
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				oSession->setName((const char*)data);
-				std::cout << "Found name " << oSession->getName() << std::endl;
 				xmlFree(data);
 			}
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "time") == 0) 
@@ -89,7 +88,6 @@ namespace device
 					data[19] = 0; time.tm_sec  = atoi((char*) data + 17);
 					time.tm_isdst = -1;
 					oSession->setTime(time);
-					std::cout << "Found time" << oSession->getBeginTime(true) << std::endl;
 				}
 				else
 				{
@@ -258,6 +256,12 @@ namespace device
 		// TODO: Handle start point / end point 
 		while(cur != NULL)
 		{
+			if (xmlStrcmp(cur->name, (const xmlChar *) "index") == 0) 
+			{
+				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
+				aLap->setLapNum(atoi((char*) data));
+				xmlFree(data);
+			}
 			if (xmlStrcmp(cur->name, (const xmlChar *) "calories") == 0) 
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
@@ -307,7 +311,6 @@ namespace device
 			cur = cur->next;
 		}
 		oSession->addLap(aLap);
-		std::cout << "Got a lap for " << aLap->getDuration() << "," << aLap->getLength() << std::endl;
 	}
 
 	void GPX::closeDoc()

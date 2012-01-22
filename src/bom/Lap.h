@@ -29,6 +29,7 @@ class Lap
 							 _descent(descent), _ascent(ascent)
 		{ };
 
+		void setLapNum(uint32_t lapNum)         { _lapNum = lapNum; };
 		void setStartPoint(Point *start)        { _start = start; };
 		void setEndPoint(Point *end)            { _end = end; };
 		void setDuration(double duration)       { _duration = duration; };
@@ -39,6 +40,7 @@ class Lap
 		void setMaxHeartrate(uint32_t max_hr)   { _max_hr = max_hr; };
 		void setAvgHeartrate(uint32_t avg_hr)   { _avg_hr = avg_hr; };
 
+		uint32_t getLapNum()       { return _lapNum; };
 		uint32_t getFirstPointId() { return _firstPointId; };
 		uint32_t getLastPointId()  { return _lastPointId; };
 		Point *getStartPoint()     { return _start; };
@@ -52,6 +54,7 @@ class Lap
 		uint32_t getAvgHeartrate() { return _avg_hr; };
 
 	private:
+		uint32_t _lapNum;
 		uint32_t _firstPointId;
 		uint32_t _lastPointId;
 		Point *_start;
