@@ -18,10 +18,10 @@ namespace source
 		_truesource->release();
 	}
 
-	void Logger::read_data(unsigned char **oData, size_t *oLength)
+	bool Logger::read_data(unsigned char **oData, size_t *oLength)
 	{
 		// TODO: Throw an exception if _truesource is null
-		_truesource->read_data(oData, oLength);
+		bool result = _truesource->read_data(oData, oLength);
 
 		std::ofstream log_file_stream(_logfilename.c_str(), std::ios_base::out | std::ios_base::app);
 		log_file_stream << std::hex;
@@ -31,6 +31,7 @@ namespace source
 		}
 		log_file_stream << std::dec << std::endl;
 		log_file_stream.close();
+		return result;
 	}
 
 	void Logger::write_data(unsigned char *iData, size_t iLength)

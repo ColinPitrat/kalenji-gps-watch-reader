@@ -99,13 +99,14 @@ namespace source
 		return true;
 	}
 
-	void USB::read_data(unsigned char **oData, size_t *oLength)
+	bool USB::read_data(unsigned char **oData, size_t *oLength)
 	{
 		int transferred;
 		int rc = libusb_bulk_transfer(_device, 0x81, _responseData, RESPONSE_BUFFER_SIZE, &transferred, _timeout);
 		*oLength = (size_t) transferred;
 		*oData = _responseData;
 		checkUSBOperation(rc);
+		return true;
 	}
 
 	void USB::write_data(unsigned char *iData, size_t iLength)
