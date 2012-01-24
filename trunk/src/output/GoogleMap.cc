@@ -53,6 +53,7 @@ namespace output
 			mystream << "{" << std::endl;
 			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
 			mystream << "                                            content: \"";
+			mystream << "<b>Time:</b> " << (*it)->getTimeAsString(true) << " km/h<br />";
 			mystream << "<b>Speed:</b> " << (*it)->getSpeed() << " km/h<br />";
 			mystream << "<b>Heartrate:</b> " << (*it)->getHeartRate() << " bpm<br/>";
 			mystream << "<b>Elevation:</b> " << (*it)->getAltitude() << " m";

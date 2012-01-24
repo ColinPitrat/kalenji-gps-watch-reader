@@ -31,12 +31,15 @@ class Point
 		uint16_t getFiability() { return _fiability; };
 		time_t getTime()        { return _time; };
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
-		std::string getTimeAsString() 
+		std::string getTimeAsString(bool human_readable=false)
 		{  
 			char buffer[256];
 			tm *time_tm = localtime(&_time);
 			std::stringstream format_string;
-			format_string << "%Y-%m-%dT%H:%M:%S." << _tenth << "Z";
+			if(human_readable)
+				format_string << "%Y-%m-%d %H:%M:%S." << _tenth;
+			else
+				format_string << "%Y-%m-%dT%H:%M:%S." << _tenth << "Z";
 			if(_tenth > 9)
 			{
 				std::cout << "Error: tenth bigger than 9 ! This is totally unexpected ... " << _tenth << std::endl;

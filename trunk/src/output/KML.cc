@@ -102,7 +102,8 @@ namespace output
 		mystream << "<name>Runner</name>" << std::endl;
 		mystream << "<styleUrl>kalenji_runner</styleUrl>" << std::endl;
 		mystream << "<Point id=\"runner\">" << std::endl;
-		mystream << "<coordinates>7.117468,43.576687,29</coordinates>" << std::endl;
+		std::list<Point*>::iterator it = points.begin();
+		mystream << "<coordinates>" << (*it)->getLongitude() << "," << (*it)->getLatitude() << "," << (*it)->getAltitude() << "</coordinates>" << std::endl;
 		mystream << "</Point>" << std::endl;
 		mystream << "</Placemark>" << std::endl << std::endl;
 

@@ -330,6 +330,15 @@ int main(int argc, char *argv[])
 	myDevice->getSessionsDetails(&sessions);
 	// TODO: in case of error we should finish reading until getting 8Axxx so that the device is in a clean state
 
+	// TODO: Cleaner, modular way to include it ?
+	// Remove empty sessions, most likely they were not imported when using a file so we don't want to export them
+	for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); )
+	{
+		if(it->second.getPoints().empty())
+			sessions.erase(it++);
+		else ++it;
+	}
+
 	std::list<std::string> filters = splitString(configuration["filters"]);
 	std::list<std::string> outputs = splitString(configuration["outputs"]);
 
