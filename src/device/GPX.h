@@ -43,9 +43,9 @@ namespace device
 			void parseDoc(Session *oSession);
 			void parseMetadata(Session *oSession, xmlNodePtr rootNode);
 			void parseTrk(Session *oSession, xmlNodePtr rootNode);
-			void parseTrkSeg(Session *oSession, xmlNodePtr rootNode);
-			void parseTrkPt(Session *oSession, xmlNodePtr rootNode);
-			void parseTrkPtExtensions(Point *oPoint, xmlNodePtr rootNode);
+			void parseTrkSegOrRoute(Session *oSession, xmlNodePtr rootNode);
+			void parseWayPoint(Session *oSession, xmlNodePtr rootNode);
+			void parseWayPointExtensions(Point *oPoint, xmlNodePtr rootNode);
 			void parseExtensions(Session *oSession, xmlNodePtr rootNode);
 			void parseLap(Session *oSession, xmlNodePtr rootNode);
 			void closeDoc();

@@ -33,9 +33,9 @@ namespace device
 		return true;
 	}
 
-	// TODO: Handle wpt, rte (nearly same as trk, difference being trkSeg layer for trk !), 
 	void GPX::parseDoc(Session *oSession)
 	{
+		// Ignored data: attributes version and creator
 		xmlNodePtr cur = _rootNode->xmlChildrenNode;
 		while(cur != NULL)
 		{
@@ -46,6 +46,15 @@ namespace device
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "trk") == 0) 
 			{
 				parseTrk(oSession, cur);
+			}
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "rte") == 0) 
+			{
+				parseTrkSegOrRoute(oSession, cur);
+			}
+			// TODO: The idea of a waypoint is to store a point of interest so it shouldn't be handled as rtePt or trkPt
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "wpt") == 0)
+			{
+				parseWayPoint(oSession, cur);
 			}
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0) 
 			{
@@ -62,6 +71,7 @@ namespace device
 
 	void GPX::parseMetadata(Session *oSession, xmlNodePtr rootNode)
 	{
+		// Ignored data: desc, author, copyright, link, keywords, bounds, extensions
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
 		while(cur != NULL)
@@ -111,7 +121,7 @@ namespace device
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "trkseg") == 0) 
 			{
-				parseTrkSeg(oSession, cur);
+				parseTrkSegOrRoute(oSession, cur);
 			}
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
@@ -122,14 +132,15 @@ namespace device
 		}
 	}
 
-	void GPX::parseTrkSeg(Session *oSession, xmlNodePtr rootNode)
+	void GPX::parseTrkSegOrRoute(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "trkpt") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "trkpt") == 0 ||
+			    xmlStrcmp(cur->name, (const xmlChar *) "rtept") == 0)
 			{
-				parseTrkPt(oSession, cur);
+				parseWayPoint(oSession, cur);
 			}
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
@@ -140,8 +151,8 @@ namespace device
 		}
 	}
 
-	// TODO: Handle all waypoints (same format for trkPt, rtePt, wayPt ...)
-	void GPX::parseTrkPt(Session *oSession, xmlNodePtr rootNode)
+	// Handle all waypoints (same format for trkPt, rtePt, wayPt ...)
+	void GPX::parseWayPoint(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlChar *data;
 		Point *aPoint = new Point();
@@ -190,7 +201,7 @@ namespace device
 			}
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0) 
 			{
-				parseTrkPtExtensions(aPoint, cur);
+				parseWayPointExtensions(aPoint, cur);
 			}
 			// Ignore text content of metadata node
 			else 
@@ -204,12 +215,12 @@ namespace device
 		//std::cout << "Got a point for " << aPoint->getLatitude() << "," << aPoint->getLongitude() << " (" << aPoint->getAltitude() << ") " << aPoint->getHeartRate() << " bpm" << std::endl;
 	}
 
-	void GPX::parseTrkPtExtensions(Point *oPoint, xmlNodePtr rootNode)
+	void GPX::parseWayPointExtensions(Point *oPoint, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		// TODO: missing speed
 
+		// TODO: missing summary elements for which attribute must be checked to now the info contained
 		while(cur != NULL)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "hr") == 0) 
