@@ -2,7 +2,7 @@
  * Install and use *
  *******************
 
-From the directory when you retrieved the source, which should be the directory containing this README.txt:
+From the directory containing this README.txt:
 
 make
 
@@ -12,15 +12,16 @@ To import data from your watch, ensure it's properly connected then launch:
 
 ./kalenji_reader
 
-GPX files created can then be imported in your favorite software. HTML files created can be displayed in a browser supporting java script provided you are connected to internet.
+GPX files created can then be imported in your favorite software. HTML files created can be displayed in a browser supporting java script provided you are connected to internet. KML files can be read in Google Earth or any other software supporting it.
 
  **************
  * Debug mode *
  **************
 
-In case you encounter a core dump, please reproduce it in debug before submitting an issue. To do so, use make debug instead of make:
+In case you encounter a core dump, please reproduce it in debug before submitting an issue. To do so, use make debug instead of make. Also use ulimit to allow the OS creating corefiles in case your distribution disable it by default.
 
 make debug
+ulimit -c 1000000
 ./kalenji_reader 2>&1 | tee kalenji_reader_output.txt
 
 This way, program output will also be written in the file kalenji_reader_output.txt. You can attach this file and the core to a bug report to provide more information on what was the problem.
@@ -76,10 +77,11 @@ This way, program output will also be written in the file kalenji_reader_output.
       Name: filters
       Default value: UnreliablePoints,EmptyLaps
 
-      List of filters to apply on imported data before exporting it. A list of filters separated by coma. 
+      List of filters to apply on imported data before exporting it. A list of filters separated by coma. Use 'none' for no filter.
       Filters can be:
        - EmptyLaps: Remove laps with null distance or null duration
        - UnreliablePoints: Remove points for which the device gives a low reliability
+       - NullHeartrate: Copy heartrate from previous point for points that have null value of heartrate
 
    - Outputs
       Name: outputs
@@ -90,6 +92,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        - GPX: GPX format, an XML file conforming to GPX and GPXDATA standards
        - GoogleMap: an HTML page containing necessary code to display the route on a google map
        - GoogleStaticMap: an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
+       - KML: a file to be opened in Google Earth. It could also work with other software supporting KML files. 
 
    - Log transactions
       Name: log_transactions
@@ -106,3 +109,32 @@ This way, program output will also be written in the file kalenji_reader_output.
       Default value: logs subdirectory in output directory
 
       The directory where raw data from the watch is logged if this functionality is activated. 
+
+ ************************
+ * Command line options *
+ ************************
+
+   - -h: help
+     Show the usual help message giving supported options
+
+   - -c: configuration file
+     Provide the configuration file to use instead of ~/.kalenji_readerrc"
+                 
+   - -d: output directory
+     Directory to which output files should be produced. Override value of "directory" given in configuration file.
+
+   - -f: filters
+     Comma separated list of filters to apply on data before the export. Override value of "filters" given in configuration file.
+
+   - -o: outputs
+     Comma separated list of output formats to produce for each session. Override value of "filters" given in configuration file.
+
+   - -t: trigger
+     Provide the type of trigger. Override value of "trigger" given in configuration file.
+
+   - -D: device
+     Type of device to use. For now, can be either 'GPX' to convert a GPX file or 'Kalenji' to import from a Kalenji watch
+
+   - -i: input file
+     Provide input file. This is mandatory for device 'GPX'. When used with device 'Kalenji' this allows to import from logs of a previous import.
+
