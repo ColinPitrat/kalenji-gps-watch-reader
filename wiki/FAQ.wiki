@@ -1,0 +1,22 @@
+#summary Frequently Asked Questions
+
+=Technical difficulties=
+
+==I have the following error message, what does it mean ?==
+
+===Device not found or error opening USB device. Is your watch correctly plugged ?===
+
+Well, two possibilities. Either your watch is not correctly plugged, but if you came to the FAQ after seeing this message it's probably not the case, either your watch is not recognized by the program. Is your watch a W Kalenji 300 GPS or a CW Kalenji 700 GPS ? Note that these are not the same products as the Keymaze ones.
+
+===libusb couldn't open USB device /dev/bus/usb/XXX/YYY: Permission denied.===
+
+You're running kalenji_reader as a user that doesn't have necessary permissions on the USB device. There are three solutions:
+
+  * you can run it as root
+  * you can change permissions on /dev/bus/usb/XXX/YYY as root by running:
+
+chmod a+rw /dev/bus/usb/XXX/YYY
+
+However this will be lost after each reboot.
+
+  * you can find how to configure permissions on USB devices in your distributions. This will usually consist in modifying udev configuration
