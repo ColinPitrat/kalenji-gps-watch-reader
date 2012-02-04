@@ -62,6 +62,7 @@ Available filters are:
   * *EmptyLaps*: Remove laps with null distance or null duration
   * *UnreliablePoints*: Remove points for which the device gives a low reliability
   * *NullHeartrate*: Replace null heartrate measures by previous non-null value
+  * *FixElevation*: Uses Google Elevation API to correct the elevation of points based on geographical information. Note that there is a limitation of 25 000 points per day, which corresponds to nearly 7 hours with the best "resolution" (one point per second) 
 
 ==Outputs==
 *Name:* outputs
