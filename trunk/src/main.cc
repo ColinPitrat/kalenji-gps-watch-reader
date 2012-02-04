@@ -220,7 +220,8 @@ bool parseConfAndOptions(int argc, char** argv)
 		// When using a file as input, we don't want the user to be prompted as we read everything and ignore all sending
 		configuration["import"] = "all";
 	}
-	if(configuration["source"] == "File" && configuration["device"] == "Kalenji")
+	// TODO: Find a better way to handle this (maybe a callback of device ?)
+	if(configuration["source"] == "File" && configuration["device"] != "GPX")
 	{
 		configuration["source"] = "HexdumpFile";
 	}
