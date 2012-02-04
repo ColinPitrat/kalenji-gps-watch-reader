@@ -29,25 +29,6 @@
 
 std::map<std::string, std::string> configuration;
 
-std::list<std::string> splitString(std::string toSplit, std::string separator = ",")
-{
-    std::list<std::string> result;
-    size_t begin = 0;
-    size_t end = 0;
-    while(end != std::string::npos)
-    {
-        end = toSplit.find(separator, begin);
-        std::string value = toSplit.substr(begin, end-begin);
-        begin = end + separator.length();
-	// none is a special value to specify empty lists
-	if(value != "none")
-	{
-		result.push_back(value);
-	}
-    }
-    return result;
-}
-
 int testDir(std::string path, bool create_if_not_exist)
 {
 	if(access(path.c_str(), W_OK) != 0)

@@ -1,11 +1,103 @@
 #include "FixElevation.h"
+#include "../Utils.h"
+#include <curl/curl.h>
+#include <cstring>
+#include <list>
+#include <algorithm>
+
+#include <cstdlib>
 
 namespace filter
 {
 	REGISTER_FILTER(FixElevation);
+	std::string FixElevation::HTTPdata;
+
+	size_t FixElevation::copyHTTPData(void *ptr, size_t size, size_t nmemb, FILE *stream)
+	{
+		HTTPdata.append((char*) ptr, size*nmemb);
+		return size*nmemb;
+	}
+
+	void FixElevation::parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last)
+	{
+		int elevation;
+		std::list<std::string> lines = splitString(HTTPdata, "\n");
+		for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it)
+		{
+			// std::cout << "Found token " << it->c_str() << std::endl;
+			it->erase(remove_if(it->begin(), it->end(), isspace), it->end());
+			std::list<std::string> tokens = splitString(*it, ":");
+			if(tokens.size() == 2)
+			{
+				// std::cout << "  Cleaned token " << it->c_str() << std::endl;
+				std::list<std::string>::iterator it2 = tokens.begin(); 
+				if((*it2) == "\"elevation\"")
+				{
+					it2++;
+					// std::cout << "    Found elevation " << it2->c_str() << std::endl;
+					elevation = atol(it2->c_str());
+					(*first)->setAltitude(elevation);
+					++first;
+				}
+			}
+		}
+		/*
+		if(last != first)
+			std::cerr << "Error: didn't found the number of elevation expected: " << HTTPdata << std::endl;
+		 */
+	}
 
 	void FixElevation::filter(Session *session)
 	{
+		CURL *curl;
+		CURLcode res;
+
+		curl = curl_easy_init();
+		if(!curl) 
+		{
+			std::cerr << "Error: Didn't manage to initialize curl" << std::endl;
+			return;
+		}
+
+		curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1);
+		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &FixElevation::copyHTTPData);
+
+		std::list<Point*> &points = session->getPoints();
+		//std::cout << "Retrieving elevation for " << points.size() << " points" << std::endl;
+
+		// Retrieve points elevation 89 by 89 (max url length = 2048 => (2048 - 75) / 22 = 89)
+		int i = 0;
+		std::list<Point*>::iterator request_first = points.begin();
+		std::list<Point*>::iterator request_last;
+		std::stringstream urlparams; 
+		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); )
+		{
+			if(i != 0)
+				urlparams << "|";
+			urlparams << (*it)->getLatitude() << "," << (*it)->getLongitude();
+			++i;
+			request_last = it;
+
+			if(i == 89 || ++it == points.end())
+			{
+				std::stringstream url; 
+				url << "http://maps.googleapis.com/maps/api/elevation/json?sensor=true&locations=";
+				url << urlparams.str();
+				//std::cout << "Doing a GET on " << url.str() << std::endl;
+
+				curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
+				res = curl_easy_perform(curl);
+				parseHTTPData(session, request_first, request_last);
+
+				HTTPdata = "";
+				request_first = it;
+				i = 0;
+				urlparams.str("");
+			}
+		}
+
+		/* always cleanup */ 
+		curl_easy_cleanup(curl);
 	}
 }
 /* To reproduce:
