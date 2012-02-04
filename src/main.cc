@@ -133,7 +133,7 @@ bool readConf()
 	configuration["trigger"] = "manual";
 	configuration["log_transactions"] = "yes";
 	configuration["source"] = "USB";
-	configuration["device"] = "Kalenji";
+	configuration["device"] = "Keymaze";
 	configuration["filters"] = "UnreliablePoints,EmptyLaps";
 	configuration["outputs"] = "GPX,GoogleMap";
 	// Default value for log_transactions_directory is defined later (depends on directory)
