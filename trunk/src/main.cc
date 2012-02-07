@@ -331,6 +331,7 @@ int main(int argc, char *argv[])
 			filter::Filter *filter = LayerRegistry<filter::Filter>::getInstance()->getObject(*it2);
 			if(filter)
 			{
+				std::cout << "  Applying filter " << *it2 << std::endl;
 				filter->filter(&(it->second));
 			}
 			else
