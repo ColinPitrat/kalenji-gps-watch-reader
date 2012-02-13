@@ -1,0 +1,17 @@
+02 
+00 59                                            // Length of data (total length of message - 4)
+93                                               // Message type for upload of data
+4E 6F 75 76 65 61 75 20 70 61 72 63 6F 75 72 00  // "Nouveau parcour"
+93 01 00 00                                      // Length in meters
+00 00 00 00                                      // Duration ?! How to set that in geonaute ?
+09 00 06 00                                      
+07 00                                            // Probably number of points
+00 00 
+AF ED 98 02  6A 96 6C 00                         // Points ...
+94 EE 98 02  4D 98 6C 00 
+97 EF 98 02  2E 99 6C 00 
+9A F1 98 02  8E 99 6C 00 
+B4 F3 98 02  C9 99 6C 00 
+7F F4 98 02  C4 99 6C 00 
+74 F2 98 02  5D 91 6C 00 
+94                                               // checksum
