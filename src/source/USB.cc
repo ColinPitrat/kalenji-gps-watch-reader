@@ -50,6 +50,10 @@ namespace source
 
 		libusb_free_device_list(listOfDevices, 1);
 		// TODO: Throw an exception if found == false
+		if(!found)
+		{
+			std::cerr << "USB device not found !" << std::endl;
+		}
 	}
 
 	void USB::release()
