@@ -299,6 +299,12 @@ namespace device
 	void Kalenji::exportSession(Session *iSession)
 	{
 		unsigned int nbPoints = iSession->getPoints().size();
+		if(nbPoints > 200)
+		{
+			std::cerr << "Export with Kalenji watches doesn't support more than 200 points. This profile contains " << nbPoints << " points." << std::endl;
+			std::cerr << "I'm not yet able to reduce it !" << std::endl;
+			return;
+		}
 		unsigned int payloadSize = 33+8*nbPoints;
 		unsigned int bufferSize = payloadSize + 4;
 		unsigned char *buffer = new unsigned char[bufferSize];
