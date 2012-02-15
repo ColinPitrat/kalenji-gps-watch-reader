@@ -1,4 +1,6 @@
 #include "Kalenji.h"
+#include <cstring>
+#include <iomanip>
 
 namespace device
 {
@@ -25,7 +27,6 @@ namespace device
 		unsigned char *responseData;
 		size_t received;
 		_dataSource->write_data(dataList, lengthDataList);
-		_dataSource->read_data(&responseData, &received);
 
 		if(responseData[0] != 0x78)
 		{
@@ -293,5 +294,84 @@ namespace device
 		}
 		// Redundant with all the if / break above !
 		while(responseData[0] != 0x8A);
+	}
+
+	void Kalenji::exportSession(Session *iSession)
+	{
+		unsigned int nbPoints = iSession->getPoints().size();
+		unsigned int payloadSize = 33+8*nbPoints;
+		unsigned int bufferSize = payloadSize + 4;
+		unsigned char *buffer = new unsigned char[bufferSize];
+		buffer[0] = 0x02;
+		buffer[1] = payloadSize / 256;
+		buffer[2] = payloadSize % 256;
+		buffer[3] = 0x93;
+		strncpy((char*)&buffer[4], iSession->getName().c_str(), 15);
+		buffer[19] = 0x0;
+
+		unsigned int distance = iSession->getDistance();
+		buffer[20] = distance % 256;
+		buffer[21] = (distance / 256) % 256;
+		buffer[22] = (distance / (256*256)) % 256;
+		buffer[23] = (distance / (256*256*256)) % 256;
+
+		// TODO: Understand what is in bytes 24 to 27
+		buffer[24] = 0;
+		buffer[25] = 0;
+		buffer[26] = 0;
+		buffer[27] = 0;
+
+		unsigned int duration = 10*iSession->getDuration();
+		buffer[28] = duration % 256;
+		buffer[29] = (duration / 256) % 256;
+		buffer[30] = (duration / (256*256)) % 256;
+		buffer[31] = (duration / (256*256*256)) % 256;
+
+		buffer[32] = nbPoints % 256;
+		buffer[33] = (nbPoints / 256) % 256;
+
+		// TODO: Understand what is in bytes 30 and 31
+		buffer[34] = 0x0;
+		buffer[35] = 0x0;
+
+		unsigned int i = 0;
+		for(std::list<Point*>::iterator it = iSession->getPoints().begin(); it != iSession->getPoints().end(); ++it)
+		{
+			unsigned int lat = (*it)->getLatitude() * 1000000;
+			buffer[36+i++] = lat % 256;
+			buffer[36+i++] = (lat / 256) % 256;
+			buffer[36+i++] = (lat / (256*256)) % 256;
+			buffer[36+i++] = (lat / (256*256*256)) % 256;
+			unsigned int lon = (*it)->getLongitude() * 1000000;
+			buffer[36+i++] = lon % 256;
+			buffer[36+i++] = (lon / 256) % 256;
+			buffer[36+i++] = (lon / (256*256)) % 256;
+			buffer[36+i++] = (lon / (256*256*256)) % 256;
+		}
+
+		unsigned char checksum = 0;
+		for(unsigned int j = 1; j < bufferSize - 1; ++j)
+		{
+			checksum ^= buffer[j];
+		}
+		buffer[bufferSize-1] = checksum;
+
+		_dataSource->write_data(buffer, bufferSize);
+		unsigned char *responseData;
+		size_t transferred;
+		_dataSource->read_data(&responseData, &transferred);
+		if(transferred != 4 || responseData[0] != 0x93 || responseData[1] != 0 || responseData[2] != 0 || responseData[3] != 0)
+		{
+			std::cout << "Invalid response: " << std::hex;
+			for(int i = 0; i < transferred; ++i)
+			{
+				std::cout << std::setw(2) << std::setfill('0') << (int)responseData[i] << " ";
+			}
+			std::cout << std::endl;
+		}
+		else
+		{
+			std::cout << "Transferred session " << iSession->getName() << std::endl;
+		}
 	}
 }

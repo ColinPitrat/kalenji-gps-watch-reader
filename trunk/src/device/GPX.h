@@ -31,6 +31,12 @@ namespace device
 			virtual void getSessionsList(SessionsMap *oSessions);
 
 			/** 
+			  Export a session from the computer to the watch
+			  @param iSession The session to export
+			 */ 
+			virtual void exportSession(Session *iSession) {};
+
+			/** 
 			  Send data to the source. 
 			  @param iData A pointer to data to be sent
 			 */ 
