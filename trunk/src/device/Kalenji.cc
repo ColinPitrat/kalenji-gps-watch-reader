@@ -27,6 +27,7 @@ namespace device
 		unsigned char *responseData;
 		size_t received;
 		_dataSource->write_data(dataList, lengthDataList);
+		_dataSource->read_data(&responseData, &received);
 
 		if(responseData[0] != 0x78)
 		{
