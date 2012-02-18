@@ -46,6 +46,8 @@ class Session
 		void setTime(tm time)                { _time = time; _time_t = mktime(&_time); };
 		void setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
 		void setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
+		void setAscent(uint32_t ascent)      { _ascent = ascent; };
+		void setDescent(uint32_t descent)    { _descent = descent; };
 
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
 		std::string getBeginTime(bool human_readable=false) 
@@ -73,6 +75,8 @@ class Session
 		int getHour()          { return _time.tm_hour; };
 		int getMinutes()       { return _time.tm_min; };
 		int getSeconds()       { return _time.tm_sec; };
+		uint32_t getAscent()   { return _ascent; };
+		uint32_t getDescent()  { return _descent; };
 		double getDuration()   { return _duration; };
 		uint32_t getDistance() { return _distance; };
 		double getMaxSpeed()   { return _max_speed; };
@@ -88,6 +92,8 @@ class Session
 		time_t _time_t;
 		uint32_t _nb_points;
 		double _duration;
+		uint32_t _ascent;
+		uint32_t _descent;
 		uint32_t _distance;
 		double _max_speed;
 		double _avg_speed;
