@@ -64,8 +64,8 @@ namespace device
 			time.tm_isdst = -1;
 
 			uint32_t nb_points = line[6] + (line[7] << 8);
-			double duration = (line [8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24)) / 10.0;
-			uint32_t distance = line [12] + (line[13] << 8) + (line[14] << 16) + (line[15] << 24);
+			double duration = (line[8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24)) / 10.0;
+			uint32_t distance = line[12] + (line[13] << 8) + (line[14] << 16) + (line[15] << 24);
 
 			// nb_laps has no interest as we read laps later except to display it in the list of sessions before import
 			uint32_t nb_laps = line[16] + (line[17] << 8);
@@ -133,6 +133,10 @@ namespace device
 				double avg_speed = (responseData[57] + (responseData[58] << 8)) / 100.0;
 				session->setMaxSpeed(max_speed);
 				session->setAvgSpeed(avg_speed);
+				uint32_t ascent = responseData[70] + (responseData[71] << 8);
+				uint32_t descent = responseData[72] + (responseData[73] << 8);
+				session->setAscent(ascent);
+				session->setDescent(descent);
 
 				// Second response 80 retrieves info concerning the laps of the session. I assume there is always only one but maybe this is not the case ...
 				// TODO: Check if this message could be splitted as is the one for points. If same size as points, this would occur after 32 laps ...
@@ -303,7 +307,7 @@ namespace device
 		if(nbPoints > 200)
 		{
 			std::cerr << "Export with Kalenji watches doesn't support more than 200 points. This profile contains " << nbPoints << " points." << std::endl;
-			std::cerr << "I'm not yet able to reduce it !" << std::endl;
+			std::cerr << "I'm not (yet?) able to reduce it !" << std::endl;
 			return;
 		}
 		unsigned int payloadSize = 33+8*nbPoints;
@@ -322,11 +326,12 @@ namespace device
 		buffer[22] = (distance / (256*256)) % 256;
 		buffer[23] = (distance / (256*256*256)) % 256;
 
-		// TODO: Understand what is in bytes 24 to 27
-		buffer[24] = 0;
-		buffer[25] = 0;
-		buffer[26] = 0;
-		buffer[27] = 0;
+		uint32_t ascent = iSession->getAscent();
+		buffer[24] = ascent % 256;
+		buffer[25] = (ascent / 256) % 256;
+		uint32_t descent = iSession->getDescent();
+		buffer[26] = descent % 256;
+		buffer[27] = (descent / 256) % 256;
 
 		unsigned int duration = 10*iSession->getDuration();
 		buffer[28] = duration % 256;
