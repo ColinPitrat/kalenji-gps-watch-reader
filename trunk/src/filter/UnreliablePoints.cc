@@ -21,7 +21,6 @@ namespace filter
 		}
 
 		// TODO: What if there is no reliable point ?! No filtering at all ?
-		
 
 		// TODO: A method removePoint in Session would be nice !
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); )

@@ -326,6 +326,7 @@ namespace device
 		buffer[22] = (distance / (256*256)) % 256;
 		buffer[23] = (distance / (256*256*256)) % 256;
 
+		// TODO: doesn't seem to work (or just not taken into account by the watch ?)
 		uint32_t ascent = iSession->getAscent();
 		buffer[24] = ascent % 256;
 		buffer[25] = (ascent / 256) % 256;
