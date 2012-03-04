@@ -24,3 +24,4 @@
  *                       Support environment variables and references to other variables in configuration ?
  *                       Review (again) the architecture. Source could be connector (USB or File) used for reading & writing. Device and output could be format (Kalenji, GPX, KML etc ...) usable for read & write. Would logger enveloppe still be needed ? Using Kalenji + File as output to log wouldn't work so I'd say yes ! Does it bring an advantage over supporting device and output separately ? This would probalby not factorize much code and sending XML over USB or Kalenji in a file wouldn't make much sense ...
  * bom::Session          Compute distance and duration from points
+ *                       Use ComputeSessionStat and ReducePoints by default when exporting to device.
