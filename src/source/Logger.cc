@@ -36,6 +36,14 @@ namespace source
 
 	void Logger::write_data(unsigned char *iData, size_t iLength)
 	{
+		/* Display on std::cout for debug purposes
+		std::cout << std::hex;
+		for(int i = 0; i < iLength; ++i)
+		{
+			std::cout << std::setw(2) << std::setfill('0') << (int) iData[i] << " ";
+		}
+		std::cout << std::endl;
+		*/
 		// TODO: Throw an exception if _truesource is null
 		_truesource->write_data(iData, iLength);
 

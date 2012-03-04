@@ -58,7 +58,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        import all sessions available on the watch
           import=all
 
-      The later is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
+      The latter is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
 
    - Default trigger type
       Name: trigger
@@ -82,6 +82,9 @@ This way, program output will also be written in the file kalenji_reader_output.
        - EmptyLaps: Remove laps with null distance or null duration
        - UnreliablePoints: Remove points for which the device gives a low reliability
        - NullHeartrate: Copy heartrate from previous point for points that have null value of heartrate
+       - FixElevation: Use GoogleMap API to determine the correct elevation of all points of the session
+       - ComputeSessionStats: Compute information at session level from points (distance, duration, max and average speed, ascent, descent ...)
+       - ReducePoints: Reduce the number of points by removing points that are not far from being aligned. This is usefull when needing to upload a route that has more than 200 points to the watch.
 
    - Outputs
       Name: outputs
@@ -93,6 +96,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        - GoogleMap: an HTML page containing necessary code to display the route on a google map
        - GoogleStaticMap: an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
        - KML: a file to be opened in Google Earth. It could also work with other software supporting KML files. 
+       - Kalenji: to export a route to the device
 
    - Log transactions
       Name: log_transactions

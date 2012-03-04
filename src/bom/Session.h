@@ -44,6 +44,8 @@ class Session
 
 		void setName(std::string name)       { _name = name; };
 		void setTime(tm time)                { _time = time; _time_t = mktime(&_time); };
+		void setDistance(uint32_t distance)  { _distance = distance; };
+		void setDuration(double duration)    { _duration = duration; };
 		void setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
 		void setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
 		void setAscent(uint32_t ascent)      { _ascent = ascent; };

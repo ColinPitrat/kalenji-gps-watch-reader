@@ -142,6 +142,10 @@ namespace device
 			{
 				parseWayPoint(oSession, cur);
 			}
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0)
+			{
+				oSession->setName((char*)xmlNodeListGetString(_document, cur->xmlChildrenNode, 1));
+			}
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
