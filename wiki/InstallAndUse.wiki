@@ -42,7 +42,7 @@ GPX files created can be imported in your favorite software.
 Let's say you have a file myRoute.gpx containing the route you want to put on your watch. You can use the following command to do so:
 
 {{{
-kalenji_reader -D GPX -i myRoute.gpx -f FixElevation,ComputeSessionStats,ReducePoints -o Kalenji
+./kalenji_reader -D GPX -i /path/to/myRoute.gpx -f FixElevation,ComputeSessionStats,ReducePoints -o Kalenji
 }}}
 
 Note that the same kind of command can be used with different -o option to convert a GPX file to apply a filter to a GPX file or to export it to another format. See ConfigurationFile and -h option for more details.
