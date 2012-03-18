@@ -117,11 +117,18 @@ namespace device
 	void GPX::parseTrk(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
+		xmlChar *data;
 		while(cur != NULL)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "trkseg") == 0) 
 			{
 				parseTrkSegOrRoute(oSession, cur);
+			}
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0) 
+			{
+				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
+				oSession->setName((const char*)data);
+				xmlFree(data);
 			}
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
@@ -206,6 +213,11 @@ namespace device
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0) 
 			{
 				parseWayPointExtensions(aPoint, cur);
+			}
+			// Ignore comment but if a point have one, we consider it's an important point
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "cmt") == 0) 
+			{
+				aPoint->setImportant(true);
 			}
 			// Ignore text content of metadata node
 			else 
