@@ -25,7 +25,7 @@ cd kalenji-gps-watch-reader-read-only
 make
 }}}
 
-= Using to import sessions from the watch =
+= Importing sessions from the watch =
 
 By default, data is imported in /tmp/kalenji_import. You can modify it by editing your ConfigurationFile. If the directory doesn't exist, it will be created.
 
@@ -37,7 +37,7 @@ By default, data is imported in /tmp/kalenji_import. You can modify it by editin
 
 GPX files created can be imported in your favorite software.
 
-= Using to export route to the watch =
+= Exporting route to the watch =
 
 Let's say you have a file myRoute.gpx containing the route you want to put on your watch. You can use the following command to do so:
 
