@@ -76,6 +76,7 @@ Outputs can be:
   * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
   * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
   * *KML*: a KML file readable, among others, by GoogleEarth
+  * *Kalenji*: export route to the watch 
 
 ==Log transactions==
 *Name:* log_transactions
