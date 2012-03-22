@@ -71,7 +71,7 @@ namespace device
 			// Decoding of basic info about the session
 			unsigned char *line = &responseData[24*i+3];
 			SessionId id = SessionId(line, line+16);
-			uint32_t num = (line[17] << 8) + line[18];
+			uint32_t num = (line[19] << 8) + line[18];
 			tm time;
 			// In tm, year is year since 1900. GPS returns year since 2000
 			time.tm_year = 100 + line[0];
@@ -106,12 +106,12 @@ namespace device
 			data[2] = length - 4;
 			data[3] = 0x80;
 			data[4] = oSessions->size() & 0xFF;
-			data[5] = oSessions->size() & 0xFF00;
+			data[5] = (oSessions->size() & 0xFF00) / 256;
 			int i = 6;
 			for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 			{
 				data[i++] = it->second.getNum() & 0xFF;
-				data[i++] = it->second.getNum() & 0xFF00;
+				data[i++] = (it->second.getNum() & 0xFF00) / 256;
 			}
 			unsigned char checksum = 0;
 			for(int i = 2; i < length-1; ++i)
