@@ -137,22 +137,20 @@ namespace device
 				uint32_t descent = responseData[72] + (responseData[73] << 8);
 				session->setAscent(ascent);
 				session->setDescent(descent);
+			}
 
-				// Second response 80 retrieves info concerning the laps of the session. I assume there is always only one but maybe this is not the case ...
-				// TODO: Check if this message could be splitted as is the one for points. If same size as points, this would occur after 32 laps ...
-				_dataSource->write_data(dataMore, lengthDataMore);
-				_dataSource->read_data(&responseData, &received);
+			// Second response 80 retrieves info concerning the laps of the session. 
+			_dataSource->write_data(dataMore, lengthDataMore);
+			_dataSource->read_data(&responseData, &received);
+			do
+			{
 				if(responseData[0] == 0x8A) break;
 				if(responseData[0] != 0x80)
 				{
 					std::cerr << "Unexpected header for getSessionsDetails (step 2): " << (int)responseData[0] << std::endl;
 					// TODO: throw an exception
 				}
-			}
 
-			// Second response 80 retrieves info concerning the laps
-			// TODO: Check if there can be many
-			{
 				int size = responseData[2] + (responseData[1] << 8);
 				if(size + 4 != received)
 				{
@@ -164,9 +162,14 @@ namespace device
 				int nbRecords = (size - 24)/ 44;
 				if(nbRecords * 44 != size - 24)
 				{
-					std::cerr << "Size is not a multiple of 44 plus 24 in getSessionsDetails (step 2) !" << std::endl;
+					std::cerr << "Size is not a multiple of 44 plus 24 in getSessionsDetails (step 2): " << nbRecords << "*44 != " << size << "-24" << "!" << std::endl;
 					// TODO: throw an exception
 				}
+				// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
+				uint32_t prevLastPoint = 0;
+				uint32_t firstPointOfRow = responseData[40+27] + (responseData[41+27] << 8);
+				uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
+				// ->8---
 				for(int i = 0; i < nbRecords; ++i)
 				{ // Decoding and addition of the lap
 					unsigned char *line = &responseData[44*i + 27];
@@ -203,10 +206,28 @@ namespace device
 					uint32_t ascent = line[32] + (line[33] << 8);
 					uint32_t firstPoint = line[40] + (line[41] << 8);
 					uint32_t lastPoint = line[42] + (line[43] << 8);
+					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
+					uint32_t nextFirstPoint = lastPointOfRow;
+					if(i < nbRecords - 1)
+					{
+						nextFirstPoint = line[40+44] + (line[41+44] << 8);
+					}
+					if(firstPoint == 0xffff && lastPoint == 0xffff)
+					{
+						firstPoint = prevLastPoint;
+						lastPoint = nextFirstPoint;
+					}
+					else
+					{
+						prevLastPoint = lastPoint;
+					}
+					// ->8---
 					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
 					session->addLap(lap);
 				}
-			}
+				_dataSource->write_data(dataMore, lengthDataMore);
+				_dataSource->read_data(&responseData, &received);
+			} while(responseData[25] == 0xaa);
 
 			// Third response 80 retrieves info concerning the points of the session. There can be many.
 			Session *session;
@@ -215,8 +236,6 @@ namespace device
 			uint32_t cumulated_tenth = 0;
 			while(keep_going)
 			{
-				_dataSource->write_data(dataMore, lengthDataMore);
-				_dataSource->read_data(&responseData, &received);
 				if(responseData[0] == 0x8A) break;
 
 				if(responseData[0] != 0x80)
@@ -291,6 +310,11 @@ namespace device
 					id_point++;
 				}
 				keep_going = !session->isComplete();
+				if(keep_going)
+				{
+					_dataSource->write_data(dataMore, lengthDataMore);
+					_dataSource->read_data(&responseData, &received);
+				}
 			}
 			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
 			if(responseData[0] == 0x8A) break;
