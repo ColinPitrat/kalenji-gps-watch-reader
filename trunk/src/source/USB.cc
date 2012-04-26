@@ -11,6 +11,8 @@ namespace source
 		libusb_device **listOfDevices;
 		bool found = false;
 		int rc = 0;
+		_kernelDriver0 = false;
+		_kernelDriver1 = false;
 
 		libusb_init(&myUSBContext);
 		ssize_t nbDevices = libusb_get_device_list(myUSBContext, &listOfDevices);
@@ -39,10 +41,21 @@ namespace source
 			{
 				rc = libusb_detach_kernel_driver(_device, 0); 
 				found = found && checkUSBOperation(rc);
+				_kernelDriver0 = true;
 			}
 
 			rc = libusb_claim_interface(_device, 0);
 			found = found && checkUSBOperation(rc);
+
+			rc = libusb_kernel_driver_active(_device, 1);
+			found = found && checkUSBOperation(rc);
+
+			if (rc > 0)
+			{
+				rc = libusb_detach_kernel_driver(_device, 1); 
+				found = found && checkUSBOperation(rc);
+				_kernelDriver1 = true;
+			}
 
 			rc = libusb_claim_interface(_device, 1);
 			found = found && checkUSBOperation(rc);
@@ -65,6 +78,17 @@ namespace source
 			checkUSBOperation(rc);
 			rc = libusb_release_interface(_device, 1);
 			checkUSBOperation(rc);
+
+			if(_kernelDriver0)
+			{
+				rc = libusb_attach_kernel_driver(_device, 0);
+				checkUSBOperation(rc);
+			}
+			if(_kernelDriver1)
+			{
+				rc = libusb_attach_kernel_driver(_device, 1);
+				checkUSBOperation(rc);
+			}
 
 			libusb_close(_device);
 		}
