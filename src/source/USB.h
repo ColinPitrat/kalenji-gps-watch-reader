@@ -52,7 +52,8 @@ namespace source
 
 			uint32_t _timeout;
 			unsigned char _responseData[4096];
-			int transferred;
+			bool _kernelDriver0;
+			bool _kernelDriver1;
 	};
 }
 
