@@ -4,7 +4,7 @@
 =Tools around your watch= 
 
 ==How can I easily create GPX files to upload to my watch ?==
-You can use Google Maps to prepare your route and then use this wonderful bookmark script:
+You can use Google Maps to prepare your route and then use this wonderful bookmark script under firefox (unfortunately it doesn't seem to work with other browsers):
 http://www.elsewhere.org/journal/gmaptogpx/
 
 =Technical difficulties=
