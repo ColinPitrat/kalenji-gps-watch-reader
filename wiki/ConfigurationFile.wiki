@@ -93,3 +93,5 @@ By default, the log files are created in a subdirectory logs of the output direc
 *Default value:* logs subdirectory in output directory
 
 The directory where raw data from the watch is logged if this functionality is activated.
+
+<wiki:gadget up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" width="468" height="60" border="0" up_keywords="kalenji GPS watch linux sport running cycling" url="http://goo.gl/R5bvK" /> 
