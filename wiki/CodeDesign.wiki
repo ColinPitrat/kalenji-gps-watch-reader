@@ -71,3 +71,5 @@ It's also necessary to use
 For the rest of the implementation, the best is to have a look at already existing objects !
 
 The important thing here is that you don't need to do anything else. Once you've created your class, you just need to launch make and you can use this new object in the configuration or the options of the program.
+
+<wiki:gadget up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" width="468" height="60" border="0" up_keywords="kalenji GPS watch linux sport running cycling" url="http://goo.gl/R5bvK" /> 
