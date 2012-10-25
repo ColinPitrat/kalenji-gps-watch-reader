@@ -59,3 +59,5 @@ mkdir -p /tmp/kalenji_import
 }}}
 
 The output of kalenji_reader will be written in kalenji_reader_output.txt. You can attach this file, an eventual core and logs of the import to a bug report to provide more information on the problem.
+
+<wiki:gadget up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" width="468" height="60" border="0" up_keywords="kalenji GPS watch linux sport running cycling" url="http://goo.gl/R5bvK" /> 
