@@ -7,7 +7,7 @@ This software is organized in layers. The usual data flow is the following:
 
 Source -> Device -> Bom -> Filters -> Output
 
-There's obviously one single source and one single device. 
+Of course, only one single source and one single device can be used at a time. Multiple filters and multiple output can be used. All filters will be applied to the data in the order defined. The resulting data will be sent to all outputs.
 
 ==Examples==
 
@@ -17,7 +17,7 @@ Source = USB
 
 Device = Kalenji
 
-*Export a GPX to a Kalenji GPS watch* (not supported yet)
+*Export a GPX to a Kalenji GPS watch*
 
 Source = File
 
@@ -44,7 +44,7 @@ At the root of the SVN repository, you can find a few files with self-explanator
 In src, there are directories corresponding to code layers. The following is true for all layers except bom:
   * objects are in a namespace having the same name as the directory
   * an interface with the name of the layer with first letter being uppercase is defined
-  * all class in the layer must inherit from the interface
+  * all classes in the layer must inherit from the interface
   * two macros DECLARE_XXX and REGISTER_XXX where XXX is the name of the layer in uppercase are defined
   * Each object use DECLARE_XXX in its class declaration and REGISTER_XXX in its class definition to register the object
   * Each object has a method getName that returns the name that refers to the object. It is advised to return the class name.
