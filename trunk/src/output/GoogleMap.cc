@@ -53,7 +53,10 @@ namespace output
 			mystream << "{" << std::endl;
 			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
 			mystream << "                                            content: \"";
-			mystream << "<b>Time:</b> " << (*it)->getTimeAsString(true) << " km/h<br />";
+			mystream << "<b>Time:</b> " << (*it)->getTimeAsString(true) << "<br />";
+			mystream << "<b>Elapsed:</b> " << durationAsString((*it)->getTime() - session->getTime()) << "<br />";
+			// TODO: Need to add a reference to the lap in each point ?
+			//mystream << "<b>Elapsed lap:</b> " << durationAsString((*it)->getTimeAsString(true) << "<br />";
 			mystream << "<b>Speed:</b> " << (*it)->getSpeed() << " km/h<br />";
 			mystream << "<b>Heartrate:</b> " << (*it)->getHeartRate() << " bpm<br/>";
 			mystream << "<b>Elevation:</b> " << (*it)->getAltitude() << " m";

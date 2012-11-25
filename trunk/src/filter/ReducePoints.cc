@@ -1,4 +1,5 @@
 #include "ReducePoints.h"
+#include "../Common.h"
 #include <cmath>
 
 namespace filter
@@ -11,7 +12,7 @@ namespace filter
 		std::list<Lap*> &laps = session->getLaps();
 		uint32_t nbPointsOri = points.size();
 		
-		uint32_t maxNbPoints = 200;
+		uint32_t maxNbPoints = 250;
 		uint32_t divider = 16;
 
 		while(points.size() > maxNbPoints && divider > 4)

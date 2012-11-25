@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <iterator>
+#include <unistd.h>
 
 namespace source
 {
