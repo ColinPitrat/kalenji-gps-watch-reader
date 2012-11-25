@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <iterator>
+#include <unistd.h>
 
 namespace source
 {
@@ -24,7 +25,7 @@ namespace source
 			}
 			else 
 			{
-				std::cerr << "Unable to open " << inputfile; 
+				std::cerr << "Unable to open " << _filename; 
 				// TODO: Throw an exception
 			}
 		}

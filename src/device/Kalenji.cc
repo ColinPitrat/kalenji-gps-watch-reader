@@ -1,4 +1,5 @@
 #include "Kalenji.h"
+#include "../Common.h"
 #include <cstring>
 #include <iomanip>
 
@@ -328,9 +329,9 @@ namespace device
 	void Kalenji::exportSession(Session *iSession)
 	{
 		unsigned int nbPoints = iSession->getPoints().size();
-		if(nbPoints > 200)
+		if(nbPoints > KALENJI_EXPORT_MAX_POINTS)
 		{
-			std::cerr << "Export with Kalenji watches doesn't support more than 200 points. This profile contains " << nbPoints << " points." << std::endl;
+			std::cerr << "Export with Kalenji watches doesn't support more than " << KALENJI_EXPORT_MAX_POINTS << " points. This profile contains " << nbPoints << " points." << std::endl;
 			std::cerr << "I'm not (yet?) able to reduce it !" << std::endl;
 			return;
 		}
@@ -397,7 +398,11 @@ namespace device
 		unsigned char *responseData;
 		size_t transferred;
 		_dataSource->read_data(&responseData, &transferred);
-		if(transferred != 4 || responseData[0] != 0x93 || responseData[1] != 0 || responseData[2] != 0 || responseData[3] != 0)
+		if(transferred == 4 && responseData[0] == 0x95 && responseData[1] == 0 && responseData[2] == 0 && responseData[3] == 0)
+		{
+			std::cout << "No space left on your watch. Please do some cleaning and retry." << std::endl;
+		}
+		else if(transferred != 4 || responseData[0] != 0x93 || responseData[1] != 0 || responseData[2] != 0 || responseData[3] != 0)
 		{
 			std::cout << "Invalid response: " << std::hex;
 			for(int i = 0; i < transferred; ++i)

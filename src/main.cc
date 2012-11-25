@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <iterator>
+#include <unistd.h>
 
 #include "source/Logger.h"
 #include "source/USB.h"
