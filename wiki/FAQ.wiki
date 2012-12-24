@@ -5,6 +5,7 @@
 
 ==How do I replay my session in 3D in Google Earth ?==
 In google-earth, in the list on the left, select "Trajet" and click on the icon "Launch visit" just below the list on the right. 
+
 http://kalenji-gps-watch-reader.googlecode.com/files/Google%20Earth.png
 
 ==How can I easily create GPX files to upload to my watch ?==
