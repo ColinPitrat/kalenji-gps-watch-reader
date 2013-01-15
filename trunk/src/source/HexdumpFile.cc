@@ -35,7 +35,7 @@ namespace source
 		}
 	}
 
-	bool HexdumpFile::read_data(unsigned char **oData, size_t *oLength)
+	bool HexdumpFile::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
 	{
 		if(_index < _inputStream.size())
 		{
