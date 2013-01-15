@@ -13,6 +13,7 @@ namespace source
 		int rc = 0;
 		_kernelDriver0 = false;
 		_kernelDriver1 = false;
+		_hasInterface1 = false;
 
 		libusb_init(&myUSBContext);
 		ssize_t nbDevices = libusb_get_device_list(myUSBContext, &listOfDevices);
@@ -47,18 +48,23 @@ namespace source
 			rc = libusb_claim_interface(_device, 0);
 			found = found && checkUSBOperation(rc);
 
-			rc = libusb_kernel_driver_active(_device, 1);
-			found = found && checkUSBOperation(rc);
-
-			if (rc > 0)
+			// TODO: Cleaner way to handle this: when to use which interfaces numbers ?
+			if(vendorId == 0x0483 && productId == 0x5740)
 			{
-				rc = libusb_detach_kernel_driver(_device, 1); 
+				_hasInterface1 = true;
+				rc = libusb_kernel_driver_active(_device, 1);
 				found = found && checkUSBOperation(rc);
-				_kernelDriver1 = true;
-			}
 
-			rc = libusb_claim_interface(_device, 1);
-			found = found && checkUSBOperation(rc);
+				if (rc > 0)
+				{
+					rc = libusb_detach_kernel_driver(_device, 1); 
+					found = found && checkUSBOperation(rc);
+					_kernelDriver1 = true;
+				}
+
+				rc = libusb_claim_interface(_device, 1);
+				found = found && checkUSBOperation(rc);
+			}
 		}
 
 		libusb_free_device_list(listOfDevices, 1);
@@ -66,6 +72,7 @@ namespace source
 		if(!found)
 		{
 			std::cerr << "USB device not found !" << std::endl;
+			throw std::exception();
 		}
 	}
 
@@ -76,8 +83,11 @@ namespace source
 		{
 			rc = libusb_release_interface(_device, 0);
 			checkUSBOperation(rc);
-			rc = libusb_release_interface(_device, 1);
-			checkUSBOperation(rc);
+			if(_hasInterface1 == true)
+			{
+				rc = libusb_release_interface(_device, 1);
+				checkUSBOperation(rc);
+			}
 
 			if(_kernelDriver0)
 			{
@@ -127,26 +137,33 @@ namespace source
 		return true;
 	}
 
-	bool USB::read_data(unsigned char **oData, size_t *oLength)
+	bool USB::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
 	{
 		int transferred;
-		int rc = libusb_bulk_transfer(_device, 0x81, _responseData, RESPONSE_BUFFER_SIZE, &transferred, _timeout);
+		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x81*/, _responseData, RESPONSE_BUFFER_SIZE, &transferred, _timeout);
 		*oLength = (size_t) transferred;
 		*oData = _responseData;
 		checkUSBOperation(rc);
 		return true;
 	}
 
-	void USB::write_data(unsigned char *iData, size_t iLength)
+	void USB::write_data(unsigned char iEndPoint, unsigned char *iData, size_t iLength)
 	{
 		int transferred;
-		int rc = libusb_bulk_transfer(_device, 0x03, iData, iLength, &transferred, _timeout);
+		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x03*/, iData, iLength, &transferred, _timeout);
 		bool ok = checkUSBOperation(rc);
 		if(transferred != iLength)
 		{
 			std::cerr << "Error: transferred (" << transferred << ") != length (" << iLength << ")" << std::endl;
 			ok = false;
 		}
+		// TODO: Throw an exception if ok == false
+	}
+
+	void USB::control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength)
+	{
+		int rc = libusb_control_transfer(_device, iRequestType, iRequest, iValue, iIndex, iData, iLength, _timeout);
+		bool ok = checkUSBOperation(rc);
 		// TODO: Throw an exception if ok == false
 	}
 }

@@ -18,13 +18,13 @@ namespace source
 		_truesource->release();
 	}
 
-	bool Logger::read_data(unsigned char **oData, size_t *oLength)
+	bool Logger::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
 	{
 		// TODO: Throw an exception if _truesource is null
-		bool result = _truesource->read_data(oData, oLength);
+		bool result = _truesource->read_data(iEndPoint, oData, oLength);
 
 		std::ofstream log_file_stream(_logfilename.c_str(), std::ios_base::out | std::ios_base::app);
-		log_file_stream << std::hex;
+		log_file_stream << std::hex << " <= ";
 		for(int i = 0; i < *oLength; ++i)
 		{
 			log_file_stream << std::setw(2) << std::setfill('0') << (int) (*oData)[i] << " ";
@@ -34,7 +34,7 @@ namespace source
 		return result;
 	}
 
-	void Logger::write_data(unsigned char *iData, size_t iLength)
+	void Logger::write_data(unsigned char iEndPoint, unsigned char *iData, size_t iLength)
 	{
 		/* Display on std::cout for debug purposes
 		std::cout << std::hex;
@@ -45,19 +45,22 @@ namespace source
 		std::cout << std::endl;
 		*/
 		// TODO: Throw an exception if _truesource is null
-		_truesource->write_data(iData, iLength);
+		_truesource->write_data(iEndPoint, iData, iLength);
 
 		// TODO: For now we don't want to display what is sent. But will we one day ? In a different file ?
-		/*
+		/* */
 		   std::ofstream log_file_stream(_logfilename.c_str(), std::ios_base::out | std::ios_base::app);
-		   log_file_stream << "Sending data: " << std::endl;
-
-		   log_file_stream << std::hex;
+		   log_file_stream << std::hex << " => ";
 		   for(int i = 0; i < iLength; ++i)
 		   {
-		   log_file_stream << std::setw(2) << std::setfill('0') << (int) iData[i] << " ";
+			   log_file_stream << std::setw(2) << std::setfill('0') << (int) iData[i] << " ";
 		   }
 		   log_file_stream << std::dec << std::endl;
-		 */
+		/* */
+	}
+
+	void Logger::control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength)
+	{
+		_truesource->control_transfer(iRequestType, iRequest, iValue, iIndex, iData, iLength);
 	}
 }
