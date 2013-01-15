@@ -74,7 +74,7 @@ namespace output
 				mystream << "      <gpxdata:startTime>" << (*it)->getStartPoint()->getTimeAsString() << "</gpxdata:startTime>" << std::endl;
 				mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 				mystream << "      <gpxdata:calories>" << (*it)->getCalories() << "</gpxdata:calories>" << std::endl;
-				mystream << "      <gpxdata:distance>" << (*it)->getLength() << "</gpxdata:distance>" << std::endl;
+				mystream << "      <gpxdata:distance>" << (*it)->getDistance() << "</gpxdata:distance>" << std::endl;
 				mystream << "      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">" << (*it)->getAvgSpeed() << "</gpxdata:summary>" << std::endl;
 				mystream << "      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">" << (*it)->getMaxSpeed() << "</gpxdata:summary>" << std::endl;
 				mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">" << (*it)->getAvgHeartrate() << "</gpxdata:summary>" << std::endl;

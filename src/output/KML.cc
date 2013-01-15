@@ -70,7 +70,7 @@ namespace output
 			mystream << "<name>Lap " << i << "</name>" << std::endl;
 			mystream << "<styleUrl>kalenji_lap</styleUrl>" << std::endl;
 			mystream << "<description>" << std::endl;
-			mystream << "<b>Distance:</b> " << (*it)->getLength()/1000.0 << " km<br/>";
+			mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
 			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
 			mystream << "<b>Average speed:</b> " << (*it)->getAvgSpeed() << " km/h<br/>";
 			mystream << "<b>Maximum speed:</b> " << (*it)->getMaxSpeed() << " km/h<br/>";

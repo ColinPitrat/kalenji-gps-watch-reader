@@ -92,7 +92,7 @@ namespace output
 			mystream << "{" << std::endl;
 			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
 			mystream << "                                            content: \"";
-			mystream << "<b>Distance:</b> " << (*it)->getLength()/1000.0 << " km<br/>";
+			mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
 			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
 			mystream << "<b>Average speed:</b> " << (*it)->getAvgSpeed() << " km/h<br/>";
 			mystream << "<b>Maximum speed:</b> " << (*it)->getMaxSpeed() << " km/h<br/>";
