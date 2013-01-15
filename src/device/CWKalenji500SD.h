@@ -14,6 +14,16 @@ namespace device
 			CWKalenji500SD() {};
 
 			/** 
+			  Dump a message on stdout
+			 */ 
+			virtual void dump(unsigned char *iData, int iLength);
+
+			/** 
+			  Receive an answer, checking it's value and ignoring broadcast messages
+			 */ 
+			virtual bool receive(unsigned char iEndPoint, unsigned char **oData, size_t* oLength, char iMessage = 0, char iMessageAnswered = 0, char iError = 0);
+
+			/** 
 			  Initialize the device. 
 			 */ 
 			virtual void init();
@@ -68,8 +78,17 @@ namespace device
 			static unsigned char dataOpenRxChannel[];
 			static const int lengthRequestMessage;
 			static unsigned char dataRequestMessage51[];
+			static unsigned char dataRequestMessage54[];
 			static const int lengthAckData;
 			static unsigned char dataAckData[];
+			static unsigned char dataAckData2[];
+			static unsigned char dataAckData3[];
+			static unsigned char dataAckData4[];
+			static unsigned char dataAckData5[];
+			static unsigned char dataAckData6[];
+			static const int lengthBurstData;
+			static unsigned char dataBurstData[];
+			static unsigned char dataBurstData2[];
 	};
 }
 

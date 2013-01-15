@@ -298,7 +298,7 @@ namespace device
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "distance") == 0) 
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
-				aLap->setLength(atoi((char*) data));
+				aLap->setDistance(atoi((char*) data));
 				xmlFree(data);
 			}
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "elapsedTime") == 0) 
@@ -351,7 +351,7 @@ namespace device
 		std::string fileContent;
 		unsigned char* line;
 		size_t length;
-		while(_dataSource->read_data(&line, &length))
+		while(_dataSource->read_data(0x81, &line, &length))
 		{
 			fileContent.append((char*)line, length);
 		}

@@ -3,6 +3,12 @@
 #include <cstring>
 #include <iomanip>
 
+#ifdef DEBUG
+#define DEBUG_CMD(x) ;
+#else
+#define DEBUG_CMD(x) ;
+#endif
+
 namespace device
 {
 	REGISTER_DEVICE(CWKalenji500SD);
@@ -29,78 +35,407 @@ namespace device
 	unsigned char CWKalenji500SD::dataOpenRxChannel[lengthOpenRxChannel] = { 0xA4, 0x01, 0x5B, 0x00, 0xFE, 0x00, 0x00 };
 	const int     CWKalenji500SD::lengthRequestMessage = 8;
 	unsigned char CWKalenji500SD::dataRequestMessage51[lengthRequestMessage] = { 0xA4, 0x02, 0x4D, 0x00, 0x51, 0xBA, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataRequestMessage54[lengthRequestMessage] = { 0xA4, 0x02, 0x4D, 0x00, 0x54, 0xBF, 0x00, 0x00 };
 	// I have really no idea of what should be in message for ack data ... I put a default one but this may fail !
 	const int     CWKalenji500SD::lengthAckData = 15;
 	unsigned char CWKalenji500SD::dataAckData[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x02, 0x32, 0x04, 0x00, 0x00, 0x00, 0x00, 0x92, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataAckData2[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x04, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA3, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataAckData3[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA0, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataAckData4[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x09, 0xFF, 0x00, 0x00, 0x00, 0x00, 0x00, 0x50, 0x00, 0x00 };
+	// The one to get a session. Byte at index 6 must be set to session ID. Byte at index 12 must be xored with the session ID.
+	unsigned char CWKalenji500SD::dataAckData5[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xAF, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataAckData6[lengthAckData] = { 0xA4, 0x09, 0x4F, 0x00, 0x44, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xA5, 0x00, 0x00 };
+	const int     CWKalenji500SD::lengthBurstData = 15;
+	unsigned char CWKalenji500SD::dataBurstData[lengthBurstData] = { 0xA4, 0x09, 0x50, 0x00, 0x44, 0x04, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0xBF, 0x00, 0x00 };
+	unsigned char CWKalenji500SD::dataBurstData2[lengthBurstData] = { 0xA4, 0x09, 0x50, 0xA0, 0x42, 0x4F, 0x42, 0x00, 0x00, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00 };
+
+	void CWKalenji500SD::dump(unsigned char *data, int length)
+	{
+		DEBUG_CMD(std::cout << std::hex);
+		for(int i = 0; i < length; ++i)
+		{
+			DEBUG_CMD(std::cout << std::setw(2) << std::setfill('0') << (int) data[i] << " ");
+		}
+		DEBUG_CMD(std::cout << std::endl);
+	}
+
+	bool CWKalenji500SD::receive(unsigned char iEndPoint, unsigned char **oData, size_t* oLength, char iMessage, char iMessageAnswered, char iError)
+	{
+		do
+		{
+			_dataSource->read_data(0x81, oData, oLength);
+			DEBUG_CMD(dump(*oData, *oLength));
+		} while( ((*oData)[2] != iMessage && iMessage != 0) || ((*oData)[4] != iMessageAnswered && iMessageAnswered != 0) );
+
+		return (*oData)[5] == iError;
+	}
 
 	void CWKalenji500SD::init()
 	{
 		_dataSource->init(0x0FCF, 0x1008);
 		unsigned char *responseData;
 		size_t transferred;
-		// Don't know if it's mandatory, but it seems that the device sends 17 input messages
-		for(int i = 0; i < 17; ++i)
+
+		// Step 1: Some control transfer, necessary to initialize the device ?
 		{
-			_dataSource->read_data(&responseData, &transferred);
+			unsigned char data[256];
+			unsigned char refdata_1[18]= { 0x12, 0x01, 0x00, 0x02, 0x00, 0x00, 0x00, 0x20, 0xCF, 0x0F, 0x08, 0x10, 0x00, 0x01, 0x01, 0x02, 0x03, 0x01 };
+			unsigned char refdata_2[ 9]= { 0x09, 0x02, 0x20, 0x00, 0x01, 0x01, 0x02, 0x80, 0x32 };
+			unsigned char refdata_3[32]= { 0x09, 0x02, 0x20, 0x00, 0x01, 0x01, 0x02, 0x80, 0x32, 0x09, 0x04, 0x00, 0x00, 0x02, 0xFF, 0x00, 0x00, 0x02, 0x07, 0x05, 0x81, 0x02, 0x40, 0x00, 0x01, 0x07, 0x05, 0x01, 0x02, 0x40, 0x00, 0x01 };
+			unsigned char refdata_4[ 4]= { 0x04, 0x03, 0x09, 0x04 };
+			unsigned char refdata_5[30]= { 0x1E, 0x03, 0x41, 0x00, 0x4E, 0x00, 0x54, 0x00, 0x20, 0x00, 0x55, 0x00, 0x53, 0x00, 0x42, 0x00, 0x53, 0x00, 0x74, 0x00, 0x69, 0x00, 0x63, 0x00, 0x6B, 0x00, 0x32, 0x00, 0x00, 0x00 };
+			unsigned char refdata_6[42]= { 0x2A, 0x03, 0x31, 0x00, 0x33, 0x00, 0x37, 0x00, 0x00, 0x00, 0x89, 0x00, 0xAD, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x89, 0x00, 0xAD, 0x00, 0x1A, 0x00, 0x00, 0x00, 0x00, 0x00, 0x44, 0x00, 0x53, 0x00, 0x49, 0x00, 0x00, 0x00, 0x42, 0x00 };
+
+			// TODO: Check corresponding refdata
+			_dataSource->control_transfer(0x80, 0x06, 0x100, 0x0,   data, 0x12);
+			// refdata_1
+			_dataSource->control_transfer(0x80, 0x06, 0x200, 0x0,   data, 0x9);
+			// refdata_2
+			_dataSource->control_transfer(0x80, 0x06, 0x200, 0x0,   data, 0x20);
+			// refdata_3
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x302, 0x409, data, 0xFF);
+			// refdata_5
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x303, 0x409, data, 0xFF);
+			// refdata_6
+			_dataSource->control_transfer(0x80, 0x06, 0x100, 0x0,   data, 0x12);
+			// refdata_1
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x302, 0x409, data, 0xFF);
+			// refdata_5
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x303, 0x409, data, 0xFF);
+			// refdata_6
+			_dataSource->control_transfer(0x80, 0x06, 0x100, 0x0,   data, 0x12);
+			// refdata_1
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x302, 0x409, data, 0xFF);
+			// refdata_5
+			_dataSource->control_transfer(0x80, 0x06, 0x300, 0x0,   data, 0xFF);
+			// refdata_4
+			_dataSource->control_transfer(0x80, 0x06, 0x303, 0x409, data, 0xFF);
+			// refdata_6
 		}
-		// Then we do a device reset using ANT function for it
-		_dataSource->write_data(dataReset, lengthReset);
-		_dataSource->read_data(&responseData, &transferred);
-		// We can then do the init sequence
-		// TODO: we should always check that answer is A2 03 40 00 XY 00 CS with XY = dataXxxx[2] and CS = checksum
-		_dataSource->write_data(dataSetNetwork, lengthSetNetwork);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataTransmitPower, lengthTransmitPower);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataAssignChannel, lengthAssignChannel);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataChannelPeriod, lengthChannelPeriod);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataChannelRFFreq, lengthChannelRFFreq);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataSearchTimeout, lengthSearchTimeout);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataChannelID, lengthChannelID);
-		_dataSource->read_data(&responseData, &transferred);
-		_dataSource->write_data(dataOpenChannel, lengthOpenChannel);
-		_dataSource->read_data(&responseData, &transferred);
-		// This can fail and return an error that requires asking for a channel with A4 02 4D 00 51 BA (<- asking for a sending of a A4 05 51)
-		_dataSource->write_data(dataOpenRxChannel, lengthOpenRxChannel);
-		_dataSource->read_data(&responseData, &transferred);
-		if(responseData[5] == 0x19)
+
+		// Step 2: Initialize ANT protocol
+		// First ask for channel capabilities
+		DEBUG_CMD(std::cout << "Request message 54 for capabilities: " << std::endl);
+		_dataSource->write_data(0x01, dataRequestMessage54, lengthRequestMessage);
+		if(receive(0x81, &responseData, &transferred, 0x54))
 		{
-			_dataSource->write_data(dataRequestMessage51, lengthRequestMessage);
-			_dataSource->read_data(&responseData, &transferred);
+			int max_chan = responseData[3];
+			int max_net = responseData[4];
+			int std_opts = responseData[5];
+			int adv_opts = responseData[6];
+			int adv_opts2 = responseData[7];
+			int max_data_chan = responseData[8];
 		}
+		else
+		{
+			std::cout << " !!! Wrong message received !!!" << std::endl;
+		}
+		DEBUG_CMD(std::cout << "Reset message (expect 6F answer): " << std::endl);
+		// Then do a device reset using ANT function for it
+		_dataSource->write_data(0x01, dataReset, lengthReset);
+		if(!receive(0x81, &responseData, &transferred, 0x6F))
+		{
+			std::cout << "Reset of device failed" << std::endl;
+		}
+		// And  then we do the init sequence
+		_dataSource->write_data(0x01, dataSetNetwork, lengthSetNetwork);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x46))
+		{
+			std::cout << "Setting network failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataTransmitPower, lengthTransmitPower);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x47))
+		{
+			std::cout << "Power transmition failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataAssignChannel, lengthAssignChannel);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x42))
+		{
+			std::cout << "Assigning data channel failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataChannelPeriod, lengthChannelPeriod);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x43))
+		{
+			std::cout << "Setting channel period failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataChannelRFFreq, lengthChannelRFFreq);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x45))
+		{
+			std::cout << "Setting RFFreq channel failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataSearchTimeout, lengthSearchTimeout);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x44))
+		{
+			std::cout << "Setting search timeout failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataChannelID, lengthChannelID);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x51))
+		{
+			std::cout << "Setting data channel ID failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataOpenChannel, lengthOpenChannel);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x4B))
+		{
+			std::cout << "Opening data channel failed" << std::endl;
+		}
+		_dataSource->write_data(0x01, dataOpenRxChannel, lengthOpenRxChannel);
+		if(!receive(0x81, &responseData, &transferred, 0x40, 0x5B))
+		{
+			DEBUG_CMD(std::cout << "Data RX channel busy" << std::endl);
+			// This can fail and return an error that requires asking for a channel with A4 02 4D 00 51 BA (<- asking for a sending of a A4 05 51)
+			if(responseData[5] == 0x19)
+			{
+				_dataSource->write_data(0x01, dataRequestMessage51, lengthRequestMessage);
+				receive(0x81, &responseData, &transferred, 0x51);
+			}
+		}
+		for(int i = 0; i < 2; ++i)
+		{
+			_dataSource->write_data(0x01, dataAckData, lengthAckData);
+			receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x05);
+		}
+		_dataSource->write_data(0x01, dataAckData2, lengthAckData);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x05);
+		receive(0x81, &responseData, &transferred, 0x50, 0x43, 0x3B);
+		receive(0x81, &responseData, &transferred, 0x50, 0x44, 0x84);
+
+		_dataSource->write_data(0x01, dataBurstData, lengthBurstData);
+		_dataSource->write_data(0x01, dataBurstData2, lengthBurstData);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x0A);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x05);
+		receive(0x81, &responseData, &transferred, 0x50, 0x43, 0x3B);
+		receive(0x81, &responseData, &transferred, 0x50, 0x44, 0x84);
+		receive(0x81, &responseData, &transferred, 0x50, 0x4A, 0x29);
+
+		_dataSource->write_data(0x01, dataBurstData, lengthBurstData);
+		_dataSource->write_data(0x01, dataBurstData2, lengthBurstData);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x0A);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x05);
+		_dataSource->write_data(0x01, dataAckData3, lengthAckData);
+		receive(0x81, &responseData, &transferred, 0x40, 0x01, 0x05);
 	}
 
 	void CWKalenji500SD::release()
 	{
+		// At the end, we send acked data 6 and we receive one confirmation with code 5 and 2 with code 2. Then we send reset and receive 0x6F.
 		unsigned char *responseData;
-		size_t transferred;
-		_dataSource->write_data(dataReset, lengthReset);
-		_dataSource->read_data(&responseData, &transferred);
+		size_t received;
+		_dataSource->write_data(0x01, dataAckData6, lengthAckData);
+		if(receive(0x81, &responseData, &received, 0x40, 0x01, 0x05))
+		{
+			DEBUG_CMD(std::cout << "Ack for acked data 6" << std::endl);
+		}
+		else
+		{
+			std::cout << "Ack received but with unexpected message code. I don't know what this means." << std::endl;
+		}
+		for(int i = 0; i < 2; ++i)
+		{
+			if(receive(0x81, &responseData, &received, 0x40, 0x01, 0x02))
+			{
+				DEBUG_CMD(std::cout << "Ack 02 for acked data 6" << std::endl);
+			}
+			else
+			{
+				std::cout << "Ack received but with unexpected message code. I don't know what this means." << std::endl;
+			}
+		}
+		_dataSource->write_data(0x01, dataReset, lengthReset);
+		_dataSource->read_data(0x81, &responseData, &received);
+		if(responseData[2] != 0x6F || responseData[3] != 0x20)
+		{
+			std::cout << "Unexpected answer to final ack:" << std::endl;
+			dump(responseData, received);
+		}
 	}
 
 	void CWKalenji500SD::getSessionsList(SessionsMap *oSessions)
 	{
-		// Test code for now, just read what comes in
+		DEBUG_CMD(std::cout << "Get sessions list !" << std::endl);
 		size_t received = 0;
 		unsigned char *responseData;
+		unsigned char buffer[4096];
+		size_t offset = 0;
 		do
 		{
-			// TODO: Use more info from this first call (some data global to the session: calories, grams, ascent, descent ...)
-			_dataSource->read_data(&responseData, &received);
+			_dataSource->read_data(0x81, &responseData, &received);
 			if(responseData[2] == 0x4E)
 			{
-				_dataSource->write_data(dataAckData, lengthAckData);
+				// Ignore broadcast messages
+				//DEBUG_CMD(std::cout << "Received 0x4E - ignored" << std::endl);
 			}
-		} while(responseData[0] != 0x8A);
+			else if(responseData[2] == 0x50 && (responseData[3] == 0x00 || responseData[3] == 0x20 || responseData[3] == 0x40 || responseData[3] == 0x60 || responseData[3] == 0xA0))
+			{
+				//DEBUG_CMD(std::cout << "Received 0x50 - 0x[0246A]0" << std::endl);
+				memcpy((void*)(buffer + offset), (void*)(responseData + 4), received-5);
+				offset += received-5;
+			}
+		} while (responseData[2] != 0x50 || responseData[3] != 0xA0);
+		int nb_sessions = (offset - 16) / 24;
+		for(int i = 0; i < nb_sessions; ++i)
+		{
+			// Decoding of basic info about the session
+			unsigned char *line = &buffer[24*i+16];
+			SessionId id = SessionId(line, line+1);
+			uint32_t num = line[0];
+
+			tm time;
+			// In tm, year is year since 1900. GPS returns year since 2000
+			time.tm_year  = 100 + (line[5] % 16) + 10*(line[5] / 16);
+			// In tm, month is between 0 and 11.
+			time.tm_mon   = (line[4] % 16) + 10*(line[4] / 16) - 1;
+			time.tm_mday  = (line[3] % 16) + 10*(line[3] / 16);
+			time.tm_hour  = (line[2] % 16) + 10*(line[2] / 16);
+			time.tm_min   = (line[1] % 16) + 10*(line[1] / 16);
+			time.tm_sec   = 0;
+			time.tm_isdst = -1;
+
+			double duration = 0;
+			uint32_t distance = 0;
+			uint32_t nb_laps = line[13];
+
+			Session mySession(id, num, time, 0, duration, distance, nb_laps);
+			oSessions->insert(SessionsMapElement(id, mySession));
+		}
 	}
 
 	void CWKalenji500SD::getSessionsDetails(SessionsMap *oSessions)
 	{
-		std::cerr << "Unsupported getSessionsDetails with CW Kalenji 500 SD" << std::endl;
+		size_t received = 0;
+		unsigned char *responseData;
+		_dataSource->write_data(0x01, dataAckData4, lengthAckData);
+		receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
+		receive(0x81, &responseData, &received, 0x50, 0x43, 0x3B);
+		receive(0x81, &responseData, &received, 0x50, 0x44, 0x89);
+		receive(0x81, &responseData, &received, 0x50, 0x21, 0x4A);
+		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+		{
+			std::cout << "Retrieve session " << (int) it->first.back() << std::endl;
+			time_t current_time = it->second.getTime();
+			dataAckData5[6] = it->first.back();
+			dataAckData5[12] = 0xAF ^ dataAckData5[6];
+			_dataSource->write_data(0x01, dataAckData5, lengthAckData);
+			receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
+
+			unsigned char buffer[4096];
+			size_t offset = 0;
+			int ligne = 0;
+			int nb_laps = 0;
+			int no_burst = 0;
+			do
+			{
+				//DEBUG_CMD(std::cout << "Retrieving data" << std::endl);
+				_dataSource->read_data(0x81, &responseData, &received);
+				if(responseData[2] == 0x4E)
+				{
+					// We consider that if 3 consecutive broadcast message arrive, we don't have anymore burst
+					// There's certainly a better way but I didn't find it yet !
+					no_burst++;
+					// Ignore broadcast messages
+					//DEBUG_CMD(std::cout << "Received 0x4E - ignored" << std::endl);
+				}
+				else if(responseData[2] == 0x50 && 
+					(responseData[3] == 0x00 || responseData[3] == 0x20 || 
+					 responseData[3] == 0x40 || responseData[3] == 0x60 || 
+					 responseData[3] == 0xA0 || responseData[3] == 0xC0 || 
+					 responseData[3] == 0xE0 ))
+				{
+					ligne++;
+					if(responseData[3] == 0xE0 || responseData[3] == 0xA0)
+						nb_laps = (ligne - 2) / 2;
+					no_burst = 0;
+					//DEBUG_CMD(std::cout << "Received 0x50 - 0x[0246AE]0" << std::endl);
+					memcpy((void*)(buffer + offset), (void*)(responseData + 4), received-5);
+					offset += received-5;
+				}
+				if(offset > 4080)
+				{
+					std::cout << "Oups, this session is too big ! I'm still quite experimental :-/" << std::endl;
+					throw std::exception();
+				}
+			} while (no_burst < 3);
+			// I first thought it ends with a line beginning with C0 and ending with FF 
+			// while (responseData[2] != 0x50 || responseData[3] != 0xC0 || responseData[11] != 0xFF );
+
+			// end point on end of data
+			// offset point on current byte
+			size_t end = offset;
+			offset = 16;
+			double total_duration = 0;
+			unsigned int total_distance = 0;
+			for(int i = 0; i < nb_laps; ++i)
+			{
+				unsigned char *lap = &buffer[offset];
+				double duration = ((lap[1] % 16) + 10.0*(lap[1] / 16)) / 100 
+				                + ((lap[2] % 16) + 10.0*(lap[2] / 16))
+				             + 60*((lap[3] % 16) + 10.0*(lap[3] / 16));
+				unsigned int distance = lap[5] + 256 * lap[6] + 256 * 256 * lap[7];
+				unsigned int avg_hr = lap[8];
+				unsigned int max_hr = lap[9];
+				unsigned int max_speed = lap[10] + 256 * lap[11];
+				total_distance += distance;
+				total_duration += duration;
+				offset += 16;
+				Lap *l = new Lap(0, 0, duration, distance, max_speed, 0, max_hr, avg_hr, 0, 0, 0, 0);
+				it->second.addLap(l);
+			}
+			it->second.setDistance(total_distance);
+			it->second.setDuration(total_duration);
+			offset += 16;
+			int nb_points = 0;
+			std::cout << std::dec; 
+			std::list<Lap*> laps = it->second.getLaps();
+			std::list<Lap*>::iterator it_lap = laps.begin();
+			double cumulated_duration = 0;
+			while(offset + 3 < end)
+			{
+				// Every 42 points (or 16 lines) there is a 0xFF 0xFF finishing the line
+				if(nb_points > 0 && nb_points % 42 == 0) offset += 2;
+				if(nb_points > 0 && nb_points % 168 == 0) offset += 16;
+
+				// Decoding of basic info about the session
+				unsigned char *point = &buffer[offset];
+				// Session end with Fx for the high weight byte of speed
+				if(point[2] >= 0xF0) break;
+
+				uint32_t hr = point[0];
+				double speed = (point[1] + 256.0*point[2]) / 100;
+
+				Point *p = new Point(FieldUndef, FieldUndef, FieldUndef, speed, current_time + 5*nb_points, 0, hr, 3);
+				it->second.addPoint(p);
+
+				if(nb_points == 0)
+				{
+					(*it_lap)->setStartPoint(p);
+					cumulated_duration += (*it_lap)->getDuration();
+				}
+				while(5*nb_points >= cumulated_duration)
+				{
+					it_lap++;
+					cumulated_duration += (*it_lap)->getDuration();
+					if(it_lap != laps.end())
+					{
+						(*it_lap)->setStartPoint(p);
+						(*it_lap)->setEndPoint(p);
+					}
+				}
+				if(it_lap != laps.end())
+					(*it_lap)->setEndPoint(p);
+
+				offset += 3;
+				nb_points++;
+			}
+		}
 	}
 
 	void CWKalenji500SD::exportSession(Session *iSession)

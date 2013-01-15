@@ -26,7 +26,7 @@ namespace device
 		{
 			if(full_size == 0 && (*index) >= 3)
 				full_size = (message[1] << 8) + message[2];
-			_dataSource->read_data(&responseData, &transferred);
+			_dataSource->read_data(0x81, &responseData, &transferred);
 			memcpy(&(message[*index]), responseData, transferred);
 			*index += transferred;
 		}
@@ -38,7 +38,7 @@ namespace device
 		_dataSource->init(0x067B, 0x2303);
 		unsigned char *responseData;
 		size_t transferred;
-		_dataSource->write_data(dataDevice, lengthDataDevice);
+		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
 	}
 
@@ -46,7 +46,7 @@ namespace device
 	{
 		unsigned char *responseData;
 		size_t received;
-		_dataSource->write_data(dataList, lengthDataList);
+		_dataSource->write_data(0x03, dataList, lengthDataList);
 		readMessage(&responseData, &received);
 
 		if(responseData[0] != 0x78)
@@ -120,7 +120,7 @@ namespace device
 			}
 			data[length-1] = checksum;
 
-			_dataSource->write_data(data, length);
+			_dataSource->write_data(0x03, data, length);
 		}
 
 		// Parsing the result
@@ -156,7 +156,7 @@ namespace device
 
 				// Second response 80 retrieves info concerning the laps of the session. I assume there is always only one but maybe this is not the case ...
 				// TODO: Check if this message could be splitted as is the one for points. If same size as points, this would occur after 32 laps ...
-				_dataSource->write_data(dataMore, lengthDataMore);
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 				if(responseData[0] == 0x8A) break;
 				if(responseData[0] != 0x80)
@@ -231,7 +231,7 @@ namespace device
 			uint32_t cumulated_tenth = 0;
 			while(keep_going)
 			{
-				_dataSource->write_data(dataMore, lengthDataMore);
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 				if(responseData[0] == 0x8A) break;
 
@@ -311,7 +311,7 @@ namespace device
 			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
 			if(responseData[0] == 0x8A) break;
 
-			_dataSource->write_data(dataMore, lengthDataMore);
+			_dataSource->write_data(0x03, dataMore, lengthDataMore);
 		}
 		// Redundant with all the if / break above !
 		while(responseData[0] != 0x8A);

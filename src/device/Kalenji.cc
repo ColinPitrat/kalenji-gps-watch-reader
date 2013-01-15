@@ -19,16 +19,16 @@ namespace device
 		_dataSource->init(0x0483, 0x5740);
 		unsigned char *responseData;
 		size_t transferred;
-		_dataSource->write_data(dataDevice, lengthDataDevice);
-		_dataSource->read_data(&responseData, &transferred);
+		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
+		_dataSource->read_data(0x81, &responseData, &transferred);
 	}
 
 	void Kalenji::getSessionsList(SessionsMap *oSessions)
 	{
 		unsigned char *responseData;
 		size_t received;
-		_dataSource->write_data(dataList, lengthDataList);
-		_dataSource->read_data(&responseData, &received);
+		_dataSource->write_data(0x03, dataList, lengthDataList);
+		_dataSource->read_data(0x81, &responseData, &received);
 
 		if(responseData[0] != 0x78)
 		{
@@ -101,7 +101,7 @@ namespace device
 			}
 			data[length-1] = checksum;
 
-			_dataSource->write_data(data, length);
+			_dataSource->write_data(0x03, data, length);
 		}
 
 		// Parsing the result
@@ -114,7 +114,7 @@ namespace device
 			// First response 80 retrieves info concerning the session
 			{
 				// TODO: Use more info from this first call (some data global to the session: calories, grams, ascent, descent ...)
-				_dataSource->read_data(&responseData, &received);
+				_dataSource->read_data(0x81, &responseData, &received);
 				if(responseData[0] == 0x8A) break;
 				if(responseData[0] != 0x80)
 				{
@@ -141,8 +141,8 @@ namespace device
 			}
 
 			// Second response 80 retrieves info concerning the laps of the session. 
-			_dataSource->write_data(dataMore, lengthDataMore);
-			_dataSource->read_data(&responseData, &received);
+			_dataSource->write_data(0x03, dataMore, lengthDataMore);
+			_dataSource->read_data(0x81, &responseData, &received);
 			do
 			{
 				if(responseData[0] == 0x8A) break;
@@ -185,7 +185,7 @@ namespace device
 					uint32_t max_hr = line[20];
 					uint32_t avg_hr = line[21];
 					uint32_t calories = line[26] + (line[27] << 8);
-					// Calories for lap given by watch is the sum of alll past laps (this looks like a bug ?! this may change with later firmwares !)
+					// Calories for lap given by watch is the sum of all past laps (this looks like a bug ?! this may change with later firmwares !)
 					std::list<Lap*> laps = session->getLaps();
 					if(laps.empty())
 					{
@@ -226,8 +226,8 @@ namespace device
 					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
 					session->addLap(lap);
 				}
-				_dataSource->write_data(dataMore, lengthDataMore);
-				_dataSource->read_data(&responseData, &received);
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
+				_dataSource->read_data(0x81, &responseData, &received);
 			} while(responseData[25] == 0xaa);
 
 			// Third response 80 retrieves info concerning the points of the session. There can be many.
@@ -313,14 +313,14 @@ namespace device
 				keep_going = !session->isComplete();
 				if(keep_going)
 				{
-					_dataSource->write_data(dataMore, lengthDataMore);
-					_dataSource->read_data(&responseData, &received);
+					_dataSource->write_data(0x03, dataMore, lengthDataMore);
+					_dataSource->read_data(0x81, &responseData, &received);
 				}
 			}
 			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
 			if(responseData[0] == 0x8A) break;
 
-			_dataSource->write_data(dataMore, lengthDataMore);
+			_dataSource->write_data(0x03, dataMore, lengthDataMore);
 		}
 		// Redundant with all the if / break above !
 		while(responseData[0] != 0x8A);
@@ -394,10 +394,10 @@ namespace device
 		}
 		buffer[bufferSize-1] = checksum;
 
-		_dataSource->write_data(buffer, bufferSize);
+		_dataSource->write_data(0x03, buffer, bufferSize);
 		unsigned char *responseData;
 		size_t transferred;
-		_dataSource->read_data(&responseData, &transferred);
+		_dataSource->read_data(0x81, &responseData, &transferred);
 		if(transferred == 4 && responseData[0] == 0x95 && responseData[1] == 0 && responseData[2] == 0 && responseData[3] == 0)
 		{
 			std::cout << "No space left on your watch. Please do some cleaning and retry." << std::endl;
