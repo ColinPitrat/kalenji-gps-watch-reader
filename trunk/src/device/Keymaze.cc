@@ -35,7 +35,7 @@ namespace device
 
 	void Keymaze::init()
 	{
-		_dataSource->init(0x067B, 0x2303);
+		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);

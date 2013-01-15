@@ -44,6 +44,8 @@ namespace device
 			virtual void getSessionsDetails(SessionsMap *oSessions);
 
 			virtual std::string getName() { return "Kalenji"; };
+			virtual unsigned int getVendorId() { return 0x0483; };
+			virtual unsigned int getProductId() { return 0x5740; };
 
 		private:
 			DECLARE_DEVICE(Kalenji);

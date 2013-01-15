@@ -16,7 +16,7 @@ namespace device
 
 	void Kalenji::init()
 	{
-		_dataSource->init(0x0483, 0x5740);
+		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);

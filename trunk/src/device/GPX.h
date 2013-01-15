@@ -43,6 +43,8 @@ namespace device
 			virtual void getSessionsDetails(SessionsMap *oSessions);
 
 			virtual std::string getName() { return "GPX"; };
+			virtual unsigned int getVendorId() { return 0x0; };
+			virtual unsigned int getProductId() { return 0x0; };
 
 		private:
 			bool openDoc();

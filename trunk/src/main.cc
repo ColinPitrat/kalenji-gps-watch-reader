@@ -134,7 +134,7 @@ bool readConf()
 	configuration["trigger"] = "manual";
 	configuration["log_transactions"] = "yes";
 	configuration["source"] = "USB";
-	configuration["device"] = "Kalenji";
+	configuration["device"] = "auto";
 	configuration["filters"] = "UnreliablePoints,EmptyLaps";
 	configuration["outputs"] = "GPX,GoogleMap";
 	// Default value for log_transactions_directory is defined later (depends on directory)
@@ -298,6 +298,46 @@ int main(int argc, char *argv[])
 				log_filename << configuration["log_transactions_directory"] << "/" << "kalenji_reader_" << buffer << ".log";
 
 				dataSource = new source::Logger(dataSource, log_filename.str());
+			}
+		}
+
+		// Auto detection of device
+		if(configuration["device"] == "auto")
+		{
+			if(configuration["source"] == "USB")
+			{
+				libusb_context *myUSBContext;
+				libusb_device **listOfDevices;
+				libusb_init(&myUSBContext);
+				ssize_t nbDevices = libusb_get_device_list(myUSBContext, &listOfDevices);
+				if (nbDevices < 0)
+				{
+					std::cerr << "Error retrieving USB devices list: " << nbDevices << std::endl;
+					throw std::exception();
+				}
+				for(int i = 0; i < nbDevices; ++i)
+				{
+					libusb_device_descriptor deviceDescriptor;
+					libusb_get_device_descriptor(listOfDevices[i], &deviceDescriptor);
+					std::map<std::string, device::Device*> objects = LayerRegistry<device::Device>::getInstance()->getObjects();
+					for(std::map<std::string, device::Device*>::iterator it = objects.begin(); it != objects.end(); ++it)
+					{
+						if(it->second->getVendorId() == deviceDescriptor.idVendor && it->second->getProductId() == deviceDescriptor.idProduct)
+						{
+							configuration["device"] = it->second->getName();
+						}
+					}
+				}
+				if(configuration["device"] == "auto")
+				{
+					std::cerr << "No known USB device found." << std::endl;
+					return 1;
+				}
+			}
+			else
+			{
+				std::cerr << "Can't autodetermine device with a source different from USB." << std::endl;
+				return 1;
 			}
 		}
 

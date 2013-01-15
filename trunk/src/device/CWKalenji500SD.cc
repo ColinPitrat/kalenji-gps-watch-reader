@@ -72,7 +72,7 @@ namespace device
 
 	void CWKalenji500SD::init()
 	{
-		_dataSource->init(0x0FCF, 0x1008);
+		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
 
