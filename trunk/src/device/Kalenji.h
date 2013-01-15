@@ -22,6 +22,7 @@ namespace device
 			  Release the device. 
 			 */ 
 			// TODO: Do something in it ?!
+			// TODO: In case of error we should finish reading until getting 8Axxx so that the device is in a clean state. What if no error ?
 			virtual void release() {};
 
 			/** 
