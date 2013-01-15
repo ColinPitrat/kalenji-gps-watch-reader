@@ -49,6 +49,9 @@ namespace device
 
 			virtual std::string getName() = 0;
 
+			virtual unsigned int getVendorId() = 0;
+			virtual unsigned int getProductId() = 0;
+
 		protected:
 			source::Source *_dataSource;
 	};

@@ -37,6 +37,7 @@ class LayerRegistry
 		}
 		// TODO: What if filter is not registered ?
 		LayerType *getObject(std::string objectName) { return _objects[objectName]; };
+		std::map<std::string, LayerType*> &getObjects() { return _objects; };
 
 	private:
 		LayerRegistry() {};
