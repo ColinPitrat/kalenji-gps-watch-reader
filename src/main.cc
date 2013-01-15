@@ -265,101 +265,107 @@ void filterSessionsToImport(SessionsMap *sessions)
 
 int main(int argc, char *argv[])
 {
-	if(!parseConfAndOptions(argc, argv)) return -1;
+	try
+	{
+		if(!parseConfAndOptions(argc, argv)) return -1;
 
-	// First attempt, creating dir if it doesn't exist
-	if(!checkAndCreateDir(configuration["directory"])) return -1;
+		// First attempt, creating dir if it doesn't exist
+		if(!checkAndCreateDir(configuration["directory"])) return -1;
 
-	// TODO: Use registry for source too 
-	source::Source *dataSource;
-	if(configuration["source"] == "File")
-	{
-		dataSource = new source::File(configuration["sourcefile"]);
-	}
-	else if(configuration["source"] == "HexdumpFile")
-	{
-		dataSource = new source::HexdumpFile(configuration["sourcefile"]);
-	}
-	else
-	{
-		dataSource = new source::USB();
-		if(configuration["log_transactions"] == "yes")
+		// TODO: Use registry for source too 
+		source::Source *dataSource;
+		if(configuration["source"] == "File")
 		{
-			if(!checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
-
-			// Create log file name 
-			// TODO: Improve ?
-			char buffer[256];
-			time_t t = time(NULL);
-			strftime(buffer, 256, "%Y%m%d_%H%M%S", localtime(&t));
-			std::stringstream log_filename;
-			log_filename << configuration["log_transactions_directory"] << "/" << "kalenji_reader_" << buffer << ".log";
-
-			dataSource = new source::Logger(dataSource, log_filename.str());
+			dataSource = new source::File(configuration["sourcefile"]);
 		}
-	}
-
-	device::Device *myDevice = LayerRegistry<device::Device>::getInstance()->getObject(configuration["device"]);
-	myDevice->setSource(dataSource);
-	myDevice->init();
-	SessionsMap sessions;
-	myDevice->getSessionsList(&sessions);
-
-	// If import = ask, prompt the user for sessions to import. 
-	// TODO: could filter already imported sessions (for example import = new)
-	// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
-	filterSessionsToImport(&sessions);
-
-	myDevice->getSessionsDetails(&sessions);
-	// TODO: in case of error we should finish reading until getting 8Axxx so that the device is in a clean state
-
-	// TODO: Cleaner, modular way to include it ?
-	// Remove empty sessions, most likely they were not imported when using a file so we don't want to export them
-	for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); )
-	{
-		if(it->second.getPoints().empty())
-			sessions.erase(it++);
-		else ++it;
-	}
-
-	std::list<std::string> filters = splitString(configuration["filters"]);
-	std::list<std::string> outputs = splitString(configuration["outputs"]);
-
-	for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); ++it)
-	{
-		for(std::list<std::string>::iterator it2 = filters.begin(); it2 != filters.end(); ++it2)
+		else if(configuration["source"] == "HexdumpFile")
 		{
-			filter::Filter *filter = LayerRegistry<filter::Filter>::getInstance()->getObject(*it2);
-			if(filter)
+			dataSource = new source::HexdumpFile(configuration["sourcefile"]);
+		}
+		else
+		{
+			dataSource = new source::USB();
+			if(configuration["log_transactions"] == "yes")
 			{
-				std::cout << "  Applying filter " << *it2 << std::endl;
-				filter->filter(&(it->second));
-			}
-			else
-			{
-				std::cout << "Filter does not exist: " << *it2 << std::endl;
+				if(!checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
+
+				// Create log file name 
+				// TODO: Improve ?
+				char buffer[256];
+				time_t t = time(NULL);
+				strftime(buffer, 256, "%Y%m%d_%H%M%S", localtime(&t));
+				std::stringstream log_filename;
+				log_filename << configuration["log_transactions_directory"] << "/" << "kalenji_reader_" << buffer << ".log";
+
+				dataSource = new source::Logger(dataSource, log_filename.str());
 			}
 		}
-		for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
+
+		device::Device *myDevice = LayerRegistry<device::Device>::getInstance()->getObject(configuration["device"]);
+		myDevice->setSource(dataSource);
+		myDevice->init();
+		SessionsMap sessions;
+		myDevice->getSessionsList(&sessions);
+
+		// If import = ask, prompt the user for sessions to import. 
+		// TODO: could filter already imported sessions (for example import = new)
+		// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
+		filterSessionsToImport(&sessions);
+
+		myDevice->getSessionsDetails(&sessions);
+
+		myDevice->release();
+		delete myDevice;
+		dataSource->release();
+		delete dataSource;
+
+		// TODO: Cleaner, modular way to include it ?
+		// Remove empty sessions, most likely they were not imported when using a file so we don't want to export them
+		for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); )
 		{
-			output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
-			if(output)
+			if(it->second.getPoints().empty())
+				sessions.erase(it++);
+			else ++it;
+		}
+
+		std::list<std::string> filters = splitString(configuration["filters"]);
+		std::list<std::string> outputs = splitString(configuration["outputs"]);
+
+		for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); ++it)
+		{
+			for(std::list<std::string>::iterator it2 = filters.begin(); it2 != filters.end(); ++it2)
 			{
-				output->dump(&(it->second), configuration);
+				filter::Filter *filter = LayerRegistry<filter::Filter>::getInstance()->getObject(*it2);
+				if(filter)
+				{
+					std::cout << "  Applying filter " << *it2 << std::endl;
+					filter->filter(&(it->second));
+				}
+				else
+				{
+					std::cout << "Filter does not exist: " << *it2 << std::endl;
+				}
 			}
-			else
+			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
 			{
-				std::cout << "Output does not exist: " << *it2 << std::endl;
+				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
+				if(output)
+				{
+					output->dump(&(it->second), configuration);
+				}
+				else
+				{
+					std::cout << "Output does not exist: " << *it2 << std::endl;
+				}
 			}
 		}
+
+		sessions.clear();
+
+		return 0;
 	}
-
-	sessions.clear();
-
-	dataSource->release();
-	delete dataSource;
-	myDevice->release();
-	delete myDevice;
-
-	return 0;
+	catch(...)
+	{
+		return 1;
+	}
 }
