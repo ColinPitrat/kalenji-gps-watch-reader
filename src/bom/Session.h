@@ -44,10 +44,15 @@ class Session
 
 		void setName(std::string name)       { _name = name; };
 		void setTime(tm time)                { _time = time; _time_t = mktime(&_time); };
-		void setDistance(uint32_t distance)  { _distance = distance; };
+
 		void setDuration(double duration)    { _duration = duration; };
+		void setDistance(uint32_t distance)  { _distance = distance; };
 		void setMaxSpeed(double max_speed)   { _max_speed = max_speed; };
 		void setAvgSpeed(double avg_speed)   { _avg_speed = avg_speed; };
+		void setMaxHr(uint32_t max_hr)       { _max_hr = max_hr; };
+		void setAvgHr(uint32_t avg_hr)       { _avg_hr = avg_hr; };
+		void setCalories(uint32_t calories)  { _calories = calories; };
+		void setGrams(uint32_t grams)        { _grams = grams; };
 		void setAscent(uint32_t ascent)      { _ascent = ascent; };
 		void setDescent(uint32_t descent)    { _descent = descent; };
 
@@ -69,22 +74,28 @@ class Session
 		std::list<Point*> &getPoints() { return _points; };
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
-		SessionId getId()      { return _id; };
-		std::string getName()  { return _name; };
-		int getYear()          { return _time.tm_year + 1900; };
-		int getMonth()         { return _time.tm_mon + 1; };
-		int getDay()           { return _time.tm_mday; };
-		int getHour()          { return _time.tm_hour; };
-		int getMinutes()       { return _time.tm_min; };
-		int getSeconds()       { return _time.tm_sec; };
-		uint32_t getAscent()   { return _ascent; };
-		uint32_t getDescent()  { return _descent; };
-		double getDuration()   { return _duration; };
-		uint32_t getDistance() { return _distance; };
-		double getMaxSpeed()   { return _max_speed; };
-		double getAvgSpeed()   { return _avg_speed; };
-		uint32_t getNbLaps()   { return _nb_laps; };
-		time_t getTime()       { return _time_t; };
+		SessionId getId()          { return _id; };
+		std::string getName()      { return _name; };
+		int getYear()              { return _time.tm_year + 1900; };
+		int getMonth()             { return _time.tm_mon + 1; };
+		int getDay()               { return _time.tm_mday; };
+		int getHour()              { return _time.tm_hour; };
+		int getMinutes()           { return _time.tm_min; };
+		int getSeconds()           { return _time.tm_sec; };
+
+		double getDuration()       { return _duration; };
+		uint32_t getDistance()     { return _distance; };
+		double getMaxSpeed()       { return _max_speed; };
+		double getAvgSpeed()       { return _avg_speed; };
+		uint32_t getMaxHeartrate() { return _max_hr; };
+		uint32_t getAvgHeartrate() { return _avg_hr; };
+		uint32_t getCalories()     { return _calories; };
+		uint32_t getGrams()        { return _grams; };
+		uint32_t getAscent()       { return _ascent; };
+		uint32_t getDescent()      { return _descent; };
+
+		uint32_t getNbLaps()       { return _nb_laps; };
+		time_t getTime()           { return _time_t; };
 
 	private:
 		SessionId _id;
@@ -93,12 +104,18 @@ class Session
 		tm _time;
 		time_t _time_t;
 		uint32_t _nb_points;
+
 		double _duration;
-		uint32_t _ascent;
-		uint32_t _descent;
 		uint32_t _distance;
 		double _max_speed;
 		double _avg_speed;
+		uint32_t _max_hr;
+		uint32_t _avg_hr;
+		uint32_t _calories;
+		uint32_t _grams;
+		uint32_t _ascent;
+		uint32_t _descent;
+
 		uint32_t _nb_laps;
 		std::list<Lap*> _laps;
 		std::list<Point*> _points;

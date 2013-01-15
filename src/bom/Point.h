@@ -3,35 +3,36 @@
 
 #include <sstream>
 #include <iostream>
+#include "../bom/Field.h"
 
 class Point
 {
 	public:
 		// TODO: Improve the way fiability is handled (0 / 3 doesn't make sense)
-		Point() : _lat(0), _lon(0), _alt(0), _speed(0), _time(0), _tenth(0), _bpm(0), _fiability(3)
-		{ _important = false; };
+		Point() : _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _time(0), _tenth(0), _bpm(FieldUndef), _fiability(3), _important(false)
+		{ };
 
-		Point(double lat, double lon, int16_t alt, double speed, time_t time, uint32_t tenth, uint16_t bpm, uint16_t fiability) 
-			 : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability)
-		{ _important = false; };
+		Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t tenth, Field<uint16_t> bpm, uint16_t fiability) 
+			 : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability), _important(false)
+		{ };
 
-		void setLatitude(double lat)     { _lat = lat; };
-		void setLongitude(double lon)    { _lon = lon; };
-		void setAltitude(int16_t alt)    { _alt = alt; };
-		void setSpeed(double speed)      { _speed = speed; };
-		void setHeartRate(uint16_t bpm)  { _bpm = bpm; };
-		void setFiability(uint16_t f)    { _fiability = f; };
-		void setImportant(bool i)        { _important = i; };
-		void setTime(time_t time)        { _time = time; };
+		void setLatitude(Field<double> lat)    { _lat = lat; };
+		void setLongitude(Field<double> lon)   { _lon = lon; };
+		void setAltitude(Field<int16_t> alt)   { _alt = alt; };
+		void setSpeed(Field<double> speed)     { _speed = speed; };
+		void setHeartRate(Field<uint16_t> bpm) { _bpm = bpm; };
+		void setFiability(uint16_t f)          { _fiability = f; };
+		void setImportant(bool i)              { _important = i; };
+		void setTime(time_t time)              { _time = time; };
 
-		double getLatitude()    { return _lat; };
-		double getLongitude()   { return _lon; };
-		int16_t getAltitude()   { return _alt; };
-		double getSpeed()       { return _speed; };
-		uint16_t getHeartRate() { return _bpm; };
-		uint16_t getFiability() { return _fiability; };
-		bool isImportant()      { return _important; };
-		time_t getTime()        { return _time; };
+		Field<double> getLatitude()    { return _lat; };
+		Field<double> getLongitude()   { return _lon; };
+		Field<int16_t> getAltitude()   { return _alt; };
+		Field<double> getSpeed()       { return _speed; };
+		Field<uint16_t> getHeartRate() { return _bpm; };
+		uint16_t getFiability()        { return _fiability; };
+		bool isImportant()             { return _important; };
+		time_t getTime()               { return _time; };
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
 		std::string getTimeAsString(bool human_readable=false)
 		{  
@@ -51,15 +52,15 @@ class Point
 		};
 
 	private:
-		double   _lat;
-		double   _lon;
-		int16_t  _alt;
-		double   _speed;
 		time_t   _time;
 		uint32_t _tenth;
-		uint16_t _bpm;
+		Field<double>   _lat;
+		Field<double>   _lon;
+		Field<int16_t>  _alt;
+		Field<double>   _speed;
+		Field<uint16_t> _bpm;
 		uint16_t _fiability;
-		uint16_t _important;
+		bool _important;
 };
 
 #endif
