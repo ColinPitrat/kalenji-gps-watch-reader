@@ -22,6 +22,8 @@ class Field
 			_defined = false;
 		};
 
+		bool isDefined() { return _defined; };
+
 		// Implicit conversion
 		operator T () { return _value; };
 
