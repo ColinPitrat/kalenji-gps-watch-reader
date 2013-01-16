@@ -25,15 +25,21 @@ namespace output
 		mystream << "  <Activity StartTime=\"" << session->getBeginTime() << "\" />" << std::endl;
 		mystream << "   <Duration TotalSeconds=\"" << session->getDuration() << "\" />" << std::endl;
 		mystream << "   <Distance TotalMeters=\"" << session->getDistance() << "\" />" << std::endl;
-		//mystream << "   <HeartRate AverageBPM=\"" << session->getAvgBPM() << "\" MaximumBPM=\"" << session->getMaxBPM() << "\" />" << std::endl;
+		if(session->getAvgHeartrate().isDefined() || session->getMaxHeartrate().isDefined())
+		{
+			mystream << "   <HeartRate ";
+			mystream << session->getAvgHeartrate().toStream("AverageBPM=\"", "\" ");
+			mystream << session->getMaxHeartrate().toStream("MaximumBPM=\"", "\" "); 
+			mystream << "/>" << std::endl;
+		}
 		mystream << "   <Laps>" << std::endl;
 		std::list<Lap*> laps = session->getLaps();
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			mystream << "    <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\" DurationSeconds=\"" << (*it)->getDuration() << "\" >" << std::endl;
 			mystream << "     <Distance TotalMeters=\"" << (*it)->getDistance() << "\" />" << std::endl;
-			mystream << "     <HeartRate AverageBPM=\"" << (*it)->getAvgHeartrate() << "\" />" << std::endl;
-			mystream << "     <Calories TotalCal=\"" << (*it)->getCalories() << "\" />" << std::endl;
+			mystream << (*it)->getAvgHeartrate().toStream("     <HeartRate AverageBPM=\"", "\" />");
+			mystream << (*it)->getCalories().toStream("     <Calories TotalCal=\"", "\" />");
 			mystream << "    </Lap>" << std::endl;
 		}
 		mystream << "   </Laps>" << std::endl;
