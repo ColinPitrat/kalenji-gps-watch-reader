@@ -39,12 +39,13 @@ namespace output
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			// TODO: More info on point ? (cadence, hr when available)
-			mystream << "      <trkpt lat=\"" << (*it)->getLatitude() << "\" lon=\"" << (*it)->getLongitude() << "\">" << std::endl;
-			mystream << "        <ele>" << (*it)->getAltitude() << "</ele>" << std::endl;
+			mystream << "      <trkpt ";
+			mystream << (*it)->getLatitude().toStream("lat=\"", "\" ");
+			mystream << (*it)->getLongitude().toStream("lon=\"", "\" ");
+			mystream << ">" << std::endl;
+			mystream << (*it)->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
 			mystream << "        <time>" << (*it)->getTimeAsString() << "</time>" << std::endl;
-			mystream << "        <extensions>" << std::endl;
-			mystream << "          <gpxdata:hr>" << (*it)->getHeartRate() << "</gpxdata:hr>" << std::endl;
-			mystream << "        </extensions>" << std::endl;
+			mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxdata:hr>", "</gpxdata:hr>\n        </extensions>");
 			mystream << "      </trkpt>" << std::endl;
 		}
 		mystream << "    </trkseg>" << std::endl;
@@ -73,12 +74,12 @@ namespace output
 				mystream << "      <gpxdata:endPoint lat=\"" << (*it)->getEndPoint()->getLatitude() << "\" lon=\"" << (*it)->getEndPoint()->getLongitude() << "\" />" << std::endl;
 				mystream << "      <gpxdata:startTime>" << (*it)->getStartPoint()->getTimeAsString() << "</gpxdata:startTime>" << std::endl;
 				mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
-				mystream << "      <gpxdata:calories>" << (*it)->getCalories() << "</gpxdata:calories>" << std::endl;
+				mystream << (*it)->getCalories().toStream("      <gpxdata:calories>", "</gpxdata:calories>\n");
 				mystream << "      <gpxdata:distance>" << (*it)->getDistance() << "</gpxdata:distance>" << std::endl;
 				mystream << "      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">" << (*it)->getAvgSpeed() << "</gpxdata:summary>" << std::endl;
 				mystream << "      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">" << (*it)->getMaxSpeed() << "</gpxdata:summary>" << std::endl;
-				mystream << "      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">" << (*it)->getAvgHeartrate() << "</gpxdata:summary>" << std::endl;
-				mystream << "      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">" << (*it)->getMaxHeartrate() << "</gpxdata:summary>" << std::endl;
+				mystream << (*it)->getAvgHeartrate().toStream("      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">", "</gpxdata:summary>\n");
+				mystream << (*it)->getMaxHeartrate().toStream("      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">", "</gpxdata:summary>\n");
 				// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
 				// This is the correct syntax, but pytrainer doesn't support it
 				//mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;
