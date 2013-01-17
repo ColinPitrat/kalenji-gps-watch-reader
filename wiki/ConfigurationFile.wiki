@@ -68,6 +68,7 @@ Available filters are:
 
 ==Outputs==
 *Name:* outputs
+
 *Default value:* GPX,GoogleMap
 
 List of formats to which data should be exported.
