@@ -3,7 +3,8 @@
 
 class TFieldUndef 
 {
-	TFieldUndef() {};
+	public:
+		TFieldUndef() {};
 };
 
 static const TFieldUndef FieldUndef;
