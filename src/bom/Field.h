@@ -1,7 +1,10 @@
 #ifndef _BOM_FIELD_H
 #define _BOM_FIELD_H
 
-class TFieldUndef {};
+class TFieldUndef 
+{
+	TFieldUndef() {};
+};
 
 static const TFieldUndef FieldUndef;
 
