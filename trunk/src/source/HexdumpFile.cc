@@ -20,10 +20,14 @@ namespace source
 				{
 					std::string thisLine;
 					getline(inputfile, line);
-					std::stringstream iss(line);
-					iss >> std::hex;
-					std::copy(std::istream_iterator<unsigned int>(iss), std::istream_iterator<unsigned int>(), std::back_inserter(thisLine));
-					_inputStream.push_back(thisLine);
+					if(line.substr(0, 4) == " <= ")
+					{
+						line = line.substr(4);
+						std::stringstream iss(line);
+						iss >> std::hex;
+						std::copy(std::istream_iterator<unsigned int>(iss), std::istream_iterator<unsigned int>(), std::back_inserter(thisLine));
+						_inputStream.push_back(thisLine);
+					}
 				}
 				inputfile.close();
 			}

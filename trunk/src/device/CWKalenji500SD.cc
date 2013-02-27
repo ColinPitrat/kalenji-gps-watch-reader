@@ -1,10 +1,10 @@
-#include "CWKalenji500SD.h"
+#INCLUDE "CWKalenji500SD.h"
 #include "../Common.h"
 #include <cstring>
 #include <iomanip>
 
 #ifdef DEBUG
-#define DEBUG_CMD(x) ;
+#define DEBUG_CMD(x) x;
 #else
 #define DEBUG_CMD(x) ;
 #endif
@@ -64,10 +64,25 @@ namespace device
 		do
 		{
 			_dataSource->read_data(0x81, oData, oLength);
+			DEBUG_CMD(std::cout << "Payload: ");
 			DEBUG_CMD(dump(*oData, *oLength));
-		} while( ((*oData)[2] != iMessage && iMessage != 0) || ((*oData)[4] != iMessageAnswered && iMessageAnswered != 0) );
+			size_t payloadLength;
+			do
+			{
+				payloadLength = (int)(*oData)[1] + 4;
+				DEBUG_CMD(dump(*oData, payloadLength));
+				if( ((*oData)[2] == iMessage || iMessage == 0) && ((*oData)[4] == iMessageAnswered || iMessageAnswered == 0) )
+				{
+					return (*oData)[5] == iError;
+				}
+				*oLength -= payloadLength;
+				*oData += payloadLength;
+			}
+			while(*oLength > payloadLength);
+			DEBUG_CMD(std::cout << "Next one" << std::endl);
+		} while( true );
 
-		return (*oData)[5] == iError;
+		return false;
 	}
 
 	void CWKalenji500SD::init()
