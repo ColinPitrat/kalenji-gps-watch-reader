@@ -1,4 +1,4 @@
-#INCLUDE "CWKalenji500SD.h"
+#include "CWKalenji500SD.h"
 #include "../Common.h"
 #include <cstring>
 #include <iomanip>
@@ -332,7 +332,10 @@ namespace device
 		receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
 		receive(0x81, &responseData, &received, 0x50, 0x43, 0x3B);
 		receive(0x81, &responseData, &received, 0x50, 0x44, 0x89);
-		receive(0x81, &responseData, &received, 0x50, 0x21, 0x4A);
+        // Issue 5: it appears that the 21 can be 23. Maybe other value sometime ?
+        // Let's just be happy with a third 50 !
+		//receive(0x81, &responseData, &received, 0x50, 0x21, 0x4A);
+		receive(0x81, &responseData, &received, 0x50);
 		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 		{
 			std::cout << "Retrieve session " << (int) it->first.back() << std::endl;
