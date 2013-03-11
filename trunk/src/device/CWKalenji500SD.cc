@@ -78,8 +78,7 @@ namespace device
 				*oLength -= payloadLength;
 				*oData += payloadLength;
 			}
-			while(*oLength > payloadLength);
-			DEBUG_CMD(std::cout << "Next one" << std::endl);
+			while(*oLength > 4 && *oLength >= (*oData)[1] + 4);
 		} while( true );
 
 		return false;
@@ -284,6 +283,7 @@ namespace device
 		do
 		{
 			_dataSource->read_data(0x81, &responseData, &received);
+			DEBUG_CMD(dump(responseData, received));
 			if(responseData[2] == 0x4E)
 			{
 				// Ignore broadcast messages
@@ -299,6 +299,7 @@ namespace device
 		int nb_sessions = (offset - 16) / 24;
 		for(int i = 0; i < nb_sessions; ++i)
 		{
+			DEBUG_CMD(std::cout << "Decode summary of session " << i << std::endl);
 			// Decoding of basic info about the session
 			unsigned char *line = &buffer[24*i+16];
 			SessionId id = SessionId(line, line+1);
@@ -332,15 +333,15 @@ namespace device
 		receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
 		receive(0x81, &responseData, &received, 0x50, 0x43, 0x3B);
 		receive(0x81, &responseData, &received, 0x50, 0x44, 0x89);
-        // Issue 5: it appears that the 21 can be 23. Maybe other value sometime ?
-        // Let's just be happy with a third 50 !
+		// Issue 5: it appears that the 21 can be 23. Maybe other value sometime ?
+		// Let's just be happy with a third 50 !
 		//receive(0x81, &responseData, &received, 0x50, 0x21, 0x4A);
 		receive(0x81, &responseData, &received, 0x50);
 		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 		{
-			std::cout << "Retrieve session " << (int) it->first.back() << std::endl;
+			std::cout << "Retrieve session " << (int) it->second.getId().back() << std::endl;
 			time_t current_time = it->second.getTime();
-			dataAckData5[6] = it->first.back();
+			dataAckData5[6] = it->second.getId().back();
 			dataAckData5[12] = 0xAF ^ dataAckData5[6];
 			_dataSource->write_data(0x01, dataAckData5, lengthAckData);
 			receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
@@ -348,12 +349,13 @@ namespace device
 			unsigned char buffer[4096];
 			size_t offset = 0;
 			int ligne = 0;
-			int nb_laps = 0;
+			int nb_laps = it->second.getNbLaps();
 			int no_burst = 0;
 			do
 			{
-				//DEBUG_CMD(std::cout << "Retrieving data" << std::endl);
+				DEBUG_CMD(std::cout << "Retrieving data" << std::endl);
 				_dataSource->read_data(0x81, &responseData, &received);
+				DEBUG_CMD(dump(responseData, received));
 				if(responseData[2] == 0x4E)
 				{
 					// We consider that if 3 consecutive broadcast message arrive, we don't have anymore burst
@@ -369,8 +371,10 @@ namespace device
 					 responseData[3] == 0xE0 ))
 				{
 					ligne++;
+					/*
 					if(responseData[3] == 0xE0 || responseData[3] == 0xA0)
 						nb_laps = (ligne - 2) / 2;
+					*/
 					no_burst = 0;
 					//DEBUG_CMD(std::cout << "Received 0x50 - 0x[0246AE]0" << std::endl);
 					memcpy((void*)(buffer + offset), (void*)(responseData + 4), received-5);
@@ -393,6 +397,7 @@ namespace device
 			unsigned int total_distance = 0;
 			for(int i = 0; i < nb_laps; ++i)
 			{
+				DEBUG_CMD(std::cout << "Lap " << i << std::endl);
 				unsigned char *lap = &buffer[offset];
 				double duration = ((lap[1] % 16) + 10.0*(lap[1] / 16)) / 100 
 				                + ((lap[2] % 16) + 10.0*(lap[2] / 16))
