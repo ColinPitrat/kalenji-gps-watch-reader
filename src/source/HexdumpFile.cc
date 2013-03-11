@@ -20,7 +20,7 @@ namespace source
 				{
 					std::string thisLine;
 					getline(inputfile, line);
-					if(line.substr(0, 4) == " <= ")
+					if(line.substr(0, 4) == " <= " && line.size() > 4)
 					{
 						line = line.substr(4);
 						std::stringstream iss(line);
