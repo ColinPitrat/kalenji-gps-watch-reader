@@ -22,7 +22,7 @@ namespace output
 		mystream << "<FitnessWorkbook xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://www.zonefivesoftware.com/xmlschemas/FitnessLogbook/v2\">" << std::endl;
 		mystream << " <AthleteLog>" << std::endl;
 		mystream << "  <Athlete />" << std::endl;
-		mystream << "  <Activity StartTime=\"" << session->getBeginTime() << "\" />" << std::endl;
+		mystream << "  <Activity StartTime=\"" << session->getBeginTime() << "\">" << std::endl;
 		mystream << "   <Duration TotalSeconds=\"" << session->getDuration() << "\" />" << std::endl;
 		mystream << "   <Distance TotalMeters=\"" << session->getDistance() << "\" />" << std::endl;
 		if(session->getAvgHeartrate().isDefined() || session->getMaxHeartrate().isDefined())
