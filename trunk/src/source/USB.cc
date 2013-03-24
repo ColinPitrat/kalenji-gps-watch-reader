@@ -7,7 +7,6 @@ namespace source
 {
 	void USB::init(uint32_t vendorId, uint32_t productId)
 	{
-		libusb_context *myUSBContext;
 		libusb_device **listOfDevices;
 		bool found = false;
 		int rc = 0;
@@ -15,8 +14,8 @@ namespace source
 		_kernelDriver1 = false;
 		_hasInterface1 = false;
 
-		libusb_init(&myUSBContext);
-		ssize_t nbDevices = libusb_get_device_list(myUSBContext, &listOfDevices);
+		libusb_init(&_USBContext);
+		ssize_t nbDevices = libusb_get_device_list(_USBContext, &listOfDevices);
 		if (nbDevices < 0)
 		{
 			std::cerr << "Error retrieving USB devices list: " << nbDevices << std::endl;
@@ -102,7 +101,7 @@ namespace source
 
 			libusb_close(_device);
 		}
-		libusb_exit(NULL); 
+		libusb_exit(_USBContext);
 	}
 
 	bool USB::checkUSBOperation(int rc)
