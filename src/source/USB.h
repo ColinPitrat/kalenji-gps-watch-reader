@@ -61,6 +61,7 @@ namespace source
 			bool checkUSBOperation(int rc);
 
 		protected:
+			libusb_context *_USBContext;
 			libusb_device_handle *_device;
 
 			uint32_t _timeout;
