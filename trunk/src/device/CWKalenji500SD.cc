@@ -63,6 +63,7 @@ namespace device
 	{
 		do
 		{
+			// TODO: add checks of read_data returned value to all calls in this file
 			_dataSource->read_data(0x81, oData, oLength);
 			DEBUG_CMD(std::cout << "Payload: ");
 			DEBUG_CMD(dump(*oData, *oLength));
@@ -255,6 +256,7 @@ namespace device
 		}
 		for(int i = 0; i < 2; ++i)
 		{
+			DEBUG_CMD(std::cout << "Ack loop " << i << std::endl);
 			if(receive(0x81, &responseData, &received, 0x40, 0x01, 0x02))
 			{
 				DEBUG_CMD(std::cout << "Ack 02 for acked data 6" << std::endl);
@@ -264,6 +266,7 @@ namespace device
 				std::cout << "Ack received but with unexpected message code. I don't know what this means." << std::endl;
 			}
 		}
+		DEBUG_CMD(std::cout << "Final reset" << std::endl);
 		_dataSource->write_data(0x01, dataReset, lengthReset);
 		_dataSource->read_data(0x81, &responseData, &received);
 		if(responseData[2] != 0x6F || responseData[3] != 0x20)
@@ -271,6 +274,7 @@ namespace device
 			std::cout << "Unexpected answer to final ack:" << std::endl;
 			dump(responseData, received);
 		}
+		DEBUG_CMD(std::cout << "CWKalenji500SD released" << std::endl);
 	}
 
 	void CWKalenji500SD::getSessionsList(SessionsMap *oSessions)
@@ -420,8 +424,10 @@ namespace device
 			std::list<Lap*> laps = it->second.getLaps();
 			std::list<Lap*>::iterator it_lap = laps.begin();
 			double cumulated_duration = 0;
+			DEBUG_CMD(std::cout << "Points ..." << std::endl);
 			while(offset + 3 < end)
 			{
+				DEBUG_CMD(std::cout << ".");
 				// Every 42 points (or 16 lines) there is a 0xFF 0xFF finishing the line
 				if(nb_points > 0 && nb_points % 42 == 0) offset += 2;
 				if(nb_points > 0 && nb_points % 168 == 0) offset += 16;
@@ -458,6 +464,7 @@ namespace device
 				offset += 3;
 				nb_points++;
 			}
+			DEBUG_CMD(std::cout << std::endl << "End of points ..." << std::endl);
 		}
 	}
 
