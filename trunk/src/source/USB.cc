@@ -1,7 +1,9 @@
 #include "USB.h"
+#include "../Utils.h"
 
 #include <iostream>
 #include <cerrno>
+#include <stdexcept>
 
 namespace source
 {
@@ -18,8 +20,7 @@ namespace source
 		ssize_t nbDevices = libusb_get_device_list(_USBContext, &listOfDevices);
 		if (nbDevices < 0)
 		{
-			std::cerr << "Error retrieving USB devices list: " << nbDevices << std::endl;
-			// TODO: Throw an exception
+			StreamExcept::sthrow() << "can't retrieve USB devices list: " << nbDevices;
 		}
 		for(int i = 0; i < nbDevices; ++i)
 		{
@@ -27,7 +28,8 @@ namespace source
 			libusb_get_device_descriptor(listOfDevices[i], &deviceDescriptor);
 			if(deviceDescriptor.idVendor == vendorId && deviceDescriptor.idProduct == productId)
 			{
-				libusb_open(listOfDevices[i], &_device);
+				if (libusb_open(listOfDevices[i], &_device) != 0)
+					throw std::runtime_error("can't access usb device");
 				found = true;
 			}
 		}
@@ -67,11 +69,9 @@ namespace source
 		}
 
 		libusb_free_device_list(listOfDevices, 1);
-		// TODO: Throw an exception if found == false
 		if(!found)
 		{
-			std::cerr << "USB device not found !" << std::endl;
-			throw std::exception();
+			throw std::runtime_error("USB device not found !");
 		}
 	}
 
