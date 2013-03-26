@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <sys/stat.h>
 #include <iterator>
+#include <iostream>
 #include <unistd.h>
 
 #include "source/Logger.h"
@@ -403,6 +404,11 @@ int main(int argc, char *argv[])
 		sessions.clear();
 
 		return 0;
+	}
+	catch(std::exception& e)
+	{
+		std::cerr << "error " << e.what() << std::endl;
+		return 1;
 	}
 	catch(...)
 	{
