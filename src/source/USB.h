@@ -58,7 +58,9 @@ namespace source
 			virtual std::string getName() { return "USB"; };
 
 		protected:
+			const char *getUSBErrorMessage(int rc);
 			bool checkUSBOperation(int rc);
+			void checkAndThrowUSBOperation(int rc);
 
 		protected:
 			libusb_context *_USBContext;

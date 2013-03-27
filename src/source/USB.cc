@@ -104,36 +104,41 @@ namespace source
 		libusb_exit(_USBContext);
 	}
 
+	const char *USB::getUSBErrorMessage(int rc)
+	{
+		switch(rc)
+		{
+			case LIBUSB_ERROR_IO:
+				return " LIBUSB_ERROR_IO";
+			case LIBUSB_ERROR_ACCESS:
+				return " LIBUSB_ERROR_ACCESS";
+			case LIBUSB_ERROR_NO_DEVICE:
+				return " LIBUSB_ERROR_NO_DEVICE";
+			case LIBUSB_ERROR_TIMEOUT:
+				return " LIBUSB_ERROR_TIMEOUT";
+			case LIBUSB_ERROR_BUSY:
+				return " LIBUSB_ERROR_BUSY";
+			default:
+				return " Unknown error";
+		}
+	}
+
 	bool USB::checkUSBOperation(int rc)
 	{
 		if(rc < 0)
 		{
-			std::cerr << "Transmission error: " << rc << " - " << errno;
-			switch(rc)
-			{
-				case LIBUSB_ERROR_IO:
-					std::cerr << " LIBUSB_ERROR_IO";
-					break;
-				case LIBUSB_ERROR_ACCESS:
-					std::cerr << " LIBUSB_ERROR_ACCESS";
-					break;
-				case LIBUSB_ERROR_NO_DEVICE:
-					std::cerr << " LIBUSB_ERROR_NO_DEVICE";
-					break;
-				case LIBUSB_ERROR_TIMEOUT:
-					std::cerr << " LIBUSB_ERROR_TIMEOUT";
-					break;
-				case LIBUSB_ERROR_BUSY:
-					std::cerr << " LIBUSB_ERROR_BUSY";
-					break;
-				default:
-					std::cerr << " Unknown error";
-					break;
-			}
-			std::cerr << std::endl;
+			std::cerr << "Transmission error: " << rc << " - " << errno
+				<< getUSBErrorMessage(rc) << std::endl;
 			return false;
 		}
 		return true;
+	}
+
+	void USB::checkAndThrowUSBOperation(int rc)
+	{
+		if(rc < 0)
+			StreamExcept::sthrow() << "on USB operation code " << rc << " - " << errno
+				<< getUSBErrorMessage(rc);
 	}
 
 	bool USB::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
@@ -142,7 +147,7 @@ namespace source
 		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x81*/, _responseData, RESPONSE_BUFFER_SIZE, &transferred, _timeout);
 		*oLength = (size_t) transferred;
 		*oData = _responseData;
-		checkUSBOperation(rc);
+		checkAndThrowUSBOperation(rc);
 		return true;
 	}
 
@@ -150,19 +155,14 @@ namespace source
 	{
 		int transferred;
 		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x03*/, iData, iLength, &transferred, _timeout);
-		bool ok = checkUSBOperation(rc);
+		checkAndThrowUSBOperation(rc);
 		if(transferred != iLength)
-		{
-			std::cerr << "Error: transferred (" << transferred << ") != length (" << iLength << ")" << std::endl;
-			ok = false;
-		}
-		// TODO: Throw an exception if ok == false
+			StreamExcept::sthrow() << "on USB write transferred (" << transferred << ") != length (" << iLength << ")";
 	}
 
 	void USB::control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength)
 	{
 		int rc = libusb_control_transfer(_device, iRequestType, iRequest, iValue, iIndex, iData, iLength, _timeout);
-		bool ok = checkUSBOperation(rc);
-		// TODO: Throw an exception if ok == false
+		checkAndThrowUSBOperation(rc);
 	}
 }
