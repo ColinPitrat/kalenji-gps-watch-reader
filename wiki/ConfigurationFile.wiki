@@ -26,9 +26,9 @@ directory=/home/toto/Running
 ==Default import behavior==
 *Name:* import
 
-*Default value:* all
+*Default value:* new
 
-You can decide whether you prefer to always:
+You can decide whether you prefer to:
   * be prompted for sessions to import each time you run kalenji_import
 {{{
 import=ask
@@ -37,8 +37,10 @@ import=ask
 {{{
 import=all
 }}}
-
-The later is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
+  * import only sessions for which not all output formats requested already exist
+{{{
+import=new
+}}}
 
 ==Default trigger type==
 *Name:* trigger
