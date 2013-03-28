@@ -6,11 +6,12 @@
 
 namespace output
 {
-	class KML : public Output
+	class KML : public FileOutput
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
 			virtual std::string getName() { return "KML"; };
+			virtual std::string getExt() { return "kml"; }
 
 		private:
 			DECLARE_OUTPUT(KML);

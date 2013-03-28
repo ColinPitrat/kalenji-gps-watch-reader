@@ -6,11 +6,12 @@
 
 namespace output
 {
-	class TCX : public Output
+	class TCX : public FileOutput
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
 			virtual std::string getName() { return "TCX"; };
+			virtual std::string getExt() { return "tcx"; }
 
 		private:
 			DECLARE_OUTPUT(TCX);
