@@ -6,11 +6,12 @@
 
 namespace output
 {
-	class GPX : public Output
+	class GPX : public FileOutput
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
 			virtual std::string getName() { return "GPX"; };
+			virtual std::string getExt() { return "gpx"; };
 
 		private:
 			DECLARE_OUTPUT(GPX);

@@ -6,11 +6,12 @@
 
 namespace output
 {
-	class GoogleStaticMap : public Output
+	class GoogleStaticMap : public FileOutput
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
 			virtual std::string getName() { return "GoogleStaticMap"; };
+			virtual std::string getExt() { return "lnk"; }
 
 		private:
 			DECLARE_OUTPUT(GoogleStaticMap);

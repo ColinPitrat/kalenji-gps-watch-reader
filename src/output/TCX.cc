@@ -1,4 +1,4 @@
-#include "tcx.h"
+#include "TCX.h"
 #include <sstream>
 #include <iostream>
 #include <iomanip>
@@ -8,15 +8,9 @@ namespace output
 {
 	REGISTER_OUTPUT(TCX);
 
-	void TCX::dump(Session *session, std::map<std::string, std::string> &configuration)
+	void TCX::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
 	{
 		int point_id = 0;
-		std::stringstream filename;
-		filename << configuration["directory"] << "/"; 
-		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
-		filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".tcx";
-		std::cout << "Creating " << filename.str() << std::endl;
-		std::ofstream mystream(filename.str().c_str());
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(12);
 		mystream << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
@@ -99,6 +93,5 @@ namespace output
 
 		// TODO: author
 		mystream << "</TrainingCenterDatabase>" << std::endl;
-		mystream.close();
 	}
 }

@@ -131,7 +131,7 @@ bool readConf()
 {
 	// Default conf
 	configuration["directory"] = "/tmp/kalenji_import";
-	configuration["import"] = "all";
+	configuration["import"] = "new";
 	configuration["trigger"] = "manual";
 	configuration["log_transactions"] = "yes";
 	configuration["source"] = "USB";
@@ -211,7 +211,7 @@ bool parseConfAndOptions(int argc, char** argv)
 	return true;
 }
 
-void filterSessionsToImport(SessionsMap *sessions)
+void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outputs)
 {
 	std::string to_import_string;
 	if(configuration["import"] == "ask")
@@ -233,6 +233,26 @@ void filterSessionsToImport(SessionsMap *sessions)
 		std::copy(std::istream_iterator<uint32_t>(std::cin), std::istream_iterator<uint32_t>(), std::back_inserter(to_import));
 */
 		getline(std::cin, to_import_string);
+	}
+	else if(configuration["import"] == "new")
+	{
+		std::ostringstream to_import;
+		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
+		{
+			bool import = false;
+			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
+			{
+				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
+				if(output && !output->exists(&(it->second), configuration)) {
+					to_import << " " << it->second.getNum();
+					import = true;
+					break;
+				}
+			}
+			if(!import)
+				std::cout << " session " << it->second.getNum() << " already imported" << std::endl;
+		}
+		to_import_string = to_import.str();
 	}
 	else
 	{
@@ -349,9 +369,9 @@ int main(int argc, char *argv[])
 		myDevice->getSessionsList(&sessions);
 
 		// If import = ask, prompt the user for sessions to import. 
-		// TODO: could filter already imported sessions (for example import = new)
 		// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
-		filterSessionsToImport(&sessions);
+		std::list<std::string> outputs = splitString(configuration["outputs"]);
+		filterSessionsToImport(&sessions, outputs);
 
 		myDevice->getSessionsDetails(&sessions);
 
@@ -370,7 +390,6 @@ int main(int argc, char *argv[])
 		}
 
 		std::list<std::string> filters = splitString(configuration["filters"]);
-		std::list<std::string> outputs = splitString(configuration["outputs"]);
 
 		for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); ++it)
 		{

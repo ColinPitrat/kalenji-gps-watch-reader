@@ -6,11 +6,12 @@
 
 namespace output
 {
-	class Fitlog : public Output
+	class Fitlog : public FileOutput
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
 			virtual std::string getName() { return "Fitlog"; };
+			virtual std::string getExt() { return "fit"; };
 
 		private:
 			DECLARE_OUTPUT(Fitlog);

@@ -37,6 +37,7 @@ class Field
 			if (_defined) 
 			{
 				std::ostringstream oss;
+				oss.precision(8);
 				oss << before << _value << after;
 				return oss.str(); 
 			}

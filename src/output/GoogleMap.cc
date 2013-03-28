@@ -9,14 +9,8 @@ namespace output
 {
 	REGISTER_OUTPUT(GoogleMap);
 
-	void GoogleMap::dump(Session *session, std::map<std::string, std::string> &configuration) {
-		std::stringstream filename;
-		filename << configuration["directory"] << "/"; 
-		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
-		filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".html";
-		std::cout << "Creating " << filename.str() << std::endl;
-
-		std::ofstream mystream(filename.str().c_str());
+	void GoogleMap::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
+	{
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(8);
 		mystream << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" << std::endl;
@@ -167,6 +161,5 @@ namespace output
 		mystream << "<div id=\"map\" style=\"width: 100%; height: 600px; top: 0px; left: 0px\"></div>" << std::endl;
 		mystream << "</body>" << std::endl;
 		mystream << "</html>" << std::endl;
-
 	}
 }
