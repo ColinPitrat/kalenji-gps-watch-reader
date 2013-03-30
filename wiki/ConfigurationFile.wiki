@@ -77,6 +77,7 @@ List of formats to which data should be exported.
 Outputs can be:
   * *GPX*: GPX format, an XML file conforming to GPX and GPXDATA standards
   * *Fitlog*: Fitlog format, an XML file conforming to Fitlog standard used, among others, by SportTracks
+ * *TCX*: TCX format, an XML file conforming to the format introduced by Garmin training center.
   * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
   * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
   * *KML*: a KML file readable, among others, by GoogleEarth
