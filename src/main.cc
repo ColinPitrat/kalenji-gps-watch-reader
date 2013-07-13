@@ -226,7 +226,7 @@ void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outpu
 			std::cout << std::setw(10) << (double)it->second.getDistance() / 1000 << " km ";
 			std::cout << std::setw(15) << durationAsString(it->second.getDuration()) << std::endl;
 		}
-		std::cout << "List of sessions to import (space separated - 'all' to import everything): " << std::endl;
+		std::cout << "List of sessions to import (space separated - 'all' to import everything - 'new' to import only new sessions): " << std::endl;
 
 /*
 		// It's a pity, but this doesn't work (only stops after a wrong entry)
@@ -234,7 +234,11 @@ void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outpu
 */
 		getline(std::cin, to_import_string);
 	}
-	else if(configuration["import"] == "new")
+	else
+	{
+		to_import_string = configuration["import"];
+	}
+	if(to_import_string == "new")
 	{
 		std::ostringstream to_import;
 		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
@@ -243,7 +247,8 @@ void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outpu
 			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
 			{
 				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
-				if(output && !output->exists(&(it->second), configuration)) {
+				if(output && !output->exists(&(it->second), configuration)) 
+				{
 					to_import << " " << it->second.getNum();
 					import = true;
 					break;
@@ -254,11 +259,6 @@ void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outpu
 		}
 		to_import_string = to_import.str();
 	}
-	else
-	{
-		to_import_string = configuration["import"];
-	}
-
 	if(to_import_string != "all")
 	{
 		std::vector<uint32_t> to_import;
