@@ -23,5 +23,10 @@ $(OBJECTS): %.o:%.cc $(HEADERS)
 
 debug: all
 
+test: all
+	pushd test 
+	./run.sh 
+	popd
+
 clean:
 	rm -f $(TARGET) $(OBJECTS) tags core

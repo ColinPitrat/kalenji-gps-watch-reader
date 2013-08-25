@@ -1,0 +1,1615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/ActivityExtension/v2 http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
+ <Activities>
+  <Activity>
+   <Id>20120-120-23T090:550:0Z</Id>
+   <Lap StartTime="2012-12-23T09:55:00.0Z">
+    <TotalTimeSeconds>2706.61</TotalTimeSeconds>
+    <DistanceMeters>8817</DistanceMeters>
+    <MaximumSpeed>1365</MaximumSpeed>
+    <Calories>0</Calories>
+    <AverageHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>176</Value></AverageHeartRateBpm>
+    <MaximumHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>209</Value></MaximumHeartRateBpm>
+    <Intensity>Active</Intensity>
+    <TriggerMethod>Distance</TriggerMethod>
+    <Track>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>0</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>111</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>1.32777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13.5</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>135</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>2.7</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>28.7361111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>150</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.04722222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>45.0833333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>162</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.26944444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>61.4861111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28055555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>77.9305555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>94.2916666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.27222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>110.847222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.31111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>127.166666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.26388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>143.444444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.25555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>159.666666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.24444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:55:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>175.958333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>172</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.25833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>193.277777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>175</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.46388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>211.958333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>172</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.73611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>229.388888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>192</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.48611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>246.305555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>208</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.38333333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>263.277777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>205</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.39444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>280.486111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>201</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.44166666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>297.819444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>201</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.46666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>310.722222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>197</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>2.58055555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>326.527777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>182</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.16111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>342.944444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>180</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28333333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>359.027777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>178</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.21666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:56:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>375.361111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>178</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.26666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>391.791666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>175</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>407.986111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>174</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.23888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>423.930555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>174</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.18888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>439.958333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>174</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.20555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>456.013888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>174</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.21111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>472.027777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>180</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.20277777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>488.305555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>182</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.25555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>504.611111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>197</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.26111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>521.125</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>206</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.30277777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>537.805555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>202</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.33611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>554.513888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>203</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.34166666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:57:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>571.430555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>199</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.38333333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>588.458333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>194</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.40555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>604.597222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>193</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.22777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>620.402777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>191</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.16111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>636.111111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>190</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.14166666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>651.638888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>196</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.10555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>667.041666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>197</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.08055555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>682.236111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>193</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.03888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>697.333333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>191</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.01944444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>712.388888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>187</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.01111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>727.930555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>181</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.10833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>744.444444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>178</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.30277777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:58:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>761.263888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>177</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.36388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>778.097222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>175</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.36666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>794.527777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>174</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>810.777777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.25</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>827.347222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.31388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>843.986111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.32777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>860.708333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.34444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>877.583333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>170</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.375</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>894.125</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.30833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>910.541666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.28333333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>926.583333333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>167</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.20833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>942.430555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>167</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.16944444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T09:59:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>958.291666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>167</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.17222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>974.152777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>166</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.17222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>989.694444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>167</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.10833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1005.25</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>167</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.11111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1021.06944444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>165</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.16388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1037.15277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.21666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1053.875</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.34444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1071.23611111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.47222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1088.15277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>170</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.38333333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1104.52777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>170</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.275</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1120.59722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.21388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1136.23611111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.12777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:00:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1151.48611111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.05</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1166.76388889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.05555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1182.15277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>168</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.07777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1216.43055556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>234</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>6.85555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>1818.65277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>80</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>120.444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>2423.15277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>120</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>120.9</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>3031.20833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>156</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>121.611111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>3615.31944444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>153</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>116.822222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>3730.20833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>9</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>22.9777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>4223.26388889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>98.6111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>4638.09722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>82.9666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>5134.70833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>99.3222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:01:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>5419.27777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>164</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>56.9138888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>5905.20833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>97.1861111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>6330.69444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>85.0972222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>6916.68055556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>117.197222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>7259.125</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>9</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>68.4888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>7275.11111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.19722222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>7291.75</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>172</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.32777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>7561.95833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>255</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>54.0416666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>7846.52777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>164</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>56.9138888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>8503.15277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>32</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>131.325</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9102.88888889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>119.947222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9702.625</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>119.947222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:02:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9736.90277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>200</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>6.85555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9752.01388889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>80</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.02222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9768.90277778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>171</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.37777777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>9785.44444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>169</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.30833333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>10370.1944444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>170</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>116.95</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>10712.6388889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>9</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>68.4888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>11306.4722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>164</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>118.766666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>11893.1944444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>178</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>117.344444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>12031.9166667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>170</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>27.7444444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>12316.4861111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>164</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>56.9138888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>12880.5555556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>32</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>112.813888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13366.4166667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>97.1722222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:03:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13450.4722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>16.8111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13484.75</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>123</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>6.85555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13499.8611111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>80</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.02222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13511.9444444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>154</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>2.41666666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>13527.2222222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>154</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.05555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>14110.5416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>155</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>116.663888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>14452.9861111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>9</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>68.4888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>15004.1527778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>87</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>110.233333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>15562.4305556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>109</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>111.655555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>15686.9305556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>134</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>24.9</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>15971.5</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>164</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>56.9138888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>16443.0416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>32</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>94.3083333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:04:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>16893.2777778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>90.0472222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17361.2638889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>93.5972222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17395.5416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>5</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>6.85555555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17410.6527778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>80</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.02222222222</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17426.7083333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>157</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.21111111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17442.9722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>158</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.25277777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>17459.1666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>161</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>3.23888888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>18041.0416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>116.375</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>18601.6111111</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>112.113888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>19091.0694444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>97.8916666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>19687.1666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>119.219444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>20318.8194444</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>126.330555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:05:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>20865.1527778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>109.266666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>21326.1527778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>92.2</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:05.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>21915.1666667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>117.802777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:10.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>22500.6388889</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>117.094444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:15.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>23025.6527778</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>105.002777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:20.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>23511.5833333</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>97.1861111111</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:25.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>24025.9722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>102.877777778</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:30.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>24764.3472222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>147.675</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:35.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>25531.1805556</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>153.366666667</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:40.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>26273.125</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>148.388888889</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:45.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>26943.9722222</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>134.169444444</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:50.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>27586.375</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>128.480555556</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:06:55.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>28278.5416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>138.433333333</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+     <Trackpoint>
+      <Time>2012-12-23T10:07:00.0Z</Time>
+      <AltitudeMeters></AltitudeMeters>
+      <DistanceMeters>28928.0416667</DistanceMeters>
+      <HeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>4</Value></HeartRateBpm>
+      <Extensions>
+       <TPX xmlns="http://www.garmin.com/xmlschemas/ActivityExtension/v2" CadenceSensor="Footpod">
+         <Speed>129.9</Speed>
+       </TPX>
+      </Extensions>
+     </Trackpoint>
+    </Track>
+   </Lap>
+  </Activity>
+ </Activities>
+</TrainingCenterDatabase>
