@@ -282,8 +282,7 @@ namespace device
 		DEBUG_CMD(std::cout << "Get sessions list !" << std::endl);
 		size_t received = 0;
 		unsigned char *responseData;
-		unsigned char buffer[4096];
-		size_t offset = 0;
+		std::vector<unsigned char> buffer;
 		do
 		{
 			_dataSource->read_data(0x81, &responseData, &received);
@@ -296,11 +295,13 @@ namespace device
 			else if(responseData[2] == 0x50 && (responseData[3] == 0x00 || responseData[3] == 0x20 || responseData[3] == 0x40 || responseData[3] == 0x60 || responseData[3] == 0xA0))
 			{
 				//DEBUG_CMD(std::cout << "Received 0x50 - 0x[0246A]0" << std::endl);
-				memcpy((void*)(buffer + offset), (void*)(responseData + 4), received-5);
-				offset += received-5;
+				for(int i = 0; i < received - 5; ++i)
+				{
+					buffer.push_back(responseData[i+4]);
+				}
 			}
 		} while (responseData[2] != 0x50 || responseData[3] != 0xA0);
-		int nb_sessions = (offset - 16) / 24;
+		int nb_sessions = (buffer.size()  - 16) / 24;
 		for(int i = 0; i < nb_sessions; ++i)
 		{
 			DEBUG_CMD(std::cout << "Decode summary of session " << i << std::endl);
@@ -350,8 +351,7 @@ namespace device
 			_dataSource->write_data(0x01, dataAckData5, lengthAckData);
 			receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
 
-			unsigned char buffer[4096];
-			size_t offset = 0;
+			std::vector<unsigned char> buffer;
 			int ligne = 0;
 			int nb_laps = it->second.getNbLaps();
 			int no_burst = 0;
@@ -381,22 +381,18 @@ namespace device
 					*/
 					no_burst = 0;
 					//DEBUG_CMD(std::cout << "Received 0x50 - 0x[0246AE]0" << std::endl);
-					memcpy((void*)(buffer + offset), (void*)(responseData + 4), received-5);
-					offset += received-5;
-				}
-				if(offset > 4080)
-				{
-					std::cout << "Oups, this session is too big ! I'm still quite experimental :-/" << std::endl;
-					throw std::exception();
+					for(int i = 0; i < received - 5; ++i)
+					{
+						buffer.push_back(responseData[i+4]);
+					}
 				}
 			} while (no_burst < 3);
 			// I first thought it ends with a line beginning with C0 and ending with FF 
 			// while (responseData[2] != 0x50 || responseData[3] != 0xC0 || responseData[11] != 0xFF );
 
 			// end point on end of data
-			// offset point on current byte
-			size_t end = offset;
-			offset = 16;
+			size_t end = buffer.size();
+			size_t offset = 16;
 			double total_duration = 0;
 			unsigned int total_distance = 0;
 			for(int i = 0; i < nb_laps; ++i)
@@ -445,21 +441,29 @@ namespace device
 
 				if(nb_points == 0)
 				{
+					DEBUG_CMD(std::cout << "First point is start point of first lap");
 					(*it_lap)->setStartPoint(p);
+					(*it_lap)->setFirstPointId(nb_points);
 					cumulated_duration += (*it_lap)->getDuration();
 				}
 				while(5*nb_points >= cumulated_duration)
 				{
+					DEBUG_CMD(std::cout << "Points are for next lap");
 					it_lap++;
 					cumulated_duration += (*it_lap)->getDuration();
 					if(it_lap != laps.end())
 					{
 						(*it_lap)->setStartPoint(p);
+						(*it_lap)->setFirstPointId(nb_points);
 						(*it_lap)->setEndPoint(p);
+						(*it_lap)->setLastPointId(nb_points);
 					}
 				}
 				if(it_lap != laps.end())
+				{
 					(*it_lap)->setEndPoint(p);
+					(*it_lap)->setLastPointId(nb_points);
+				}
 
 				offset += 3;
 				nb_points++;
