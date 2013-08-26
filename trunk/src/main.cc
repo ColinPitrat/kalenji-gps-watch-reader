@@ -127,7 +127,7 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 	return options;
 }
 
-bool readConf()
+bool readConf(std::map<std::string, std::string>& options)
 {
 	// Default conf
 	configuration["directory"] = "/tmp/kalenji_import";
@@ -138,6 +138,7 @@ bool readConf()
 	configuration["device"] = "auto";
 	configuration["filters"] = "UnreliablePoints,EmptyLaps";
 	configuration["outputs"] = "GPX,GoogleMap";
+	configuration["gpx_extensions"] = "gpxdata";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
@@ -150,9 +151,9 @@ bool readConf()
 	}
 
 	std::string rcfile = std::string(homeDir) + "/.kalenji_readerrc";
-	if(configuration.count("rcfile") != 0)
+	if(options.count("rcfile") != 0)
 	{
-		rcfile = configuration["rcfile"];
+		rcfile = options["rcfile"];
 	}
 	if(access(rcfile.c_str(), F_OK) == 0)
 	{
@@ -179,18 +180,18 @@ bool readConf()
 			return false;
 		}
 	}
+	// Now override configuration with options given by the users
+	for(std::map<std::string, std::string>::iterator it = options.begin(); it != options.end(); ++it)
+	{
+		configuration[it->first] = it->second;
+	}
 	return true;
 }
 
 bool parseConfAndOptions(int argc, char** argv)
 {
 	std::map<std::string, std::string> options = readOptions(argc, argv);
-	readConf();
-	// Now override configuration with options given by the users
-	for(std::map<std::string, std::string>::iterator it = options.begin(); it != options.end(); ++it)
-	{
-		configuration[it->first] = it->second;
-	}
+	readConf(options);
 
 	// Some configuration adaptation ... 
 	// TODO: Cleaner way to handle it ?
@@ -363,6 +364,11 @@ int main(int argc, char *argv[])
 		}
 
 		device::Device *myDevice = LayerRegistry<device::Device>::getInstance()->getObject(configuration["device"]);
+		if(myDevice == NULL)
+		{
+			std::cerr << "Error trying to register device " << configuration["device"] << ": Unknown device" << std::endl;
+			throw std::exception();
+		}
 		myDevice->setSource(dataSource);
 		myDevice->init();
 		SessionsMap sessions;
