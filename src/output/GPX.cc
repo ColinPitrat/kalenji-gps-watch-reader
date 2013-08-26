@@ -39,7 +39,15 @@ namespace output
 			mystream << ">" << std::endl;
 			mystream << (*it)->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
 			mystream << "        <time>" << (*it)->getTimeAsString() << "</time>" << std::endl;
-			mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxdata:hr>", "</gpxdata:hr>\n        </extensions>");
+			if(configuration["gpx_extensions"].find("gpxdata") != std::string::npos)
+			{
+				mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxdata:hr>", "</gpxdata:hr>\n        </extensions>");
+			}
+			// TODO: Implement correctly gpxtpx extension
+			if(configuration["gpx_extensions"].find("gpxtpx") != std::string::npos)
+			{
+				mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxtpx:hr>", "</gpxtpx:hr>\n        </extensions>");
+			}
 			mystream << "      </trkpt>" << std::endl;
 		}
 		mystream << "    </trkseg>" << std::endl;
@@ -64,8 +72,14 @@ namespace output
 				lap++;
 				mystream << "    <gpxdata:lap>" << std::endl;
 				mystream << "      <gpxdata:index>" << lap << "</gpxdata:index>" << std::endl;
-				mystream << "      <gpxdata:startPoint lat=\"" << (*it)->getStartPoint()->getLatitude() << "\" lon=\"" << (*it)->getStartPoint()->getLongitude() << "\"/>" << std::endl;
-				mystream << "      <gpxdata:endPoint lat=\"" << (*it)->getEndPoint()->getLatitude() << "\" lon=\"" << (*it)->getEndPoint()->getLongitude() << "\" />" << std::endl;
+				if((*it)->getStartPoint()->getLatitude().isDefined() && (*it)->getStartPoint()->getLongitude().isDefined())
+				{
+					mystream << "      <gpxdata:startPoint lat=\"" << (*it)->getStartPoint()->getLatitude() << "\" lon=\"" << (*it)->getStartPoint()->getLongitude() << "\"/>" << std::endl;
+				}
+				if((*it)->getEndPoint()->getLatitude().isDefined() && (*it)->getEndPoint()->getLongitude().isDefined())
+				{
+					mystream << "      <gpxdata:endPoint lat=\"" << (*it)->getEndPoint()->getLatitude() << "\" lon=\"" << (*it)->getEndPoint()->getLongitude() << "\" />" << std::endl;
+				}
 				mystream << "      <gpxdata:startTime>" << (*it)->getStartPoint()->getTimeAsString() << "</gpxdata:startTime>" << std::endl;
 				mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 				mystream << (*it)->getCalories().toStream("      <gpxdata:calories>", "</gpxdata:calories>\n");
