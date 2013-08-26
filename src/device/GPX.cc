@@ -202,7 +202,8 @@ namespace device
 					data[16] = 0; time_tm.tm_min  = atoi((char*) data + 14);
 					data[19] = 0; time_tm.tm_sec  = atoi((char*) data + 17);
 					time_tm.tm_isdst = -1;
-					aPoint->setTime(atoi((char*) data));
+					time_t time = mktime(&time_tm);
+					aPoint->setTime(time);
 				}
 				else
 				{
