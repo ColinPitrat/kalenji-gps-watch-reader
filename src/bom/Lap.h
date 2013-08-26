@@ -43,6 +43,8 @@ class Lap
 		void setGrams(uint32_t grams)           { _grams = grams; };
 		void setAscent(uint32_t ascent)         { _ascent = ascent; };
 		void setDescent(uint32_t descent)       { _descent = descent; };
+		void setFirstPointId(uint32_t pid)      { _firstPointId = pid; };
+		void setLastPointId(uint32_t pid)       { _lastPointId = pid; };
 
 		uint32_t getLapNum()              { return _lapNum; };
 		uint32_t getFirstPointId()        { return _firstPointId; };
