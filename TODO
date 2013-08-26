@@ -4,16 +4,14 @@
  * device::Kalenji:      In case of error we should finish reading until getting 8Axxx so that the device is in a clean state (== implement release ?)
  * output::GPX:          Improve metadata (add link among others)
  * output::GPX:          Study options offered by GPXDATA: http://www.cluetrust.com/Schemas/gpxdata10.xsd
- * output::GPX:          Only put extensions - heartrate if info is present and non zero
+ * output::GPX:          Study options offered by GPXTPX
  *                       Add possibility to define different trigger type (Manual, Distance, HR, Location, Time) for each session (or each lap ?)
  *                       Setup an automatic build and non-regression testing (is there something available with google code ?)
- * device::GPX           Create a device to "import" from GPX file (would allow creating a GoogleMap from GPX for example)
  *                       Export of route to the device (source = File, device = GPX, output = Kalenji ? therefore, output would use source = USB ... to generalize for file too ?)
  *                       Factorize code converting date to string (calls to strftime - to put in some utils part ?)
  * bom::Session          Improve interface
  * bom::Session          Method to remove point (handling adjusting laps)
  *                       Check configuration file syntax (allowing comments)
- *                       Add import = new option (importing only session that have not already been imported - define how we want it to behave exactly)
  *                       Add some exceptions to handle error cases
  * output::GoogleMap     Use max speed and min speed to determine the color range
  * output::GoogleMap     Use max hr and min hr to determine the width range
@@ -24,3 +22,5 @@
  *                       Review (again) the architecture. Source could be connector (USB or File) used for reading & writing. Device and output could be format (Kalenji, GPX, KML etc ...) usable for read & write. Would logger enveloppe still be needed ? Using Kalenji + File as output to log wouldn't work so I'd say yes ! Does it bring an advantage over supporting device and output separately ? This would probalby not factorize much code and sending XML over USB or Kalenji in a file wouldn't make much sense ...
  * bom::Session          Compute distance and duration from points
  *                       Use ComputeSessionStat and ReducePoints by default when exporting to device.
+ * filter                A filter that remove performance data (date and time, heartrate, speed) to only produce a trace.
+ *                       Create a bom for runner (weight, height, max heartrate, age ... name ? )
