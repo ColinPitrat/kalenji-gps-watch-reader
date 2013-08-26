@@ -89,10 +89,10 @@ Outputs can be:
 
 *Default value:* gpxdata
 
-If set to none, no extension of GPX file format is used. 
-If set to gpxdata, gpxdata extension is used to encode heartrate information for each point, and lap information.
-If set to gpxtpx, gpxtpx extension is used to encode heartrate information for each point.
-The variable can be set to gpxdata,gpxtpx in order to encode data using both extensions.
+If set to _none_, no extension of GPX file format is used. 
+If set to _gpxdata_, gpxdata extension is used to encode heartrate information for each point, and lap information.
+If set to _gpxtpx_, gpxtpx extension is used to encode heartrate information for each point.
+The variable can be set to _gpxdata,gpxtpx_ in order to encode data using both extensions.
 
 ==Log transactions==
 *Name:* log_transactions
