@@ -81,7 +81,18 @@ Outputs can be:
   * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
   * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
   * *KML*: a KML file readable, among others, by GoogleEarth
+  * *CSV*: a CSV (comma separated values) file with one line per point of measure and only two columns: time and distance. The main purpose of this format is to compare sessions using create_comparison_curve.sh script.
   * *Kalenji*: export route to the watch 
+
+==Outputs options==
+*Name:* gpx_extensions
+
+*Default value:* gpxdata
+
+If set to none, no extension of GPX file format is used. 
+If set to gpxdata, gpxdata extension is used to encode heartrate information for each point, and lap information.
+If set to gpxtpx, gpxtpx extension is used to encode heartrate information for each point.
+The variable can be set to gpxdata,gpxtpx in order to encode data using both extensions.
 
 ==Log transactions==
 *Name:* log_transactions
