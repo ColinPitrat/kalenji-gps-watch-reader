@@ -10,7 +10,6 @@ namespace output
 
 	void TCX::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
 	{
-		int point_id = 0;
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(12);
 		mystream << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
@@ -31,6 +30,7 @@ namespace output
 		std::list<Lap*> laps = session->getLaps();
 		std::list<Point*> points = session->getPoints();
 		std::list<Point*>::iterator pit = points.begin();
+		int point_id = 0;
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			mystream << "   <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\">" << std::endl;
@@ -63,10 +63,12 @@ namespace output
 				mystream << "     <Trackpoint>" << std::endl;
 				mystream << "      <Time>" << (*pit)->getTimeAsString() << "</Time>" << std::endl;
 				if ((*pit)->getLatitude().isDefined() && (*pit)->getLongitude().isDefined())
+				{
 					mystream << "      <Position>"
 						<< (*pit)->getLatitude().toStream("<LatitudeDegrees>", "</LatitudeDegrees>")
 						<< (*pit)->getLongitude().toStream("<LongitudeDegrees>", "</LongitudeDegrees>")
 						<< "</Position>" << std::endl;
+				}
 				mystream << "      <AltitudeMeters>" << (*pit)->getAltitude().toStream() << "</AltitudeMeters>" << std::endl;
 				mystream << "      <DistanceMeters>" << total_dist << "</DistanceMeters>" << std::endl;
 				mystream << (*pit)->getHeartRate().toStream(
