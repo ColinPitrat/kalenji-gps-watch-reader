@@ -49,7 +49,8 @@ namespace device
 
 			virtual std::string getName() { return "Keymaze"; };
 			virtual unsigned int getVendorId() { return 0x067B; };
-			virtual unsigned int getProductId() { return 0x2303; };
+			//virtual unsigned int getProductId() { return 0x2303; };
+			virtual unsigned int getProductId() { return 0x230300; };
 
 		private:
 			DECLARE_DEVICE(Keymaze);
