@@ -5,6 +5,7 @@
 #include <list>
 #include <map>
 #include <stdint.h>
+#include <ctime>
 #include "../bom/Lap.h"
 #include "../bom/Point.h"
 
