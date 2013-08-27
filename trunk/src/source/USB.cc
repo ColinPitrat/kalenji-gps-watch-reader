@@ -28,8 +28,12 @@ namespace source
 			libusb_get_device_descriptor(listOfDevices[i], &deviceDescriptor);
 			if(deviceDescriptor.idVendor == vendorId && deviceDescriptor.idProduct == productId)
 			{
-				if (libusb_open(listOfDevices[i], &_device) != 0)
+				int rc = libusb_open(listOfDevices[i], &_device);
+				if (rc != 0)
+				{
+					std::cout << "libusb_open returned " << rc << libusb_error_name(rc) << std::endl;
 					throw std::runtime_error("can't access usb device");
+				}
 				found = true;
 			}
 		}

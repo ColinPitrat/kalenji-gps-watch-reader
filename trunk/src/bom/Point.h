@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <iostream>
+#include <ctime>
 #include "../bom/Field.h"
 
 class Point

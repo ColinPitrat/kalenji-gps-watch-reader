@@ -40,7 +40,11 @@ int testDir(std::string path, bool create_if_not_exist)
 			case ENOENT:
 				if(create_if_not_exist)
 				{
+					#ifdef WINDOWS
+					mkdir(path.c_str());
+					#else
 					mkdir(path.c_str(), 0777);
+					#endif
 					return 1;
 				}
 				else
@@ -143,14 +147,22 @@ bool readConf(std::map<std::string, std::string>& options)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
 	// Load from ~/.kalenji_readerrc
+	#ifdef WINDOWS
+	char *homeDir = getenv("HOMEPATH");
+	#else
 	char *homeDir = getenv("HOME");
+	#endif
 	if(!homeDir)
 	{
 		std::cerr << "No home dir found ! This is strange ... Why would $HOME not be set for your user ?" << std::endl;
 		return false;
 	}
 
+	#ifdef WINDOWS
+	std::string rcfile = std::string(homeDir) + "/kalenji_reader.conf";
+	#else
 	std::string rcfile = std::string(homeDir) + "/.kalenji_readerrc";
+	#endif
 	if(options.count("rcfile") != 0)
 	{
 		rcfile = options["rcfile"];
