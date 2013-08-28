@@ -39,14 +39,25 @@ namespace output
 			mystream << ">" << std::endl;
 			mystream << (*it)->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
 			mystream << "        <time>" << (*it)->getTimeAsString() << "</time>" << std::endl;
-			if(configuration["gpx_extensions"].find("gpxdata") != std::string::npos)
+			bool gpxdata_ext = configuration["gpx_extensions"].find("gpxdata") != std::string::npos;
+			bool gpxtpx_ext = configuration["gpx_extensions"].find("gpxtpx") != std::string::npos;
+			bool has_extension =  gpxdata_ext || gpxtpx_ext;
+			if(has_extension)
 			{
-				mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxdata:hr>", "</gpxdata:hr>\n        </extensions>");
+				mystream << "        <extensions>" << std::endl;
+			}
+			if(gpxdata_ext)
+			{
+				mystream << (*it)->getHeartRate().toStream("          <gpxdata:hr>", "</gpxdata:hr>\n");
 			}
 			// TODO: Implement correctly gpxtpx extension
-			if(configuration["gpx_extensions"].find("gpxtpx") != std::string::npos)
+			if(gpxtpx_ext)
 			{
-				mystream << (*it)->getHeartRate().toStream("        <extensions>\n          <gpxtpx:hr>", "</gpxtpx:hr>\n        </extensions>");
+				mystream << (*it)->getHeartRate().toStream("          <gpxtpx:hr>", "</gpxtpx:hr>\n");
+			}
+			if(has_extension)
+			{
+				mystream << "        </extensions>" << std::endl;
 			}
 			mystream << "      </trkpt>" << std::endl;
 		}
