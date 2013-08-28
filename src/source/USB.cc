@@ -31,8 +31,9 @@ namespace source
 				int rc = libusb_open(listOfDevices[i], &_device);
 				if (rc != 0)
 				{
-					std::cout << "libusb_open returned " << rc << libusb_error_name(rc) << std::endl;
-					throw std::runtime_error("can't access usb device");
+					std::ostringstream oss;
+					oss << "can't access usb device: " << rc << libusb_error_name(rc);
+					throw std::runtime_error(oss.str());
 				}
 				found = true;
 			}
@@ -40,8 +41,10 @@ namespace source
 
 		if(found)
 		{
+			#ifndef WINDOWS
 			rc = libusb_kernel_driver_active(_device, 0);
 			found = found && checkUSBOperation(rc);
+			#endif
 
 			if (rc > 0)
 			{
@@ -57,8 +60,10 @@ namespace source
 			if(vendorId == 0x0483 && productId == 0x5740)
 			{
 				_hasInterface1 = true;
+				#ifndef WINDOWS
 				rc = libusb_kernel_driver_active(_device, 1);
 				found = found && checkUSBOperation(rc);
+				#endif
 
 				if (rc > 0)
 				{
