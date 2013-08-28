@@ -1,4 +1,4 @@
-#summary How to install and use kalenji_reader.
+#summary Installation and usage under Linux.
 #labels Featured,Phase-Deploy
 
 You can either install featured versions from a distributed package or current development version from SVN.
