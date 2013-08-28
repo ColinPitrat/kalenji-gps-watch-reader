@@ -134,7 +134,11 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 bool readConf(std::map<std::string, std::string>& options)
 {
 	// Default conf
+	#ifdef WINDOWS
+	configuration["directory"] = "c:\\tmp\\kalenji_import";
+	#else
 	configuration["directory"] = "/tmp/kalenji_import";
+	#endif
 	configuration["import"] = "new";
 	configuration["trigger"] = "manual";
 	configuration["log_transactions"] = "yes";
@@ -148,7 +152,7 @@ bool readConf(std::map<std::string, std::string>& options)
 
 	// Load from ~/.kalenji_readerrc
 	#ifdef WINDOWS
-	char *homeDir = getenv("HOMEPATH");
+	char *homeDir = getenv("USERPROFILE");
 	#else
 	char *homeDir = getenv("HOME");
 	#endif
@@ -159,7 +163,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	}
 
 	#ifdef WINDOWS
-	std::string rcfile = std::string(homeDir) + "/kalenji_reader.conf";
+	std::string rcfile = std::string(homeDir) + "\\kalenji_reader.conf";
 	#else
 	std::string rcfile = std::string(homeDir) + "/.kalenji_readerrc";
 	#endif
