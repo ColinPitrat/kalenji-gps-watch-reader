@@ -1,0 +1,8 @@
+#summary Installation and usage under Windows
+#labels Featured,Phase-Deploy
+
+= Installation of WinUSB driver =
+
+= Creation of configuration file =
+
+= Usage =
