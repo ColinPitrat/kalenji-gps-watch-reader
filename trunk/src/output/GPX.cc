@@ -10,14 +10,24 @@ namespace output
 
 	void GPX::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
 	{
-		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
+		bool gpxdata_ext = configuration["gpx_extensions"].find("gpxdata") != std::string::npos;
+		bool gpxtpx_ext = configuration["gpx_extensions"].find("gpxtpx") != std::string::npos;
+		bool has_extension =  gpxdata_ext || gpxtpx_ext;
+		// Latitude and longitude retrieved from the GPS has 6 decimals and can have 2 digits before decimal point
 		mystream.precision(8);
 		mystream << "<?xml version=\"1.0\"?>" << std::endl;
 		mystream << "<gpx version=\"1.1\"" << std::endl;
 		mystream << "     creator=\"Kalenji 300 Reader\"" << std::endl;
 		mystream << "     xmlns=\"http://www.topografix.com/GPX/1/1\"" << std::endl;
 		mystream << "     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << std::endl;
-		mystream << "     xmlns:gpxdata=\"http://www.cluetrust.com/XML/GPXDATA/1/0\"" << std::endl;
+		if(gpxdata_ext)
+		{
+			mystream << "     xmlns:gpxdata=\"http://www.cluetrust.com/XML/GPXDATA/1/0\"" << std::endl;
+		}
+		if(gpxtpx_ext)
+		{
+			mystream << "     xmlns:gpxtpx=\"http://www.garmin.com/xmlschemas/TrackPointExtension/v1\"" << std::endl;
+		}
 		mystream << "     xsi:schemaLocation=\"http://www.topografix.com/GPX/1/1" << std::endl;
 		mystream << "                          http://www.topografix.com/GPX/1/1/gpx.xsd\">" << std::endl;
 
@@ -32,16 +42,12 @@ namespace output
 		std::list<Point*> points = session->getPoints();
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
-			// TODO: More info on point ? (cadence, hr when available)
 			mystream << "      <trkpt ";
 			mystream << (*it)->getLatitude().toStream("lat=\"", "\" ");
 			mystream << (*it)->getLongitude().toStream("lon=\"", "\" ");
 			mystream << ">" << std::endl;
 			mystream << (*it)->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
 			mystream << "        <time>" << (*it)->getTimeAsString() << "</time>" << std::endl;
-			bool gpxdata_ext = configuration["gpx_extensions"].find("gpxdata") != std::string::npos;
-			bool gpxtpx_ext = configuration["gpx_extensions"].find("gpxtpx") != std::string::npos;
-			bool has_extension =  gpxdata_ext || gpxtpx_ext;
 			if(has_extension)
 			{
 				mystream << "        <extensions>" << std::endl;
@@ -50,7 +56,6 @@ namespace output
 			{
 				mystream << (*it)->getHeartRate().toStream("          <gpxdata:hr>", "</gpxdata:hr>\n");
 			}
-			// TODO: Implement correctly gpxtpx extension
 			if(gpxtpx_ext)
 			{
 				mystream << (*it)->getHeartRate().toStream("          <gpxtpx:hr>", "</gpxtpx:hr>\n");
