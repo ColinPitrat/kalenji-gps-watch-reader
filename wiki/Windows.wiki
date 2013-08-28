@@ -1,8 +1,49 @@
 #summary Installation and usage under Windows
 #labels Featured,Phase-Deploy
 
+= Installation of kalenji_reader =
+
+Unzip the content of the archive in the directory of your choice.
+
 = Installation of WinUSB driver =
+
+Launch zadig.exe. This is the installer for WinUSB driver. Accept to run it as Administrator.
+
+In menu Options, click on List All Devices:
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_list_devices.png
+
+Then choose the device corresponding to your watch. As the name may not be very explicit, you can try the "List All Devices" with and without the watch plugged to check which device appears. The 
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_choose_device.png
+
+You can check vendor ID and product ID to be sure this corresponds to your watch. Then click on "Install Driver" button.
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_install_driver.png
 
 = Creation of configuration file =
 
+Check where your USERPROFILE directory is. 
+You can do this by running a command line:
+Start Menu -> Execute
+Type "cmd.exe".
+
+Then in the shell windows that opened, type the following:
+{{{
+echo %USERPROFILE%
+}}}
+
+For example on Windows 7, I have C:\Users\username.
+
+Go in this directory and create a file named kalenji_reader.conf.
+
+Fill this file with your configuration (cf ConfigurationFile).
+
+For example:
+{{{
+directory=c:\temp\kalenji_import
+import=ask
+outputs=GPX,KML,GoogleMap
+gpx_extensions=gpxdata
+}}}
+
 = Usage =
+
+Just launch kalenji_reader.exe. You can create a shortcut to it to ease its usage.
