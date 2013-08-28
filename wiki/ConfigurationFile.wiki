@@ -3,12 +3,23 @@
 
 =Where to place your configuration file=
 
-You can modify the default behavior of kalenji_reader by putting a .kalenji_readerrc file in your home directory. 
+You can modify the default behavior of kalenji_reader by creating a configuration file and setting your preferences in it.
 
-For example for a user called toto, the configuration file will be:
+On UNIX systems, the file must be called .kalenji_readerrc file and placed in your home directory. 
+
+For example, for a user called toto, the configuration file will be:
 {{{
 /home/toto/.kalenjirc
 }}}
+
+On Windows, the file must be named kalenji_reader.conf and put in %USERPROFILE%. 
+
+For example, on Windows 7, for a user called toto:
+{{{
+C:\Users\toto\kalenji_reader.conf
+}}}
+
+Alternatively, you place and name your file however/wherever you want and pass it to kalenji_reader by using -c option.
 
 =Options available=
 
