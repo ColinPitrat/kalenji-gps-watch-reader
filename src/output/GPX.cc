@@ -58,7 +58,7 @@ namespace output
 			}
 			if(gpxtpx_ext)
 			{
-				mystream << (*it)->getHeartRate().toStream("          <gpxtpx:hr>", "</gpxtpx:hr>\n");
+				mystream << (*it)->getHeartRate().toStream("          <gpxtpx:TrackPointExtension><gpxtpx:hr>", "</gpxtpx:hr></gpxtpx:TrackPointExtension>\n");
 			}
 			if(has_extension)
 			{
