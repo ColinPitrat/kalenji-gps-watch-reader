@@ -6,18 +6,18 @@
 class Lap
 {
 	public:
-		Lap() : _firstPointId(0),      _lastPointId(0), 
-			_start(NULL),          _end(NULL), 
-			_duration(0),          _distance(0), 
-			_max_speed(0),         _avg_speed(0), 
-			_max_hr(FieldUndef),   _avg_hr(FieldUndef), 
-			_calories(FieldUndef), _grams(FieldUndef), 
-			_descent(FieldUndef),  _ascent(FieldUndef)
+		Lap() : _firstPointId(0),       _lastPointId(0), 
+			_start(NULL),           _end(NULL), 
+			_duration(0),           _distance(0), 
+			_max_speed(FieldUndef), _avg_speed(FieldUndef), 
+			_max_hr(FieldUndef),    _avg_hr(FieldUndef), 
+			_calories(FieldUndef),  _grams(FieldUndef), 
+			_descent(FieldUndef),   _ascent(FieldUndef)
 		{ };
 
 		Lap(uint32_t firstPointId,    uint32_t lastPointId, 
 		    double duration,          uint32_t distance, 
-		    double max_speed,         double avg_speed, 
+		    Field<double> max_speed,  Field<double> avg_speed, 
 		    Field<double> max_hr,     Field<double> avg_hr, 
 		    Field<uint32_t> calories, Field<uint32_t> grams, 
 		    Field<uint32_t> descent,  Field<uint32_t> ascent) :  _firstPointId(firstPointId), _lastPointId(lastPointId), 
@@ -35,8 +35,8 @@ class Lap
 
 		void setDuration(double duration)       { _duration = duration; };
 		void setDistance(uint32_t distance)     { _distance = distance; };
-		void setMaxSpeed(uint32_t max_speed)    { _max_speed = max_speed; };
-		void setAvgSpeed(uint32_t avg_speed)    { _avg_speed = avg_speed; };
+		void setMaxSpeed(double max_speed)      { _max_speed = max_speed; };
+		void setAvgSpeed(double avg_speed)      { _avg_speed = avg_speed; };
 		void setMaxHeartrate(uint32_t max_hr)   { _max_hr = max_hr; };
 		void setAvgHeartrate(uint32_t avg_hr)   { _avg_hr = avg_hr; };
 		void setCalories(uint32_t calories)     { _calories = calories; };
@@ -54,8 +54,8 @@ class Lap
 
 		double getDuration()              { return _duration; };
 		uint32_t getDistance()            { return _distance; };
-		uint32_t getMaxSpeed()            { return _max_speed; };
-		uint32_t getAvgSpeed()            { return _avg_speed; };
+		Field<double> getMaxSpeed()       { return _max_speed; };
+		Field<double> getAvgSpeed()       { return _avg_speed; };
 		Field<uint32_t> getMaxHeartrate() { return _max_hr; };
 		Field<uint32_t> getAvgHeartrate() { return _avg_hr; };
 		Field<uint32_t> getCalories()     { return _calories; };
@@ -73,8 +73,8 @@ class Lap
 		// TODO: Add begin time, as using the time of the first point can be very unprecise !
 		double _duration;
 		uint32_t _distance;
-		double _max_speed;
-		double _avg_speed;
+		Field<double> _max_speed;
+		Field<double> _avg_speed;
 		Field<uint32_t> _max_hr;
 		Field<uint32_t> _avg_hr;
 		Field<uint32_t> _calories;
