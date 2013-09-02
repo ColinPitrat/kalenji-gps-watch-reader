@@ -1,5 +1,13 @@
 #include "Keymaze.h"
+#include "../Common.h"
 #include <cstring>
+#include <iomanip>
+
+#ifdef DEBUG
+#define DEBUG_CMD(x) x;
+#else
+#define DEBUG_CMD(x) ;
+#endif
 
 #define RESPONSE_BUFFER_SIZE 4096
 
@@ -15,21 +23,33 @@ namespace device
 	unsigned char Keymaze::dataMore[lengthDataMore] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
 	unsigned char Keymaze::message[RESPONSE_BUFFER_SIZE];
 
+	void Keymaze::dump(unsigned char *data, int length)
+	{
+		DEBUG_CMD(std::cout << std::hex);
+		for(int i = 0; i < length; ++i)
+		{
+			DEBUG_CMD(std::cout << std::setw(2) << std::setfill('0') << (int) data[i] << " ");
+		}
+		DEBUG_CMD(std::cout << std::endl);
+	}
+
 	void Keymaze::readMessage(unsigned char **buffer, size_t *index)
 	{
 		unsigned char* responseData;
-		*index = 0;
+		size_t prev_index = *index = 0;
 		size_t transferred;
 		size_t full_size = 0;
-		//while((*index) < (full_size + 4) || full_size == 0)
-		while((*index) < (full_size + 4) || (*index) <= 3)
+		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
+		do
 		{
-			if(full_size == 0 && (*index) >= 3)
-				full_size = (message[1] << 8) + message[2];
 			_dataSource->read_data(0x81, &responseData, &transferred);
 			memcpy(&(message[*index]), responseData, transferred);
 			*index += transferred;
+			if(full_size == 0 && (*index) >= 3)
+				full_size = (message[1] << 8) + message[2];
 		}
+		while((*index) < (full_size + 4) || (*index) < 3);
+		DEBUG_CMD(std::cout << "Read a total size of " << *index << " - expected: " << full_size + 4 << std::endl;);
 		*buffer = message;
 	}
 
@@ -40,6 +60,11 @@ namespace device
 		size_t transferred;
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
+		if(responseData[0] != 0x85)
+		{
+			std::cerr << "Unexpected header for initDevice: " << std::hex << (int) responseData[0] << std::dec << std::endl;
+			// TODO: Throw an exception
+		}
 	}
 
 	void Keymaze::getSessionsList(SessionsMap *oSessions)
@@ -60,18 +85,19 @@ namespace device
 			std::cerr << "Unexpected size in header for getList: " << responseData[2] << " (!= " << received << " - 4)" << std::endl;
 			// TODO: Throw an exception
 		}
-		int nbRecords = size / 24;
-		if(nbRecords * 24 != size)
+		// 31 bytes per session
+		int nbRecords = size / 31;
+		if(nbRecords * 31 != size)
 		{
-			std::cerr << "Size is not a multiple of 24 in getList !" << std::endl;
+			std::cerr << "Size is not a multiple of 31 in getList !" << std::endl;
 			// TODO: Throw an exception
 		}
 		for(int i = 0; i < nbRecords; ++i)
 		{
 			// Decoding of basic info about the session
-			unsigned char *line = &responseData[24*i+3];
-			SessionId id = SessionId(line, line+16);
-			uint32_t num = (line[19] << 8) + line[18];
+			unsigned char *line = &responseData[31*i+3];
+			SessionId id = SessionId(line, line+26);
+			uint32_t num = (line[27] << 8) + line[28];
 			tm time;
 			// In tm, year is year since 1900. GPS returns year since 2000
 			time.tm_year = 100 + line[0];
@@ -83,12 +109,15 @@ namespace device
 			time.tm_sec = line[5];
 			time.tm_isdst = -1;
 
-			uint32_t nb_points = line[6] + (line[7] << 8);
-			double duration = (line [8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24)) / 10.0;
-			uint32_t distance = line [12] + (line[13] << 8) + (line[14] << 16) + (line[15] << 24);
-
-			// nb_laps has no interest as we read laps later except to display it in the list of sessions before import
-			uint32_t nb_laps = line[16] + (line[17] << 8);
+			uint32_t nb_laps = line[6];
+			double duration = ((line[7] << 24) + (line[8] << 16) + (line[9] << 8) + line[10]) / 10.0;
+			uint32_t distance = (line[11] << 24) + (line[12] << 16) + (line[13] << 8) + line[14];
+			/* Not used
+			uint32_t calories = (line[15] << 8) + line[16];
+			uint32_t max_bpm = line[19];
+			uint32_t avg_bpm = line[20];
+			*/
+			uint32_t nb_points = (line[25] << 8) + line[26];
 
 			Session mySession(id, num, time, nb_points, duration, distance, nb_laps);
 			oSessions->insert(SessionsMapElement(id, mySession));
@@ -102,16 +131,16 @@ namespace device
 			int length = 7 + 2*oSessions->size();
 			unsigned char data[length];
 			data[0] = 0x02;
-			data[1] = 0x00;
-			data[2] = length - 4;
+			data[1] = (length & 0xFF00) >> 8;
+			data[2] = (length - 4) & 0xFF;
 			data[3] = 0x80;
 			data[4] = oSessions->size() & 0xFF;
-			data[5] = (oSessions->size() & 0xFF00) / 256;
+			data[5] = (oSessions->size() & 0xFF00) >> 8;
 			int i = 6;
 			for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 			{
+				data[i++] = (it->second.getNum() & 0xFF00) >> 8;
 				data[i++] = it->second.getNum() & 0xFF;
-				data[i++] = (it->second.getNum() & 0xFF00) / 256;
 			}
 			unsigned char checksum = 0;
 			for(int i = 2; i < length-1; ++i)
@@ -128,76 +157,63 @@ namespace device
 		// TODO: Use only one session pointer, one session ID and one find. Only check it's the same at all step to be sure
 		size_t received = 0;
 		unsigned char *responseData;
+		readMessage(&responseData, &received);
 		do
 		{
-			// First response 80 retrieves info concerning the session
+			// First response 80 retrieves info concerning the laps of the session. 
+			// TODO: support multi laps sessions
+			do
 			{
-				// TODO: Use more info from this first call (some data global to the session: calories, grams, ascent, descent ...)
-				readMessage(&responseData, &received);
 				if(responseData[0] == 0x8A) break;
 				if(responseData[0] != 0x80)
 				{
-					std::cerr << "Unexpected header for getSessionsDetails (step 2): " << (int)responseData[0] << std::endl;
+					std::cerr << "Unexpected header for getSessionsDetails (step 1): " << (int)responseData[0] << std::endl;
 					// TODO: throw an exception
 				}
+
 				int size = responseData[2] + (responseData[1] << 8);
-				// TODO: Is checking the size everywhere really usefull ? Checks could be factorized !
 				if(size + 4 != received)
 				{
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 1): " << size << " != " << received << " - 4" << std::endl;
 					// TODO: throw an exception
 				}
-				SessionId id(responseData + 3, responseData + 19);
+				SessionId id(responseData + 3, responseData + 29);
 				Session *session = &(oSessions->find(id)->second);
-				double max_speed = (responseData[55] + (responseData[56] << 8)) / 100.0;
-				double avg_speed = (responseData[57] + (responseData[58] << 8)) / 100.0;
-				session->setMaxSpeed(max_speed);
-				session->setAvgSpeed(avg_speed);
-
-				// Second response 80 retrieves info concerning the laps of the session. I assume there is always only one but maybe this is not the case ...
-				// TODO: Check if this message could be splitted as is the one for points. If same size as points, this would occur after 32 laps ...
-				_dataSource->write_data(0x03, dataMore, lengthDataMore);
-				readMessage(&responseData, &received);
-				if(responseData[0] == 0x8A) break;
-				if(responseData[0] != 0x80)
+				// TODO: Check in a multilap session if the 27 first byte are really not repeated (session info, not lap info)
+				// and if the lap info is 26 bytes long
+				int nbRecords = (size - 27) / 26;
+				if(nbRecords * 26 != size - 27)
 				{
-					std::cerr << "Unexpected header for getSessionsDetails (step 2): " << (int)responseData[0] << std::endl;
+					std::cerr << "Size is not a multiple of 26 plus 27 in getSessionsDetails (step 1): " << nbRecords << "*26 != " << size << "-27" << "!" << std::endl;
 					// TODO: throw an exception
 				}
-			}
-
-			// Second response 80 retrieves info concerning the laps
-			// TODO: Check if there can be many
-			{
-				int size = responseData[2] + (responseData[1] << 8);
-				if(size + 4 != received)
-				{
-					std::cerr << "Unexpected size in header for getSessionsDetails (step 2): " << size << " != " << received << " - 4" << std::endl;
-					// TODO: throw an exception
-				}
-				SessionId id(responseData + 3, responseData + 19);
-				Session *session = &(oSessions->find(id)->second);
-				int nbRecords = (size - 24)/ 44;
-				if(nbRecords * 44 != size - 24)
-				{
-					std::cerr << "Size is not a multiple of 44 plus 24 in getSessionsDetails (step 2) !" << std::endl;
-					// TODO: throw an exception
-				}
+				// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
+				uint32_t prevLastPoint = 0;
+				uint32_t firstPointOfRow = responseData[53] + (responseData[52] << 8);
+				// TODO: Check if lastPointOfRow = responseData[55] + (responseData[54] << 8)
+				uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
+				// ->8---
 				for(int i = 0; i < nbRecords; ++i)
-				{ // Decoding and addition of the lap
-					unsigned char *line = &responseData[44*i + 27];
-					static uint32_t sum_calories = 0;
-					// time_t lap_end = lap_start + (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 10;
-					double duration = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 10.0;
-					// last_lap_end = lap_end;
-
-					uint32_t length = line[8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24);
-					double max_speed = (line[12] + (line[13] << 8)) / 100.0;
-					double avg_speed = (line[14] + (line[15] << 8)) / 100.0;
+				{
+					// Decoding and addition of the lap
+					unsigned char *line = &responseData[26*i + 27 + 3];
+					double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
+					uint32_t length = (line[12] << 24) + (line[13] << 16) + (line[14] << 8) + line[15];
+					uint32_t calories = (line[16] << 8) + line[17];
 					uint32_t max_hr = line[20];
 					uint32_t avg_hr = line[21];
-					uint32_t calories = line[26] + (line[27] << 8);
-					// Calories for lap given by watch is the sum of alll past laps (this looks like a bug ?! this may change with later firmwares !)
+					uint32_t firstPoint = (line[22] << 8)  + line[23];
+					uint32_t lastPoint = (line[24] << 8) + line[25];
+					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, FieldUndef, FieldUndef, max_hr, avg_hr, calories, FieldUndef, FieldUndef, FieldUndef);
+					session->addLap(lap);
+					/*
+					TODO: Check and fix all this when I have a multilap session example
+					// time_t lap_end = lap_start + (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 10;
+					// last_lap_end = lap_end;
+
+					double max_speed = (line[12] + (line[13] << 8)) / 100.0;
+					double avg_speed = (line[14] + (line[15] << 8)) / 100.0;
+					// Calories for lap given by watch is the sum of all past laps (this looks like a bug ?! this may change with later firmwares !)
 					std::list<Lap*> laps = session->getLaps();
 					if(laps.empty())
 					{
@@ -217,22 +233,36 @@ namespace device
 					uint32_t grams = line[28] + (line[29] << 8);
 					uint32_t descent = line[30] + (line[31] << 8);
 					uint32_t ascent = line[32] + (line[33] << 8);
-					uint32_t firstPoint = line[40] + (line[41] << 8);
-					uint32_t lastPoint = line[42] + (line[43] << 8);
-					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
-					session->addLap(lap);
+					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
+					uint32_t nextFirstPoint = lastPointOfRow;
+					if(i < nbRecords - 1)
+					{
+						nextFirstPoint = line[40+44] + (line[41+44] << 8);
+					}
+					if(firstPoint == 0xffff && lastPoint == 0xffff)
+					{
+						firstPoint = prevLastPoint;
+						lastPoint = nextFirstPoint;
+					}
+					else
+					{
+						prevLastPoint = lastPoint;
+					}
+					// ->8---
+					*/
 				}
-			}
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
+				readMessage(&responseData, &received);
+				// TODO: Find a good condition to end the loop
+			} while(responseData[25] == 0xaa);
 
-			// Third response 80 retrieves info concerning the points of the session. There can be many.
+			// Following response 80 retrieves info concerning the points of the session. There can be many.
 			Session *session;
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
 			while(keep_going)
 			{
-				_dataSource->write_data(0x03, dataMore, lengthDataMore);
-				readMessage(&responseData, &received);
 				if(responseData[0] == 0x8A) break;
 
 				if(responseData[0] != 0x80)
@@ -246,7 +276,7 @@ namespace device
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 3): " << size << " != " << received << " - 4" << std::endl;
 					// TODO: throw an exception
 				}
-				SessionId id(responseData + 3, responseData + 19);
+				SessionId id(responseData + 3, responseData + 29);
 				session = &(oSessions->find(id)->second);
 				std::list<Point*> points = session->getPoints();
 				time_t current_time = session->getTime();
@@ -254,10 +284,10 @@ namespace device
 				{
 					current_time = points.back()->getTime();
 				}
-				int nbRecords = (size - 24)/ 20;
-				if(nbRecords * 20 != size - 24)
+				int nbRecords = (size - 31)/ 15;
+				if(nbRecords * 15 != size - 31)
 				{
-					std::cerr << "Size is not a multiple of 20 plus 24 in getSessionsDetails (step 3) !" << std::endl;
+					std::cerr << "Size is not a multiple of 15 plus 31 in getSessionsDetails (step 2) ! " << size << " " << nbRecords << std::endl;
 					// TODO: throw an exception
 				}
 				std::list<Lap*>::iterator lap = session->getLaps().begin();
@@ -270,18 +300,19 @@ namespace device
 				{
 					//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
 					{ // Decoding and addition of the point
-						unsigned char *line = &responseData[20*i + 27];
-						double lat = (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 1000000.0;
-						double lon = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 1000000.0;
-						// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
-						int16_t alt = line[8] + (line[9] << 8);
-						double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
+						unsigned char *line = &responseData[15*i + 31 + 3];
+						DEBUG_CMD(std::cout << "Decoding point from: ";);
+						DEBUG_CMD(dump(line, 15));
+						double lat = ((line[0] << 24) + (line[1] << 16) + (line[2] << 8) + line[3]) / 1000000.0;
+						double lon = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 1000000.0;
+						int16_t alt = (line[8] << 8) + line[9];
+						// TODO: Ensure this is speed !
+						double speed = ((double)((line[10] << 8)+ line[11]) / 100.0);
 						uint16_t bpm = line[12];
-						uint16_t fiability = line[13];
-						cumulated_tenth += line[16] + (line[17] << 8);
+						cumulated_tenth += (line[13] << 8) + line[14];
 						current_time += cumulated_tenth / 10;
 						cumulated_tenth = cumulated_tenth % 10;
-						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
+						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, 3);
 						session->addPoint(point);
 					}
 					if(id_point == (*lap)->getFirstPointId())
@@ -307,11 +338,11 @@ namespace device
 					id_point++;
 				}
 				keep_going = !session->isComplete();
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
+				readMessage(&responseData, &received);
 			}
 			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
 			if(responseData[0] == 0x8A) break;
-
-			_dataSource->write_data(0x03, dataMore, lengthDataMore);
 		}
 		// Redundant with all the if / break above !
 		while(responseData[0] != 0x8A);

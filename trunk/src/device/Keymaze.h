@@ -18,6 +18,8 @@ namespace device
 			 */ 
 			virtual void init();
 
+			void dump(unsigned char *data, int length);
+
 			/** 
 			  Read a full message doing as much roundtrips as necessary
 			 */ 
