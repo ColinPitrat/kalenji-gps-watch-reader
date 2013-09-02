@@ -100,8 +100,8 @@ namespace output
 				mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
 				mystream << (*it)->getCalories().toStream("      <gpxdata:calories>", "</gpxdata:calories>\n");
 				mystream << "      <gpxdata:distance>" << (*it)->getDistance() << "</gpxdata:distance>" << std::endl;
-				mystream << "      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">" << (*it)->getAvgSpeed() << "</gpxdata:summary>" << std::endl;
-				mystream << "      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">" << (*it)->getMaxSpeed() << "</gpxdata:summary>" << std::endl;
+				mystream << (*it)->getAvgSpeed().toStream("      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">", "</gpxdata:summary>\n");
+				mystream << (*it)->getMaxSpeed().toStream("      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">", "</gpxdata:summary>\n");
 				mystream << (*it)->getAvgHeartrate().toStream("      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">", "</gpxdata:summary>\n");
 				mystream << (*it)->getMaxHeartrate().toStream("      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">", "</gpxdata:summary>\n");
 				// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)

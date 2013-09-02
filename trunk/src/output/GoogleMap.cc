@@ -88,10 +88,10 @@ namespace output
 			mystream << "                                            content: \"";
 			mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
 			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
-			mystream << "<b>Average speed:</b> " << (*it)->getAvgSpeed() << " km/h<br/>";
-			mystream << "<b>Maximum speed:</b> " << (*it)->getMaxSpeed() << " km/h<br/>";
-			mystream << "<b>Average heartrate:</b> " << (*it)->getAvgHeartrate() << " bpm<br/>";
-			mystream << "<b>Maximum heartrate:</b> " << (*it)->getMaxHeartrate() << " bpm<br/>";
+			mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
+			mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
+			mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
+			mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
 			mystream << "\"});" << std::endl;
 			mystream << "    popup.open(map);" << std::endl;
 			mystream << "}" << std::endl;
