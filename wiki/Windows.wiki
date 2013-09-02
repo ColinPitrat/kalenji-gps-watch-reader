@@ -7,6 +7,8 @@ Unzip the content of the archive in the directory of your choice.
 
 = 2 - Installation of WinUSB driver =
 
+*Note that after installing WinUSB driver, Geonaute Software will not recognize the watch anymore. You'll be able to use it again by removing WinUSB driver and reinstalling the previous one.* If you know a way to use both at the same time, please share it !
+
 Launch zadig.exe. This is the installer for WinUSB driver. Accept to run it as Administrator.
 
 In menu Options, click on List All Devices:
