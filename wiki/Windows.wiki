@@ -7,7 +7,7 @@ Unzip the content of the archive in the directory of your choice.
 
 = 2 - Installation of WinUSB driver =
 
-*Note that after installing WinUSB driver, Geonaute Software will not recognize the watch anymore. You'll be able to use it again by removing WinUSB driver and reinstalling the previous one.* If you know a way to use both at the same time, please share it !
+*Note that after installing WinUSB driver, Geonaute Software will not recognize the watch anymore. You'll be able to use it again by uninstalling WinUSB driver and reinstalling the previous one. See _ 5 - Uninstall WinUSB driver _.* If you know a way to use both at the same time, please share it !
 
 Launch zadig.exe. This is the installer for WinUSB driver. Accept to run it as Administrator.
 
@@ -49,3 +49,19 @@ gpx_extensions=gpxdata
 = 4 - Usage =
 
 Just launch kalenji_reader.exe. You can create a shortcut to it to ease its usage.
+
+= 5 - Uninstall WinUSB driver =
+
+To uninstall WinUSB driver, go in Control Panel, in Device Manager. Look for your USB device (under Universal Serial Bus controllers).
+
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_uninstall_1.png
+
+Right click on it and select Properties. In the Driver tab, click Uninstall.
+
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_uninstall_2.png
+
+In the confirmation window, check the checkbox to delete the driver software and click OK.
+
+https://kalenji-gps-watch-reader.googlecode.com/files/zadig_uninstall_3.png
+
+Now, if you unplug and replug your device, the default driver should be reinstalled automatically and you'll be able to use Geonaute Software again.
