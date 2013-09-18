@@ -309,7 +309,7 @@ namespace device
 						// TODO: Ensure this is speed !
 						double speed = ((double)((line[10] << 8)+ line[11]) / 100.0);
 						uint16_t bpm = line[12];
-						cumulated_tenth += (line[13] << 8) + line[14];
+						cumulated_tenth += line[14];
 						current_time += cumulated_tenth / 10;
 						cumulated_tenth = cumulated_tenth % 10;
 						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, 3);

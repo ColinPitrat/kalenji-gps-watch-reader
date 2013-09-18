@@ -282,7 +282,7 @@ namespace device
 						double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
 						uint16_t bpm = line[12];
 						uint16_t fiability = line[13];
-						cumulated_tenth += line[16] + (line[17] << 8);
+						cumulated_tenth += line[16];
 						current_time += cumulated_tenth / 10;
 						cumulated_tenth = cumulated_tenth % 10;
 						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
