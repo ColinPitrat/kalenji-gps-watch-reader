@@ -35,6 +35,7 @@ namespace device
 
 	void Keymaze::readMessage(unsigned char **buffer, size_t *index)
 	{
+		DEBUG_CMD(std::cout << "Keymaze::readMessage()" << std::endl);
 		unsigned char* responseData;
 		size_t prev_index = *index = 0;
 		size_t transferred;
@@ -55,9 +56,11 @@ namespace device
 
 	void Keymaze::init()
 	{
+		DEBUG_CMD(std::cout << "Keymaze::init() - init device" << std::endl);
 		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
+		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
 		if(responseData[0] != 0x85)
@@ -69,6 +72,7 @@ namespace device
 
 	void Keymaze::getSessionsList(SessionsMap *oSessions)
 	{
+		DEBUG_CMD(std::cout << "Keymaze::getSessionsList()" << std::endl);
 		unsigned char *responseData;
 		size_t received;
 		_dataSource->write_data(0x03, dataList, lengthDataList);
@@ -126,6 +130,7 @@ namespace device
 
 	void Keymaze::getSessionsDetails(SessionsMap *oSessions)
 	{
+		DEBUG_CMD(std::cout << "Keymaze::getSessionsDetails()" << std::endl);
 		// Sending the query with the list of sessions to retrieve
 		{
 			int length = 7 + 2*oSessions->size();
