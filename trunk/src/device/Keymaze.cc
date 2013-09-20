@@ -43,7 +43,7 @@ namespace device
 		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
 		do
 		{
-			_dataSource->read_data(0x81, &responseData, &transferred);
+			_dataSource->read_data(0x83, &responseData, &transferred);
 			memcpy(&(message[*index]), responseData, transferred);
 			*index += transferred;
 			if(full_size == 0 && (*index) >= 3)
@@ -60,8 +60,68 @@ namespace device
 		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
+		// Step 1: Some control transfer, necessary to initialize the device ?
+		{
+			unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
+			// TODO: Define which messages to send by looking at the ULZ
+			// Lots of vendor device
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x60, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x61, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0081, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0001, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x02, 0x0044, 0x0, data, 0x0);
+			// Set feature - remote wakeup
+			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
+			// Class interface
+			_dataSource->control_transfer(0x11, 0x20, 0x0000, 0x0, data, 0x7);
+			// Lots of vendor device again
+			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0081, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0001, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x22, 0x0000, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x22, 0x0000, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0B0B, 0x2, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0909, 0x0, data, 0x0);
+			_dataSource->control_transfer(0x20, 0x01, 0x0808, 0x0, data, 0x0);
+			// Class interface
+			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			// Vendor device again
+			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
+			// Class interface
+			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			// Vendor device again
+			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
+			// Class interface
+			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+		}
 		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
-		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
+		_dataSource->write_data(0x02, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
 		if(responseData[0] != 0x85)
 		{
@@ -75,7 +135,7 @@ namespace device
 		DEBUG_CMD(std::cout << "Keymaze::getSessionsList()" << std::endl);
 		unsigned char *responseData;
 		size_t received;
-		_dataSource->write_data(0x03, dataList, lengthDataList);
+		_dataSource->write_data(0x02, dataList, lengthDataList);
 		readMessage(&responseData, &received);
 
 		if(responseData[0] != 0x78)
@@ -154,7 +214,7 @@ namespace device
 			}
 			data[length-1] = checksum;
 
-			_dataSource->write_data(0x03, data, length);
+			_dataSource->write_data(0x02, data, length);
 		}
 
 		// Parsing the result
@@ -256,7 +316,7 @@ namespace device
 					// ->8---
 					*/
 				}
-				_dataSource->write_data(0x03, dataMore, lengthDataMore);
+				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 				// TODO: Find a good condition to end the loop
 			} while(responseData[25] == 0xaa);
@@ -343,7 +403,7 @@ namespace device
 					id_point++;
 				}
 				keep_going = !session->isComplete();
-				_dataSource->write_data(0x03, dataMore, lengthDataMore);
+				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 			}
 			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
