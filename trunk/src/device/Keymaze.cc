@@ -65,34 +65,54 @@ namespace device
 			unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
 			// TODO: Define which messages to send by looking at the ULZ
 			// Lots of vendor device
-		/*
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 1" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 2" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 3" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 4" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 5" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 6" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x1, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 7" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 8" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 9" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 10" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x60, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 11" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 12" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 13" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 14" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x61, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 15" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 16" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8383, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 17" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0081, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 18" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 19" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x0001, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 20" << std::endl);
 			_dataSource->control_transfer(0x20, 0x02, 0x0044, 0x0, data, 0x0);
 		 */
 			DEBUG_CMD(std::cout << "Keymaze::init() - wakeup device" << std::endl);
 			// Set feature - remote wakeup
 			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
-		/*
 			// Class interface
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface" << std::endl);
 			_dataSource->control_transfer(0x11, 0x20, 0x0000, 0x0, data, 0x7);
+		/*
 			// Lots of vendor device again
 			_dataSource->control_transfer(0x20, 0x01, 0x0080, 0x0, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
