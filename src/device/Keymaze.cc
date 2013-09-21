@@ -111,7 +111,7 @@ namespace device
 			// Set feature - remote wakeup
 			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
 			// Class interface
-			DEBUG_CMD(std::cout << "Keymaze::init() - class interface" << std::endl);
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 1" << std::endl);
 			_dataSource->control_transfer(0x11, 0x20, 0x0000, 0x0, data, 0x7);
 		/*
 			// Lots of vendor device again
@@ -134,20 +134,25 @@ namespace device
 			_dataSource->control_transfer(0x20, 0x01, 0x0808, 0x0, data, 0x0);
 			// Class interface
 		 */
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 2" << std::endl);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 3" << std::endl);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 		 /*
 			// Vendor device again
 			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
 		 */
 			// Class interface
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 4" << std::endl);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 5" << std::endl);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 			// Vendor device again
 		 /*
 			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
 		 */
 			// Class interface
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 6" << std::endl);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 		}
 		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
