@@ -105,7 +105,6 @@ namespace device
 			_dataSource->control_transfer(0x20, 0x01, 0x0001, 0x0, data, 0x0);
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 20" << std::endl);
 			_dataSource->control_transfer(0x20, 0x02, 0x0044, 0x0, data, 0x0);
-		 */
 			DEBUG_CMD(std::cout << "Keymaze::init() - wakeup device" << std::endl);
 			// Set feature - remote wakeup
 			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
