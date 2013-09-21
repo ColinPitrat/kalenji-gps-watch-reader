@@ -60,12 +60,12 @@ namespace device
 		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
-		/*
 		// Step 1: Some control transfer, necessary to initialize the device ?
 		{
 			unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
 			// TODO: Define which messages to send by looking at the ULZ
 			// Lots of vendor device
+		/*
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x01, 0x0404, 0x0, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
@@ -86,8 +86,11 @@ namespace device
 			_dataSource->control_transfer(0x20, 0x01, 0x0000, 0x1, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x01, 0x0001, 0x0, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x02, 0x0044, 0x0, data, 0x0);
+		 */
+			DEBUG_CMD(std::cout << "Keymaze::init() - wakeup device" << std::endl);
 			// Set feature - remote wakeup
 			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
+		/*
 			// Class interface
 			_dataSource->control_transfer(0x11, 0x20, 0x0000, 0x0, data, 0x7);
 			// Lots of vendor device again
@@ -120,8 +123,8 @@ namespace device
 			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
 			// Class interface
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+			*/
 		}
-		*/
 		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
 		_dataSource->write_data(0x02, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
