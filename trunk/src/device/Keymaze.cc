@@ -65,6 +65,7 @@ namespace device
 			unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
 			// TODO: Define which messages to send by looking at the ULZ
 			// Lots of vendor device
+			/*
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 1" << std::endl);
 			_dataSource->control_transfer(0x20, 0x01, 0x8484, 0x0, data, 0x0);
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 2" << std::endl);
@@ -106,6 +107,7 @@ namespace device
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 20" << std::endl);
 			_dataSource->control_transfer(0x20, 0x02, 0x0044, 0x0, data, 0x0);
 			DEBUG_CMD(std::cout << "Keymaze::init() - wakeup device" << std::endl);
+			*/
 			// Set feature - remote wakeup
 			_dataSource->control_transfer(0x00, 0x03, 0x0001, 0x0, data, 0x0);
 			// Class interface
@@ -131,18 +133,22 @@ namespace device
 			_dataSource->control_transfer(0x20, 0x01, 0x0909, 0x0, data, 0x0);
 			_dataSource->control_transfer(0x20, 0x01, 0x0808, 0x0, data, 0x0);
 			// Class interface
+		 */
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
+		 /*
 			// Vendor device again
 			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
+		 */
 			// Class interface
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 			// Vendor device again
+		 /*
 			_dataSource->control_transfer(0x20, 0x01, 0x0505, 0x1311, data, 0x0);
+		 */
 			// Class interface
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
-			*/
 		}
 		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
 		_dataSource->write_data(0x02, dataDevice, lengthDataDevice);
