@@ -60,6 +60,7 @@ namespace device
 		_dataSource->init(getVendorId(), getProductId());
 		unsigned char *responseData;
 		size_t transferred;
+		/*
 		// Step 1: Some control transfer, necessary to initialize the device ?
 		{
 			unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
@@ -120,6 +121,7 @@ namespace device
 			// Class interface
 			_dataSource->control_transfer(0x11, 0x22, 0x0000, 0x0, data, 0x7);
 		}
+		*/
 		DEBUG_CMD(std::cout << "Keymaze::init() - send hello message" << std::endl);
 		_dataSource->write_data(0x02, dataDevice, lengthDataDevice);
 		readMessage(&responseData, &transferred);
