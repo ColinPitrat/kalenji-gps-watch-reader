@@ -125,10 +125,12 @@ namespace device
 			_dataSource->control_transfer(0xC0, 0x01, 0x0080, 0x0, dataIn, 0x1);
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 26" << std::endl);
 			_dataSource->control_transfer(0x40, 0x01, 0x0000, 0x1, data, 0x0);
-			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 27" << std::endl);
-			_dataSource->control_transfer(0x40, 0x22, 0x0000, 0x0, data, 0x0);
-			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 28" << std::endl);
-			_dataSource->control_transfer(0x40, 0x22, 0x0000, 0x0, data, 0x0);
+			// Class interface
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 2" << std::endl);
+			_dataSource->control_transfer(0x21, 0x22, 0x0000, 0x0, data, 0x0);
+			DEBUG_CMD(std::cout << "Keymaze::init() - class interface 3" << std::endl);
+			_dataSource->control_transfer(0x21, 0x22, 0x0000, 0x0, data, 0x0);
+			// Vendor device
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 29 (in)" << std::endl);
 			_dataSource->control_transfer(0xC0, 0x01, 0x0080, 0x0, dataIn, 0x1);
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 30" << std::endl);
