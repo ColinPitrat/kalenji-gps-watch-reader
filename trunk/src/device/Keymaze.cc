@@ -66,7 +66,7 @@ namespace device
 			unsigned char dataIn[256];
 			// TODO: Define which messages to send by looking at the ULZ
 			// Lots of vendor device
-			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 1 (in)" << std::endl);
+			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 1 (in 0xC0)" << std::endl);
 			_dataSource->control_transfer(0xC0, 0x01, 0x8484, 0x0, dataIn, 0x1);
 			DEBUG_CMD(std::cout << "Keymaze::init() - vendor device 2" << std::endl);
 			_dataSource->control_transfer(0x40, 0x01, 0x0404, 0x0, data, 0x0);
