@@ -290,34 +290,38 @@ namespace device
 					// TODO: throw an exception
 				}
 				SessionId id(responseData + 3, responseData + 29);
-				Session *session = &(oSessions->find(id)->second);
-				// TODO: Check in a multilap session if the 32 first byte are really not repeated (session info, not lap info)
-				// and if the lap info is 22 bytes long
-				int nbRecords = (size - 32) / 22;
-				if(nbRecords * 22 != size - 32)
+				SessionsMap::iterator it = oSessions->find(id);
+				if(it != oSessions::end())
 				{
-					std::cerr << "Size is not a multiple of 22 plus 32 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-32" << "!" << std::endl;
-					// TODO: throw an exception
-				}
-				// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
-				uint32_t prevLastPoint = 0;
-				uint32_t firstPointOfRow = responseData[53] + (responseData[52] << 8);
-				// TODO: Check if lastPointOfRow = responseData[55] + (responseData[54] << 8)
-				uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
-				// ->8---
-				for(int i = 0; i < nbRecords; ++i)
-				{
-					// Decoding and addition of the lap
-					unsigned char *line = &responseData[22*i + 32 + 3];
-					double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
-					uint32_t length = (line[8] << 24) + (line[9] << 16) + (line[10] << 8) + line[11];
-					uint32_t calories = (line[12] << 8) + line[13];
-					uint32_t max_hr = line[16];
-					uint32_t avg_hr = line[17];
-					uint32_t firstPoint = (line[18] << 8)  + line[19];
-					uint32_t lastPoint = (line[20] << 8) + line[21];
-					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, FieldUndef, FieldUndef, max_hr, avg_hr, calories, FieldUndef, FieldUndef, FieldUndef);
-					session->addLap(lap);
+					Session *session = &(it->second);
+					// TODO: Check in a multilap session if the 32 first byte are really not repeated (session info, not lap info)
+					// and if the lap info is 22 bytes long
+					int nbRecords = (size - 32) / 22;
+					if(nbRecords * 22 != size - 32)
+					{
+						std::cerr << "Size is not a multiple of 22 plus 32 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-32" << "!" << std::endl;
+						// TODO: throw an exception
+					}
+					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
+					uint32_t prevLastPoint = 0;
+					uint32_t firstPointOfRow = responseData[53] + (responseData[52] << 8);
+					// TODO: Check if lastPointOfRow = responseData[55] + (responseData[54] << 8)
+					uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
+					// ->8---
+					for(int i = 0; i < nbRecords; ++i)
+					{
+						// Decoding and addition of the lap
+						unsigned char *line = &responseData[22*i + 32 + 3];
+						double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
+						uint32_t length = (line[8] << 24) + (line[9] << 16) + (line[10] << 8) + line[11];
+						uint32_t calories = (line[12] << 8) + line[13];
+						uint32_t max_hr = line[16];
+						uint32_t avg_hr = line[17];
+						uint32_t firstPoint = (line[18] << 8)  + line[19];
+						uint32_t lastPoint = (line[20] << 8) + line[21];
+						Lap *lap = new Lap(firstPoint, lastPoint, duration, length, FieldUndef, FieldUndef, max_hr, avg_hr, calories, FieldUndef, FieldUndef, FieldUndef);
+						session->addLap(lap);
+					}
 				}
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
@@ -345,65 +349,69 @@ namespace device
 					// TODO: throw an exception
 				}
 				SessionId id(responseData + 3, responseData + 29);
-				session = &(oSessions->find(id)->second);
-				std::list<Point*> points = session->getPoints();
-				time_t current_time = session->getTime();
-				if(!points.empty())
+				SessionsMap::iterator it = oSessions->find(id);
+				if(it != oSessions::end())
 				{
-					current_time = points.back()->getTime();
-				}
-				int nbRecords = (size - 31)/ 15;
-				if(nbRecords * 15 != size - 31)
-				{
-					std::cerr << "Size is not a multiple of 15 plus 31 in getSessionsDetails (step 2) ! " << size << " " << nbRecords << std::endl;
-					// TODO: throw an exception
-				}
-				std::list<Lap*>::iterator lap = session->getLaps().begin();
-				while(id_point > (*lap)->getLastPointId() && lap != session->getLaps().end())
-				{
-					++lap;
-				}
-				// TODO: Cleaner way to handle id_point ?
-				for(int i = 0; i < nbRecords; ++i)
-				{
-					//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
-					{ // Decoding and addition of the point
-						unsigned char *line = &responseData[15*i + 31 + 3];
-						DEBUG_CMD(std::cout << "Decoding point from: ";);
-						DEBUG_CMD(dump(line, 15));
-						double lat = ((line[0] << 24) + (line[1] << 16) + (line[2] << 8) + line[3]) / 1000000.0;
-						double lon = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 1000000.0;
-						int16_t alt = (line[8] << 8) + line[9];
-						// TODO: Ensure this is speed !
-						double speed = ((double)((line[10] << 8)+ line[11]) / 100.0);
-						uint16_t bpm = line[12];
-						cumulated_tenth += line[14];
-						current_time += cumulated_tenth / 10;
-						cumulated_tenth = cumulated_tenth % 10;
-						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, 3);
-						session->addPoint(point);
-					}
-					if(id_point == (*lap)->getFirstPointId())
+					session = &(it->second);
+					std::list<Point*> points = session->getPoints();
+					time_t current_time = session->getTime();
+					if(!points.empty())
 					{
-						(*lap)->setStartPoint(session->getPoints().back());
+						current_time = points.back()->getTime();
 					}
-					while(id_point >= (*lap)->getLastPointId() && lap != session->getLaps().end())
+					int nbRecords = (size - 31)/ 15;
+					if(nbRecords * 15 != size - 31)
 					{
-						// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-						if((*lap)->getStartPoint() == NULL)
-						{
-							std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
-							(*lap)->setStartPoint(session->getPoints().back());
-						}
-						(*lap)->setEndPoint(session->getPoints().back());
+						std::cerr << "Size is not a multiple of 15 plus 31 in getSessionsDetails (step 2) ! " << size << " " << nbRecords << std::endl;
+						// TODO: throw an exception
+					}
+					std::list<Lap*>::iterator lap = session->getLaps().begin();
+					while(id_point > (*lap)->getLastPointId() && lap != session->getLaps().end())
+					{
 						++lap;
-						//std::cout << "Calling setStartPoint for " << id_point << "on lap (" << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
-						if(lap != session->getLaps().end())
+					}
+					// TODO: Cleaner way to handle id_point ?
+					for(int i = 0; i < nbRecords; ++i)
+					{
+						//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
+						{ // Decoding and addition of the point
+							unsigned char *line = &responseData[15*i + 31 + 3];
+							DEBUG_CMD(std::cout << "Decoding point from: ";);
+							DEBUG_CMD(dump(line, 15));
+							double lat = ((line[0] << 24) + (line[1] << 16) + (line[2] << 8) + line[3]) / 1000000.0;
+							double lon = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 1000000.0;
+							int16_t alt = (line[8] << 8) + line[9];
+							// TODO: Ensure this is speed !
+							double speed = ((double)((line[10] << 8)+ line[11]) / 100.0);
+							uint16_t bpm = line[12];
+							cumulated_tenth += line[14];
+							current_time += cumulated_tenth / 10;
+							cumulated_tenth = cumulated_tenth % 10;
+							Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, 3);
+							session->addPoint(point);
+						}
+						if(id_point == (*lap)->getFirstPointId())
 						{
 							(*lap)->setStartPoint(session->getPoints().back());
 						}
+						while(id_point >= (*lap)->getLastPointId() && lap != session->getLaps().end())
+						{
+							// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
+							if((*lap)->getStartPoint() == NULL)
+							{
+								std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
+								(*lap)->setStartPoint(session->getPoints().back());
+							}
+							(*lap)->setEndPoint(session->getPoints().back());
+							++lap;
+							//std::cout << "Calling setStartPoint for " << id_point << "on lap (" << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
+							if(lap != session->getLaps().end())
+							{
+								(*lap)->setStartPoint(session->getPoints().back());
+							}
+						}
+						id_point++;
 					}
-					id_point++;
 				}
 				keep_going = !session->isComplete();
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
