@@ -38,7 +38,7 @@ namespace device
 		DEBUG_CMD(std::cout << "Keymaze::readMessage()" << std::endl);
 		unsigned char* responseData;
 		size_t prev_index = *index = 0;
-		size_t transferred;
+		size_t transferred = 0;
 		size_t full_size = 0;
 		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
 		do
