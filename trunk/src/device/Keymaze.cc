@@ -291,12 +291,12 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 29);
 				Session *session = &(oSessions->find(id)->second);
-				// TODO: Check in a multilap session if the 27 first byte are really not repeated (session info, not lap info)
-				// and if the lap info is 26 bytes long
-				int nbRecords = (size - 27) / 26;
-				if(nbRecords * 26 != size - 27)
+				// TODO: Check in a multilap session if the 32 first byte are really not repeated (session info, not lap info)
+				// and if the lap info is 22 bytes long
+				int nbRecords = (size - 32) / 22;
+				if(nbRecords * 22 != size - 32)
 				{
-					std::cerr << "Size is not a multiple of 26 plus 27 in getSessionsDetails (step 1): " << nbRecords << "*26 != " << size << "-27" << "!" << std::endl;
+					std::cerr << "Size is not a multiple of 22 plus 32 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-32" << "!" << std::endl;
 					// TODO: throw an exception
 				}
 				// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
@@ -308,14 +308,14 @@ namespace device
 				for(int i = 0; i < nbRecords; ++i)
 				{
 					// Decoding and addition of the lap
-					unsigned char *line = &responseData[26*i + 27 + 3];
-					double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
-					uint32_t length = (line[12] << 24) + (line[13] << 16) + (line[14] << 8) + line[15];
-					uint32_t calories = (line[16] << 8) + line[17];
-					uint32_t max_hr = line[20];
-					uint32_t avg_hr = line[21];
-					uint32_t firstPoint = (line[22] << 8)  + line[23];
-					uint32_t lastPoint = (line[24] << 8) + line[25];
+					unsigned char *line = &responseData[22*i + 32 + 3];
+					double duration = ((line[0] << 24) + (line[1] << 16) + (line[2] << 8) + line[3]) / 10.0;
+					uint32_t length = (line[8] << 24) + (line[9] << 16) + (line[10] << 8) + line[11];
+					uint32_t calories = (line[12] << 8) + line[13];
+					uint32_t max_hr = line[16];
+					uint32_t avg_hr = line[17];
+					uint32_t firstPoint = (line[18] << 8)  + line[19];
+					uint32_t lastPoint = (line[20] << 8) + line[21];
 					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, FieldUndef, FieldUndef, max_hr, avg_hr, calories, FieldUndef, FieldUndef, FieldUndef);
 					session->addLap(lap);
 					/*
@@ -366,7 +366,7 @@ namespace device
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 				// TODO: Find a good condition to end the loop
-			} while(responseData[25] == 0xaa);
+			} while(responseData[30] == 0xff && responseData[31] == 0xff && responseData[32] == 0xff && responseData[33] == 0xff);
 
 			// Following response 80 retrieves info concerning the points of the session. There can be many.
 			Session *session;
