@@ -309,7 +309,7 @@ namespace device
 				{
 					// Decoding and addition of the lap
 					unsigned char *line = &responseData[22*i + 32 + 3];
-					double duration = ((line[0] << 24) + (line[1] << 16) + (line[2] << 8) + line[3]) / 10.0;
+					double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
 					uint32_t length = (line[8] << 24) + (line[9] << 16) + (line[10] << 8) + line[11];
 					uint32_t calories = (line[12] << 8) + line[13];
 					uint32_t max_hr = line[16];
@@ -318,50 +318,6 @@ namespace device
 					uint32_t lastPoint = (line[20] << 8) + line[21];
 					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, FieldUndef, FieldUndef, max_hr, avg_hr, calories, FieldUndef, FieldUndef, FieldUndef);
 					session->addLap(lap);
-					/*
-					TODO: Check and fix all this when I have a multilap session example
-					// time_t lap_end = lap_start + (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 10;
-					// last_lap_end = lap_end;
-
-					double max_speed = (line[12] + (line[13] << 8)) / 100.0;
-					double avg_speed = (line[14] + (line[15] << 8)) / 100.0;
-					// Calories for lap given by watch is the sum of all past laps (this looks like a bug ?! this may change with later firmwares !)
-					std::list<Lap*> laps = session->getLaps();
-					if(laps.empty())
-					{
-						sum_calories = 0;
-					}
-					else
-					{
-						if(calories < sum_calories)
-						{
-							std::cerr << "Error: Calories for this lap is smaller than previous one ! It means a firmware bug has been fixed !" << std::endl;
-							std::cerr << "       Please notify project maintainer. If possible provide your firmware version." << std::endl;
-							std::cerr << "       Info concerning calories will be wrong." << std::endl;
-						}
-						calories -= sum_calories;
-					}
-					sum_calories += calories;
-					uint32_t grams = line[28] + (line[29] << 8);
-					uint32_t descent = line[30] + (line[31] << 8);
-					uint32_t ascent = line[32] + (line[33] << 8);
-					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
-					uint32_t nextFirstPoint = lastPointOfRow;
-					if(i < nbRecords - 1)
-					{
-						nextFirstPoint = line[40+44] + (line[41+44] << 8);
-					}
-					if(firstPoint == 0xffff && lastPoint == 0xffff)
-					{
-						firstPoint = prevLastPoint;
-						lastPoint = nextFirstPoint;
-					}
-					else
-					{
-						prevLastPoint = lastPoint;
-					}
-					// ->8---
-					*/
 				}
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
