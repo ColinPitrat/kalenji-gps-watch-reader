@@ -458,6 +458,7 @@ namespace device
 		}
 		// Redundant with all the if / break above !
 		while(responseData[0] != 0x8A);
+		unsigned char data[256] = { 0, 0xE1, 0, 0, 0, 0, 0x8 };
 		DEBUG_CMD(std::cout << "Keymaze::getSessionsDetails() - class interface 1" << std::endl);
 		_dataSource->control_transfer(0x21, 0x22, 0x0000, 0x0, data, 0x0);
 	}
