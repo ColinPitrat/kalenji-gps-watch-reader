@@ -291,7 +291,7 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 29);
 				SessionsMap::iterator it = oSessions->find(id);
-				if(it != oSessions::end())
+				if(it != oSessions->end())
 				{
 					Session *session = &(it->second);
 					// TODO: Check in a multilap session if the 32 first byte are really not repeated (session info, not lap info)
@@ -350,7 +350,7 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 29);
 				SessionsMap::iterator it = oSessions->find(id);
-				if(it != oSessions::end())
+				if(it != oSessions->end())
 				{
 					session = &(it->second);
 					std::list<Point*> points = session->getPoints();
