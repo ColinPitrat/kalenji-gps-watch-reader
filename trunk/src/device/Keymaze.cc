@@ -335,6 +335,7 @@ namespace device
 			uint32_t cumulated_tenth = 0;
 			while(keep_going)
 			{
+				session = NULL;
 				if(responseData[0] == 0x8A) break;
 
 				if(responseData[0] != 0x80)
@@ -413,11 +414,14 @@ namespace device
 						id_point++;
 					}
 				}
-				keep_going = !session->isComplete();
+				keep_going = session == NULL || !session->isComplete();
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 			}
-			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
+			if(session != NULL)
+			{
+				std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
+			}
 			if(responseData[0] == 0x8A) break;
 		}
 		// Redundant with all the if / break above !
