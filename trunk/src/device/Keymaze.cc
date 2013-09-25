@@ -246,8 +246,8 @@ namespace device
 			data[1] = (length & 0xFF00) >> 8;
 			data[2] = (length - 4) & 0xFF;
 			data[3] = 0x80;
-			data[4] = oSessions->size() & 0xFF;
-			data[5] = (oSessions->size() & 0xFF00) >> 8;
+			data[4] = (oSessions->size() & 0xFF00) >> 8;
+			data[5] = oSessions->size() & 0xFF;
 			int i = 6;
 			for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 			{
@@ -294,12 +294,12 @@ namespace device
 				if(it != oSessions->end())
 				{
 					Session *session = &(it->second);
-					// TODO: Check in a multilap session if the 32 first byte are really not repeated (session info, not lap info)
+					// TODO: Check in a multilap session if the 31 first byte are really not repeated (session info, not lap info)
 					// and if the lap info is 22 bytes long
-					int nbRecords = (size - 32) / 22;
-					if(nbRecords * 22 != size - 32)
+					int nbRecords = (size - 31) / 22;
+					if(nbRecords * 22 != size - 31)
 					{
-						std::cerr << "Size is not a multiple of 22 plus 32 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-32" << "!" << std::endl;
+						std::cerr << "Size is not a multiple of 22 plus 31 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-31" << "!" << std::endl;
 						// TODO: throw an exception
 					}
 					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
@@ -311,7 +311,7 @@ namespace device
 					for(int i = 0; i < nbRecords; ++i)
 					{
 						// Decoding and addition of the lap
-						unsigned char *line = &responseData[22*i + 32 + 3];
+						unsigned char *line = &responseData[22*i + 31 + 3];
 						double duration = ((line[4] << 24) + (line[5] << 16) + (line[6] << 8) + line[7]) / 10.0;
 						uint32_t length = (line[8] << 24) + (line[9] << 16) + (line[10] << 8) + line[11];
 						uint32_t calories = (line[12] << 8) + line[13];
