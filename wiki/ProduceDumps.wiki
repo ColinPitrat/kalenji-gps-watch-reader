@@ -69,5 +69,5 @@ In order to ease reverse engineering, it's a good idea to produce at least 3 dum
  * One with multiple sessions, with as much features used as possible (multilaps sessions, pauses ...)
 
 For each dump, send also the GPX files corresponding to the imported sessions (so obviously, no GPX file for the first dump). Join any additional information you have, in particular:
- * everything that a watch can display about a session or a lap (heartrate, speed, calories ... max and average, ascent, descent, ascent & descent speed ...). Not necessary for all sessions but at least for two.
- * any information that you entered in you watch when configuring it: name, age, weight, max heartrate ...
+ * Everything that a watch can display about a session or a lap (heartrate, speed, calories ... max and average, ascent, descent, ascent & descent speed ...). Not necessary for all sessions but at least for two.
+ * Any information that you entered in you watch when configuring it: name, age, weight, max heartrate ...
