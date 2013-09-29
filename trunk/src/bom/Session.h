@@ -45,8 +45,12 @@ class Session
 		void addPoint(Point* point) { _points.push_back(point); }
 		void addLap(Lap *lap)       { _laps.push_back(lap); }
 
+		void setId(SessionId id)                   { _id = id; };
+		void setNum(uint32_t num)                  { _num = num; };
 		void setName(std::string name)             { _name = name; };
 		void setTime(tm time)                      { _time = time; _time_t = mktime(&_time); };
+		void setNbPoints(uint32_t nbPoints)        { _nb_points = nbPoints; };
+		void setNbLaps(uint32_t nbLaps)            { _nb_laps = nbLaps; };
 
 		void setDuration(double duration)          { _duration = duration; };
 		void setDistance(uint32_t distance)        { _distance = distance; };
