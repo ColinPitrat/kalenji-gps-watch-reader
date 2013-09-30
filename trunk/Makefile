@@ -46,9 +46,7 @@ $(WINOBJECTS): %.os:%.cc $(HEADERS)
 debug: all
 
 test: all
-	pushd test 
-	./run.sh 
-	popd
+	cd test && ./run.sh && cd ..
 
 clean:
 	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win
