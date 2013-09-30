@@ -136,14 +136,15 @@ namespace device
 			{
 				tm time;
 				// In tm, year is year since 1900. GPS returns year since 2000
-				time.tm_year = 100 + (line[0] & 0x0F);
+				time.tm_year = 100 + (line[6] & 0x0F);
 				// In tm, month is between 0 and 11.
-				time.tm_mon = line[6] & 0xF0;
-				time.tm_mday = line[7] & 0xF8;
+				time.tm_mon = (line[6] & 0xF0) >> 4;
+				time.tm_mday = (line[7] & 0xF8) >> 3;
 				time.tm_hour = line[3];
 				time.tm_min = line[4];
 				time.tm_sec = line[5];
 				time.tm_isdst = -1;
+				DEBUG_CMD(std::cout << "Header for lap " << (uint32_t) line[6] << "-" << (uint32_t) line[7] << " = " << time.tm_year << "-" << time.tm_mon << "-" << time.tm_mday << std::endl);
 
 				current_time = mktime(&time);
 
