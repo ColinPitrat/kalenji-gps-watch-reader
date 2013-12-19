@@ -67,4 +67,4 @@ https://kalenji-gps-watch-reader.googlecode.com/files/zadig_uninstall_3.png
 Now, if you unplug and replug your device, the default driver should be reinstalled automatically and you'll be able to use Geonaute Software again.
 
 
-<wiki:gadget up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" width="468" height="60" border="0" up_keywords="kalenji GPS watch linux sport running cycling" url="http://goo.gl/R5bvK" /> 
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
