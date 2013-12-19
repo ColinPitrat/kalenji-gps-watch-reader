@@ -45,4 +45,5 @@ However this will be lost after each reboot.
 
   * you can find how to configure permissions on USB devices in your distributions. This will usually consist in modifying udev configuration
 
-<wiki:gadget up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" width="468" height="60" border="0" up_keywords="kalenji GPS watch linux sport running cycling" url="http://goo.gl/R5bvK" /> 
+
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
