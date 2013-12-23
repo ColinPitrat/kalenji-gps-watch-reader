@@ -44,10 +44,6 @@ class Point
 				format_string << "%Y-%m-%d %H:%M:%S." << _tenth;
 			else
 				format_string << "%Y-%m-%dT%H:%M:%S." << _tenth << "Z";
-			if(_tenth > 9)
-			{
-				std::cout << "Error: tenth bigger than 9 ! This is totally unexpected ... " << _tenth << std::endl;
-			}
 			strftime(buffer, 256, format_string.str().c_str(), time_tm);
 			return std::string(buffer);
 		};

@@ -56,7 +56,13 @@ namespace device
 			static unsigned char dataList[];
 			static const int lengthDataMore;
 			static unsigned char dataMore[];
-	};
+
+			enum KalenjiType
+			{
+				GH675,
+				Keymaze700Trial
+			} type;
+			};
 }
 
 #endif
