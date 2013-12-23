@@ -21,6 +21,22 @@ namespace device
 		size_t transferred;
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
 		_dataSource->read_data(0x81, &responseData, &transferred);
+		std::string typeGH = "GH-675";
+		std::string typeKeymaze = "Keymaze 700 Trial";
+		if(memcmp(&(responseData[3]), typeGH.c_str(), typeGH.size()) == 0)
+		{
+			type = GH675;
+			std::cout << "Using device type Kalenji 500 or 700: " << &(responseData[3]) << std::endl;
+		}
+		else if(memcmp(&(responseData[3]), typeKeymaze.c_str(), typeKeymaze.size()) == 0)
+		{
+			type = Keymaze700Trial;
+			std::cout << "Using device type Keymaze 700 Trial" << std::endl;
+		}
+		else
+		{
+			std::cerr << "Unsupported device type for Kalenji: " << &(responseData[3]) << std::endl;
+		}
 	}
 
 	void Kalenji::getSessionsList(SessionsMap *oSessions)
@@ -41,16 +57,21 @@ namespace device
 			std::cerr << "Unexpected size in header for getList: " << responseData[2] << " (!= " << received << " - 4)" << std::endl;
 			// TODO: Throw an exception
 		}
-		int nbRecords = size / 24;
-		if(nbRecords * 24 != size)
+		int sizeRecord = 24;
+		if (type == Keymaze700Trial)
 		{
-			std::cerr << "Size is not a multiple of 24 in getList !" << std::endl;
+			sizeRecord = 54;
+		}
+		int nbRecords = size / sizeRecord;
+		if(nbRecords * sizeRecord != size)
+		{
+			std::cerr << "Size is not a multiple of " << sizeRecord << " in getList !" << std::endl;
 			// TODO: Throw an exception
 		}
 		for(int i = 0; i < nbRecords; ++i)
 		{
 			// Decoding of basic info about the session
-			unsigned char *line = &responseData[24*i+3];
+			unsigned char *line = &responseData[sizeRecord*i+3];
 			SessionId id = SessionId(line, line+16);
 			uint32_t num = (line[19] << 8) + line[18];
 			tm time;
@@ -70,6 +91,15 @@ namespace device
 
 			// nb_laps has no interest as we read laps later except to display it in the list of sessions before import
 			uint32_t nb_laps = line[16] + (line[17] << 8);
+			// In Keymaze 700 Trial, some values are at different places
+			if(type == Keymaze700Trial)
+			{
+				num = (line[47] << 8) + line[46];
+				nb_points = line[7] + (line[8] << 8);
+				duration = (line[9] + (line[10] << 8) + (line[11] << 16) + (line[12] << 24)) / 100.0;
+				distance = (line[13] + (line[14] << 8) + (line[15] << 16) + (line[16] << 24)) / 100;
+				nb_laps = line[6];
+			}
 
 			Session mySession(id, num, time, nb_points, duration, distance, nb_laps);
 			oSessions->insert(SessionsMapElement(id, mySession));
@@ -112,6 +142,8 @@ namespace device
 		do
 		{
 			// First response 80 retrieves info concerning the session
+			// Doesn't exist for Keymaze 700 trial (all info is in 78)
+			if(type != Keymaze700Trial)
 			{
 				// TODO: Use more info from this first call (some data global to the session: calories, grams, ascent, descent ...)
 				_dataSource->read_data(0x81, &responseData, &received);
@@ -138,10 +170,10 @@ namespace device
 				uint32_t descent = responseData[72] + (responseData[73] << 8);
 				session->setAscent(ascent);
 				session->setDescent(descent);
+				_dataSource->write_data(0x03, dataMore, lengthDataMore);
 			}
 
 			// Second response 80 retrieves info concerning the laps of the session. 
-			_dataSource->write_data(0x03, dataMore, lengthDataMore);
 			_dataSource->read_data(0x81, &responseData, &received);
 			do
 			{
@@ -160,10 +192,17 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 19);
 				Session *session = &(oSessions->find(id)->second);
-				int nbRecords = (size - 24)/ 44;
-				if(nbRecords * 44 != size - 24)
+				int sizeRecord = 24;
+				int sizeLap = 44;
+				if (type == Keymaze700Trial)
 				{
-					std::cerr << "Size is not a multiple of 44 plus 24 in getSessionsDetails (step 2): " << nbRecords << "*44 != " << size << "-24" << "!" << std::endl;
+					sizeRecord = 54;
+					sizeLap = 48;
+				}
+				int nbRecords = (size - sizeRecord) / sizeLap;
+				if(nbRecords * sizeLap != size - sizeRecord)
+				{
+					std::cerr << "Size is not a multiple of " << sizeLap << " plus " << sizeRecord << " in getSessionsDetails (step 2): " << nbRecords << "*" << sizeLap << " != " << size << "-" << sizeRecord << "!" << std::endl;
 					// TODO: throw an exception
 				}
 				// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
@@ -173,7 +212,7 @@ namespace device
 				// ->8---
 				for(int i = 0; i < nbRecords; ++i)
 				{ // Decoding and addition of the lap
-					unsigned char *line = &responseData[44*i + 27];
+					unsigned char *line = &responseData[sizeLap*i + sizeRecord+3];
 					static uint32_t sum_calories = 0;
 					// time_t lap_end = lap_start + (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 10;
 					double duration = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 10.0;
@@ -223,6 +262,22 @@ namespace device
 						prevLastPoint = lastPoint;
 					}
 					// ->8---
+					if(type == Keymaze700Trial)
+					{
+						duration = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 100.0;
+						length = line[8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24);
+						max_speed = (line[20] + (line[21] << 8)) / 100.0;
+						// Surprisingly, average speed is not with the same precision as max speed, so no need to divide by 100 !
+						avg_speed = line[18] + (line[19] << 8);
+						max_hr = line[23];
+						avg_hr = line[22];
+						calories = line[24] + (line[25] << 8);
+						grams = 0;
+						descent = line[38] + (line[39] << 8);
+						ascent = line[40] + (line[41] << 8);
+						firstPoint = line[26] + (line[27] << 8);
+						lastPoint = line[28] + (line[29] << 8);
+					}
 					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
 					session->addLap(lap);
 				}
@@ -258,10 +313,17 @@ namespace device
 				{
 					current_time = points.back()->getTime();
 				}
-				int nbRecords = (size - 24)/ 20;
-				if(nbRecords * 20 != size - 24)
+				int sizeRecord = 24;
+				int sizePoint = 20;
+				if (type == Keymaze700Trial)
 				{
-					std::cerr << "Size is not a multiple of 20 plus 24 in getSessionsDetails (step 3) !" << std::endl;
+					sizeRecord = 54;
+					sizePoint = 17;
+				}
+				int nbRecords = (size - sizeRecord) / sizePoint;
+				if(nbRecords * sizePoint != size - sizeRecord)
+				{
+					std::cerr << "Size is not a multiple of " << sizePoint << " plus " << sizeRecord << " in getSessionsDetails (step 3) !" << std::endl;
 					// TODO: throw an exception
 				}
 				std::list<Lap*>::iterator lap = session->getLaps().begin();
@@ -274,19 +336,30 @@ namespace device
 				{
 					//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
 					{ // Decoding and addition of the point
-						unsigned char *line = &responseData[20*i + 27];
+						unsigned char *line = &responseData[sizePoint*i + sizeRecord + 3];
 						double lat = (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 1000000.0;
 						double lon = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 1000000.0;
 						// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
 						int16_t alt = line[8] + (line[9] << 8);
-						double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
 						uint16_t bpm = line[12];
-						uint16_t fiability = line[13];
-						cumulated_tenth += line[16];
-						current_time += cumulated_tenth / 10;
-						cumulated_tenth = cumulated_tenth % 10;
-						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
-						session->addPoint(point);
+						if(type == GH675)
+						{
+							double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
+							uint16_t fiability = line[13];
+							cumulated_tenth += line[16];
+							current_time += cumulated_tenth / 10;
+							cumulated_tenth = cumulated_tenth % 10;
+							Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
+							session->addPoint(point);
+						}
+						else if(type == Keymaze700Trial)
+						{
+							cumulated_tenth += line[13];
+							current_time += cumulated_tenth / 100;
+							cumulated_tenth = cumulated_tenth % 100;
+							Point *point = new Point(lat, lon, alt, FieldUndef, current_time, cumulated_tenth, bpm, 3);
+							session->addPoint(point);
+						}
 					}
 					if(id_point == (*lap)->getFirstPointId())
 					{
