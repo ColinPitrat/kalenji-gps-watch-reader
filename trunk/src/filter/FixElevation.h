@@ -9,12 +9,13 @@ namespace filter
 	{
 		public:
 			static size_t copyHTTPData(void *ptr, size_t size, size_t nmemb, FILE *stream);
-			void parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last);
+			bool parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last);
 			virtual void filter(Session *session);
 			virtual std::string getName() { return "FixElevation"; };
 
 		private:
 			static std::string HTTPdata;
+			uint32_t fixed_points;
 			DECLARE_FILTER(FixElevation);
 	};
 }
