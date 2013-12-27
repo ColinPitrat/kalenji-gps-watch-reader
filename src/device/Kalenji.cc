@@ -2,6 +2,7 @@
 #include "../Common.h"
 #include <cstring>
 #include <iomanip>
+#include <cmath>
 
 namespace device
 {
@@ -424,7 +425,14 @@ namespace device
 			std::cerr << "I'm not (yet?) able to reduce it !" << std::endl;
 			return;
 		}
-		unsigned int payloadSize = 33+8*nbPoints;
+		uint32_t headerSize = 32;
+		uint32_t pointSize = 8;
+		if(type == Keymaze700Trial)
+		{
+			headerSize = 20;
+			pointSize = 12;
+		}
+		unsigned int payloadSize = headerSize + pointSize*nbPoints + 1;
 		unsigned int bufferSize = payloadSize + 4;
 		unsigned char *buffer = new unsigned char[bufferSize];
 		buffer[0] = 0x02;
@@ -440,40 +448,66 @@ namespace device
 		buffer[22] = (distance / (256*256)) % 256;
 		buffer[23] = (distance / (256*256*256)) % 256;
 
-		// TODO: doesn't seem to work (or just not taken into account by the watch ?)
-		uint32_t ascent = iSession->getAscent();
-		buffer[24] = ascent % 256;
-		buffer[25] = (ascent / 256) % 256;
-		uint32_t descent = iSession->getDescent();
-		buffer[26] = descent % 256;
-		buffer[27] = (descent / 256) % 256;
+		if(type == GH675)
+		{
+			// TODO: doesn't seem to work (or just not taken into account by the watch ?)
+			uint32_t ascent = iSession->getAscent();
+			buffer[24] = ascent % 256;
+			buffer[25] = (ascent / 256) % 256;
+			uint32_t descent = iSession->getDescent();
+			buffer[26] = descent % 256;
+			buffer[27] = (descent / 256) % 256;
 
-		unsigned int duration = 10*iSession->getDuration();
-		buffer[28] = duration % 256;
-		buffer[29] = (duration / 256) % 256;
-		buffer[30] = (duration / (256*256)) % 256;
-		buffer[31] = (duration / (256*256*256)) % 256;
+			unsigned int duration = 10*iSession->getDuration();
+			buffer[28] = duration % 256;
+			buffer[29] = (duration / 256) % 256;
+			buffer[30] = (duration / (256*256)) % 256;
+			buffer[31] = (duration / (256*256*256)) % 256;
+		}
 
-		buffer[32] = nbPoints % 256;
-		buffer[33] = (nbPoints / 256) % 256;
+		buffer[headerSize] = nbPoints % 256;
+		buffer[headerSize+1] = (nbPoints / 256) % 256;
 
 		// TODO: Understand what is in bytes 30 and 31
-		buffer[34] = 0x0;
-		buffer[35] = 0x0;
+		buffer[headerSize+2] = 0x01;
+		buffer[headerSize+3] = 0x00;
 
 		unsigned int i = 0;
+		unsigned int k = 0;
+		Point* prevPoint = *(iSession->getPoints().begin());
 		for(std::list<Point*>::iterator it = iSession->getPoints().begin(); it != iSession->getPoints().end(); ++it)
 		{
 			unsigned int lat = (*it)->getLatitude() * 1000000;
-			buffer[36+i++] = lat % 256;
-			buffer[36+i++] = (lat / 256) % 256;
-			buffer[36+i++] = (lat / (256*256)) % 256;
-			buffer[36+i++] = (lat / (256*256*256)) % 256;
+			buffer[headerSize+4+i++] = lat % 256;
+			buffer[headerSize+4+i++] = (lat / 256) % 256;
+			buffer[headerSize+4+i++] = (lat / (256*256)) % 256;
+			buffer[headerSize+4+i++] = (lat / (256*256*256)) % 256;
 			unsigned int lon = (*it)->getLongitude() * 1000000;
-			buffer[36+i++] = lon % 256;
-			buffer[36+i++] = (lon / 256) % 256;
-			buffer[36+i++] = (lon / (256*256)) % 256;
-			buffer[36+i++] = (lon / (256*256*256)) % 256;
+			buffer[headerSize+4+i++] = lon % 256;
+			buffer[headerSize+4+i++] = (lon / 256) % 256;
+			buffer[headerSize+4+i++] = (lon / (256*256)) % 256;
+			buffer[headerSize+4+i++] = (lon / (256*256*256)) % 256;
+			if(type == Keymaze700Trial)
+			{
+				// -8<--- This part computes the distance between the 2 points
+				double pi = 3.14159265358979323846;
+				double R = 6371000; // Approximate radius of the Earth in meters
+				double dLatRad = ((*it)->getLatitude()  - prevPoint->getLatitude())  * pi / 180.0;
+				double dLonRad = ((*it)->getLongitude() - prevPoint->getLongitude()) * pi / 180.0;
+				double lat1Rad =  prevPoint->getLatitude() * pi / 180.0;
+				double lat2Rad =  (*it)->getLatitude()     * pi / 180.0;
+				double a = sin(dLatRad/2) * sin(dLatRad/2) + sin(dLonRad/2) * sin(dLonRad/2) * cos(lat1Rad) * cos(lat2Rad);
+				double c = 2 * atan2(sqrt(a), sqrt(1-a));
+				int dist = R * c;
+				// ->8---
+				unsigned int alt = (*it)->getAltitude();
+				buffer[headerSize+4+i++] = alt % 256;
+				buffer[headerSize+4+i++] = (alt / 256) % 256;
+				buffer[headerSize+4+i++] = dist % 256;
+				buffer[headerSize+4+i++] = (dist / 256) % 256;
+				k++;
+			}
+			prevPoint = *it;
 		}
 
 		unsigned char checksum = 0;
@@ -483,6 +517,14 @@ namespace device
 		}
 		buffer[bufferSize-1] = checksum;
 
+		/*
+		std::cout << std::hex;
+		for(int j = 0; j < bufferSize; ++j)
+		{
+			std::cout << std::setw(2) << std::setfill('0') << static_cast<int>(buffer[j]) << " ";
+		}
+		std::cout << std::dec << std::endl;
+		*/
 		_dataSource->write_data(0x03, buffer, bufferSize);
 		unsigned char *responseData;
 		size_t transferred;
