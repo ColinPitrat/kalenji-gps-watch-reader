@@ -102,6 +102,23 @@ namespace device
 			}
 
 			Session mySession(id, num, time, nb_points, duration, distance, nb_laps);
+			if(type == Keymaze700Trial)
+			{
+				double max_speed = (line[19] + (line[20] << 8)) / 100.0;
+				double avg_speed = (line[17] + (line[18] << 8)) / 100.0;
+				mySession.setMaxSpeed(max_speed);
+				mySession.setAvgSpeed(avg_speed);
+				uint32_t ascent = line[29] + (responseData[30] << 8);
+				uint32_t descent = responseData[31] + (responseData[32] << 8);
+				mySession.setAscent(ascent);
+				mySession.setDescent(descent);
+				uint32_t calories = line[39] + (line[40] << 8);
+				uint32_t avgHR = line[41];
+				uint32_t maxHR = line[42];
+				mySession.setCalories(calories);
+				mySession.setAvgHr(avgHR);
+				mySession.setMaxHr(maxHR);
+			}
 			oSessions->insert(SessionsMapElement(id, mySession));
 		}
 	}
@@ -342,24 +359,23 @@ namespace device
 						// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
 						int16_t alt = line[8] + (line[9] << 8);
 						uint16_t bpm = line[12];
+						double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
+						uint16_t fiability = line[13];
 						if(type == GH675)
 						{
-							double speed = ((double)(line[10] + (line[11] << 8)) / 100.0);
-							uint16_t fiability = line[13];
 							cumulated_tenth += line[16];
 							current_time += cumulated_tenth / 10;
 							cumulated_tenth = cumulated_tenth % 10;
-							Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
-							session->addPoint(point);
 						}
 						else if(type == Keymaze700Trial)
 						{
+							fiability = 3;
 							cumulated_tenth += line[13];
 							current_time += cumulated_tenth / 100;
 							cumulated_tenth = cumulated_tenth % 100;
-							Point *point = new Point(lat, lon, alt, FieldUndef, current_time, cumulated_tenth, bpm, 3);
-							session->addPoint(point);
 						}
+						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, fiability);
+						session->addPoint(point);
 					}
 					if(id_point == (*lap)->getFirstPointId())
 					{
