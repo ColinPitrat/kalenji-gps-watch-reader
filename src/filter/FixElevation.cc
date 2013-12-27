@@ -18,10 +18,12 @@ namespace filter
 		return size*nmemb;
 	}
 
-	void FixElevation::parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last)
+	bool FixElevation::parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last)
 	{
 		int elevation;
 		std::list<std::string> lines = splitString(HTTPdata, "\n");
+		int i = 0;
+		int n = 0;
 		for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it)
 		{
 			// std::cout << "Found token " << it->c_str() << std::endl;
@@ -36,21 +38,48 @@ namespace filter
 					it2++;
 					// std::cout << "    Found elevation " << it2->c_str() << std::endl;
 					elevation = atol(it2->c_str());
-					(*first)->setAltitude(elevation);
+					if(elevation != (*first)->getAltitude())
+					{
+						fixed_points++;
+						//std::cout << "Moving " << (*first)->getLatitude() << "," << (*first)->getLongitude() << " from " << (*first)->getAltitude();
+						(*first)->setAltitude(elevation);
+						//std::cout << " to " << (*first)->getAltitude() << std::endl;
+					}
 					++first;
+					++i;
+				}
+				if((*it2) == "\"status\"")
+				{
+					it2++;
+					if((*it2) != "\"OK\"")
+					{
+						std::cerr << "Error: received an error from Google API: " << (*it2) << "." << std::endl;
+						return false;
+					}
 				}
 			}
 		}
-		/*
 		if(last != first)
-			std::cerr << "Error: didn't found the number of elevation expected: " << HTTPdata << std::endl;
-		 */
+		{
+			while(last != first && i <= n)
+			{
+				++first;
+				++n;
+				// Just for safety
+				if(n > 100) break;
+			}
+			std::cerr << "Error: didn't found the number of elevation expected in answer from Google API: " << i << " found, " << n << " expected." << std::endl;
+			//std::cerr << HTTPdata << std:endl;
+			return false;
+		}
+		return true;
 	}
 
 	void FixElevation::filter(Session *session)
 	{
 		CURL *curl;
 		CURLcode res;
+		fixed_points = 0;
 
 		curl = curl_easy_init();
 		if(!curl) 
@@ -76,9 +105,8 @@ namespace filter
 				urlparams << "|";
 			urlparams << (*it)->getLatitude() << "," << (*it)->getLongitude();
 			++i;
-			request_last = it;
 
-			if(i == 89 || ++it == points.end())
+			if(++it == points.end() || i == 89)
 			{
 				std::stringstream url; 
 				url << "http://maps.googleapis.com/maps/api/elevation/json?sensor=true&locations=";
@@ -87,7 +115,13 @@ namespace filter
 
 				curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 				res = curl_easy_perform(curl);
-				parseHTTPData(session, request_first, request_last);
+				request_last = it;
+				/* Uncomment to obtain URL queryied in order to debug
+				if(!parseHTTPData(session, request_first, request_last))
+				{
+					std::cout << "Error when parsing result of " << url.str() << std::endl;
+				}
+				*/
 
 				HTTPdata = "";
 				request_first = it;
@@ -98,6 +132,7 @@ namespace filter
 
 		/* always cleanup */ 
 		curl_easy_cleanup(curl);
+		std::cout << "    Fixed elevation of " << fixed_points << " points." << std::endl;
 	}
 }
 /* To reproduce:
