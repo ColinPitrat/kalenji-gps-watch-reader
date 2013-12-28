@@ -13,20 +13,30 @@ namespace filter
 		uint32_t nbPointsOri = points.size();
 		
 		uint32_t maxNbPoints = 250;
-		uint32_t divider = 16;
+		uint32_t divider = 64;
 
 		while(points.size() > maxNbPoints && divider > 4)
 		{
 			std::list<Point*>::iterator it = points.begin();
-			Point *previousKept = *it;
+			std::list<Point*>::iterator previousKept = it;
+			// Always keep the first point. Always OK because we verified that points.size() > maxNbPoints > 3
+			++it;
+			std::list<Point*>::iterator previousPoint = it;
+			++it;
 
 			// TODO: A method removePoint in Session would be nice !
-			++it;
-			Point *previousPoint = *it;
 			while(it != points.end())
 			{
-				double orientation1 = atan2(((*it)->getLatitude() - previousPoint->getLatitude()), ((*it)->getLongitude() - previousPoint->getLongitude()));
-				double orientation2 = atan2(((*it)->getLatitude() - previousKept->getLatitude() ), ((*it)->getLongitude() - previousKept->getLongitude() ));
+				double orientation1 = 0;
+				double orientation2 = 0;
+				double lat1 = (*it)->getLatitude();
+				double lon1 = (*it)->getLongitude();
+				double lat2 = (*previousPoint)->getLatitude();
+				double lon2 = (*previousPoint)->getLongitude();
+				double lat3 = (*previousKept)->getLatitude();
+				double lon3 = (*previousKept)->getLongitude();
+				orientation1 = atan2(lat1 - lat2, lon1 - lon2);
+				orientation2 = atan2(lat1 - lat3, lon1 - lon3);
 				double dOrientation = fabs(orientation1 - orientation2);
 				double pi = 3.14159265358979323846;
 				// For cases where orientation1 ~= pi and orientation2 ~= -pi or reverse
@@ -34,27 +44,28 @@ namespace filter
 				if(dOrientation < -pi) dOrientation += 2*pi;
 
 				// TODO: Arbitrary limit to determine in a smarter way ?
-				if(dOrientation < (pi / 8) && !previousPoint->isImportant())
+				if(dOrientation < (pi / divider) && !(*previousPoint)->isImportant())
 				{
 					for(std::list<Lap*>::iterator it2 = laps.begin(); it2 != laps.end(); ++it2)
 					{
-						if((*it2)->getStartPoint() == previousPoint)
+						if((*it2)->getStartPoint() == (*previousPoint))
 						{
-							(*it2)->setStartPoint(previousKept);
+							(*it2)->setStartPoint(*previousKept);
 						}
-						if((*it2)->getEndPoint() == previousPoint)
+						if((*it2)->getEndPoint() == (*previousPoint))
 						{
-							(*it2)->setEndPoint(previousKept);
+							(*it2)->setEndPoint(*previousKept);
 						}
 					}
-					points.remove(previousPoint);
-					delete (previousPoint);
+					Point *toDelete = *previousPoint;
+					previousPoint = points.erase(previousPoint);
+					delete (toDelete);
 				}
 				else
 				{
 					previousKept = previousPoint;
 				}
-				previousPoint = *it;
+				previousPoint = it;
 				++it;
 			}
 			divider--;
@@ -65,7 +76,7 @@ namespace filter
 		}
 		else
 		{
-			std::cout << "    Reduced session from " << nbPointsOri << " to " << points.size() << " points." << std::endl;
+			std::cout << "    Reduced session from " << nbPointsOri << " to " << points.size() << " points (min angle = pi/" << divider << ")." << std::endl;
 		}
 	}
 }

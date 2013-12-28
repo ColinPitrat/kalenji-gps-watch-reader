@@ -26,14 +26,14 @@ class Point
 		void setImportant(bool i)              { _important = i; };
 		void setTime(time_t time)              { _time = time; };
 
-		Field<double> getLatitude()    { return _lat; };
-		Field<double> getLongitude()   { return _lon; };
-		Field<int16_t> getAltitude()   { return _alt; };
-		Field<double> getSpeed()       { return _speed; };
-		Field<uint16_t> getHeartRate() { return _bpm; };
-		uint16_t getFiability()        { return _fiability; };
-		bool isImportant()             { return _important; };
-		time_t getTime()               { return _time; };
+		Field<double>& getLatitude()    { return _lat; };
+		Field<double>& getLongitude()   { return _lon; };
+		Field<int16_t>& getAltitude()   { return _alt; };
+		Field<double>& getSpeed()       { return _speed; };
+		Field<uint16_t>& getHeartRate() { return _bpm; };
+		uint16_t getFiability()         { return _fiability; };
+		bool isImportant()              { return _important; };
+		time_t getTime()                { return _time; };
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
 		std::string getTimeAsString(bool human_readable=false)
 		{  

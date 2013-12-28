@@ -46,22 +46,22 @@ class Lap
 		void setFirstPointId(uint32_t pid)      { _firstPointId = pid; };
 		void setLastPointId(uint32_t pid)       { _lastPointId = pid; };
 
-		uint32_t getLapNum()              { return _lapNum; };
-		uint32_t getFirstPointId()        { return _firstPointId; };
-		uint32_t getLastPointId()         { return _lastPointId; };
-		Point *getStartPoint()            { return _start; };
-		Point *getEndPoint()              { return _end; };
+		uint32_t getLapNum()               { return _lapNum; };
+		uint32_t getFirstPointId()         { return _firstPointId; };
+		uint32_t getLastPointId()          { return _lastPointId; };
+		Point *getStartPoint()             { return _start; };
+		Point *getEndPoint()               { return _end; };
 
-		double getDuration()              { return _duration; };
-		uint32_t getDistance()            { return _distance; };
-		Field<double> getMaxSpeed()       { return _max_speed; };
-		Field<double> getAvgSpeed()       { return _avg_speed; };
-		Field<uint32_t> getMaxHeartrate() { return _max_hr; };
-		Field<uint32_t> getAvgHeartrate() { return _avg_hr; };
-		Field<uint32_t> getCalories()     { return _calories; };
-		Field<uint32_t> getGrams()        { return _grams; };
-		Field<uint32_t> getAscent()       { return _ascent; };
-		Field<uint32_t> getDescent()      { return _descent; };
+		double getDuration()               { return _duration; };
+		uint32_t getDistance()             { return _distance; };
+		Field<double>& getMaxSpeed()       { return _max_speed; };
+		Field<double>& getAvgSpeed()       { return _avg_speed; };
+		Field<uint32_t>& getMaxHeartrate() { return _max_hr; };
+		Field<uint32_t>& getAvgHeartrate() { return _avg_hr; };
+		Field<uint32_t>& getCalories()     { return _calories; };
+		Field<uint32_t>& getGrams()        { return _grams; };
+		Field<uint32_t>& getAscent()       { return _ascent; };
+		Field<uint32_t>& getDescent()      { return _descent; };
 
 	private:
 		uint32_t _lapNum;
