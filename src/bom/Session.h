@@ -74,35 +74,35 @@ class Session
 			return std::string(buffer);
 		};
 
-		uint32_t getNum()                 { return _num; };
-		bool isComplete()                 { return _nb_points == _points.size(); };
+		uint32_t getNum()                  { return _num; };
+		bool isComplete()                  { return _nb_points == _points.size(); };
 
-		std::list<Lap*> &getLaps()        { return _laps; };
-		std::list<Point*> &getPoints()    { return _points; };
+		std::list<Lap*> &getLaps()         { return _laps; };
+		std::list<Point*> &getPoints()     { return _points; };
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
-		SessionId getId()                 { return _id; };
-		std::string getName()             { return _name; };
-		int getYear()                     { return _time.tm_year + 1900; };
-		int getMonth()                    { return _time.tm_mon + 1; };
-		int getDay()                      { return _time.tm_mday; };
-		int getHour()                     { return _time.tm_hour; };
-		int getMinutes()                  { return _time.tm_min; };
-		int getSeconds()                  { return _time.tm_sec; };
+		SessionId getId()                  { return _id; };
+		std::string getName()              { return _name; };
+		int getYear()                      { return _time.tm_year + 1900; };
+		int getMonth()                     { return _time.tm_mon + 1; };
+		int getDay()                       { return _time.tm_mday; };
+		int getHour()                      { return _time.tm_hour; };
+		int getMinutes()                   { return _time.tm_min; };
+		int getSeconds()                   { return _time.tm_sec; };
 
-		double getDuration()              { return _duration; };
-		uint32_t getDistance()            { return _distance; };
-		double getMaxSpeed()              { return _max_speed; };
-		double getAvgSpeed()              { return _avg_speed; };
-		Field<uint32_t> getMaxHeartrate() { return _max_hr; };
-		Field<uint32_t> getAvgHeartrate() { return _avg_hr; };
-		Field<uint32_t> getCalories()     { return _calories; };
-		Field<uint32_t> getGrams()        { return _grams; };
-		Field<uint32_t> getAscent()       { return _ascent; };
-		Field<uint32_t> getDescent()      { return _descent; };
+		double getDuration()               { return _duration; };
+		uint32_t getDistance()             { return _distance; };
+		double getMaxSpeed()               { return _max_speed; };
+		double getAvgSpeed()               { return _avg_speed; };
+		Field<uint32_t>& getMaxHeartrate() { return _max_hr; };
+		Field<uint32_t>& getAvgHeartrate() { return _avg_hr; };
+		Field<uint32_t>& getCalories()     { return _calories; };
+		Field<uint32_t>& getGrams()        { return _grams; };
+		Field<uint32_t>& getAscent()       { return _ascent; };
+		Field<uint32_t>& getDescent()      { return _descent; };
 
-		uint32_t getNbLaps()              { return _nb_laps; };
-		time_t getTime()                  { return _time_t; };
+		uint32_t getNbLaps()               { return _nb_laps; };
+		time_t getTime()                   { return _time_t; };
 
 	private:
 		SessionId _id;

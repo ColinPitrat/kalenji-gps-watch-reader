@@ -60,21 +60,24 @@ namespace output
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			++i;
-			mystream << "<Placemark>" << std::endl;
-			mystream << "<name>Lap " << i << "</name>" << std::endl;
-			mystream << "<styleUrl>kalenji_lap</styleUrl>" << std::endl;
-			mystream << "<description>" << std::endl;
-			mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
-			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
-			mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
-			mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
-			mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
-			mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
-			mystream << "</description>" << std::endl;
-			mystream << "<Point>" << std::endl;
-			mystream << "<coordinates>" << (*it)->getEndPoint()->getLongitude() << "," << (*it)->getEndPoint()->getLatitude() << "," << (*it)->getEndPoint()->getAltitude() << "</coordinates>" << std::endl;
-			mystream << "</Point>" << std::endl;
-			mystream << "</Placemark>" << std::endl;
+			if((*it)->getEndPoint() != NULL)
+			{
+				mystream << "<Placemark>" << std::endl;
+				mystream << "<name>Lap " << i << "</name>" << std::endl;
+				mystream << "<styleUrl>kalenji_lap</styleUrl>" << std::endl;
+				mystream << "<description>" << std::endl;
+				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
+				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
+				mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
+				mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
+				mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
+				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
+				mystream << "</description>" << std::endl;
+				mystream << "<Point>" << std::endl;
+				mystream << "<coordinates>" << (*it)->getEndPoint()->getLongitude() << "," << (*it)->getEndPoint()->getLatitude() << "," << (*it)->getEndPoint()->getAltitude() << "</coordinates>" << std::endl;
+				mystream << "</Point>" << std::endl;
+				mystream << "</Placemark>" << std::endl;
+			}
 		}
 
 		mystream << "<Placemark>" << std::endl;

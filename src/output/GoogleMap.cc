@@ -78,23 +78,26 @@ namespace output
 		uint32_t lap = 0;
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
-			mystream << "waypoint" << lap << " = Array (";
-			mystream << (*it)->getEndPoint()->getLatitude() << ", " << (*it)->getEndPoint()->getLongitude() << ", " << lap;
-			mystream << ");" << std::endl;
+			if((*it)->getEndPoint() != NULL)
+			{
+				mystream << "waypoint" << lap << " = Array (";
+				mystream << (*it)->getEndPoint()->getLatitude() << ", " << (*it)->getEndPoint()->getLongitude() << ", " << lap;
+				mystream << ");" << std::endl;
 
-			mystream << "function lap_popup_callback_" << lap << "(event)" << std::endl;
-			mystream << "{" << std::endl;
-			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
-			mystream << "                                            content: \"";
-			mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
-			mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
-			mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
-			mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
-			mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
-			mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
-			mystream << "\"});" << std::endl;
-			mystream << "    popup.open(map);" << std::endl;
-			mystream << "}" << std::endl;
+				mystream << "function lap_popup_callback_" << lap << "(event)" << std::endl;
+				mystream << "{" << std::endl;
+				mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
+				mystream << "                                            content: \"";
+				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
+				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
+				mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
+				mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
+				mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
+				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
+				mystream << "\"});" << std::endl;
+				mystream << "    popup.open(map);" << std::endl;
+				mystream << "}" << std::endl;
+			}
 			++lap;
 		}
 		mystream << "waypointsList = Array (";

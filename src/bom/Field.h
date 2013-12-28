@@ -26,13 +26,14 @@ class Field
 			_defined = false;
 		};
 
-		bool isDefined() { return _defined; };
+		bool isDefined() const { return _defined; };
+		const T& getValue() const { return _value; };
 
 		// Implicit conversion
-		operator T () { return _value; };
+		operator T () const { return _value; };
 
 		// A function to be able to print a string containing the value only if field is defined
-		std::string toStream(std::string before = "", std::string after = "") 
+		std::string toStream(std::string before = "", std::string after = "") const
 		{ 
 			if (_defined) 
 			{

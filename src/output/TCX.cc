@@ -33,7 +33,14 @@ namespace output
 		int point_id = 0;
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
-			mystream << "   <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\">" << std::endl;
+			if((*it)->getStartPoint() != NULL)
+			{
+				mystream << "   <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\">" << std::endl;
+			}
+			else
+			{
+				mystream << "   <Lap>" << std::endl;
+			}
 			mystream << "    <TotalTimeSeconds>" << (*it)->getDuration() << "</TotalTimeSeconds>" << std::endl;
 			mystream << "    <DistanceMeters>" << (*it)->getDistance() << "</DistanceMeters>" << std::endl;
 			mystream << "    <MaximumSpeed>" << (*it)->getMaxSpeed() << "</MaximumSpeed>" << std::endl;
