@@ -29,3 +29,37 @@
 // Remain to be tested:
 //  - VMA test
 //  - All training sessions !
+
+// Keymaze 700 version:
+// 0d0c17 = 23 DEC 2014
+// 07140a = 07:20:10
+// 06 = nombre de tours
+// 0595 = 1429 = nombre de points
+// 25260 = 152160 centièmes = 25'21"60
+// 7dbc5 = 515013 cm = 5.15 km
+// 04c2 = 1218 = 12.2 km/h = vitesse moyenne
+// 070c = 1804 = 18.04 km/h = vitesse max
+// 029c = 668 m/h = vitesse assentionnelle moyenne
+// 044c = 1100 m/h = vitesse assentionnelle max
+// 024f = 591 m/h = vitesse de descente moyenne
+// 04b0 = 1200 m/h = vitesse de descente max
+// 78 00 = 120 m de dénivelé (positif & négatif)
+// 78 00 = 120 m de dénivelé (positif & négatif)
+// 36 02 = 566 = altitude min en metres
+// 86 02 = 646 = altitude max en metres
+// 00 00 = dénivelé global en metres
+// 68 01 = 360 = kcal
+// a6 = cardio moyenne
+// ce = cardio max
+// 0b = 11 = temp min
+// 0e = 14 = temp moyenne
+// 15 = 21 = temp max
+// 00 00 00 00 
+// 01 13 73 00
+// Il manque un 13 = 19 g = poids perdu - celui qui suit ne colle pas pour la deuxième session
+78 
+00 6c 
+//  1  2    3  4  5    6    7  8    9            13            17          21          25            29      31      33      35      37      39      41          44       46      48      50
+0d 0c 17   07 14 0a   06   95 05   60 52 02 00   c5 db 07 00   c2 04 0c 07 9c 02 4c 04 4f 02 b0 04   78 00   78 00   36 02   86 02   00 00   68 01   a6  ce  0b  0e  15   00 00   00 00   01 13 73 00 
+0d 0c 17   07 30 1f   01   d3 01   d3 bf 00 00   f1 b4 00 00   53 01 3d 02 00 00 2c 01 00 00 2c 01   00 00   00 00   5d 02   65 02   fd ff   38 00   66  70  0e  0e  10   07 00   01 00   01 18 65 00 
+29
