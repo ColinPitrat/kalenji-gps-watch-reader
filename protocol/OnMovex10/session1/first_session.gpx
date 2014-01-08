@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+	<trk>
+		<name>ONmove 510/710 - 20/12/2013</name>
+		<trkseg>
+			<trkpt lat="51.218245" lon="3.210235">
+				<ele>65509</ele>
+				<time>2013-12-20T13:25:41Z</time>
+			</trkpt>
+			<trkpt lat="51.218237" lon="3.210298">
+				<ele>65509</ele>
+				<time>2013-12-20T13:25:43Z</time>
+			</trkpt>
+			<trkpt lat="51.218235" lon="3.210365">
+				<ele>65509</ele>
+				<time>2013-12-20T13:25:45Z</time>
+			</trkpt>
+			<trkpt lat="51.218222" lon="3.210497">
+				<ele>65509</ele>
+				<time>2013-12-20T13:25:47Z</time>
+			</trkpt>
+			<trkpt lat="51.218213" lon="3.210543">
+				<ele>65510</ele>
+				<time>2013-12-20T13:25:49Z</time>
+			</trkpt>
+			<trkpt lat="51.218197" lon="3.210627">
+				<ele>65512</ele>
+				<time>2013-12-20T13:25:51Z</time>
+			</trkpt>
+			<trkpt lat="51.218178" lon="3.210718">
+				<ele>65515</ele>
+				<time>2013-12-20T13:25:53Z</time>
+			</trkpt>
+			<trkpt lat="51.218158" lon="3.21075">
+				<ele>65517</ele>
+				<time>2013-12-20T13:25:56Z</time>
+			</trkpt>
+			<trkpt lat="51.21815" lon="3.210805">
+				<ele>65520</ele>
+				<time>2013-12-20T13:25:58Z</time>
+			</trkpt>
+			<trkpt lat="51.218147" lon="3.210862">
+				<ele>65522</ele>
+				<time>2013-12-20T13:26:00Z</time>
+			</trkpt>
+			<trkpt lat="51.218135" lon="3.210908">
+				<ele>65524</ele>
+				<time>2013-12-20T13:26:02Z</time>
+			</trkpt>
+			<trkpt lat="51.218122" lon="3.210943">
+				<ele>65527</ele>
+				<time>2013-12-20T13:26:04Z</time>
+			</trkpt>
+			<trkpt lat="51.218098" lon="3.211015">
+				<ele>65529</ele>
+				<time>2013-12-20T13:26:06Z</time>
+			</trkpt>
+			<trkpt lat="51.218065" lon="3.211097">
+				<ele>65530</ele>
+				<time>2013-12-20T13:26:08Z</time>
+			</trkpt>
+			<trkpt lat="51.218043" lon="3.211142">
+				<ele>65533</ele>
+				<time>2013-12-20T13:26:11Z</time>
+			</trkpt>
+			<trkpt lat="51.218028" lon="3.211157">
+				<ele>65535</ele>
+				<time>2013-12-20T13:26:13Z</time>
+			</trkpt>
+			<trkpt lat="51.218002" lon="3.211197">
+				<ele>0</ele>
+				<time>2013-12-20T13:26:15Z</time>
+			</trkpt>
+			<trkpt lat="51.217975" lon="3.211227">
+				<ele>0</ele>
+				<time>2013-12-20T13:26:17Z</time>
+			</trkpt>
+			<trkpt lat="51.217967" lon="3.211237">
+				<ele>0</ele>
+				<time>2013-12-20T13:26:19Z</time>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>
