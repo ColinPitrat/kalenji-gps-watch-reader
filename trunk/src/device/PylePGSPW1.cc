@@ -136,9 +136,9 @@ namespace device
 			{
 				tm time;
 				// In tm, year is year since 1900. GPS returns year since 2000
-				time.tm_year = 100 + (line[6] & 0x0F);
+				time.tm_year = 100 + (line[6] & 0x7F);
 				// In tm, month is between 0 and 11.
-				time.tm_mon = (line[6] & 0xF0) >> 4;
+				time.tm_mon = ((line[6] & 0x80) >> 7) + ((line[7] & 0x07) << 1) - 1;
 				time.tm_mday = (line[7] & 0xF8) >> 3;
 				time.tm_hour = line[3];
 				time.tm_min = line[4];
