@@ -83,7 +83,8 @@ void usage(char *progname)
 	std::cout << "  - c: conf file:   Provide alternate configuration file instead of ~/.kalenji_readerrc" << std::endl;
 	std::cout << "  - d: output dir:  Directory to which output files should be produced" << std::endl;
 	std::cout << "  - f: filters:     Comma separated list of filters to apply on data before the export. Use 'none' for empty list" << std::endl;
-	std::cout << "  - D: device:      Type of device to use (e.g: GPX, Kalenji)" << std::endl;
+	std::cout << "  - D: device:      Type of device to use (e.g: GPX, Kalenji, OnMove710)" << std::endl;
+	std::cout << "  - p: path:        Folder path for file-based access device (mass-storage device like OnMove710)" << std::endl;
 	std::cout << "  - i: input file:  Provide input file instead of reading from device" << std::endl;
 	std::cout << "  - o: outputs:     Comma separated list of output formats to produce for each session." << std::endl;
 	std::cout << "  - t: trigger:     Override the type of trigger (possible values: manual, distance, time, location, hr)" << std::endl;
@@ -93,7 +94,7 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 {
 	std::map<std::string, std::string> options;
 	int option;
-	while((option = getopt(argc, argv, ":c:d:f:D:i:o:t:h")) != -1)
+	while((option = getopt(argc, argv, ":c:d:f:D:p:i:o:t:h")) != -1)
 	{
 		switch(option)
 		{
@@ -109,6 +110,10 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 			case 'D':
 				options["device"] = std::string(optarg);
 				break;
+		        case 'p':
+			        options["source"] = "Path";
+			        options["path"] = std::string(optarg);
+                                break;
 			case 'i':
 				options["source"] = "File";
 				options["sourcefile"] = std::string(optarg);
@@ -311,7 +316,7 @@ int main(int argc, char *argv[])
 		if(!checkAndCreateDir(configuration["directory"])) return -1;
 
 		// TODO: Use registry for source too 
-		source::Source *dataSource;
+		source::Source *dataSource = NULL;
 		if(configuration["source"] == "File")
 		{
 			dataSource = new source::File(configuration["sourcefile"]);
@@ -320,7 +325,7 @@ int main(int argc, char *argv[])
 		{
 			dataSource = new source::HexdumpFile(configuration["sourcefile"]);
 		}
-		else
+		else if(configuration["souce"] == "USB")
 		{
 			dataSource = new source::USB();
 			if(configuration["log_transactions"] == "yes")
@@ -386,6 +391,7 @@ int main(int argc, char *argv[])
 			throw std::exception();
 		}
 		myDevice->setSource(dataSource);
+		myDevice->setConfiguration(configuration);
 		myDevice->init();
 		SessionsMap sessions;
 		myDevice->getSessionsList(&sessions);
@@ -399,8 +405,11 @@ int main(int argc, char *argv[])
 
 		myDevice->release();
 		delete myDevice;
-		dataSource->release();
-		delete dataSource;
+		if(dataSource != NULL) 
+		{
+			dataSource->release();
+			delete dataSource;
+		}
 
 		// TODO: Cleaner, modular way to include it ?
 		// Remove empty sessions, most likely they were not imported when using a file so we don't want to export them
