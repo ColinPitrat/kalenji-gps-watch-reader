@@ -23,8 +23,8 @@ Alternatively, you place and name your file however/wherever you want and pass i
 
 =Options available=
 
-==Support of OnMove 510 and OnMove 710==
-OnMove 510 and 710 are recognized as USB mass storage device. You should be able to configure your computer to automatically mount it at some place of your choice. 
+==Support of !OnMove 510 and !OnMove 710==
+!OnMove 510 and 710 are recognized as USB mass storage device. You should be able to configure your computer to automatically mount it at some place of your choice. 
 Then put the following in your configuration file:
 {{{
 source=Path
