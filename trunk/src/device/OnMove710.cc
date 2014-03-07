@@ -180,6 +180,7 @@ namespace device
 
 			unsigned char* buffer;
 			size_t size = -1;
+
 			std::string ghtFilename = filenamePrefix + std::string(".GHT");
 			buffer = readAllBytes(ghtFilename,size);
 			parseGHTFile(buffer,session);
@@ -207,6 +208,8 @@ namespace device
 		unsigned char* chunk;
 		time_t current_time = session->getTime();
 		uint32_t cumulated_tenth = 0;
+		uint32_t id_point = 0;
+		std::list<Lap*>::iterator lap = session->getLaps().begin();
 
 		for(int i=0; i<length; i=i+20) 
 		{
@@ -225,6 +228,27 @@ namespace device
 
 			current_time += cumulated_tenth / 10;
 			cumulated_tenth = cumulated_tenth % 10;
+
+			if(id_point == (*lap)->getFirstPointId())
+			{
+				(*lap)->setStartPoint(session->getPoints().back());
+			}
+			while(id_point >= (*lap)->getLastPointId() && lap != session->getLaps().end())
+			{
+				// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
+				if((*lap)->getStartPoint() == NULL)
+				{
+					std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
+					(*lap)->setStartPoint(session->getPoints().back());
+				}
+				(*lap)->setEndPoint(session->getPoints().back());
+				++lap;
+				if(lap != session->getLaps().end())
+				{
+					(*lap)->setStartPoint(session->getPoints().back());
+				}
+			}
+			id_point++;
 		}
 	}
 

@@ -3,7 +3,7 @@
  <Activities>
   <Activity>
    <Id>20130-120-20T130:260:47Z</Id>
-   <Lap>
+   <Lap StartTime="2013-12-20T13:26:47.0Z">
     <TotalTimeSeconds>1611000</TotalTimeSeconds>
     <DistanceMeters>341</DistanceMeters>
     <MaximumSpeed>2</MaximumSpeed>
@@ -903,7 +903,7 @@
      </Trackpoint>
     </Track>
    </Lap>
-   <Lap>
+   <Lap StartTime="2013-12-20T13:29:24.2Z">
     <TotalTimeSeconds>2881000</TotalTimeSeconds>
     <DistanceMeters>630</DistanceMeters>
     <MaximumSpeed>2</MaximumSpeed>
@@ -2535,7 +2535,7 @@
      </Trackpoint>
     </Track>
    </Lap>
-   <Lap>
+   <Lap StartTime="2013-12-20T13:34:12.8Z">
     <TotalTimeSeconds>2945000</TotalTimeSeconds>
     <DistanceMeters>661</DistanceMeters>
     <MaximumSpeed>2</MaximumSpeed>
