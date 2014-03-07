@@ -5,6 +5,9 @@
 #include "../source/Source.h"
 #include "../bom/Session.h"
 
+#include <string>
+#include <map>
+
 #define DECLARE_DEVICE(DeviceClass) static LayerRegistrer<Device, DeviceClass> _registrer;
 #define REGISTER_DEVICE(DeviceClass) LayerRegistrer<Device, DeviceClass> DeviceClass::_registrer;
 
@@ -17,8 +20,9 @@ namespace device
 	{
 		public:
 			Device() : _dataSource(NULL) {};
-
+	                virtual void setConfiguration(std::map<std::string, std::string> configuration) {_configuration = configuration;}
 			virtual void setSource(source::Source *dataSource) { _dataSource = dataSource; };
+
 			/** 
 			  Initialize the device. Any action that needs to be done before discussing with it.
 			 */ 
@@ -53,6 +57,7 @@ namespace device
 			virtual unsigned int getProductId() = 0;
 
 		protected:
+			std::map<std::string, std::string> _configuration;
 			source::Source *_dataSource;
 	};
 }
