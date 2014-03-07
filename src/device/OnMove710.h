@@ -58,8 +58,6 @@ namespace device
 		private:
 			std::string getPath();
 			DECLARE_DEVICE(OnMove710);
-
-	
 	};
 }
 
