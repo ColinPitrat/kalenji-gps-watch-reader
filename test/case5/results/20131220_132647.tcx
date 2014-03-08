@@ -4,9 +4,9 @@
   <Activity>
    <Id>20130-120-20T130:260:47Z</Id>
    <Lap StartTime="2013-12-20T13:26:47.0Z">
-    <TotalTimeSeconds>161</TotalTimeSeconds>
+    <TotalTimeSeconds>161.1</TotalTimeSeconds>
     <DistanceMeters>341</DistanceMeters>
-    <MaximumSpeed>7</MaximumSpeed>
+    <MaximumSpeed>7.93</MaximumSpeed>
     <Calories>98</Calories>
     <AverageHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>94</Value></AverageHeartRateBpm>
     <MaximumHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>105</Value></MaximumHeartRateBpm>
@@ -904,9 +904,9 @@
     </Track>
    </Lap>
    <Lap StartTime="2013-12-20T13:29:24.2Z">
-    <TotalTimeSeconds>288</TotalTimeSeconds>
+    <TotalTimeSeconds>288.1</TotalTimeSeconds>
     <DistanceMeters>630</DistanceMeters>
-    <MaximumSpeed>7</MaximumSpeed>
+    <MaximumSpeed>7.51</MaximumSpeed>
     <Calories>91</Calories>
     <AverageHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>91</Value></AverageHeartRateBpm>
     <MaximumHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>96</Value></MaximumHeartRateBpm>
@@ -2536,9 +2536,9 @@
     </Track>
    </Lap>
    <Lap StartTime="2013-12-20T13:34:12.8Z">
-    <TotalTimeSeconds>294</TotalTimeSeconds>
+    <TotalTimeSeconds>294.5</TotalTimeSeconds>
     <DistanceMeters>661</DistanceMeters>
-    <MaximumSpeed>8</MaximumSpeed>
+    <MaximumSpeed>8.03</MaximumSpeed>
     <Calories>87</Calories>
     <AverageHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>91</Value></AverageHeartRateBpm>
     <MaximumHeartRateBpm xsi:type="HeartRateInBeatsPerMinute_t"><Value>96</Value></MaximumHeartRateBpm>
