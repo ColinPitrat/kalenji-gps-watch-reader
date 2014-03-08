@@ -2421,11 +2421,11 @@
       <gpxdata:startPoint lat="51.217907" lon="3.211408"/>
       <gpxdata:endPoint lat="51.215815" lon="3.214917" />
       <gpxdata:startTime>2013-12-20T13:26:47.0Z</gpxdata:startTime>
-      <gpxdata:elapsedTime>1611000</gpxdata:elapsedTime>
-      <gpxdata:calories>0</gpxdata:calories>
+      <gpxdata:elapsedTime>161</gpxdata:elapsedTime>
+      <gpxdata:calories>98</gpxdata:calories>
       <gpxdata:distance>341</gpxdata:distance>
-      <gpxdata:summary name="AverageSpeed" kind="avg">0</gpxdata:summary>
-      <gpxdata:summary name="MaximumSpeed" kind="max">2</gpxdata:summary>
+      <gpxdata:summary name="AverageSpeed" kind="avg">7</gpxdata:summary>
+      <gpxdata:summary name="MaximumSpeed" kind="max">7</gpxdata:summary>
       <gpxdata:summary name="AverageHeartRateBpm" kind="avg">94</gpxdata:summary>
       <gpxdata:summary name="MaximumHeartRateBpm" kind="max">105</gpxdata:summary>
       <gpxdata:trigger>distance</gpxdata:trigger>
@@ -2436,11 +2436,11 @@
       <gpxdata:startPoint lat="51.215815" lon="3.214917"/>
       <gpxdata:endPoint lat="51.211558" lon="3.220625" />
       <gpxdata:startTime>2013-12-20T13:29:24.2Z</gpxdata:startTime>
-      <gpxdata:elapsedTime>2881000</gpxdata:elapsedTime>
-      <gpxdata:calories>0</gpxdata:calories>
+      <gpxdata:elapsedTime>288</gpxdata:elapsedTime>
+      <gpxdata:calories>91</gpxdata:calories>
       <gpxdata:distance>630</gpxdata:distance>
-      <gpxdata:summary name="AverageSpeed" kind="avg">0</gpxdata:summary>
-      <gpxdata:summary name="MaximumSpeed" kind="max">2</gpxdata:summary>
+      <gpxdata:summary name="AverageSpeed" kind="avg">7</gpxdata:summary>
+      <gpxdata:summary name="MaximumSpeed" kind="max">7</gpxdata:summary>
       <gpxdata:summary name="AverageHeartRateBpm" kind="avg">91</gpxdata:summary>
       <gpxdata:summary name="MaximumHeartRateBpm" kind="max">96</gpxdata:summary>
       <gpxdata:trigger>distance</gpxdata:trigger>
@@ -2451,11 +2451,11 @@
       <gpxdata:startPoint lat="51.211558" lon="3.220625"/>
       <gpxdata:endPoint lat="51.20686" lon="3.224378" />
       <gpxdata:startTime>2013-12-20T13:34:12.8Z</gpxdata:startTime>
-      <gpxdata:elapsedTime>2945000</gpxdata:elapsedTime>
-      <gpxdata:calories>0</gpxdata:calories>
+      <gpxdata:elapsedTime>294</gpxdata:elapsedTime>
+      <gpxdata:calories>87</gpxdata:calories>
       <gpxdata:distance>661</gpxdata:distance>
-      <gpxdata:summary name="AverageSpeed" kind="avg">0</gpxdata:summary>
-      <gpxdata:summary name="MaximumSpeed" kind="max">2</gpxdata:summary>
+      <gpxdata:summary name="AverageSpeed" kind="avg">8</gpxdata:summary>
+      <gpxdata:summary name="MaximumSpeed" kind="max">8</gpxdata:summary>
       <gpxdata:summary name="AverageHeartRateBpm" kind="avg">91</gpxdata:summary>
       <gpxdata:summary name="MaximumHeartRateBpm" kind="max">96</gpxdata:summary>
       <gpxdata:trigger>distance</gpxdata:trigger>
