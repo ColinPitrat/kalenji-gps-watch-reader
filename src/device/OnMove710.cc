@@ -217,7 +217,7 @@ namespace device
 			double latitude = ((double)bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3])) / 1000000.;//bytesToInt(chunk.slice(0, 4)) / 1000000,
 			double longitude = ((double)bytesToInt4(chunk[4],chunk[5],chunk[6],chunk[7])) / 1000000.;//bytesToInt(chunk.slice(4, 8)) / 1000000,
 			int16_t altitude = bytesToInt2(chunk[8],chunk[9]);//bytesToInt(chunk.slice(8, 10)),
-			double speed = ((double)bytesToInt2(chunk[10],chunk[11])) / 100.;//bytesToInt(chunk.slice(10, 12)) *10/3600,//[dm/h]=>[m/s]
+			double speed = ((double)bytesToInt2(chunk[10],chunk[11])) / 100.0;//bytesToInt(chunk.slice(10, 12)) *10/3600,//[dm/h]=>[m/s]
 			uint16_t heartRate = (unsigned char)chunk[12];//bytesToInt(chunk[12]),
 			uint16_t status = chunk[13];//bytesToInt(chunk[13]),
 			//TODO: Don't know what at 14-15
@@ -260,11 +260,11 @@ namespace device
 		{
 			chunk = &bytes[i];
 
-			int accruedTime = bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3]) / 10.0;//bytesToInt(chunk.slice(0, 4)) * 100, // [s/10] => [ms]
-			int totalTime = bytesToInt4(chunk[4],chunk[5],chunk[6],chunk[7]) / 10.0;//bytesToInt(chunk.slice(4, 8)) * 1000, // [s] => [ms]
+			double accruedTime = bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3]) / 10.0;//bytesToInt(chunk.slice(0, 4)) * 100, // [s/10] => [ms]
+			double totalTime = bytesToInt4(chunk[4],chunk[5],chunk[6],chunk[7]) / 10.0;//bytesToInt(chunk.slice(4, 8)) * 1000, // [s] => [ms]
 			int totalDistance = bytesToInt4(chunk[8],chunk[9],chunk[10],chunk[11]);//bytesToInt(chunk.slice(8, 12)),
-			int maxSpeed = bytesToInt2(chunk[12],chunk[13]) / 100.0;//bytesToInt(chunk.slice(12, 14)) * 10 / 3600, // [dm/h] => [m/s]
-			int averageSpeed = bytesToInt2(chunk[14],chunk[15]) / 100.0;//bytesToInt(chunk.slice(14, 16))*10/3600,[dm/h]=>[m/s]
+			double maxSpeed = bytesToInt2(chunk[12],chunk[13]) / 100.0;//bytesToInt(chunk.slice(12, 14)) * 10 / 3600, // [dm/h] => [m/s]
+			double averageSpeed = bytesToInt2(chunk[14],chunk[15]) / 100.0;//bytesToInt(chunk.slice(14, 16))*10/3600,[dm/h]=>[m/s]
 			/* Really sure it's maxPace and averagePace ?! */
 			int maxPace = bytesToInt2(chunk[16],chunk[17]);//bytesToInt(chunk.slice(16, 18)),
 			int averagePace =bytesToInt2(chunk[18],chunk[19]);//bytesToInt(chunk.slice(18, 20)),
@@ -315,7 +315,7 @@ namespace device
 		int seconds = bytes[5];
 
 		int totalPoint = bytesToInt2(bytes[6],bytes[7]);//bytesToInt(bytes.slice(6, 8)),
-		int totalTime = bytesToInt4(bytes[8],bytes[9],bytes[10],bytes[11]) / 10.0;//bytes.slice(8, 12)) * 100, // [s/10] => [s]
+		double totalTime = bytesToInt4(bytes[8],bytes[9],bytes[10],bytes[11]) / 10.0;//bytes.slice(8, 12)) * 100, // [s/10] => [s]
 		int totalDistance = bytesToInt4(bytes[12],bytes[13],bytes[14],bytes[15]);//bytesToInt(bytes.slice(12, 16)),
 		int lapCount = bytesToInt2(bytes[16],bytes[17]);//bytesToInt(bytes.slice(16, 18)),
 		int ptRec = bytesToInt2(bytes[18],bytes[19]);//bytesToInt(bytes.slice(18, 20)),
@@ -328,8 +328,8 @@ namespace device
 		int guestDistance = bytesToInt4(bytes[44],bytes[45],bytes[46],bytes[47]);//bytesToInt(bytes.slice(44, 48)),
 		int guestAverageSpeed = bytesToInt2(bytes[48],bytes[49]) / 100.0;//bytesToInt(bytes.slice(48, 50)) * 10 / 3600,//[dm/h]=>[m/s]
 		int guestAveragePace = bytesToInt2(bytes[50],bytes[51]);//bytesToInt(bytes.slice(50, 52)),
-		int maxSpeed = bytesToInt2(bytes[52],bytes[53]) / 100.0;//bytesToInt(bytes.slice(52, 54)) * 10 / 3600, // [dm/h] => [m/s]
-		int averageSpeed = bytesToInt2(bytes[54],bytes[55]) / 100.0;//bytesToInt(bytes.slice(54, 56)) * 10 / 3600,//[dm/h]=>[m/s]
+		double maxSpeed = bytesToInt2(bytes[52],bytes[53]) / 100.0;//bytesToInt(bytes.slice(52, 54)) * 10 / 3600, // [dm/h] => [m/s]
+		double averageSpeed = bytesToInt2(bytes[54],bytes[55]) / 100.0;//bytesToInt(bytes.slice(54, 56)) * 10 / 3600,//[dm/h]=>[m/s]
 		int maxPace = bytesToInt2(bytes[56],bytes[57]);//bytesToInt(bytes.slice(56, 58)),
 		int averagePace = bytesToInt2(bytes[58],bytes[59]);//bytesToInt(bytes.slice(58, 60)),
 		int maxHeartRate =  bytes[60];
