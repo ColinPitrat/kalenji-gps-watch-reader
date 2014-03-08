@@ -38,7 +38,7 @@
 <name>Lap 1</name>
 <styleUrl>kalenji_lap</styleUrl>
 <description>
-<b>Distance:</b> 0.341 km<br/><b>Time:</b> 18d 15h30m0s<br/><b>Average speed:</b> 0 km/h<br/><b>Maximum speed:</b> 2 km/h<br/><b>Average heartrate:</b> 94 bpm<br/><b>Maximum heartrate:</b> 105 bpm<br/></description>
+<b>Distance:</b> 0.341 km<br/><b>Time:</b> 2m41s<br/><b>Average speed:</b> 7 km/h<br/><b>Maximum speed:</b> 7 km/h<br/><b>Average heartrate:</b> 94 bpm<br/><b>Maximum heartrate:</b> 105 bpm<br/></description>
 <Point>
 <coordinates>3.214917,51.215815,0</coordinates>
 </Point>
@@ -47,7 +47,7 @@
 <name>Lap 2</name>
 <styleUrl>kalenji_lap</styleUrl>
 <description>
-<b>Distance:</b> 0.63 km<br/><b>Time:</b> 33d 8h16m40s<br/><b>Average speed:</b> 0 km/h<br/><b>Maximum speed:</b> 2 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/></description>
+<b>Distance:</b> 0.63 km<br/><b>Time:</b> 4m48s<br/><b>Average speed:</b> 7 km/h<br/><b>Maximum speed:</b> 7 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/></description>
 <Point>
 <coordinates>3.220625,51.211558,9</coordinates>
 </Point>
@@ -56,7 +56,7 @@
 <name>Lap 3</name>
 <styleUrl>kalenji_lap</styleUrl>
 <description>
-<b>Distance:</b> 0.661 km<br/><b>Time:</b> 34d 2h3m20s<br/><b>Average speed:</b> 0 km/h<br/><b>Maximum speed:</b> 2 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/></description>
+<b>Distance:</b> 0.661 km<br/><b>Time:</b> 4m54s<br/><b>Average speed:</b> 8 km/h<br/><b>Maximum speed:</b> 8 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/></description>
 <Point>
 <coordinates>3.224378,51.20686,0</coordinates>
 </Point>
