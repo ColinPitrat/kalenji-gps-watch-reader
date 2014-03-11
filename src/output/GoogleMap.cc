@@ -20,6 +20,7 @@ namespace output
 		mystream << "<title>Session from " << session->getBeginTime() << "</title>" << std::endl;
 		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
+		mystream << "popupGlobal = null;" << std::endl;
 
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
@@ -56,6 +57,7 @@ namespace output
 			mystream << "<b>Elevation:</b> " << (*it)->getAltitude() << " m";
 			mystream << "\"});" << std::endl;
 			mystream << "    popup.open(map);" << std::endl;
+			mystream << "    return popup;" << std::endl;
 			mystream << "}" << std::endl;
 			++point;
 		}
@@ -96,6 +98,7 @@ namespace output
 				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
 				mystream << "\"});" << std::endl;
 				mystream << "    popup.open(map);" << std::endl;
+				mystream << "    return popup;" << std::endl;
 				mystream << "}" << std::endl;
 			}
 			++lap;
@@ -115,7 +118,7 @@ namespace output
 		}
 		mystream << ");" << std::endl;
 
-		mystream << "function load() " << std::endl;
+		mystream << "function loadMap() " << std::endl;
 		mystream << "{" << std::endl;
 		mystream << "	var centerLatLng = new google.maps.LatLng(pointsList[0][0], pointsList[0][1]);" << std::endl;
 		mystream << "	var myOptions = {" << std::endl;
@@ -159,9 +162,86 @@ namespace output
 		mystream << "}" << std::endl;
 		mystream << "//]]>" << std::endl;
 		mystream << "</script>" << std::endl;
+		mystream << "<script type=\"text/javascript\" src=\"http://dygraphs.com/1.0.1/dygraph-combined.js\"></script>" << std::endl;
+		mystream << "<script type=\"text/javascript\">" << std::endl;
+		mystream << "// point ID, elapsed time (ms), speed (km/h), heartrate (bpm), elevation (m)" << std::endl;
+		mystream << "var rawDatas = [" << std::endl;
+		int i = 0;
+		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		{
+			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000;
+			mystream << "[" << i << "," << elapsed << "," << (*it)->getSpeed() << "," << (*it)->getHeartRate() << "," << (*it)->getAltitude() << "]," << std::endl;
+			++i;
+		}
+		mystream << "]" << std::endl;
+		mystream << "displayData = [true, true, true]" << std::endl;
+		mystream << "labelsData = [\"Speed\", \"Heart Rate\", \"Altitude\"]" << std::endl;
+		mystream << "function durationToString(pt,multiline) {" << std::endl;
+		mystream << "	 ms = rawDatas[pt][1];" << std::endl;
+		mystream << "	 var h = Math.floor(ms / (61 * 60 * 1000));" << std::endl;
+		mystream << "	 ms = ms - h * (60 * 60 * 1000);" << std::endl;
+		mystream << "	 var m = Math.floor(ms / (60 * 1000));" << std::endl;
+		mystream << "	 ms = ms - m * (60 * 1000);" << std::endl;
+		mystream << "	 var s = Math.floor(ms / 1000);" << std::endl;
+		mystream << "	 ms = ms - (s * 1000);" << std::endl;
+		mystream << "	 ths = Math.floor(ms / 10);" << std::endl;
+		mystream << "	 var r = \"\";" << std::endl;
+		mystream << "	 if(h!==0) {r = r + h +\"h\"; if(multiline) {r = r +\"<br/>\"}}" << std::endl;
+		mystream << "	 r = r + m + \"mn\"; if(multiline) {r = r +\"<br/>\"}" << std::endl;
+		mystream << "	 r = r + s + \".\" + ths +\"s\";" << std::endl;
+		mystream << "	 return r;" << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "function loadGraph() " << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "	graphDatas=[];" << std::endl;
+		mystream << "	labels=[];" << std::endl;
+		mystream << "	for(var i = 0; i < rawDatas.length; i++)" << std::endl;
+		mystream << "	{" << std::endl;
+		mystream << "		var col = 0;" << std::endl;
+		mystream << "		graphDatas[i] = [];" << std::endl;
+		mystream << "		labels[col] = \"Point ID\";" << std::endl;
+		mystream << "		graphDatas[i][col++] = rawDatas[i][0];" << std::endl;
+		mystream << "		for(var j = 0; j < 3; j++)" << std::endl;
+		mystream << "		{" << std::endl;
+		mystream << "			if(displayData[j])" << std::endl;
+		mystream << "			{" << std::endl;
+		mystream << "				labels[col] = labelsData[j];" << std::endl;
+		mystream << "				graphDatas[i][col++] = rawDatas[i][j+2];" << std::endl;
+		mystream << "			}" << std::endl;
+		mystream << "		}" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "	g = new Dygraph(" << std::endl;
+		mystream << "	document.getElementById(\"graph\")" << std::endl;
+		mystream << "	,graphDatas" << std::endl;
+		mystream << "	,{" << std::endl;
+		mystream << "	labels: labels " << std::endl;
+		mystream << "	,axes: { " << std::endl;
+		mystream << "	x: {" << std::endl;
+		mystream << "	 valueFormatter: function(ms) {return durationToString(ms,false);}" << std::endl;
+		mystream << "	 ,axisLabelFormatter: function(ms) {return durationToString(ms,true);}" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "	);" << std::endl;
+		mystream << "	g.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "function toggleDisplay(i)" << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "	displayData[i] = !displayData[i];" << std::endl;
+		mystream << "	loadGraph();" << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "function load()" << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "	loadGraph();" << std::endl;
+		mystream << "	loadMap();" << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "</script>" << std::endl;
 		mystream << "</head>" << std::endl;
 		mystream << "<body onload=\"load()\" style=\"cursor:crosshair\" border=\"0\">" << std::endl;
-		mystream << "<div id=\"map\" style=\"width: 100%; height: 600px; top: 0px; left: 0px\"></div>" << std::endl;
+		mystream << "<div id=\"map\" style=\"width: 100%; height: 500px; top: 0px; left: 0px\"></div>" << std::endl;
+		mystream << "<div id=\"graph\" style=\"width: 100%; height: 300px; top: 0px; left: 0px\"></div>" << std::endl;
+		mystream << "<div id=\"spacer\" style=\"height: 25px\"></div>" << std::endl;
+		mystream << "<div id=\"controls\" style=\"width: 100%; text-align:center\"><input type=\"checkbox\" name=\"Speed\" onchange=\"toggleDisplay(0)\" checked=\"checked\">Speed</input><input type=\"checkbox\" name=\"Heartrate\" onchange=\"toggleDisplay(1)\" checked=\"checked\">Heartrate</input><input type=\"checkbox\" name=\"Elevation\" onchange=\"toggleDisplay(2)\" checked=\"checked\">Elevation</input></div>" << std::endl;
 		mystream << "</body>" << std::endl;
 		mystream << "</html>" << std::endl;
 	}
