@@ -90,6 +90,7 @@ namespace output
 				mystream << "{" << std::endl;
 				mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
 				mystream << "                                            content: \"";
+				mystream << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap+1 << "</h3>";
 				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
 				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
 				mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
@@ -165,13 +166,27 @@ namespace output
 		mystream << "<script type=\"text/javascript\" src=\"http://dygraphs.com/1.0.1/dygraph-combined.js\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "// point ID, elapsed time (ms), speed (km/h), heartrate (bpm), elevation (m)" << std::endl;
-		mystream << "var rawDatas = [" << std::endl;
+		mystream << "rawDatas = [" << std::endl;
 		int i = 0;
+		laps = session->getLaps();
+		std::list<Lap*>::iterator itLaps = laps.begin();
+		std::list<uint32_t> lapsList;
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000;
 			mystream << "[" << i << "," << elapsed << "," << (*it)->getSpeed() << "," << (*it)->getHeartRate() << "," << (*it)->getAltitude() << "]," << std::endl;
+			while((*itLaps)->getEndPoint() == *it)
+			{
+				lapsList.push_back(i);
+				itLaps++;
+			}
 			++i;
+		}
+		mystream << "]" << std::endl;
+		mystream << "laps = [";
+		for(std::list<uint32_t>::iterator it = lapsList.begin(); it != lapsList.end(); ++it)
+		{
+			mystream << *it << ",";
 		}
 		mystream << "]" << std::endl;
 		mystream << "displayData = [true, true, true]" << std::endl;
@@ -201,6 +216,8 @@ namespace output
 		mystream << "		graphDatas[i] = [];" << std::endl;
 		mystream << "		labels[col] = \"Point ID\";" << std::endl;
 		mystream << "		graphDatas[i][col++] = rawDatas[i][0];" << std::endl;
+		mystream << "		labels[col] = \"Laps\";" << std::endl;
+		mystream << "		graphDatas[i][col++] = null;" << std::endl;
 		mystream << "		for(var j = 0; j < 3; j++)" << std::endl;
 		mystream << "		{" << std::endl;
 		mystream << "			if(displayData[j])" << std::endl;
@@ -214,8 +231,9 @@ namespace output
 		mystream << "	document.getElementById(\"graph\")" << std::endl;
 		mystream << "	,graphDatas" << std::endl;
 		mystream << "	,{" << std::endl;
-		mystream << "	labels: labels " << std::endl;
-		mystream << "	,axes: { " << std::endl;
+		mystream << "	labels: labels," << std::endl;
+		mystream << "   colors: [\"#000000\", \"#0000FF\", \"#00AA00\", \"#FF0000\"]," << std::endl;
+		mystream << "	axes: { " << std::endl;
 		mystream << "	x: {" << std::endl;
 		mystream << "	 valueFormatter: function(ms) {return durationToString(ms,false);}" << std::endl;
 		mystream << "	 ,axisLabelFormatter: function(ms) {return durationToString(ms,true);}" << std::endl;
@@ -224,6 +242,28 @@ namespace output
 		mystream << "	}" << std::endl;
 		mystream << "	);" << std::endl;
 		mystream << "	g.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
+		mystream << "	g.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval][0], pointsList[ann.xval][1]); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
+		mystream << "	g.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
+		mystream << "			for(var i = 0; i+1 < laps.length; i+=2)" << std::endl;
+		mystream << "			{" << std::endl;
+		mystream << "              var left = g.toDomCoords(laps[i], 0)[0];" << std::endl;
+		mystream << "              var right = g.toDomCoords(laps[i+1], 0)[0];" << std::endl;
+		mystream << "              canvas.fillStyle = \"rgba(220, 220, 220, 1.0)\";" << std::endl;
+		mystream << "              canvas.fillRect(left, area.y, right - left, area.h);" << std::endl;
+		mystream << "			}" << std::endl;
+		mystream << "		}});" << std::endl;
+		mystream << "	annotations = [];" << std::endl;
+		mystream << "	for(var i = 0; i < laps.length; ++i)" << std::endl;
+		mystream << "	{" << std::endl;
+		mystream << "		annotations.push({" << std::endl;
+		mystream << "			series: 'Laps'," << std::endl;
+		mystream << "			xval: laps[i]," << std::endl;
+		mystream << "			attachAtBottom: true," << std::endl;
+		mystream << "			shortText: (i+1)," << std::endl;
+		mystream << "			text: 'Lap ' + (i+1)" << std::endl;
+		mystream << "		});" << std::endl;
+		mystream << "	}" << std::endl;
+		mystream << "	g.setAnnotations(annotations);" << std::endl;
 		mystream << "}" << std::endl;
 		mystream << "function toggleDisplay(i)" << std::endl;
 		mystream << "{" << std::endl;
