@@ -21,6 +21,7 @@ namespace output
 		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "popupGlobal = null;" << std::endl;
+		mystream << "highlightedPoint = null;" << std::endl;
 
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
@@ -131,6 +132,7 @@ namespace output
 		mystream << "	      mapTypeId: google.maps.MapTypeId.HYBRID" << std::endl;
 		mystream << "	};" << std::endl << std::endl;
 		mystream << "	map = new google.maps.Map(document.getElementById(\"map\"), myOptions);" << std::endl;
+		mystream << "   highlightedPoint = new google.maps.Marker({position: centerLatLng, map: map, zIndex: 1});" << std::endl;
 		mystream << "	var image_size = new google.maps.Size(32, 32);" << std::endl;
 		mystream << "	var image_origin = new google.maps.Point(0, 0);" << std::endl;
 		mystream << "	var image_anchor = new google.maps.Point(3, 25);" << std::endl;
@@ -249,6 +251,7 @@ namespace output
 		mystream << "	}" << std::endl;
 		mystream << "	);" << std::endl;
 		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
+		mystream << "	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); map.setCenter(center); highlightedPoint.setPosition(center); } });" << std::endl;
 		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval][0], pointsList[ann.xval][1]); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
 		mystream << "	graph.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
 		mystream << "			for(var i = 0; i+1 < laps.length; i+=2)" << std::endl;
