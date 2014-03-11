@@ -325,7 +325,7 @@ int main(int argc, char *argv[])
 		{
 			dataSource = new source::HexdumpFile(configuration["sourcefile"]);
 		}
-		else if(configuration["souce"] == "USB")
+		else if(configuration["source"] == "USB")
 		{
 			dataSource = new source::USB();
 			if(configuration["log_transactions"] == "yes")
