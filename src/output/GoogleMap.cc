@@ -119,6 +119,8 @@ namespace output
 		}
 		mystream << ");" << std::endl;
 
+		mystream << "var graph;" << std::endl;
+
 		mystream << "function loadMap() " << std::endl;
 		mystream << "{" << std::endl;
 		mystream << "	var centerLatLng = new google.maps.LatLng(pointsList[0][0], pointsList[0][1]);" << std::endl;
@@ -158,8 +160,13 @@ namespace output
 		mystream << "					});" << std::endl;
 		mystream << "			polyline.setMap(map);" << std::endl;
 		mystream << "			google.maps.event.addListener(polyline, 'click', point_popup_callbacks[i]);" << std::endl;
+		mystream << "		        attachMouseOverHandler(polyline, i);" << std::endl;
 		mystream << "		}" << std::endl;
 		mystream << "	}" << std::endl;
+		mystream << "}" << std::endl;
+
+		mystream << "function attachMouseOverHandler(mapElement, point) {" << std::endl;
+		mystream << "     google.maps.event.addListener(mapElement, 'mouseover', function() {graph.setSelection(point);});" << std::endl;
 		mystream << "}" << std::endl;
 		mystream << "//]]>" << std::endl;
 		mystream << "</script>" << std::endl;
@@ -227,7 +234,7 @@ namespace output
 		mystream << "			}" << std::endl;
 		mystream << "		}" << std::endl;
 		mystream << "	}" << std::endl;
-		mystream << "	g = new Dygraph(" << std::endl;
+		mystream << "	graph = new Dygraph(" << std::endl;
 		mystream << "	document.getElementById(\"graph\")" << std::endl;
 		mystream << "	,graphDatas" << std::endl;
 		mystream << "	,{" << std::endl;
@@ -241,13 +248,13 @@ namespace output
 		mystream << "	}" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "	);" << std::endl;
-		mystream << "	g.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
-		mystream << "	g.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval][0], pointsList[ann.xval][1]); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
-		mystream << "	g.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
+		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
+		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval][0], pointsList[ann.xval][1]); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
+		mystream << "	graph.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
 		mystream << "			for(var i = 0; i+1 < laps.length; i+=2)" << std::endl;
 		mystream << "			{" << std::endl;
-		mystream << "              var left = g.toDomCoords(laps[i], 0)[0];" << std::endl;
-		mystream << "              var right = g.toDomCoords(laps[i+1], 0)[0];" << std::endl;
+		mystream << "              var left = graph.toDomCoords(laps[i], 0)[0];" << std::endl;
+		mystream << "              var right = graph.toDomCoords(laps[i+1], 0)[0];" << std::endl;
 		mystream << "              canvas.fillStyle = \"rgba(220, 220, 220, 1.0)\";" << std::endl;
 		mystream << "              canvas.fillRect(left, area.y, right - left, area.h);" << std::endl;
 		mystream << "			}" << std::endl;
@@ -263,7 +270,7 @@ namespace output
 		mystream << "			text: 'Lap ' + (i+1)" << std::endl;
 		mystream << "		});" << std::endl;
 		mystream << "	}" << std::endl;
-		mystream << "	g.setAnnotations(annotations);" << std::endl;
+		mystream << "	graph.setAnnotations(annotations);" << std::endl;
 		mystream << "}" << std::endl;
 		mystream << "function toggleDisplay(i)" << std::endl;
 		mystream << "{" << std::endl;
