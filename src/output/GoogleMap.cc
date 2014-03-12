@@ -5,6 +5,13 @@
 #include <iomanip>
 #include <fstream>
 
+// TODOs:
+// Add session information
+// Always have 0 of axis visible (but if negative value (e.g: altitude) it should be visible too)
+// Check whether highlightedPoint could be the global popup without glitches, by moving it and changing its content instead of closing it and opening a new one. Or maybe the glitches are due to a strange input to the callback ... Check the point exists ?
+// Integrate patch to have two axis
+// Allow to choose X axis (distance or time)
+// Allow to choose what to draw on which axis (once patch integrated)
 namespace output
 {
 	REGISTER_OUTPUT(GoogleMap);
@@ -241,6 +248,7 @@ namespace output
 		mystream << "	,graphDatas" << std::endl;
 		mystream << "	,{" << std::endl;
 		mystream << "	labels: labels," << std::endl;
+		mystream << "	\"Speed\": { axis: {}}," << std::endl;
 		mystream << "   colors: [\"#000000\", \"#0000FF\", \"#00AA00\", \"#FF0000\"]," << std::endl;
 		mystream << "	axes: { " << std::endl;
 		mystream << "	x: {" << std::endl;
@@ -248,6 +256,8 @@ namespace output
 		mystream << "	 ,axisLabelFormatter: function(ms) {return durationToString(ms,true);}" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "	}" << std::endl;
+		mystream << "	,ylabel: 'Heart rate (bpm) / Altitude (m)'" << std::endl;
+		mystream << "	,y2label: 'Speed (km/h)'" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "	);" << std::endl;
 		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
