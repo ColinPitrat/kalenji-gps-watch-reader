@@ -45,7 +45,8 @@ namespace output
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
-		        if(it != points.begin()) {
+			if(it != points.begin()) 
+			{
 			  mystream << ","; 
 			}
 			mystream <<  "{";
