@@ -6,6 +6,7 @@
 #include <fstream>
 
 // TODOs:
+// Clean way laps are handled (one generic function and one class for laps, as is done for points)
 // Add session information
 // Always have 0 of axis visible (but if negative value (e.g: altitude) it should be visible too)
 // Check whether highlightedPoint could be the global popup without glitches, by moving it and changing its content instead of closing it and opening a new one. Or maybe the glitches are due to a strange input to the callback ... Check the point exists ?
@@ -30,19 +31,32 @@ namespace output
 		mystream << "popupGlobal = null;" << std::endl;
 		mystream << "highlightedPoint = null;" << std::endl;
 
+		mystream << "function point_popup_callback(event,dataPoint)" << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
+		mystream << "                                            content: \"<b>Time:</b> \" + dataPoint.time + \"<br /><b>Elapsed:</b> \" + dataPoint.duration +\"<br /><b>Speed:</b> \" + dataPoint.speed + \" km/h<br /><b>Heartrate:</b> \" + dataPoint.heartrate +\" bpm<br/><b>Elevation:</b> \"+ dataPoint.altitude + \" m\"});" << std::endl;
+		mystream << "    popup.open(map);" << std::endl;
+		mystream << "    return popup;" << std::endl;
+		mystream << "}" << std::endl;
+
+		mystream << "pointsList = Array(" << std::endl;
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
-			mystream << "point" << point << " = Array(";
-			mystream << (*it)->getLatitude() << "," << (*it)->getLongitude() << ",";
-			mystream << "\"#"; 
+		        if(it != points.begin()) {
+			  mystream << ","; 
+			}
+			mystream <<  "{";
+			mystream << "lat:" << (*it)->getLatitude() << ", long:" << (*it)->getLongitude() << ", ";
+			mystream << "color: \"#"; 
 			// Max speed is bright red, 5 km/h or less is black
 			// TODO: Dynamic way to find lower bound ?
 			double min_speed = 5;
 			double speed_factor = 0xFF / (session->getMaxSpeed() - min_speed);
 			int16_t sp = ((*it)->getSpeed() - min_speed) * speed_factor;
+			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
 			if(sp < 0) sp = 0;
 			if(sp > 0xFF) sp = 0xFF;
 			mystream << std::hex << std::setw(2) << std::setfill('0') << sp;
@@ -50,37 +64,16 @@ namespace output
 			// TODO: Use max hr and min hr to determine the width range
 			uint16_t hr = (*it)->getHeartRate();
 			if(hr <= 60) hr = 60;
-			mystream << ");" << std::endl;
 
-			mystream << "function point_popup_callback_" << point << "(event)" << std::endl;
-			mystream << "{" << std::endl;
-			mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
-			mystream << "                                            content: \"";
-			mystream << "<b>Time:</b> " << (*it)->getTimeAsString(true) << "<br />";
-			mystream << "<b>Elapsed:</b> " << durationAsString((*it)->getTime() - session->getTime()) << "<br />";
-			// TODO: Need to add a reference to the lap in each point ?
-			//mystream << "<b>Elapsed lap:</b> " << durationAsString((*it)->getTimeAsString(true) << "<br />";
-			mystream << "<b>Speed:</b> " << (*it)->getSpeed() << " km/h<br />";
-			mystream << "<b>Heartrate:</b> " << (*it)->getHeartRate() << " bpm<br/>";
-			mystream << "<b>Elevation:</b> " << (*it)->getAltitude() << " m";
-			mystream << "\"});" << std::endl;
-			mystream << "    popup.open(map);" << std::endl;
-			mystream << "    return popup;" << std::endl;
+			mystream << ", elapsed: " << elapsed;
+			mystream << ", time: \"" << (*it)->getTimeAsString(true) << "\""; //TODO
+			mystream << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
+			mystream << ", speed: " << (*it)->getSpeed();
+			mystream << ", heartrate: " << (*it)->getHeartRate();
+			mystream << ", altitude: " << (*it)->getAltitude();
 			mystream << "}" << std::endl;
+
 			++point;
-		}
-		mystream << "pointsList = Array (";
-		for(uint32_t i = 0; i < point; ++i)
-		{
-			if(i > 0) mystream << ",";
-			mystream << "point" << i;
-		}
-		mystream << ");" << std::endl;
-		mystream << "point_popup_callbacks = Array (";
-		for(uint32_t i = 0; i < point; ++i)
-		{
-			if(i > 0) mystream << ",";
-			mystream << "point_popup_callback_" << i;
 		}
 		mystream << ");" << std::endl;
 
@@ -131,7 +124,7 @@ namespace output
 
 		mystream << "function loadMap() " << std::endl;
 		mystream << "{" << std::endl;
-		mystream << "	var centerLatLng = new google.maps.LatLng(pointsList[0][0], pointsList[0][1]);" << std::endl;
+		mystream << "	var centerLatLng = new google.maps.LatLng(pointsList[0].lat, pointsList[0].long);" << std::endl;
 		mystream << "	var myOptions = {" << std::endl;
 		mystream << "	      zoom: 14," << std::endl;
 		mystream << "	      center: centerLatLng," << std::endl;
@@ -159,19 +152,26 @@ namespace output
 		mystream << "	{" << std::endl;
 		mystream << "		if(i > 0)" << std::endl;
 		mystream << "		{" << std::endl;
-		mystream << "			var startPoint = new google.maps.LatLng(pointsList[i-1][0], pointsList[i-1][1]);" << std::endl;
-		mystream << "			var endPoint = new google.maps.LatLng(pointsList[i][0], pointsList[i][1]);" << std::endl;
+		mystream << "			var previousDataPoint = pointsList[i-1];" << std::endl;
+		mystream << "			var currentDataPoint = pointsList[i];" << std::endl;
+		mystream << "			var startPoint = new google.maps.LatLng(previousDataPoint.lat, previousDataPoint.long);" << std::endl;
+		mystream << "			var endPoint = new google.maps.LatLng(currentDataPoint.lat, currentDataPoint.long);" << std::endl;
 		mystream << "			var pathArray = Array(startPoint, endPoint);" << std::endl;
 		mystream << "			var polyline = new google.maps.Polyline({path: pathArray," << std::endl;
-		mystream << "					strokeColor: pointsList[i][2]," << std::endl;
+		mystream << "					strokeColor: currentDataPoint.color," << std::endl;
 		mystream << "					strokeOpacity: 0.9," << std::endl;
 		mystream << "					strokeWeight: 5," << std::endl;
 		mystream << "					});" << std::endl;
 		mystream << "			polyline.setMap(map);" << std::endl;
-		mystream << "			google.maps.event.addListener(polyline, 'click', point_popup_callbacks[i]);" << std::endl;
+		mystream << "			attachPopupHandler(polyline, currentDataPoint);" << std::endl;
 		mystream << "		        attachMouseOverHandler(polyline, i);" << std::endl;
 		mystream << "		}" << std::endl;
 		mystream << "	}" << std::endl;
+		mystream << "}" << std::endl;
+
+
+		mystream << "function attachPopupHandler(mapElement, dataPoint) {" << std::endl;
+		mystream << "     google.maps.event.addListener(mapElement, 'click', function(evt) {point_popup_callback(evt,dataPoint);});" << std::endl;
 		mystream << "}" << std::endl;
 
 		mystream << "function attachMouseOverHandler(mapElement, point) {" << std::endl;
@@ -182,7 +182,8 @@ namespace output
 		mystream << "<script type=\"text/javascript\" src=\"http://dygraphs.com/1.0.1/dygraph-combined.js\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "// point ID, elapsed time (ms), speed (km/h), heartrate (bpm), elevation (m)" << std::endl;
-		mystream << "rawDatas = [" << std::endl;
+		
+		
 		int i = 0;
 		laps = session->getLaps();
 		std::list<Lap*>::iterator itLaps = laps.begin();
@@ -190,7 +191,6 @@ namespace output
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000;
-			mystream << "[" << i << "," << elapsed << "," << (*it)->getSpeed() << "," << (*it)->getHeartRate() << "," << (*it)->getAltitude() << "]," << std::endl;
 			while((*itLaps)->getEndPoint() == *it)
 			{
 				lapsList.push_back(i);
@@ -198,7 +198,7 @@ namespace output
 			}
 			++i;
 		}
-		mystream << "]" << std::endl;
+		
 		mystream << "laps = [";
 		for(std::list<uint32_t>::iterator it = lapsList.begin(); it != lapsList.end(); ++it)
 		{
@@ -208,7 +208,7 @@ namespace output
 		mystream << "displayData = [true, true, true]" << std::endl;
 		mystream << "labelsData = [\"Speed\", \"Heart Rate\", \"Altitude\"]" << std::endl;
 		mystream << "function durationToString(pt,multiline) {" << std::endl;
-		mystream << "	 ms = rawDatas[pt][1];" << std::endl;
+		mystream << "	 ms = pointsList[pt].elapsed;" << std::endl;
 		mystream << "	 var h = Math.floor(ms / (61 * 60 * 1000));" << std::endl;
 		mystream << "	 ms = ms - h * (60 * 60 * 1000);" << std::endl;
 		mystream << "	 var m = Math.floor(ms / (60 * 1000));" << std::endl;
@@ -226,22 +226,26 @@ namespace output
 		mystream << "{" << std::endl;
 		mystream << "	graphDatas=[];" << std::endl;
 		mystream << "	labels=[];" << std::endl;
-		mystream << "	for(var i = 0; i < rawDatas.length; i++)" << std::endl;
+		mystream << "	for(var i = 0; i < pointsList.length; i++)" << std::endl;
 		mystream << "	{" << std::endl;
 		mystream << "		var col = 0;" << std::endl;
 		mystream << "		graphDatas[i] = [];" << std::endl;
 		mystream << "		labels[col] = \"Point ID\";" << std::endl;
-		mystream << "		graphDatas[i][col++] = rawDatas[i][0];" << std::endl;
+		mystream << "		graphDatas[i][col++] = i;" << std::endl;
 		mystream << "		labels[col] = \"Laps\";" << std::endl;
 		mystream << "		graphDatas[i][col++] = null;" << std::endl;
-		mystream << "		for(var j = 0; j < 3; j++)" << std::endl;
-		mystream << "		{" << std::endl;
-		mystream << "			if(displayData[j])" << std::endl;
-		mystream << "			{" << std::endl;
-		mystream << "				labels[col] = labelsData[j];" << std::endl;
-		mystream << "				graphDatas[i][col++] = rawDatas[i][j+2];" << std::endl;
-		mystream << "			}" << std::endl;
-		mystream << "		}" << std::endl;
+		mystream << "		if(displayData[0]) { //speed" << std::endl;
+		mystream << "		    labels[col] = labelsData[0];" << std::endl;
+		mystream << "		    graphDatas[i][col++] = pointsList[i].speed;" << std::endl;
+		mystream << "	        }" << std::endl;
+		mystream << "		if(displayData[1]) { //heartrate" << std::endl;
+		mystream << "		    labels[col] = labelsData[1];" << std::endl;
+		mystream << "		    graphDatas[i][col++] = pointsList[i].heartrate;" << std::endl;
+		mystream << "	        }" << std::endl;
+		mystream << "		if(displayData[2]) { //altitude" << std::endl;
+		mystream << "		    labels[col] = labelsData[2];" << std::endl;
+		mystream << "		    graphDatas[i][col++] = pointsList[i].altitude;" << std::endl;
+		mystream << "	        }" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "	graph = new Dygraph(" << std::endl;
 		mystream << "	document.getElementById(\"graph\")" << std::endl;
@@ -260,9 +264,9 @@ namespace output
 		mystream << "	,y2label: 'Speed (km/h)'" << std::endl;
 		mystream << "	}" << std::endl;
 		mystream << "	);" << std::endl;
-		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); popupGlobal = point_popup_callbacks[x](e); } });" << std::endl;
-		mystream << "	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[x][0], pointsList[x][1]); map.setCenter(center); highlightedPoint.setPosition(center); } });" << std::endl;
-		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval][0], pointsList[ann.xval][1]); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
+		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); popupGlobal = point_popup_callback(e,pointsList[x]); } });" << std::endl;
+		mystream << "	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); map.setCenter(center); highlightedPoint.setPosition(center); } });" << std::endl;
+		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval].lat, pointsList[ann.xval].long); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
 		mystream << "	graph.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
 		mystream << "			for(var i = 0; i+1 < laps.length; i+=2)" << std::endl;
 		mystream << "			{" << std::endl;
