@@ -6,13 +6,10 @@
 #include <fstream>
 
 // TODOs:
-// Clean way laps are handled (one generic function and one class for laps, as is done for points)
 // Add session information
-// Always have 0 of axis visible (but if negative value (e.g: altitude) it should be visible too)
 // Check whether highlightedPoint could be the global popup without glitches, by moving it and changing its content instead of closing it and opening a new one. Or maybe the glitches are due to a strange input to the callback ... Check the point exists ?
-// Integrate patch to have two axis
 // Allow to choose X axis (distance or time)
-// Allow to choose what to draw on which axis (once patch integrated)
+// Allow to choose what to draw on which axis
 namespace output
 {
 	REGISTER_OUTPUT(GoogleMap);
@@ -26,10 +23,29 @@ namespace output
 		mystream << "<head>" << std::endl;
 		mystream << "<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"/>" << std::endl;
 		mystream << "<title>Session from " << session->getBeginTime() << "</title>" << std::endl;
+
+		mystream << "<style media='screen' type='text/css'>" << std::endl;
+		mystream << ".dygraph-legend {" << std::endl;
+		mystream << "    width: 100px;" << std::endl;
+		mystream << "    background-color: transparent !important;" << std::endl;
+		mystream << "    left: 75px !important;" << std::endl;
+		mystream << "    top: 5px !important;" << std::endl;
+		mystream << "    width: 400px !important;" << std::endl;
+		mystream << "    " << std::endl;
+		mystream << "}" << std::endl;
+		mystream << "</style>" << std::endl;
+
 		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "popupGlobal = null;" << std::endl;
 		mystream << "highlightedPoint = null;" << std::endl;
+
+		mystream << "function lap_popup_callback(event, dataLapPoint)" << std::endl;
+		mystream << "{" << std::endl;
+		mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, content: dataLapPoint.infos});" << std::endl;
+		mystream << "    popup.open(map);" << std::endl;
+		mystream << "    return popup;" << std::endl;
+		mystream << "}" << std::endl;
 
 		mystream << "function point_popup_callback(event,dataPoint)" << std::endl;
 		mystream << "{" << std::endl;
@@ -80,18 +96,23 @@ namespace output
 
 		std::list<Lap*> laps = session->getLaps();
 		uint32_t lap = 0;
+		bool addComa = false;
+		mystream << "waypointsList = Array (";
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			if((*it)->getEndPoint() != NULL)
 			{
-				mystream << "waypoint" << lap << " = Array (";
-				mystream << (*it)->getEndPoint()->getLatitude() << ", " << (*it)->getEndPoint()->getLongitude() << ", " << lap;
-				mystream << ");" << std::endl;
+				mystream << std::endl;
 
-				mystream << "function lap_popup_callback_" << lap << "(event)" << std::endl;
-				mystream << "{" << std::endl;
-				mystream << "    var popup = new google.maps.InfoWindow({position: event.latLng, " << std::endl;
-				mystream << "                                            content: \"";
+				if(addComa) 
+				{
+					mystream << ",";
+				}
+				addComa = true;
+
+				mystream << "{";
+				mystream << "lat:" << (*it)->getEndPoint()->getLatitude() << ", long:" << (*it)->getEndPoint()->getLongitude() << ", lap:" << lap;
+				mystream << ", infos: \"";
 				mystream << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap+1 << "</h3>";
 				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
 				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
@@ -99,27 +120,12 @@ namespace output
 				mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
 				mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
 				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
-				mystream << "\"});" << std::endl;
-				mystream << "    popup.open(map);" << std::endl;
-				mystream << "    return popup;" << std::endl;
-				mystream << "}" << std::endl;
+				mystream << "\"";
+				mystream << "}";
 			}
 			++lap;
 		}
-		mystream << "waypointsList = Array (";
-		for(uint32_t i = 0; i < lap; ++i)
-		{
-			if(i > 0) mystream << ",";
-			mystream << "waypoint" << i;
-		}
-		mystream << ");" << std::endl << std::endl;;
-		mystream << "lap_popup_callbacks = Array (";
-		for(uint32_t i = 0; i < lap; ++i)
-		{
-			if(i > 0) mystream << ",";
-			mystream << "lap_popup_callback_" << i;
-		}
-		mystream << ");" << std::endl;
+		mystream << ");" << std::endl << std::endl;
 
 		mystream << "var graph;" << std::endl;
 
@@ -139,7 +145,8 @@ namespace output
 		mystream << "	var image_anchor = new google.maps.Point(3, 25);" << std::endl;
 		mystream << "	for (i=0; i<waypointsList.length; i++)" << std::endl;
 		mystream << "	{" << std::endl;
-		mystream << "		var point = new google.maps.LatLng(waypointsList[i][0], waypointsList[i][1]);" << std::endl;
+		mystream << "	    var dataLapPoint = waypointsList[i];" << std::endl;
+		mystream << "		var point = new google.maps.LatLng(dataLapPoint.lat, dataLapPoint.long);" << std::endl;
 		// TODO: Use something else for the icon of lap ending
 		mystream << "		var markerImage = new google.maps.MarkerImage(\"http://www.icone-gif.com/icone/isometrique/32x32/green-flag.png\", image_size, image_origin, image_anchor);" << std::endl;
 		mystream << "		var markerOptions = {" << std::endl;
@@ -147,7 +154,7 @@ namespace output
 		mystream << "			position: point}" << std::endl;
 		mystream << "		var markerD = new google.maps.Marker(markerOptions); " << std::endl;
 		mystream << "		markerD.setMap(map);" << std::endl;
-		mystream << "		google.maps.event.addListener(markerD, 'click', lap_popup_callbacks[i]);" << std::endl;
+		mystream << "		attachLapPopupHandler(markerD, dataLapPoint);" << std::endl;
 		mystream << "	}" << std::endl << std::endl;
 		mystream << "	for (i=0; i<pointsList.length; i++)" << std::endl;
 		mystream << "	{" << std::endl;
@@ -170,6 +177,10 @@ namespace output
 		mystream << "	}" << std::endl;
 		mystream << "}" << std::endl;
 
+
+		mystream << "function attachLapPopupHandler(mapElement, dataLapPoint) {" << std::endl;
+		mystream << "     google.maps.event.addListener(mapElement, 'click', function(evt) {lap_popup_callback(evt,dataLapPoint);});" << std::endl;
+		mystream << "}" << std::endl;
 
 		mystream << "function attachPopupHandler(mapElement, dataPoint) {" << std::endl;
 		mystream << "     google.maps.event.addListener(mapElement, 'click', function(evt) {point_popup_callback(evt,dataPoint);});" << std::endl;
@@ -253,7 +264,7 @@ namespace output
 		mystream << "	,graphDatas" << std::endl;
 		mystream << "	,{" << std::endl;
 		mystream << "	labels: labels," << std::endl;
-		mystream << "	\"Speed\": { axis: {}}," << std::endl;
+		mystream << "	\"Speed\": { axis: {includeZero:true}}," << std::endl;
 		mystream << "   colors: [\"#000000\", \"#0000FF\", \"#00AA00\", \"#FF0000\"]," << std::endl;
 		mystream << "	axes: { " << std::endl;
 		mystream << "	x: {" << std::endl;
@@ -267,7 +278,7 @@ namespace output
 		mystream << "	);" << std::endl;
 		mystream << "	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); popupGlobal = point_popup_callback(e,pointsList[x]); } });" << std::endl;
 		mystream << "	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); map.setCenter(center); highlightedPoint.setPosition(center); } });" << std::endl;
-		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval].lat, pointsList[ann.xval].long); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });" << std::endl;
+		mystream << "	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval].lat, pointsList[ann.xval].long); popupGlobal = lap_popup_callback(e,waypointsList[ann.shortText-1]); } });" << std::endl;
 		mystream << "	graph.updateOptions({underlayCallback: function(canvas, area, g) {" << std::endl;
 		mystream << "			for(var i = 0; i+1 < laps.length; i+=2)" << std::endl;
 		mystream << "			{" << std::endl;
