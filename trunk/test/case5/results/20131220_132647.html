@@ -3,10 +3,26 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 <title>Session from 2013-12-20T13:26:47Z</title>
+<style media='screen' type='text/css'>
+.dygraph-legend {
+    width: 100px;
+    background-color: transparent !important;
+    left: 75px !important;
+    top: 5px !important;
+    width: 400px !important;
+    
+}
+</style>
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 <script type="text/javascript">
 popupGlobal = null;
 highlightedPoint = null;
+function lap_popup_callback(event, dataLapPoint)
+{
+    var popup = new google.maps.InfoWindow({position: event.latLng, content: dataLapPoint.infos});
+    popup.open(map);
+    return popup;
+}
 function point_popup_callback(event,dataPoint)
 {
     var popup = new google.maps.InfoWindow({position: event.latLng, 
@@ -359,33 +375,11 @@ pointsList = Array(
 ,{lat:51.20686, long:3.224378, color: "#000000", elapsed: 740000, time: "2013-12-20 13:39:07.8", duration: "12m20s", speed: 0, heartrate: 89, altitude: 0}
 ,{lat:51.20686, long:3.224378, color: "#000000", elapsed: 743000, time: "2013-12-20 13:39:10.0", duration: "12m23s", speed: 0, heartrate: 89, altitude: 0}
 );
-waypoint0 = Array (51.215815, 3.214917, 0);
-function lap_popup_callback_0(event)
-{
-    var popup = new google.maps.InfoWindow({position: event.latLng, 
-                                            content: "<h3 style=\"padding:0; margin:0\">Lap 1</h3><b>Distance:</b> 0.341 km<br/><b>Time:</b> 2m41s<br/><b>Average speed:</b> 7.62 km/h<br/><b>Maximum speed:</b> 7.93 km/h<br/><b>Average heartrate:</b> 94 bpm<br/><b>Maximum heartrate:</b> 105 bpm<br/>"});
-    popup.open(map);
-    return popup;
-}
-waypoint1 = Array (51.211558, 3.220625, 1);
-function lap_popup_callback_1(event)
-{
-    var popup = new google.maps.InfoWindow({position: event.latLng, 
-                                            content: "<h3 style=\"padding:0; margin:0\">Lap 2</h3><b>Distance:</b> 0.63 km<br/><b>Time:</b> 4m48s<br/><b>Average speed:</b> 7.51 km/h<br/><b>Maximum speed:</b> 7.51 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/>"});
-    popup.open(map);
-    return popup;
-}
-waypoint2 = Array (51.20686, 3.224378, 2);
-function lap_popup_callback_2(event)
-{
-    var popup = new google.maps.InfoWindow({position: event.latLng, 
-                                            content: "<h3 style=\"padding:0; margin:0\">Lap 3</h3><b>Distance:</b> 0.661 km<br/><b>Time:</b> 4m54s<br/><b>Average speed:</b> 8.03 km/h<br/><b>Maximum speed:</b> 8.03 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/>"});
-    popup.open(map);
-    return popup;
-}
-waypointsList = Array (waypoint0,waypoint1,waypoint2);
+waypointsList = Array (
+{lat:51.215815, long:3.214917, lap:0, infos: "<h3 style=\"padding:0; margin:0\">Lap 1</h3><b>Distance:</b> 0.341 km<br/><b>Time:</b> 2m41s<br/><b>Average speed:</b> 7.62 km/h<br/><b>Maximum speed:</b> 7.93 km/h<br/><b>Average heartrate:</b> 94 bpm<br/><b>Maximum heartrate:</b> 105 bpm<br/>"}
+,{lat:51.211558, long:3.220625, lap:1, infos: "<h3 style=\"padding:0; margin:0\">Lap 2</h3><b>Distance:</b> 0.63 km<br/><b>Time:</b> 4m48s<br/><b>Average speed:</b> 7.51 km/h<br/><b>Maximum speed:</b> 7.51 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/>"}
+,{lat:51.20686, long:3.224378, lap:2, infos: "<h3 style=\"padding:0; margin:0\">Lap 3</h3><b>Distance:</b> 0.661 km<br/><b>Time:</b> 4m54s<br/><b>Average speed:</b> 8.03 km/h<br/><b>Maximum speed:</b> 8.03 km/h<br/><b>Average heartrate:</b> 91 bpm<br/><b>Maximum heartrate:</b> 96 bpm<br/>"});
 
-lap_popup_callbacks = Array (lap_popup_callback_0,lap_popup_callback_1,lap_popup_callback_2);
 var graph;
 function loadMap() 
 {
@@ -404,14 +398,15 @@ function loadMap()
 	var image_anchor = new google.maps.Point(3, 25);
 	for (i=0; i<waypointsList.length; i++)
 	{
-		var point = new google.maps.LatLng(waypointsList[i][0], waypointsList[i][1]);
+	    var dataLapPoint = waypointsList[i];
+		var point = new google.maps.LatLng(dataLapPoint.lat, dataLapPoint.long);
 		var markerImage = new google.maps.MarkerImage("http://www.icone-gif.com/icone/isometrique/32x32/green-flag.png", image_size, image_origin, image_anchor);
 		var markerOptions = {
 			icon: markerImage,
 			position: point}
 		var markerD = new google.maps.Marker(markerOptions); 
 		markerD.setMap(map);
-		google.maps.event.addListener(markerD, 'click', lap_popup_callbacks[i]);
+		attachLapPopupHandler(markerD, dataLapPoint);
 	}
 
 	for (i=0; i<pointsList.length; i++)
@@ -433,6 +428,9 @@ function loadMap()
 		        attachMouseOverHandler(polyline, i);
 		}
 	}
+}
+function attachLapPopupHandler(mapElement, dataLapPoint) {
+     google.maps.event.addListener(mapElement, 'click', function(evt) {lap_popup_callback(evt,dataLapPoint);});
 }
 function attachPopupHandler(mapElement, dataPoint) {
      google.maps.event.addListener(mapElement, 'click', function(evt) {point_popup_callback(evt,dataPoint);});
@@ -493,7 +491,7 @@ function loadGraph()
 	,graphDatas
 	,{
 	labels: labels,
-	"Speed": { axis: {}},
+	"Speed": { axis: {includeZero:true}},
    colors: ["#000000", "#0000FF", "#00AA00", "#FF0000"],
 	axes: { 
 	x: {
@@ -507,7 +505,7 @@ function loadGraph()
 	);
 	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); popupGlobal = point_popup_callback(e,pointsList[x]); } });
 	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[x].lat, pointsList[x].long); map.setCenter(center); highlightedPoint.setPosition(center); } });
-	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval].lat, pointsList[ann.xval].long); popupGlobal = lap_popup_callbacks[ann.shortText-1](e); } });
+	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[ann.xval].lat, pointsList[ann.xval].long); popupGlobal = lap_popup_callback(e,waypointsList[ann.shortText-1]); } });
 	graph.updateOptions({underlayCallback: function(canvas, area, g) {
 			for(var i = 0; i+1 < laps.length; i+=2)
 			{
