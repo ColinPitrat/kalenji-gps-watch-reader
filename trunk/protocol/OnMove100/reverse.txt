@@ -1,0 +1,6 @@
+Bus 006 Device 004: ID 10c4:ea61 Cygnal Integrated Products, Inc. CP210x UART Bridge
+[root@pitrat4 OnMove100]# grep "<trkpt" session1.gpx  | wc -l
+1253
+[root@pitrat4 OnMove100]# grep "^0030.*01 fa" session1.hexdump | wc -l
+1254
+
