@@ -8,6 +8,7 @@
 #include <ctime>
 #include "../bom/Lap.h"
 #include "../bom/Point.h"
+#include "../Utils.h"
 
 typedef std::vector<char> SessionId;
 
@@ -103,6 +104,33 @@ class Session
 
 		uint32_t getNbLaps()               { return _nb_laps; };
 		time_t getTime()                   { return _time_t; };
+
+		/* If watches doesn't set the distance for each point, we must try to compute them.
+		 * TODO: check against laps if computation is good enougth
+		 */
+		void ensurePointDistanceAreOk() 
+		{
+			Point* previousPoint = NULL;
+			double totalDistance = 0; // counter to avoid precision lost (because we round to meter in point::distance;
+			for(std::list<Point*>::iterator it = _points.begin(); it != _points.end(); ++it) 
+			{
+				Point* point = (*it);
+				if(!point->getDistance().isDefined()) 
+				{
+					if(previousPoint == NULL) 
+					{
+						point->setDistance(0); // First point: distance equal to zero
+					}
+					else 
+					{
+						double distanceInMeter = distanceEarth(previousPoint->getLatitude(), previousPoint->getLongitude(), point->getLatitude(), point->getLongitude());
+						totalDistance = totalDistance + distanceInMeter;
+						point->setDistance(totalDistance);
+					}
+				}
+				previousPoint = point;
+			}
+		}
 
 	private:
 		SessionId _id;

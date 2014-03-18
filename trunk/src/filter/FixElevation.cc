@@ -116,12 +116,10 @@ namespace filter
 				curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 				res = curl_easy_perform(curl);
 				request_last = it;
-				/* Uncomment to obtain URL queryied in order to debug
 				if(!parseHTTPData(session, request_first, request_last))
 				{
 					std::cout << "Error when parsing result of " << url.str() << std::endl;
 				}
-				*/
 
 				HTTPdata = "";
 				request_first = it;
