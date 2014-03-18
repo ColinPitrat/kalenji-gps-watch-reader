@@ -10,22 +10,23 @@ class Point
 {
 	public:
 		// TODO: Improve the way fiability is handled (0 / 3 doesn't make sense)
-		Point() : _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _time(0), _tenth(0), _bpm(FieldUndef), _fiability(3), _important(false)
+                Point() : _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _time(0), _tenth(0), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
 		{ };
 
-		Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t tenth, Field<uint16_t> bpm, uint16_t fiability) 
-			 : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability), _important(false)
+                Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t tenth, Field<uint16_t> bpm, uint16_t fiability) 
+		  : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
 		{ };
 
-		void setLatitude(Field<double> lat)    { _lat = lat; };
-		void setLongitude(Field<double> lon)   { _lon = lon; };
-		void setAltitude(Field<int16_t> alt)   { _alt = alt; };
-		void setSpeed(Field<double> speed)     { _speed = speed; };
-		void setHeartRate(Field<uint16_t> bpm) { _bpm = bpm; };
-		void setFiability(uint16_t f)          { _fiability = f; };
-		void setImportant(bool i)              { _important = i; };
-		void setTime(time_t time)              { _time = time; };
-
+		void setLatitude(Field<double> lat)        { _lat = lat; };
+		void setLongitude(Field<double> lon)       { _lon = lon; };
+		void setAltitude(Field<int16_t> alt)       { _alt = alt; };
+		void setSpeed(Field<double> speed)         { _speed = speed; };
+		void setHeartRate(Field<uint16_t> bpm)     { _bpm = bpm; };
+		void setFiability(uint16_t f)              { _fiability = f; };
+		void setImportant(bool i)                  { _important = i; };
+		void setTime(time_t time)                  { _time = time; };
+		void setDistance(Field<uint32_t> distance) { _distance = distance;} 
+		
 		Field<double>& getLatitude()    { return _lat; };
 		Field<double>& getLongitude()   { return _lon; };
 		Field<int16_t>& getAltitude()   { return _alt; };
@@ -34,6 +35,7 @@ class Point
 		uint16_t getFiability()         { return _fiability; };
 		bool isImportant()              { return _important; };
 		time_t getTime()                { return _time; };
+		Field<uint32_t> getDistance()   { return _distance;}
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
 		std::string getTimeAsString(bool human_readable=false)
 		{  
@@ -58,6 +60,7 @@ class Point
 		Field<uint16_t> _bpm;
 		uint16_t _fiability;
 		bool _important;
+		Field<uint32_t> _distance; //Distance in meter from the begining: if -1, must be computed by the session see Session::getDistanceForPoint(Point point);
 };
 
 #endif
