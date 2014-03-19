@@ -1,4 +1,5 @@
 #include "ComputeSessionStats.h"
+#include "../Utils.h"
 #include <cmath>
 
 namespace filter
@@ -25,18 +26,7 @@ namespace filter
 			++it;
 			if(it == points.end()) break;
 
-			// -8<--- This part computes the distance between the 2 points
-			double pi = 3.14159265358979323846;
-			double R = 6371000; // Approximate radius of the Earth in meters
-			double dLatRad = ((*it)->getLatitude()  - prevPoint->getLatitude())  * pi / 180.0;
-			double dLonRad = ((*it)->getLongitude() - prevPoint->getLongitude()) * pi / 180.0;
-			double lat1Rad =  prevPoint->getLatitude() * pi / 180.0;
-			double lat2Rad =  (*it)->getLatitude()     * pi / 180.0;
-			double a = sin(dLatRad/2) * sin(dLatRad/2) + sin(dLonRad/2) * sin(dLonRad/2) * cos(lat1Rad) * cos(lat2Rad);
-			double c = 2 * atan2(sqrt(a), sqrt(1-a));
-			double dist = R * c;
-			// ->8---
-			distance += dist;
+			distance += distanceEarth(**it, *prevPoint);
 
 			int eleChange = (*it)->getAltitude() - prevPoint->getAltitude();
 			if(eleChange > 0)

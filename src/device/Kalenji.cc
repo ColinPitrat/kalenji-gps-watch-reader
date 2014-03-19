@@ -1,5 +1,6 @@
 #include "Kalenji.h"
 #include "../Common.h"
+#include "../Utils.h"
 #include <cstring>
 #include <iomanip>
 #include <cmath>
@@ -489,17 +490,7 @@ namespace device
 			buffer[headerSize+4+i++] = (lon / (256*256*256)) % 256;
 			if(type == Keymaze700Trial)
 			{
-				// -8<--- This part computes the distance between the 2 points
-				double pi = 3.14159265358979323846;
-				double R = 6371000; // Approximate radius of the Earth in meters
-				double dLatRad = ((*it)->getLatitude()  - prevPoint->getLatitude())  * pi / 180.0;
-				double dLonRad = ((*it)->getLongitude() - prevPoint->getLongitude()) * pi / 180.0;
-				double lat1Rad =  prevPoint->getLatitude() * pi / 180.0;
-				double lat2Rad =  (*it)->getLatitude()     * pi / 180.0;
-				double a = sin(dLatRad/2) * sin(dLatRad/2) + sin(dLonRad/2) * sin(dLonRad/2) * cos(lat1Rad) * cos(lat2Rad);
-				double c = 2 * atan2(sqrt(a), sqrt(1-a));
-				int dist = R * c;
-				// ->8---
+				int dist = distanceEarth(**it, *prevPoint);
 				unsigned int alt = (*it)->getAltitude();
 				buffer[headerSize+4+i++] = alt % 256;
 				buffer[headerSize+4+i++] = (alt / 256) % 256;
