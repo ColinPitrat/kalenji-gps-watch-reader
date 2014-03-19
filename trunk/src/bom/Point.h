@@ -4,6 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <ctime>
+#include <stdint.h>
 #include "../bom/Field.h"
 
 class Point
@@ -27,18 +28,18 @@ class Point
 		void setTime(time_t time)                  { _time = time; };
 		void setDistance(Field<uint32_t> distance) { _distance = distance;} 
 		
-		Field<double>& getLatitude()    { return _lat; };
-		Field<double>& getLongitude()   { return _lon; };
-		Field<int16_t>& getAltitude()   { return _alt; };
-		Field<double>& getSpeed()       { return _speed; };
-		Field<uint16_t>& getHeartRate() { return _bpm; };
-		uint16_t getFiability()         { return _fiability; };
-		bool isImportant()              { return _important; };
-		time_t getTime()                { return _time; };
-		Field<uint32_t> getDistance()   { return _distance;}
+		const Field<double>& getLatitude() const    { return _lat; };
+		const Field<double>& getLongitude() const   { return _lon; };
+		const Field<int16_t>& getAltitude() const   { return _alt; };
+		const Field<double>& getSpeed() const       { return _speed; };
+		const Field<uint16_t>& getHeartRate() const { return _bpm; };
+		const uint16_t getFiability() const         { return _fiability; };
+		const bool isImportant() const              { return _important; };
+		const time_t getTime() const                { return _time; };
+		const Field<uint32_t> getDistance() const   { return _distance;}
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
-		std::string getTimeAsString(bool human_readable=false)
-		{  
+		const std::string getTimeAsString(bool human_readable=false) const
+		{
 			char buffer[256];
 			tm *time_tm = localtime(&_time);
 			std::stringstream format_string;

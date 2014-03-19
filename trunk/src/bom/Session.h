@@ -65,7 +65,7 @@ class Session
 		void setDescent(Field<uint32_t> descent)   { _descent = descent; };
 
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
-		std::string getBeginTime(bool human_readable=false) 
+		const std::string getBeginTime(bool human_readable=false) const 
 		{
 			char buffer[256];
 			if(human_readable)
@@ -75,35 +75,35 @@ class Session
 			return std::string(buffer);
 		};
 
-		uint32_t getNum()                  { return _num; };
+		const uint32_t getNum() const                  { return _num; };
 		bool isComplete()                  { return _nb_points == _points.size(); };
 
 		std::list<Lap*> &getLaps()         { return _laps; };
 		std::list<Point*> &getPoints()     { return _points; };
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
-		SessionId getId()                  { return _id; };
-		std::string getName()              { return _name; };
-		int getYear()                      { return _time.tm_year + 1900; };
-		int getMonth()                     { return _time.tm_mon + 1; };
-		int getDay()                       { return _time.tm_mday; };
-		int getHour()                      { return _time.tm_hour; };
-		int getMinutes()                   { return _time.tm_min; };
-		int getSeconds()                   { return _time.tm_sec; };
+		const SessionId getId() const                  { return _id; };
+		const std::string getName() const              { return _name; };
+		const int getYear() const                      { return _time.tm_year + 1900; };
+		const int getMonth() const                     { return _time.tm_mon + 1; };
+		const int getDay() const                       { return _time.tm_mday; };
+		const int getHour() const                      { return _time.tm_hour; };
+		const int getMinutes() const                   { return _time.tm_min; };
+		const int getSeconds() const                   { return _time.tm_sec; };
 
-		double getDuration()               { return _duration; };
-		uint32_t getDistance()             { return _distance; };
-		double getMaxSpeed()               { return _max_speed; };
-		double getAvgSpeed()               { return _avg_speed; };
-		Field<uint32_t>& getMaxHeartrate() { return _max_hr; };
-		Field<uint32_t>& getAvgHeartrate() { return _avg_hr; };
-		Field<uint32_t>& getCalories()     { return _calories; };
-		Field<uint32_t>& getGrams()        { return _grams; };
-		Field<uint32_t>& getAscent()       { return _ascent; };
-		Field<uint32_t>& getDescent()      { return _descent; };
+		const double getDuration() const               { return _duration; };
+		const uint32_t getDistance() const             { return _distance; };
+		const double getMaxSpeed() const               { return _max_speed; };
+		const double getAvgSpeed() const               { return _avg_speed; };
+		const Field<uint32_t>& getMaxHeartrate() const { return _max_hr; };
+		const Field<uint32_t>& getAvgHeartrate() const { return _avg_hr; };
+		const Field<uint32_t>& getCalories() const     { return _calories; };
+		const Field<uint32_t>& getGrams() const        { return _grams; };
+		const Field<uint32_t>& getAscent() const       { return _ascent; };
+		const Field<uint32_t>& getDescent() const      { return _descent; };
 
-		uint32_t getNbLaps()               { return _nb_laps; };
-		time_t getTime()                   { return _time_t; };
+		const uint32_t getNbLaps() const               { return _nb_laps; };
+		const time_t getTime() const                   { return _time_t; };
 
 		/* If watches doesn't set the distance for each point, we must try to compute them.
 		 * TODO: check against laps if computation is good enougth

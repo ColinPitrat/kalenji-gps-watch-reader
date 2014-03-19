@@ -1,4 +1,5 @@
 #include "Utils.h"
+#include "bom/Point.h"
 
 #include <sstream>
 #include <iomanip>
@@ -50,15 +51,12 @@ std::list<std::string> splitString(std::string toSplit, std::string separator)
     return result;
 }
 
-
-
-
-/// @brief The usual PI/180 constant  
-static const double DEG_TO_RAD = 0.017453292519943295769236907684886;  
-/// @brief Earth's quatratic mean radius for WGS-84  
+static const double PI = 3.14159265358979323846;
+static const double DEG_TO_RAD = PI / 180.0;  
+/// Earth's quatratic mean radius for WGS-84  
 static const double EARTH_RADIUS_IN_METERS = 6372797.560856;  
       
-/** @brief Computes the arc, in radian, between two WGS-84 positions. 
+/** Computes the arc, in radian, between two WGS-84 positions. 
  * 
  * The result is equal to <code>Distance(from,to)/EARTH_RADIUS_IN_METERS</code> 
  *    <code>= 2*asin(sqrt(h(d/EARTH_RADIUS_IN_METERS )))</code> 
@@ -71,25 +69,30 @@ static const double EARTH_RADIUS_IN_METERS = 6372797.560856;
  * The haversine formula gives: 
  *    <code>h(d/R) = h(from.lat-to.lat)+h(from.lon-to.lon)+cos(from.lat)*cos(to.lat)</code> 
  * 
- * @sa http://en.wikipedia.org/wiki/Law_of_haversines 
+ * http://en.wikipedia.org/wiki/Law_of_haversines 
  */  
-double ArcInRadians(double lat1,double long1,double lat2,double long2) {  
-        double latitudeArc  = (lat1 - lat2) * DEG_TO_RAD;  
-        double longitudeArc = (long1 - long2) * DEG_TO_RAD;  
-        double latitudeH = sin(latitudeArc * 0.5);  
-        latitudeH *= latitudeH;  
-        double lontitudeH = sin(longitudeArc * 0.5);  
-        lontitudeH *= lontitudeH;  
-        double tmp = cos(lat1*DEG_TO_RAD) * cos(lat2*DEG_TO_RAD);  
-        return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));  
-    }  
+double ArcInRadians(double lat1,double long1,double lat2,double long2) 
+{
+	double latitudeArc  = (lat1 - lat2) * DEG_TO_RAD;  
+	double longitudeArc = (long1 - long2) * DEG_TO_RAD;  
+	double latitudeH = sin(latitudeArc * 0.5);  
+	latitudeH *= latitudeH;  
+	double lontitudeH = sin(longitudeArc * 0.5);  
+	lontitudeH *= lontitudeH;  
+	double tmp = cos(lat1*DEG_TO_RAD) * cos(lat2*DEG_TO_RAD);  
+	return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));  
+}  
       
-/** @brief Computes the distance, in meters, between two WGS-84 positions. 
+/** Computes the distance, in meters, between two WGS-84 positions. 
  * 
  * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code> 
- * 
- * @sa ArcInRadians 
  */  
-double distanceEarth(double lat1,double long1,double lat2,double long2) {  
+double distanceEarth(double lat1,double long1,double lat2,double long2) 
+{
   return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, long1,lat2,long2);  
 }  
+
+double distanceEarth(const Point& p1, const Point& p2)
+{
+	return distanceEarth(p1.getLatitude(), p1.getLongitude(), p2.getLatitude(), p2.getLongitude());
+}
