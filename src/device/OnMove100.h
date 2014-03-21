@@ -53,8 +53,8 @@ namespace device
 		private:
 			std::string getPath();
 			DECLARE_DEVICE(OnMove100);
-			static const int lengthDataList;
-			static unsigned char dataList[];
+			static const int lengthDeviceInit;
+			static unsigned char deviceInit[];
 	};
 }
 
