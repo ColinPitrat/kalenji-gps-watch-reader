@@ -37,6 +37,11 @@ namespace source
 				// TODO: Throw an exception
 			}
 		}
+		else 
+		{
+			std::cerr << "Unable to access " << inputfile; 
+			// TODO: Throw an exception
+		}
 	}
 
 	bool HexdumpFile::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
