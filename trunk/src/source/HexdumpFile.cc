@@ -39,7 +39,7 @@ namespace source
 		}
 		else 
 		{
-			std::cerr << "Unable to access " << inputfile; 
+			std::cerr << "Unable to access " << _filename; 
 			// TODO: Throw an exception
 		}
 	}
