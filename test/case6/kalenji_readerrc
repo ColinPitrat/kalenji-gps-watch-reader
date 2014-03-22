@@ -1,0 +1,6 @@
+directory=/tmp
+import=all
+trigger=distance
+log_transactions=no
+filters=FixElevation
+outputs=KML,GPX,TCX,CSV,GoogleMap
