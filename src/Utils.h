@@ -9,21 +9,23 @@
 
 class Point;
 
-class SExcept: public std::ostringstream {
-public:
-	friend class StreamExcept;
-	virtual ~SExcept() { throw std::runtime_error(str()); }
+class SExcept: public std::ostringstream 
+{
+	public:
+		friend class StreamExcept;
+		virtual ~SExcept() { throw std::runtime_error(str()); }
 
-private:
-	SExcept() {}
+	private:
+		SExcept() {}
 };
 
-class StreamExcept: public std::tr1::shared_ptr<SExcept> {
-public:
-	static StreamExcept sthrow() { return StreamExcept(new SExcept()); }
+class StreamExcept: public std::tr1::shared_ptr<SExcept> 
+{
+	public:
+		static StreamExcept sthrow() { return StreamExcept(new SExcept()); }
 
-private:
-	StreamExcept(SExcept *p):std::tr1::shared_ptr<SExcept>(p) {}
+	private:
+		StreamExcept(SExcept *p):std::tr1::shared_ptr<SExcept>(p) {}
 };
 
 // If we use a reference as first argument, the following statement:
@@ -39,7 +41,6 @@ operator<< (StreamExcept e, const T& x)
 
 std::string durationAsString(double sec, bool with_hundredth = false);
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",");
-
 
 double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
 double distanceEarth(const Point& p1, const Point& p2);

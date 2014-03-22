@@ -136,8 +136,7 @@ namespace source
 	{
 		if(rc < 0)
 		{
-			std::cerr << "Transmission error: " << rc << " - " << errno
-				<< getUSBErrorMessage(rc) << std::endl;
+			std::cerr << "Transmission error: " << rc << " - " << errno << getUSBErrorMessage(rc) << std::endl;
 			return false;
 		}
 		return true;
@@ -146,8 +145,9 @@ namespace source
 	void USB::checkAndThrowUSBOperation(int rc)
 	{
 		if(rc < 0)
-			StreamExcept::sthrow() << "on USB operation code " << rc << " - " << errno
-				<< getUSBErrorMessage(rc);
+		{
+			StreamExcept::sthrow() << "on USB operation code " << rc << " - " << errno << getUSBErrorMessage(rc);
+		}
 	}
 
 	bool USB::read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength)
@@ -166,7 +166,9 @@ namespace source
 		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x03*/, iData, iLength, &transferred, _timeout);
 		checkAndThrowUSBOperation(rc);
 		if(transferred != iLength)
+		{
 			StreamExcept::sthrow() << "on USB write transferred (" << transferred << ") != length (" << iLength << ")";
+		}
 	}
 
 	void USB::control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength)
