@@ -51,8 +51,12 @@ namespace device
 			virtual unsigned int getProductId() { return 0xea61; };
 
 		private:
+			double decodeCoordinate(unsigned char *buffer);
+
 			std::string getPath();
 			DECLARE_DEVICE(OnMove100);
+			static const int lengthGetData;
+			static unsigned char getData[];
 			static const int lengthDeviceInit;
 			static unsigned char deviceInit[];
 	};
