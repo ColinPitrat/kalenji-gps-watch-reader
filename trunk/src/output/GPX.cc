@@ -17,7 +17,7 @@ namespace output
 		mystream.precision(8);
 		mystream << "<?xml version=\"1.0\"?>" << std::endl;
 		mystream << "<gpx version=\"1.1\"" << std::endl;
-		mystream << "     creator=\"Kalenji 300 Reader\"" << std::endl;
+		mystream << "     creator=\"Kalenji Reader\"" << std::endl;
 		mystream << "     xmlns=\"http://www.topografix.com/GPX/1/1\"" << std::endl;
 		mystream << "     xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"" << std::endl;
 		if(gpxdata_ext)
