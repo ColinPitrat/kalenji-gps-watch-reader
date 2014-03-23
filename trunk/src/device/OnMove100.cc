@@ -37,102 +37,64 @@ namespace device
 		{
 			unsigned char data[256] = { 0 };
 			unsigned char dataIn[256];
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 1" << std::endl);
 			_dataSource->control_transfer(0x0, 0x9, 0x0, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 2" << std::endl);
-			_dataSource->control_transfer(0x80, 0x6, 0x0, 0x1, data, 18);
+			_dataSource->control_transfer(0x80, 0x6, 0x100, 0x0, dataIn, 18);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 3" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, dataIn, 18);
+			_dataSource->control_transfer(0x80, 0x6, 0x300, 0x0, dataIn, 256);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 4" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0x80, 0x6, 0x302, 0x409, dataIn, 256);
+
+			/* Same as step 5 but buffer to small
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 5" << std::endl);
-			_dataSource->control_transfer(0x80, 0x6, 0x0, 0x3, data, 256);
+			_dataSource->control_transfer(0x80, 0x6, 0x200, 0x0, dataIn, 9);
+			*/
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 6" << std::endl);
-			data[0] = 4; data[1] = 3; data[2] = 9; data[3] = 4;
-			_dataSource->control_transfer(0x0, 0x2, 0x4, 0x1, data, 0);
+			_dataSource->control_transfer(0x80, 0x6, 0x200, 0x0, dataIn, 32);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 7" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0x0, 0x9, 0x1, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 8" << std::endl);
-			data[0] = 0x80; data[1] = 6; data[2] = 2; data[3] = 3; data[4] = 9; data[5] = 4; data[6] = 0; data[7] = 1;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 256);
+			_dataSource->control_transfer(0x40, 0x0, 0xFFFF, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 9" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x4a, 0x1, dataIn, 74);
+			_dataSource->control_transfer(0x40, 0x1, 0x2000, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 10" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0xc0, 0xFF, 0x370b, 0x0, dataIn, 1);
+
+			/* Same as step 10 - useless ?
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 11" << std::endl);
-			data[0] = 0x80; data[1] = 6; data[2] = 0; data[3] = 2; data[4] = 0; data[5] = 0; data[6] = 9; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 9);
+			_dataSource->control_transfer(0xc0, 0xFF, 0x370b, 0x0, dataIn, 1);
+			*/
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 12" << std::endl);
-			data[0] = 0x9; data[1] = 2; data[2] = 0x20; data[3] = 0; data[4] = 1; data[5] = 1; data[6] = 0; data[7] = 0x80; data[8] = 0x32;
-			_dataSource->control_transfer(0x80, 0x2, 0x9, 0x1, data, 9);
+			data[0] = 0; data[1] = 0xc2; data[2] = 1; data[3] = 0;
+			_dataSource->control_transfer(0x40, 0x1e, 0x0, 0x0, data, 4);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 13" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+
+			/* Same as step 13 - useless ?
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 14" << std::endl);
-			data[0] = 0x80; data[1] = 6; data[2] = 0; data[3] = 2; data[4] = 0; data[5] = 0; data[6] = 0x20; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
+			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 15" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x20, 0x1, dataIn, 0x20);
+			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 16" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+
 			DEBUG_CMD(std::cout << "OnMove100::init() - step 17" << std::endl);
-			data[0] = 0x0; data[1] = 9; data[2] = 1; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x80, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 18" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 19" << std::endl);
-			data[0] = 0x40; data[1] = 0; data[2] = 0xFF; data[3] = 0xFF; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 20" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 21" << std::endl);
-			data[0] = 0x40; data[1] = 1; data[2] = 0; data[3] = 0x20; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 22" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 23" << std::endl);
-			data[0] = 0xc0; data[1] = 0xff; data[2] = 0xb; data[3] = 0x37; data[4] = 0; data[5] = 0; data[6] = 1; data[7] = 0;
-			_dataSource->control_transfer(0x80, 0x2, 0x8, 0x0, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 24" << std::endl);
-			data[0] = 2;
-			_dataSource->control_transfer(0x80, 0x2, 0x1, 0x1, data, 1);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 25" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 26" << std::endl);
-			data[0] = 0xc0; data[1] = 0xff; data[2] = 0xb; data[3] = 0x37; data[4] = 0; data[5] = 0; data[6] = 1; data[7] = 0;
-			_dataSource->control_transfer(0x80, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 27" << std::endl);
-			data[0] = 2;
-			_dataSource->control_transfer(0x80, 0x2, 0x1, 0x1, data, 1);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 28" << std::endl);
-			_dataSource->control_transfer(0x80, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 29" << std::endl);
-			data[0] = 0x40; data[1] = 0x1e; data[2] = 0; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 4; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 30" << std::endl);
-			data[0] = 0x0; data[1] = 0xc2; data[2] = 1; data[3] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x4, 0x1, data, 4);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 31" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 32" << std::endl);
-			data[0] = 0x40; data[1] = 0x12; data[2] = 0xc; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 33" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 34" << std::endl);
-			data[0] = 0x40; data[1] = 0x12; data[2] = 0xc; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 35" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 36" << std::endl);
-			data[0] = 0x40; data[1] = 0x12; data[2] = 0xc; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 37" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 38" << std::endl);
-			data[0] = 0x40; data[1] = 0x12; data[2] = 0xc; data[3] = 0; data[4] = 0; data[5] = 0; data[6] = 0; data[7] = 0;
-			_dataSource->control_transfer(0x0, 0x2, 0x8, 0x0, data, 8);
-			DEBUG_CMD(std::cout << "OnMove100::init() - step 39" << std::endl);
-			_dataSource->control_transfer(0x0, 0x2, 0x0, 0x2, data, 0);
+			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+			*/
 		}
 		// Step 2 - Device initialization ?
 		{
@@ -141,13 +103,13 @@ namespace device
 			size_t received = 0;
 			unsigned char *responseData;
 			int attempts = 0;
-			while(memcmp(responseData, initResponse, sizeInitResponse) && attempts < 10)
+			do
 			{
 				attempts++;
 				DEBUG_CMD(std::cout << "OnMove100::init() - device init attempt " << attempts << std::endl);
 				_dataSource->write_data(0x01, deviceInit, lengthDeviceInit);
 				_dataSource->read_data(0x81, &responseData, &received);
-			}
+			} while(memcmp(responseData, initResponse, sizeInitResponse) && attempts < 10);
 		}
 	}
 

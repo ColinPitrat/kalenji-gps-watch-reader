@@ -50,8 +50,8 @@ namespace device
 			virtual void getSessionsDetails(SessionsMap *oSessions);
 
 			virtual std::string getName() { return "PylePGSPW1"; };
-			virtual unsigned int getVendorId() { return 0x10C4; };
-			virtual unsigned int getProductId() { return 0xEA61; };
+			virtual unsigned int getVendorId() { return 0x10c4; };
+			virtual unsigned int getProductId() { return 0xea61; };
 
 		private:
 			DECLARE_DEVICE(PylePGSPW1);

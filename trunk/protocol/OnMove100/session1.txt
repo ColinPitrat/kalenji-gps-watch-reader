@@ -1,3 +1,4 @@
+// Step 1
 No.     Time        Source                Destination           Protocol Length Info
      10 0.103006    host                  2.0                   USB      36     SET CONFIGURATION Request
 
@@ -45,6 +46,7 @@ URB setup
 0010  00 03 00 02 00 80 02 08 00 00 00 00 00 09 00 00   ................
 0020  00 00 00 00                                       ....
 
+// Step 2
 No.     Time        Source                Destination           Protocol Length Info
      85 5.596320    host                  2.0                   USB      36     GET DESCRIPTOR Request DEVICE
 
@@ -94,6 +96,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 80 06 00 01   ................
 0020  00 00 12 00                                       ....
 
+// Answer to step 2
 No.     Time        Source                Destination           Protocol Length Info
      86 5.597320    2.0                   host                  USB      46     GET DESCRIPTOR Response DEVICE
 
@@ -150,6 +153,7 @@ DEVICE DESCRIPTOR
 0010  01 03 00 02 00 80 02 12 00 00 00 01 12 01 10 01   ................
 0020  00 00 00 40 c4 10 61 ea 00 01 01 02 03 01         ...@..a.......
 
+// Status of step 3
 No.     Time        Source                Destination           Protocol Length Info
      87 5.597320    2.0                   host                  USB      28     GET DESCRIPTOR Status
 
@@ -190,6 +194,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 3
 No.     Time        Source                Destination           Protocol Length Info
      88 5.597320    host                  2.0                   USB      36     GET DESCRIPTOR Request STRING
 
@@ -239,6 +244,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 80 06 00 03   ................
 0020  00 00 00 01                                       ....
 
+// Answer to step 3
 No.     Time        Source                Destination           Protocol Length Info
      89 5.597320    2.0                   host                  USB      32     GET DESCRIPTOR Response STRING
 
@@ -283,6 +289,7 @@ STRING DESCRIPTOR
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 04 00 00 00 01 04 03 09 04   ................
 
+// Status of step 3
 No.     Time        Source                Destination           Protocol Length Info
      90 5.597320    2.0                   host                  USB      28     GET DESCRIPTOR Status
 
@@ -323,6 +330,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 4
 No.     Time        Source                Destination           Protocol Length Info
      91 5.597320    host                  2.0                   USB      36     GET DESCRIPTOR Request STRING
 
@@ -372,6 +380,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 80 06 02 03   ................
 0020  09 04 00 01                                       ....
 
+// Answer to step 4
 No.     Time        Source                Destination           Protocol Length Info
      92 5.598320    2.0                   host                  USB      102    GET DESCRIPTOR Response STRING
 
@@ -421,6 +430,7 @@ STRING DESCRIPTOR
 0050  20 00 43 00 6f 00 6e 00 74 00 72 00 6f 00 6c 00    .C.o.n.t.r.o.l.
 0060  6c 00 65 00 72 00                                 l.e.r.
 
+// Status of step 4
 No.     Time        Source                Destination           Protocol Length Info
      93 5.598320    2.0                   host                  USB      28     GET DESCRIPTOR Status
 
@@ -461,6 +471,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 5 (same as step 6 but buffer too short)
 No.     Time        Source                Destination           Protocol Length Info
      94 5.598320    host                  2.0                   USB      36     GET DESCRIPTOR Request CONFIGURATION
 
@@ -510,6 +521,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 80 06 00 02   ................
 0020  00 00 09 00                                       ....
 
+// Answer to step 5
 No.     Time        Source                Destination           Protocol Length Info
      95 5.598320    2.0                   host                  USB      37     GET DESCRIPTOR Response CONFIGURATION
 
@@ -563,6 +575,7 @@ CONFIGURATION DESCRIPTOR
 0010  01 03 00 02 00 80 02 09 00 00 00 01 09 02 20 00   .............. .
 0020  01 01 00 80 32                                    ....2
 
+// Status of step 5
 No.     Time        Source                Destination           Protocol Length Info
      96 5.598320    2.0                   host                  USB      28     GET DESCRIPTOR Status
 
@@ -603,6 +616,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 6
 No.     Time        Source                Destination           Protocol Length Info
      97 5.598320    host                  2.0                   USB      36     GET DESCRIPTOR Request CONFIGURATION
 
@@ -652,6 +666,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 80 06 00 02   ................
 0020  00 00 20 00                                       .. .
 
+// Answer to step 6
 No.     Time        Source                Destination           Protocol Length Info
      98 5.599320    2.0                   host                  USB      60     GET DESCRIPTOR Response CONFIGURATION
 
@@ -742,6 +757,7 @@ ENDPOINT DESCRIPTOR
 0020  01 01 00 80 32 09 04 00 00 02 ff 00 00 02 07 05   ....2...........
 0030  81 02 40 00 00 07 05 01 02 40 00 00               ..@......@..
 
+// Status of step 6
 No.     Time        Source                Destination           Protocol Length Info
      99 5.599320    2.0                   host                  USB      28     GET DESCRIPTOR Status
 
@@ -782,6 +798,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 08 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 7
 No.     Time        Source                Destination           Protocol Length Info
     100 5.599320    host                  2.0                   USB      36     SET CONFIGURATION Request
 
@@ -830,6 +847,7 @@ URB setup
 0010  00 03 00 02 00 80 02 08 00 00 00 00 00 09 01 00   ................
 0020  00 00 00 00                                       ....
 
+// Status of step 7777777
 No.     Time        Source                Destination           Protocol Length Info
     101 5.599320    2.0                   host                  USB      28     SET CONFIGURATION Status
 
@@ -870,6 +888,7 @@ USB URB
 0000  1c 00 50 a7 eb 09 80 fa ff ff 00 00 00 00 00 00   ..P.............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 8
 No.     Time        Source                Destination           Protocol Length Info
     102 59.596408   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -918,6 +937,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 00 ff ff   ............@...
 0020  00 00 00 00                                       ....
 
+// Status of step 8
 No.     Time        Source                Destination           Protocol Length Info
     103 59.597409   2.0                   host                  USB      28     GET STATUS Status
 
@@ -958,6 +978,7 @@ USB URB
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 00 02 00 00 00 00 02               ............
 
+// Step 9
 No.     Time        Source                Destination           Protocol Length Info
     104 59.597409   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1006,6 +1027,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 01 00 20   ............@.. 
 0020  00 00 00 00                                       ....
 
+// Status of step 9
 No.     Time        Source                Destination           Protocol Length Info
     105 59.597409   2.0                   host                  USB      28     CLEAR FEATURE Status
 
@@ -1046,6 +1068,7 @@ USB URB
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 00 02 00 00 00 00 02               ............
 
+// Step 10
 No.     Time        Source                Destination           Protocol Length Info
     106 59.597409   host                  2.0                   USB      36     URB_CONTROL in
 
@@ -1094,6 +1117,7 @@ URB setup
 0010  00 03 00 02 00 80 02 08 00 00 00 00 c0 ff 0b 37   ...............7
 0020  00 00 01 00                                       ....
 
+// Answer to step 10
 No.     Time        Source                Destination           Protocol Length Info
     107 59.599409   2.0                   host                  USB      29     URB_CONTROL in
 
@@ -1135,6 +1159,7 @@ CONTROL response data
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 80 02 01 00 00 00 01 02            .............
 
+// Status of step 10
 No.     Time        Source                Destination           Protocol Length Info
     108 59.599409   2.0                   host                  USB      28     Unknown type ff Status
 
@@ -1175,6 +1200,7 @@ USB URB
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 11 (same as 10)
 No.     Time        Source                Destination           Protocol Length Info
     109 59.599409   host                  2.0                   USB      36     URB_CONTROL in
 
@@ -1223,6 +1249,7 @@ URB setup
 0010  00 03 00 02 00 80 02 08 00 00 00 00 c0 ff 0b 37   ...............7
 0020  00 00 01 00                                       ....
 
+// Answer to step 11
 No.     Time        Source                Destination           Protocol Length Info
     110 59.600409   2.0                   host                  USB      29     URB_CONTROL in
 
@@ -1264,6 +1291,7 @@ CONTROL response data
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 80 02 01 00 00 00 01 02            .............
 
+// Status of step 11
 No.     Time        Source                Destination           Protocol Length Info
     111 59.600409   2.0                   host                  USB      28     Unknown type ff Status
 
@@ -1304,6 +1332,7 @@ USB URB
 0000  1c 00 90 44 93 09 80 fa ff ff 00 00 00 00 08 00   ...D............
 0010  01 03 00 02 00 80 02 00 00 00 00 02               ............
 
+// Step 12
 No.     Time        Source                Destination           Protocol Length Info
     112 59.603409   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1352,6 +1381,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 1e 00 00   ............@...
 0020  00 00 04 00                                       ....
 
+// Data of step 12
 No.     Time        Source                Destination           Protocol Length Info
     113 59.604409   2.0                   host                  USB      32     URB_CONTROL out
 
@@ -1393,6 +1423,7 @@ CONTROL response data
 0000  1c 00 30 73 8d 09 80 fa ff ff 00 00 00 00 08 00   ..0s............
 0010  01 03 00 02 00 00 02 04 00 00 00 01 00 c2 01 00   ................
 
+// Status of step 12
 No.     Time        Source                Destination           Protocol Length Info
     114 59.604409   2.0                   host                  USB      28     Unknown type 1e Status
 
@@ -1433,6 +1464,7 @@ USB URB
 0000  1c 00 30 73 8d 09 80 fa ff ff 00 00 00 00 08 00   ..0s............
 0010  01 03 00 02 00 00 02 00 00 00 00 02               ............
 
+// Step 13
 No.     Time        Source                Destination           Protocol Length Info
     115 59.606409   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1481,6 +1513,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 12 0c 00   ............@...
 0020  00 00 00 00                                       ....
 
+// Status of step 13
 No.     Time        Source                Destination           Protocol Length Info
     116 59.606409   2.0                   host                  USB      28     Unknown type 12 Status
 
@@ -1521,6 +1554,7 @@ USB URB
 0000  1c 00 10 16 dc 04 80 fa ff ff 00 00 00 00 08 00   ................
 0010  01 03 00 02 00 00 02 00 00 00 00 02               ............
 
+// Device is now initialized, bulk transfer start
 No.     Time        Source                Destination           Protocol Length Info
     117 59.614410   host                  2.1                   USB      59     URB_BULK out
 
@@ -1604,6 +1638,7 @@ Leftover Capture Data: 450c0c180165144d313139303930312d3031333132313030...
 0020  65 14 4d 31 31 39 30 39 30 31 2d 30 31 33 31 32   e.M1190901-01312
 0030  31 30 30 37 31 24 01 00 64 6a 00 00 64 6a 00      10071$..dj..dj.
 
+// Step 14 (same as 13)
 No.     Time        Source                Destination           Protocol Length Info
     119 61.603523   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1652,6 +1687,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 12 0c 00   ............@...
 0020  00 00 00 00                                       ....
 
+// Answer to step 14
 No.     Time        Source                Destination           Protocol Length Info
     120 61.603523   2.0                   host                  USB      28     Unknown type 12 Status
 
@@ -1775,6 +1811,7 @@ Leftover Capture Data: 450c0c180165144d313139303930312d3031333132313030...
 0020  65 14 4d 31 31 39 30 39 30 31 2d 30 31 33 31 32   e.M1190901-01312
 0030  31 30 30 37 31 24 01 00 64 6a 00 00 64 6a 00      10071$..dj..dj.
 
+// Step 15 (same as 13)
 No.     Time        Source                Destination           Protocol Length Info
     123 63.606638   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1823,6 +1860,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 12 0c 00   ............@...
 0020  00 00 00 00                                       ....
 
+// Status of step 15
 No.     Time        Source                Destination           Protocol Length Info
     124 63.606638   2.0                   host                  USB      28     Unknown type 12 Status
 
@@ -1946,6 +1984,7 @@ Leftover Capture Data: 450c0c180165144d313139303930312d3031333132313030...
 0020  65 14 4d 31 31 39 30 39 30 31 2d 30 31 33 31 32   e.M1190901-01312
 0030  31 30 30 37 31 24 01 00 64 6a 00 00 64 6a 00      10071$..dj..dj.
 
+// Step 16 (same as 13)
 No.     Time        Source                Destination           Protocol Length Info
     127 65.262733   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -1994,6 +2033,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 12 0c 00   ............@...
 0020  00 00 00 00                                       ....
 
+// Status of step 16
 No.     Time        Source                Destination           Protocol Length Info
     128 65.262733   2.0                   host                  USB      28     Unknown type 12 Status
 
@@ -2117,6 +2157,7 @@ Leftover Capture Data: 450c0c180165144d313139303930312d3031333132313030...
 0020  65 14 4d 31 31 39 30 39 30 31 2d 30 31 33 31 32   e.M1190901-01312
 0030  31 30 30 37 31 24 01 00 64 6a 00 00 64 6a 00      10071$..dj..dj.
 
+// Step 17 (same as 13)
 No.     Time        Source                Destination           Protocol Length Info
     131 66.867824   host                  2.0                   USB      36     URB_CONTROL out
 
@@ -2165,6 +2206,7 @@ URB setup
 0010  00 03 00 02 00 00 02 08 00 00 00 00 40 12 0c 00   ............@...
 0020  00 00 00 00                                       ....
 
+// Status of step 17
 No.     Time        Source                Destination           Protocol Length Info
     132 66.868824   2.0                   host                  USB      28     Unknown type 12 Status
 
