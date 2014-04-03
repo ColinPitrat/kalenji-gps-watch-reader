@@ -94,29 +94,29 @@ The information of the kind of event that triggered the end of a lap is, as far 
 ==Filters==
 *Name:* filters
 
-*Default value:* UnreliablePoints,EmptyLaps
+*Default value:* !UnreliablePoints,!EmptyLaps
 
 List of filters to apply on imported data before exporting it.
 Available filters are:
-  * *EmptyLaps*: Remove laps with null distance or null duration
-  * *UnreliablePoints*: Remove points for which the device gives a low reliability
-  * *NullHeartrate*: Replace null heartrate measures by previous non-null value
-  * *FixElevation*: Uses Google Elevation API to correct the elevation of points based on geographical information. Note that there is a limitation of 25 000 points per day, which corresponds to nearly 7 hours with the best "resolution" (one point per second) 
-  * *ComputeSessionStats*: Calculate duration, distance, average speed, max speed, ascent and descent using the raw information from points of the session.
-  * *ReducePoints*: Remove some points so that the route contains less than 200 points after the operation. This is useful before exporting a route to the watch. This keeps points considered as important (with comment in a GPX file) and remove points where they are not far from being aligned (the notion of "not far" adapting dynamically to reach the 200 limit).
+  * *!EmptyLaps*: Remove laps with null distance or null duration
+  * *!UnreliablePoints*: Remove points for which the device gives a low reliability
+  * *!NullHeartrate*: Replace null heartrate measures by previous non-null value
+  * *!FixElevation*: Uses Google Elevation API to correct the elevation of points based on geographical information. Note that there is a limitation of 25 000 points per day, which corresponds to nearly 7 hours with the best "resolution" (one point per second) 
+  * *!ComputeSessionStats*: Calculate duration, distance, average speed, max speed, ascent and descent using the raw information from points of the session.
+  * *!ReducePoints*: Remove some points so that the route contains less than 200 points after the operation. This is useful before exporting a route to the watch. This keeps points considered as important (with comment in a GPX file) and remove points where they are not far from being aligned (the notion of "not far" adapting dynamically to reach the 200 limit).
 
 ==Outputs==
 *Name:* outputs
 
-*Default value:* GPX,GoogleMap
+*Default value:* GPX,!GoogleMap
 
 List of formats to which data should be exported.
 Outputs can be:
   * *GPX*: GPX format, an XML file conforming to GPX and GPXDATA standards
   * *Fitlog*: Fitlog format, an XML file conforming to Fitlog standard used, among others, by SportTracks
   * *TCX*: TCX format, an XML file conforming to the format introduced by Garmin training center
-  * *GoogleMap*: an HTML page containing necessary code to display the route on a google map
-  * *GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
+  * *!GoogleMap*: an HTML page containing necessary code to display the route on a google map
+  * *!GoogleStaticMap*: a file containing an URL using Google API to produce a static picture of the route. As the API limit URL size, it is a simplified version for long routes
   * *KML*: a KML file readable, among others, by GoogleEarth
   * *CSV*: a CSV (comma separated values) file with one line per point of measure and only two columns: time and distance. The main purpose of this format is to compare sessions using create_comparison_curve.sh script.
   * *Kalenji*: export route to the watch 
