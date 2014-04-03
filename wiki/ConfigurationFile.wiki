@@ -42,10 +42,10 @@ To import from GPX file, you should prefer the usage of -D option in command lin
 
 Supported devices are:
   * *CWKalenji500SD*: For CW Kalenji 500 SD, CW Kalenji 500 Play SD and W Kalenji 500 SD
-  * *Kalenji*: For W Kalenji 300 GPS, CW Kalenji 700 GPS, OnMove 500, OnMove 700 and Keymaze 700 Trail
+  * *Kalenji*: For W Kalenji 300 GPS, CW Kalenji 700 GPS, On Move 500, OnMove 700 and Keymaze 700 Trail
   * *Keymaze*: For Keymaze 500 and Keymaze 700
-  * *OnMove100*: For OnMove 100
-  * *OnMove710*: For OnMove 510 and OnMove 710
+  * *!OnMove100*: For On Move 100
+  * *!OnMove710*: For On Move 510 and On Move 710
   * *PylePGSPW1*: For Pyle PGSPW1
   * *GPX*: For GPX files
 
