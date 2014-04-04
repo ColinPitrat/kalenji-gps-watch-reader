@@ -25,7 +25,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
  _*Size*_: 9.7 MB<br/>
  _*SHA1 checksum*_: 52596f8d1a8b26c1f14f8197177ee705d7e067eb
 
-  Support of On Move 710 and On Move 100.
+  Support of On Move 710 and On Move 100.<br/>
   Improve HTML !GoogleMap output by adding graphs and linking them to the map.
 
 = Older releases =
