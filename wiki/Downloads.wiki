@@ -1,0 +1,51 @@
+#summary All releases of kalenji-gps-watch-reader
+#labels Featured,Phase-Deploy,Downloads
+
+= Introduction =
+
+Although SVN version should always be working well and contain the most advanced features, you may want to use a stable release.
+You'll find it here !
+
+= Latest release - version 4.7 =
+
+== Source code packages ==
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.7.tar.gz kalenji-gps-watch-reader-4.7.tar.gz]
+
+== Windows version ==
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.7_win.tar.gz kalenji-gps-watch-reader-4.7_win.tar.gz]
+
+= Older releases =
+
+== Windows versions ==
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.6_win.tar.gz kalenji-gps-watch-reader-4.6_win.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.5_win.tar.gz kalenji-gps-watch-reader-4.5_win.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.4_win.tar.gz kalenji-gps-watch-reader-4.4_win.tar.gz]
+
+== Source code ==
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.6.tar.gz kalenji-gps-watch-reader-4.6.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.5.tar.gz kalenji-gps-watch-reader-4.5.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.4.tar.gz kalenji-gps-watch-reader-4.4.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.3.tar.gz kalenji-gps-watch-reader-4.3.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.2.tar.gz kalenji-gps-watch-reader-4.2.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.1.tar.gz kalenji-gps-watch-reader-4.1.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.0.tar.gz kalenji-gps-watch-reader-4.0.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-3.1.tar.gz kalenji-gps-watch-reader-3.1.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-3.0.tar.gz kalenji-gps-watch-reader-3.0.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-2.0.tar.gz kalenji-gps-watch-reader-2.0.tar.gz]
+
+[https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-1.0.tar.gz kalenji-gps-watch-reader-1.0.tar.gz]
