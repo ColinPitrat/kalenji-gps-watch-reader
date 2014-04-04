@@ -1,6 +1,8 @@
 #summary Configuration file
 #labels Phase-Deploy,Configuration
 
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+
 =Where to place your configuration file=
 
 You can modify the default behavior of kalenji_reader by creating a configuration file and setting your preferences in it.
@@ -147,5 +149,4 @@ By default, the log files are created in a subdirectory logs of the output direc
 
 The directory where raw data from the watch is logged if this functionality is activated.
 
-
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />

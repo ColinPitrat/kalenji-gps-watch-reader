@@ -1,6 +1,8 @@
 #summary Installation and usage under Linux.
 #labels Featured,Phase-Deploy
 
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+
 You can either install featured versions from a distributed package or current development version from SVN.
 
 = Installing from package =
@@ -61,4 +63,4 @@ mkdir -p /tmp/kalenji_import
 The output of kalenji_reader will be written in kalenji_reader_output.txt. You can attach this file, an eventual core and logs of the import to a bug report to provide more information on the problem.
 
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />

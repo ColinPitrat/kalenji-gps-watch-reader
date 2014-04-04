@@ -1,6 +1,8 @@
 #summary Produce dumps for the reverse enginnering of a device
 #labels Phase-Implementation
 
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+
 = Software required =
 
 You need to install USBPcap in order to produce dumps. You can find it here:
@@ -73,4 +75,4 @@ For each dump, send also the GPX files corresponding to the imported sessions (s
  * Any information that you entered in you watch when configuring it: name, age, weight, max heartrate ...
 
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
