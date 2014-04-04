@@ -30,7 +30,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
   Support of On Move 710 and On Move 100.<br/>
   Improve HTML !GoogleMap output by adding graphs and linking them to the map.
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
 
 = Older releases =
 
