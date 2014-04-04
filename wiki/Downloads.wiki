@@ -3,7 +3,7 @@
 
 = Introduction =
 
-Although SVN version should always be working well and contain the most advanced features, you may want to use a stable release.
+Although SVN version should always be working well and contains the most advanced features, you may want to use a stable release.
 You'll find it here !
 
 It is possible to benefit from improvements of a newer version for all the sessions you already imported even if you removed them from your watch as long as you had logs activated. You just need to use -i command line option with the log files that should be in the subdirectory 'logs' of your import directory. 
@@ -11,9 +11,9 @@ It is possible to benefit from improvements of a newer version for all the sessi
 = Latest release - version 4.7 =
 
 == Source code packages ==
-Release date: Apr 4, 2014
-Size: 141.5 kB
-SHA1 checksum: 69dd5e061d5880109b337360d3da36302d347e8d
+  *Release date*: Apr 4, 2014
+  *Size*: 141.5 kB
+  *SHA1 checksum*: 69dd5e061d5880109b337360d3da36302d347e8d
 
 Support of On Move 710 and On Move 100.
 Improve HTML GoogleMap output by adding graphs and linking them to the map.
