@@ -8,7 +8,7 @@ You'll find it here !
 
 It is possible to benefit from improvements of a newer version for all the sessions you already imported even if you removed them from your watch as long as you had logs activated. You just need to use -i command line option with the log files that should be in the subdirectory 'logs' of your import directory. 
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" />
 
 = Latest release - version 4.7 =
 
@@ -30,7 +30,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
   Support of On Move 710 and On Move 100.<br/>
   Improve HTML !GoogleMap output by adding graphs and linking them to the map.
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="3040795652020570" up_ad_slot="3820977634" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="468" height="60" up_ad_client="ca-pub-3040795652020570" up_ad_slot="3820977634" />
 
 = Older releases =
 
