@@ -22,7 +22,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
  Improve HTML !GoogleMap output by adding graphs and linking them to the map.
 
 == Windows version ==
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.7_win.tar.gz kalenji-gps-watch-reader-4.7_win.tar.gz]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.7_win.zip kalenji-gps-watch-reader-4.7_win.zip]<br/>
  _*Release date*_: Apr 4, 2014<br/>
  _*Size*_: 9.7 MB<br/>
  _*SHA1 checksum*_: 52596f8d1a8b26c1f14f8197177ee705d7e067eb
@@ -37,7 +37,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
 == Windows versions ==
 
 *Version 4.6*
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.6_win.tar.gz kalenji-gps-watch-reader-4.6_win.tar.gz]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.6_win.zip kalenji-gps-watch-reader-4.6_win.zip]<br/>
  _*Release date*_: Jan 13, 2014<br/>
  _*Size*_: 9.7 MB<br/>
  _*SHA1 checksum*_: a823a40b3d6649a1752e59727b6c854ec20b6e26 
@@ -45,7 +45,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
   Repair the !FixElevation filter.
 
 *Version 4.5*
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.5_win.tar.gz kalenji-gps-watch-reader-4.5_win.tar.gz]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.5_win.zip kalenji-gps-watch-reader-4.5_win.zip]<br/>
  _*Release date*_: Dec 29, 2013<br/>
  _*Size*_: 9.7 MB<br/>
  _*SHA1 checksum*_: 54b4819b3e30177ad4d4840e62141e44a6ad5eac
@@ -54,7 +54,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
   Fix a few issues
 
 *Version 4.4*
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.4_win.tar.gz kalenji-gps-watch-reader-4.4_win.tar.gz]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.4_win.zip kalenji-gps-watch-reader-4.4_win.zip]<br/>
  _*Release date*_: Aug 28, 2013<br/>
  _*Size*_: 9.5 MB<br/>
  _*SHA1 checksum*_: 8a05bd502ddf327a2490499f9a078862455cf7cb
