@@ -55,7 +55,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
  _*Size*_: 9.5 MB<br/>
  _*SHA1 checksum*_: 8a05bd502ddf327a2490499f9a078862455cf7cb
 
-First kalenji_reader version delivered for Windows.
+  First kalenji_reader version delivered for Windows.
 
 == Source code ==
 
@@ -91,7 +91,7 @@ First kalenji_reader version delivered for Windows.
  _*Size*_: 37.1 kB<br/>
  _*SHA1 checksum*_: 26c0e07b014512bec8d26d3b8990ca5741c8b05a
 
-  Fix issues 6, 7 and 8.
+  Fix issue 6, issue 7 and issue 8.
 
 *Version 4.2*
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.2.tar.gz kalenji-gps-watch-reader-4.2.tar.gz]<br/>
@@ -115,7 +115,7 @@ First kalenji_reader version delivered for Windows.
  _*Size*_: 36.5 kB<br/>
  _*SHA1 checksum*_: d21f829251368e70fa8cf253ab090b1a9bface4e
 
-  Two mains new things in this version:
+  Three main new things in this version:
    * support of Fitlog output format
    * support of CW Kalenji 500 SD watch (no GPS, just a podometer and a heartrate belt)
    * autodetection of device
@@ -134,7 +134,7 @@ First kalenji_reader version delivered for Windows.
  _*Size*_: 26.4 kB<br/>
  _*SHA1 checksum*_: e570568dbc03af013095a1af786692502463b7f1
 
-  Two mains new things in this version:
+  Two main new things in this version:
    * the import of sessions from the computer to the watch. It is limited to route having less than 200 points.
    * the !FixElevation filter that uses !GoogleMap API to determine the elevation instead of relying on the data given by the watch. This is usually much more precise.
 
@@ -154,7 +154,7 @@ First kalenji_reader version delivered for Windows.
  _*Size*_: 10.1 kB<br/>
  _*SHA1 checksum*_: bde18addc0ab40014b7f9e9a67f2a6a5d0d34ef3
 
-  Fully functional:<br/>
+  Fully functional:
    * support of position, elevation and heartrate
    * export in GPX format
    * log raw data of each import
