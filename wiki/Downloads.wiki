@@ -11,12 +11,15 @@ It is possible to benefit from improvements of a newer version for all the sessi
 = Latest release - version 4.7 =
 
 == Source code packages ==
-  *Release date*: Apr 4, 2014
-  *Size*: 141.5 kB
-  *SHA1 checksum*: 69dd5e061d5880109b337360d3da36302d347e8d
+*Release date*: Apr 4, 2014
+
+*Size*: 141.5 kB
+
+*SHA1 checksum*: 69dd5e061d5880109b337360d3da36302d347e8d
 
 Support of On Move 710 and On Move 100.
-Improve HTML GoogleMap output by adding graphs and linking them to the map.
+
+Improve HTML !GoogleMap output by adding graphs and linking them to the map.
 
 [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.7.tar.gz kalenji-gps-watch-reader-4.7.tar.gz]
 
