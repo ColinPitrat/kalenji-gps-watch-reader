@@ -9,7 +9,7 @@ Unzip the content of the archive in the directory of your choice.
 
 = 2 - Installation of WinUSB driver =
 
-*This step is not needed for On Move 510 and On Move 710 watches*
+*This step is not needed (in fact, it MUST NOT BE DONE) for On Move 510 and On Move 710 watches*
 
 *Note that after installing WinUSB driver, Geonaute Software will not recognize the watch anymore. You'll be able to use it again by uninstalling WinUSB driver and reinstalling the previous one. See _ 5 - Uninstall WinUSB driver _.* If you know a way to use both at the same time, please share it !
 
