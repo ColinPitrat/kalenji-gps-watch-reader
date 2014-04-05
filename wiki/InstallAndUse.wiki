@@ -27,6 +27,12 @@ cd kalenji-gps-watch-reader-read-only
 make
 }}}
 
+= On Move 510 and 710 =
+
+On Move 510 and On Move 710 watches are handled as USB mass storage devices so they require a specific configuration.
+
+You need to either give the path to the mount point where the watch content is available with -p option or specify it using path option in your configuration file (see ConfigurationFile for details).
+
 = Importing sessions from the watch =
 
 By default, data is imported in /tmp/kalenji_import. You can modify it by editing your ConfigurationFile. If the directory doesn't exist, it will be created.
@@ -41,6 +47,13 @@ GPX files created can be imported in your favorite software.
 
 = Exporting route to the watch =
 
+This is supported for the following devices:
+  * W Kalenji 300 GPS
+  * CW Kalenji 700 GPS
+  * GPS On Move 500
+  * GPS On Move 700
+  * Keymaze 700 Trail
+
 Let's say you have a file myRoute.gpx containing the route you want to put on your watch. You can use the following command to do so:
 
 {{{
@@ -48,6 +61,8 @@ Let's say you have a file myRoute.gpx containing the route you want to put on yo
 }}}
 
 Note that the same kind of command can be used with different -o option to convert a GPX file to apply a filter to a GPX file or to export it to another format. See ConfigurationFile and -h option for more details.
+
+See [http://code.google.com/p/kalenji-gps-watch-reader/wiki/FAQ#How_can_I_easily_create_GPX_files_to_upload_to_my_watch_? this FAQ element] for how to create a GPX file from Google Map.
 
 = Debug mode =
 
