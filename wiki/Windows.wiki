@@ -50,6 +50,12 @@ outputs=GPX,KML,GoogleMap
 gpx_extensions=gpxdata
 }}}
 
+For On Move 510 and 710 you'll also need to precise where the watch is mounted as USB mass storage device. Typically:
+{{{
+source=Path
+path=E:
+}}}
+
 = 4 - Usage =
 
 Just launch kalenji_reader.exe. You can create a shortcut to it to ease its usage.
