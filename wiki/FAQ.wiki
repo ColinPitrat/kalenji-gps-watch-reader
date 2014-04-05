@@ -32,7 +32,9 @@ However, it should be possible to use them with Cygwin. Note that it has not bee
 
 ===No known USB device found===
 
-This message occurs when using autodetection and your watch is not recognized. If it happens, first check in your OS if your watch is visible (on linux, you can use lsusb command - on windows, check in device manager, accessible from control panel).
+This message occurs when using autodetection and your watch is not recognized. If it happens, first check if your watch is in the list of supported devices. If this is the case, check in your OS if your watch is visible (on linux, you can use lsusb command - on windows, check in device manager, accessible from control panel).
+
+If you watch is not supported, you can have a look at ProduceDumps to provide some help to implement the support for it and open an issue or contact me by mail to send me the dumps.
 
 You can try to force the usage of a given device type by using -D option in command line or by adding the device option in your .kalenji_readerrc (see ConfigurationFile for more details and for a list of device names).
 
