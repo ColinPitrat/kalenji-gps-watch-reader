@@ -1,7 +1,7 @@
 #summary An overview of the architecture of the software for developpers
 #labels Phase-Implementation
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
 
 = Introduction =
 
@@ -74,4 +74,4 @@ For the rest of the implementation, the best is to have a look at already existi
 
 The important thing here is that you don't need to do anything else. Once you've created your class, you just need to launch make and you can use this new object in the configuration or the options of the program.
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />

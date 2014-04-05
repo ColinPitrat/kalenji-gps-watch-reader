@@ -1,7 +1,7 @@
 #summary Installation and usage under Windows
 #labels Featured,Phase-Deploy
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
 
 = 1 - Installation of kalenji_reader =
 
@@ -77,4 +77,7 @@ https://kalenji-gps-watch-reader.googlecode.com/files/zadig_uninstall_3.png
 Now, if you unplug and replug your device, the default driver should be reinstalled automatically and you'll be able to use Geonaute Software again.
 
 
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="6350536088" />
+<<<<<<< .mine
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
+=======
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />>>>>>>> .r276
