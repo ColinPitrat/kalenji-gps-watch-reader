@@ -139,12 +139,36 @@ namespace device
 		size_t received;
 		_dataSource->write_data(0x01, getData, lengthGetData);
 		_dataSource->read_data(0x81, &responseData, &received);
-		// First lines to be reverse engineered (sessions global infos ?)
-		while(responseData[35] != 0xfa)
+		if(responseData[35] != 0xff)
 		{
-			DEBUG_CMD(std::cout << "OnMove100: Ignore header !" << std::endl);
+			std::cout << "Unexpected line termination " << responseData[35] << " instead of 0xFF." << std::endl;
+		}
+		_dataSource->read_data(0x81, &responseData, &received);
+		// First lines to be reverse engineered (sessions global infos ?)
+		while(responseData[35] == 0xfd)
+		{
 			try
 			{
+				tm time;
+				time.tm_sec = responseData[0];
+				time.tm_min = responseData[1];
+				time.tm_hour = responseData[2];
+				time.tm_mday = responseData[3];
+				// In tm, month is between 0 and 11.
+				time.tm_mon = responseData[4] - 1;
+				// In tm, year is year since 1900. GPS returns year since 2000
+				time.tm_year = 100 + responseData[5];
+				time.tm_isdst = -1;
+				DEBUG_CMD(std::cout << "Session from: " << time.tm_year + 1900 << "-" << time.tm_mon + 1 << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec << std::endl);
+				int nb_points = (responseData[14] << 8) + responseData[15];
+				int num_session = responseData[34];
+				SessionId id = SessionId(responseData[34], responseData[34]+1);
+				// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
+				Session mySession(id, num_session, time, nb_points, 0, 0, 0);
+				oSessions->insert(SessionsMapElement(id, mySession));
+				Session *session = &(oSessions->find(id)->second);
+				time_t current_time = session->getTime();
+				// Ignore second line (for now ?)
 				_dataSource->read_data(0x81, &responseData, &received);
 			}
 			catch(std::runtime_error e)
@@ -152,11 +176,14 @@ namespace device
 				DEBUG_CMD(std::cout << "OnMove100: read_data failed: " << e.what() << " - Retrying a get data." << std::endl;)
 				_dataSource->write_data(0x01, getData, lengthGetData);
 			}
+			_dataSource->read_data(0x81, &responseData, &received);
 		}
 		while(responseData[35] == 0xfa)
 		{
 			DEBUG_CMD(std::cout << "OnMove100: Read session !" << std::endl);
 			// First line ending with fa is the header of the session
+			// It's exactly the same as the first line ending with fd
+			/*
 			tm time;
 			time.tm_sec = responseData[0];
 			time.tm_min = responseData[1];
@@ -174,6 +201,10 @@ namespace device
 			// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
 			Session mySession(id, num_session, time, nb_points, 0, 0, 0);
 			oSessions->insert(SessionsMapElement(id, mySession));
+			Session *session = &(oSessions->find(id)->second);
+			time_t current_time = session->getTime();
+			*/
+			SessionId id = SessionId(responseData[34], responseData[34]+1);
 			Session *session = &(oSessions->find(id)->second);
 			time_t current_time = session->getTime();
 			_dataSource->read_data(0x81, &responseData, &received);
