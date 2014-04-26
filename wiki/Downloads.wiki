@@ -16,7 +16,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.7.tar.gz kalenji-gps-watch-reader-4.7.tar.gz]<br/>
  _*Release date*_: Apr 4, 2014<br/>
  _*Size*_: 141.5 kB<br/>
- _*SHA1 checksum*_: 69dd5e061d5880109b337360d3da36302d347e8d
+ _*SHA1 checksum*_: be017c4114fdc50959d16eb8fd17986814673347
 
  Support of On Move 710 and On Move 100.<br/>
  Improve HTML !GoogleMap output by adding graphs and linking them to the map.
