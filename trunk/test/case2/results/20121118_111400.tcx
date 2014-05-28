@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/ActivityExtension/v2 http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
  <Activities>
-  <Activity>
-   <Id>20120-110-18T110:140:0Z</Id>
+  <Activity Sport="Running">
+   <Id>2012-11-18T11:14:00Z</Id>
    <Lap StartTime="2012-11-18T11:14:00.0Z">
     <TotalTimeSeconds>2616.57</TotalTimeSeconds>
     <DistanceMeters>9199</DistanceMeters>

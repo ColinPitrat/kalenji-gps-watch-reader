@@ -20,13 +20,8 @@ namespace output
 				"http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 "
 				"http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd\">" << std::endl;
 		mystream << " <Activities>" << std::endl;
-		mystream << "  <Activity>" << std::endl;
-		mystream << "   <Id>" << session->getYear() << std::setw(2) << std::setfill('0')
-			<< "-" << session->getMonth() << std::setw(2) << std::setfill('0')
-			<< "-" << session->getDay() << "T" << std::setw(2) << std::setfill('0')
-			<< session->getHour() << std::setw(2) << std::setfill('0') << ":"
-			<< session->getMinutes() << std::setw(2) << std::setfill('0') << ":"
-			<< session->getSeconds() << "Z</Id>" << std::endl;
+		mystream << "  <Activity Sport=\"" << configuration["tcx_sport"] << "\">" << std::endl;
+		mystream << "   <Id>" << session->getBeginTime() << "</Id>" << std::endl;
 		std::list<Lap*> laps = session->getLaps();
 		std::list<Point*> points = session->getPoints();
 		std::list<Point*>::iterator pit = points.begin();
