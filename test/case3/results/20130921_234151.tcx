@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TrainingCenterDatabase xmlns="http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.garmin.com/xmlschemas/ActivityExtension/v2 http://www.garmin.com/xmlschemas/ActivityExtensionv2.xsd http://www.garmin.com/xmlschemas/TrainingCenterDatabase/v2 http://www.garmin.com/xmlschemas/TrainingCenterDatabasev2.xsd">
  <Activities>
-  <Activity>
-   <Id>20130-90-21T230:410:51Z</Id>
+  <Activity Sport="Biking">
+   <Id>2013-09-21T23:41:51Z</Id>
   </Activity>
  </Activities>
 </TrainingCenterDatabase>
