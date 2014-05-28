@@ -133,6 +133,15 @@ If set to _gpxdata_, gpxdata extension is used to encode heartrate information f
 If set to _gpxtpx_, gpxtpx extension is used to encode heartrate information for each point.
 The variable can be set to _gpxdata,gpxtpx_ in order to encode data using both extensions.
 
+*Name:* tcx_sport
+
+*Default value:* Running
+
+Activity to use to categorize the session in TCX file format. Should be one of:
+  * *Running*
+  * *Biking*
+  * *Other*
+
 ==Log transactions==
 *Name:* log_transactions
 
