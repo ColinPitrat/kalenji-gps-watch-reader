@@ -105,10 +105,19 @@ namespace device
 			int attempts = 0;
 			do
 			{
-				attempts++;
-				DEBUG_CMD(std::cout << "OnMove100::init() - device init attempt " << attempts << std::endl);
-				_dataSource->write_data(0x01, deviceInit, lengthDeviceInit);
-				_dataSource->read_data(0x81, &responseData, &received);
+				try
+				{
+					attempts++;
+					DEBUG_CMD(std::cout << "OnMove100::init() - device init attempt " << attempts << std::endl);
+					_dataSource->write_data(0x01, deviceInit, lengthDeviceInit);
+					_dataSource->read_data(0x81, &responseData, &received);
+				}
+				catch(...)
+				{
+					unsigned char data[256] = { 0 };
+					DEBUG_CMD(std::cout << "OnMove100::init() - step 13 (retry device init)" << std::endl);
+					_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
+				}
 			} while(memcmp(responseData, initResponse, sizeInitResponse) && attempts < 10);
 		}
 	}
