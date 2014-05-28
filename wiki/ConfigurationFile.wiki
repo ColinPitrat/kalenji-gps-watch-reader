@@ -123,7 +123,7 @@ Outputs can be:
   * *CSV*: a CSV (comma separated values) file with one line per point of measure and only two columns: time and distance. The main purpose of this format is to compare sessions using create_comparison_curve.sh script.
   * *Kalenji*: export route to the watch 
 
-==Outputs options==
+==GPX output options==
 *Name:* gpx_extensions
 
 *Default value:* gpxdata
@@ -133,6 +133,7 @@ If set to _gpxdata_, gpxdata extension is used to encode heartrate information f
 If set to _gpxtpx_, gpxtpx extension is used to encode heartrate information for each point.
 The variable can be set to _gpxdata,gpxtpx_ in order to encode data using both extensions.
 
+==TCX output options==
 *Name:* tcx_sport
 
 *Default value:* Running
