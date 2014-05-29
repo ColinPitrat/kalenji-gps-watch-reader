@@ -251,6 +251,31 @@ namespace device
 	{
 	}
 
+	void OnMove100::deleteSessions()
+	{
+		DEBUG_CMD(std::cout << "OnMove100: Deleting sessions !" << std::endl);
+		unsigned char data[256] = { 0 };
+		unsigned char dataIn[256];
+
+		DEBUG_CMD(std::cout << "OnMove100::init() - step 1" << std::endl);
+		_dataSource->control_transfer(0x40, 0x0, 0x0, 0x0, data, 0);
+
+		DEBUG_CMD(std::cout << "OnMove100::init() - step 2" << std::endl);
+		_dataSource->control_transfer(0xa3, 0x0, 0x0, 0x2, data, 4);
+
+		// I think this one is the usefull one - The other steps may not be necessary
+		DEBUG_CMD(std::cout << "OnMove100::init() - step 3" << std::endl);
+		_dataSource->control_transfer(0x23, 0x1, 0x10, 0x2, data, 0);
+
+		DEBUG_CMD(std::cout << "OnMove100::init() - step 4" << std::endl);
+		_dataSource->control_transfer(0xa3, 0x0, 0x0, 0x2, data, 4);
+
+		DEBUG_CMD(std::cout << "OnMove100::init() - step 5" << std::endl);
+		_dataSource->control_transfer(0x0, 0x9, 0x0, 0x0, data, 0);
+
+		DEBUG_CMD(std::cout << "OnMove100: Sessions deleted !" << std::endl);
+	}
+
 	void OnMove100::exportSession(Session *iSession) 
 	{
 		std::cerr << "Unsupported export of session with OnMove 100" << std::endl;

@@ -41,10 +41,15 @@ namespace device
 			virtual void exportSession(Session *iSession);
 
 			/** 
-			  Send data to the source. 
-			  @param iData A pointer to data to be sent
+			  Retrieve details of sessions passed in input/output map
+			  @param ioSessions The sessions to import, the function enrich it with details
 			 */ 
-			virtual void getSessionsDetails(SessionsMap *oSessions);
+			virtual void getSessionsDetails(SessionsMap *ioSessions);
+
+			/**
+			  Clean the watch by removing all sessions stored in it.
+		        */
+			virtual void deleteSessions();
 			
 			virtual std::string getName() { return "OnMove100"; };
 			virtual unsigned int getVendorId() { return 0x10c4; };
