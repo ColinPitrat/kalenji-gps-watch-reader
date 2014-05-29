@@ -25,12 +25,12 @@ Alternatively, you place and name your file however/wherever you want and pass i
 
 =Options available=
 
-==OnMove100 options==
+==!OnMove100 options==
 *Name:* onmove100_delete
 
 *Default value:* no
 
-OnMove100 doesn't offer the possibility to delete sessions from the watch itself, so the software must support it. Setting this option to yes activate the deletion of the sessions after the import.
+!OnMove100 doesn't offer the possibility to delete sessions from the watch itself, so the software must support it. Setting this option to yes activate the deletion of the sessions after the import.
 As this delete all sessions on the watch, it is only effective when importing all sessions (import=all or import=ask and all specified during the import).
 
 *Be careful with it in order to not loose data !* One way to protect against data loss is to ensure logging is activated.
