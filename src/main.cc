@@ -153,6 +153,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["outputs"] = "GPX,GoogleMap";
 	configuration["gpx_extensions"] = "gpxdata";
 	configuration["tcx_sport"] = "Running";
+	configuration["onmove100_delete"] = "no";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
@@ -234,7 +235,7 @@ bool parseConfAndOptions(int argc, char** argv)
 	return true;
 }
 
-void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outputs)
+std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outputs)
 {
 	std::string to_import_string;
 	if(configuration["import"] == "ask")
@@ -305,6 +306,7 @@ void filterSessionsToImport(SessionsMap *sessions, std::list<std::string> &outpu
 			else ++it;
 		}
 	}
+	return to_import_string;
 }
 
 int main(int argc, char *argv[])
@@ -400,9 +402,14 @@ int main(int argc, char *argv[])
 		// If import = ask, prompt the user for sessions to import. 
 		// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
 		std::list<std::string> outputs = splitString(configuration["outputs"]);
-		filterSessionsToImport(&sessions, outputs);
+		std::string to_import = filterSessionsToImport(&sessions, outputs);
 
 		myDevice->getSessionsDetails(&sessions);
+
+		if(configuration["device"] == "OnMove100" && configuration["onmove100_delete"] == "yes" && to_import == "all")
+		{
+			myDevice->deleteSessions();
+		}
 
 		myDevice->release();
 		delete myDevice;

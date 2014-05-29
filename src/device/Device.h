@@ -46,10 +46,16 @@ namespace device
 			virtual void exportSession(Session *iSession) = 0;
 
 			/** 
-			  Send data to the source. 
-			  @param iData A pointer to data to be sent
+			  Retrieve details of sessions passed in input/output map
+			  @param ioSessions The sessions to import, the function enrich it with details
 			 */ 
-			virtual void getSessionsDetails(SessionsMap *oSessions) = 0;
+			virtual void getSessionsDetails(SessionsMap *ioSessions) = 0;
+
+			/**
+			  Deleting sessions is not the primary function of this software. The way it's handled is not very user friendly.
+			  This function should only be implemented for devices that do not offer a way to delete sessions from the watch. (e.g: OnMove100)
+			*/
+			virtual void deleteSessions() { std::cerr << "deleteSessions() not implemented for this device" << std::endl; };
 
 			virtual std::string getName() = 0;
 
