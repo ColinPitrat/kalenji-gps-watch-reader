@@ -111,10 +111,11 @@ The information of the kind of event that triggered the end of a lap is, as far 
 List of filters to apply on imported data before exporting it.
 Available filters are:
   * *!EmptyLaps*: Remove laps with null distance or null duration
-  * *!UnreliablePoints*: Remove points for which the device gives a low reliability
-  * *!NullHeartrate*: Replace null heartrate measures by previous non-null value
+  * *!UnreliablePoints*: Remove points for which the device gives a low reliability (concerns the following devices: Keymaze 700 Trail, OnMove 500/510/700/710, W Kalenji 300, CW Kalenji 700)
+  * *!NullHeartrate*: Replace null heartrate measures by previous non-null value (usefull on some devices in case of temporary communication issues between heartrate sensor and watch)
   * *!FixElevation*: Uses Google Elevation API to correct the elevation of points based on geographical information. Note that there is a limitation of 25 000 points per day, which corresponds to nearly 7 hours with the best "resolution" (one point per second) 
   * *!ComputeSessionStats*: Calculate duration, distance, average speed, max speed, ascent and descent using the raw information from points of the session.
+  * *!ComputeInstantSpeed*: Compute the instant speed for each point based on the distance (computed from coordinates) and the time. This is usefull on OnMove100 for which the data from the watch seems invalid (average speed instead of instant speed).
   * *!ReducePoints*: Remove some points so that the route contains less than 200 points after the operation. This is useful before exporting a route to the watch. This keeps points considered as important (with comment in a GPX file) and remove points where they are not far from being aligned (the notion of "not far" adapting dynamically to reach the 200 limit).
 
 ==Outputs==
