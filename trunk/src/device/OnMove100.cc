@@ -98,8 +98,11 @@ namespace device
 		}
 		// Step 2 - Device initialization ?
 		{
-			const size_t sizeInitResponse = 6;
-			unsigned char initResponse[sizeInitResponse] = { 0x45, 0x0c, 0x0c, 0x18, 0x01, 0x65 };
+			const size_t sizeInitResponse = 2;
+			//unsigned char initResponse[sizeInitResponse] = { 0x45, 0x0c, 0x0c, 0x18, 0x01, 0x65 };
+			// In issue 23, a dump attached as 45 0c 04 18 00 as answer, considered correct by OnConnect software
+			// So let's only check 45 0c as it's the common part to all dumps until now
+			unsigned char initResponse[sizeInitResponse] = { 0x45, 0x0c };
 			size_t received = 0;
 			unsigned char *responseData;
 			int attempts = 0;
