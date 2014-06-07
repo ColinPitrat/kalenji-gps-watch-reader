@@ -25,8 +25,10 @@
 #include "Registry.h"
 #include "Utils.h"
 
-#ifndef DEBUG
-#define DEBUG 0
+#ifdef DEBUG
+#define DEBUG_CMD(x) x;
+#else
+#define DEBUG_CMD(x) ;
 #endif
 
 std::map<std::string, std::string> configuration;
@@ -322,17 +324,21 @@ int main(int argc, char *argv[])
 		source::Source *dataSource = NULL;
 		if(configuration["source"] == "File")
 		{
+			DEBUG_CMD(std::cout << "main() - Source is File" << std::endl);
 			dataSource = new source::File(configuration["sourcefile"]);
 		}
 		else if(configuration["source"] == "HexdumpFile")
 		{
+			DEBUG_CMD(std::cout << "main() - Source is HexdumpFile" << std::endl);
 			dataSource = new source::HexdumpFile(configuration["sourcefile"]);
 		}
 		else if(configuration["source"] == "USB")
 		{
+			DEBUG_CMD(std::cout << "main() - Source is USB" << std::endl);
 			dataSource = new source::USB();
 			if(configuration["log_transactions"] == "yes")
 			{
+				DEBUG_CMD(std::cout << "main() - With transaction logger" << std::endl);
 				if(!checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
 
 				// Create log file name 
@@ -408,6 +414,7 @@ int main(int argc, char *argv[])
 
 		if(configuration["device"] == "OnMove100" && configuration["onmove100_delete"] == "yes" && to_import == "all")
 		{
+			DEBUG_CMD(std::cout << "main() - Delete sessions" << std::endl);
 			myDevice->deleteSessions();
 		}
 
@@ -415,6 +422,7 @@ int main(int argc, char *argv[])
 		delete myDevice;
 		if(dataSource != NULL) 
 		{
+			DEBUG_CMD(std::cout << "main() - Release datasource" << std::endl);
 			dataSource->release();
 			delete dataSource;
 		}

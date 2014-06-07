@@ -100,6 +100,7 @@ namespace device
 
 	void OnMove710::release()
 	{
+		DEBUG_CMD(std::cout << "OnMove710: Release (nothing to do)" << std::endl);
 	}
 
 	std::string OnMove710::getPath() 

@@ -13,6 +13,7 @@ namespace filter
 
 		std::list<Point*>::iterator it = points.begin();
 		double speed = 0;
+		// TODO: Support a moving average
 		while(true)
 		{
 			prevPoint = *it;

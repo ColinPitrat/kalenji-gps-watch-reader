@@ -20,7 +20,7 @@ namespace device
 	{
 		public:
 			Device() : _dataSource(NULL) {};
-	                virtual void setConfiguration(std::map<std::string, std::string> configuration) {_configuration = configuration;}
+			virtual void setConfiguration(std::map<std::string, std::string> configuration) {_configuration = configuration;}
 			virtual void setSource(source::Source *dataSource) { _dataSource = dataSource; };
 
 			/** 
