@@ -1,5 +1,5 @@
+#summary On Configuration file
 #labels Phase-Deploy,Configuration
-On#summary Configuration file
 
 <wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
 
