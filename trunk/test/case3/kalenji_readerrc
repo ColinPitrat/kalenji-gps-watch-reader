@@ -1,7 +1,7 @@
-directory=/tmp
-import=all
-trigger=distance
-log_transactions=no
-filters=none
-outputs=KML,GPX,TCX,CSV
+directory= /tmp
+import=all 
+trigger = distance
+ log_transactions = no 
+	filters =none
+	outputs	=	KML,GPX,TCX,CSV	
 tcx_sport=Biking
