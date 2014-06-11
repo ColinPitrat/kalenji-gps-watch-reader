@@ -388,7 +388,7 @@ int main(int argc, char *argv[])
 			}
 			else
 			{
-				std::cerr << "Can't autodetermine device with a source different from USB." << std::endl;
+				std::cerr << "Can't autodetermine device with a source different from USB. Specify your device using -D option or device= in your configuration file." << std::endl;
 				return 1;
 			}
 		}
