@@ -21,14 +21,18 @@ namespace device
 	REGISTER_DEVICE(OnMove710);
 
 
-	int bytesToInt2(unsigned char b0,unsigned char b1) 
+	int bytesToInt2(unsigned char b0, unsigned char b1) 
 	{
-		int Int = b0 | ( (int)b1 << 8 );// | ( (int)bytes[2] << 16 ) | ( (int)bytes[3] << 24 );
+		int Int = b0 | ( (int)b1 << 8 );
+		return Int;
 	}
-	int bytesToInt4(unsigned char b0,unsigned char b1,unsigned char b2,unsigned char b3) 
+
+	int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3) 
 	{
 		int Int = b0 | ( (int)b1 << 8 ) | ( (int)b2 << 16 ) | ( (int)b3 << 24 );
+		return Int;
 	}
+
 	unsigned char* readAllBytes(std::string filename,size_t& size) 
 	{
 		std::ifstream fl(filename.c_str());  
@@ -41,6 +45,7 @@ namespace device
 		size = len;
 		return (unsigned char*)buffer;  
 	}  
+
 	bool fileExists(std::string filename) 
 	{
 		struct stat fileInfo;
@@ -256,30 +261,30 @@ namespace device
 	void OnMove710::parseGHLFile(unsigned char* bytes, int length, Session *session) 
 	{
 		unsigned char* chunk;
-		int lapIndex = 0;
+		DEBUG_CMD(int lapIndex = 0);
 		for(int i=0;i<length;i=i+48) 
 		{
 			chunk = &bytes[i];
 
-			double accruedTime = bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3]) / 10.0;//bytesToInt(chunk.slice(0, 4)) * 100, // [s/10] => [ms]
+			//double accruedTime = bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3]) / 10.0;//bytesToInt(chunk.slice(0, 4)) * 100, // [s/10] => [ms]
 			double totalTime = bytesToInt4(chunk[4],chunk[5],chunk[6],chunk[7]) / 10.0;//bytesToInt(chunk.slice(4, 8)) * 1000, // [s] => [ms]
 			int totalDistance = bytesToInt4(chunk[8],chunk[9],chunk[10],chunk[11]);//bytesToInt(chunk.slice(8, 12)),
 			double maxSpeed = bytesToInt2(chunk[12],chunk[13]) / 100.0;//bytesToInt(chunk.slice(12, 14)) * 10 / 3600, // [dm/h] => [m/s]
 			double averageSpeed = bytesToInt2(chunk[14],chunk[15]) / 100.0;//bytesToInt(chunk.slice(14, 16))*10/3600,[dm/h]=>[m/s]
 			/* Really sure it's maxPace and averagePace ?! */
-			int maxPace = bytesToInt2(chunk[16],chunk[17]);//bytesToInt(chunk.slice(16, 18)),
-			int averagePace =bytesToInt2(chunk[18],chunk[19]);//bytesToInt(chunk.slice(18, 20)),
+			//int maxPace = bytesToInt2(chunk[16],chunk[17]);//bytesToInt(chunk.slice(16, 18)),
+			//int averagePace =bytesToInt2(chunk[18],chunk[19]);//bytesToInt(chunk.slice(18, 20)),
 			int maxHeartRate = chunk[20];//bytesToInt(chunk[20]),
 			int averageHeartRate = chunk[21];//bytesToInt(chunk[21]),
 			int averageCalory = bytesToInt2(chunk[22],chunk[23]);//bytesToInt(chunk.slice(22, 24)),
-			int maxCalory =bytesToInt2(chunk[24],chunk[25]);//bytesToInt(chunk.slice(24, 26)),
-			int totalCalory = bytesToInt2(chunk[26],chunk[27]);//bytesToInt(chunk.slice(26, 28)),
+			//int maxCalory =bytesToInt2(chunk[24],chunk[25]);//bytesToInt(chunk.slice(24, 26)),
+			//int totalCalory = bytesToInt2(chunk[26],chunk[27]);//bytesToInt(chunk.slice(26, 28)),
 			int weightLoss = bytesToInt2(chunk[28],chunk[29]);//bytesToInt(chunk.slice(28, 30)),
-			int descent = bytesToInt2(chunk[30],chunk[31]);//bytesToInt(chunk.slice(30, 32)),
-			int ascent = bytesToInt2(chunk[32],chunk[33]);//bytesToInt(chunk.slice(32, 34)),
-			int trainingType = chunk[34];//bytesToInt(chunk[34]),//0:not training; 1:warmup; 2:action; 3:rest; 4:break; 5: cool
-			int wAccruedDistance = bytesToInt2(chunk[35],chunk[36]);//bytesToInt(chunk.slice(35, 37)),
-			int cAccruedDistance = chunk[37];//bytesToInt(chunk[37]),
+			//int descent = bytesToInt2(chunk[30],chunk[31]);//bytesToInt(chunk.slice(30, 32)),
+			//int ascent = bytesToInt2(chunk[32],chunk[33]);//bytesToInt(chunk.slice(32, 34)),
+			//int trainingType = chunk[34];//bytesToInt(chunk[34]),//0:not training; 1:warmup; 2:action; 3:rest; 4:break; 5: cool
+			//int wAccruedDistance = bytesToInt2(chunk[35],chunk[36]);//bytesToInt(chunk.slice(35, 37)),
+			//int cAccruedDistance = chunk[37];//bytesToInt(chunk[37]),
 			/* Previous values were not working on the dump I had */
 			uint32_t startPoint = bytesToInt2(chunk[40],chunk[41]);//bytesToInt(chunk.slice(38, 40)),
 			uint32_t endPoint = bytesToInt2(chunk[42],chunk[43]);//bytesToInt(chunk.slice(40, 42)),
@@ -308,45 +313,47 @@ namespace device
 
 	void OnMove710::parseGHTFile(const unsigned char* bytes,Session* session) 
 	{
+		/*
 		int year = bytes[0];
 		int month = bytes[1];
 		int day = bytes[2];
 		int hour = bytes[3];
 		int minutes = bytes[4];
 		int seconds = bytes[5];
+		*/
 
 		int totalPoint = bytesToInt2(bytes[6],bytes[7]);//bytesToInt(bytes.slice(6, 8)),
 		double totalTime = bytesToInt4(bytes[8],bytes[9],bytes[10],bytes[11]) / 10.0;//bytes.slice(8, 12)) * 100, // [s/10] => [s]
 		int totalDistance = bytesToInt4(bytes[12],bytes[13],bytes[14],bytes[15]);//bytesToInt(bytes.slice(12, 16)),
 		int lapCount = bytesToInt2(bytes[16],bytes[17]);//bytesToInt(bytes.slice(16, 18)),
-		int ptRec = bytesToInt2(bytes[18],bytes[19]);//bytesToInt(bytes.slice(18, 20)),
-		int lapRec = bytesToInt2(bytes[20],bytes[21]);//bytesToInt(bytes.slice(20, 22)),
-		int isChallenge = bytes[22];/*TODO check why'!!'*///!!bytesToInt(bytes[22]),
-		int challengeType = bytes[23];
+		//int ptRec = bytesToInt2(bytes[18],bytes[19]);//bytesToInt(bytes.slice(18, 20)),
+		//int lapRec = bytesToInt2(bytes[20],bytes[21]);//bytesToInt(bytes.slice(20, 22)),
+		//int isChallenge = bytes[22];/*TODO check why'!!'*///!!bytesToInt(bytes[22]),
+		//int challengeType = bytes[23];
 		char challengeName[16];
 		strncpy(challengeName,(const char*)&bytes[24],16);//bytesToString(bytes.slice(24, 40).filter(BYTE_UTILS.suspiciousBytesForString)),
-		int guestTotalDuration =  bytesToInt4(bytes[40],bytes[41],bytes[42],bytes[43]);//bytesToInt(bytes.slice(40, 44)),
-		int guestDistance = bytesToInt4(bytes[44],bytes[45],bytes[46],bytes[47]);//bytesToInt(bytes.slice(44, 48)),
-		int guestAverageSpeed = bytesToInt2(bytes[48],bytes[49]) / 100.0;//bytesToInt(bytes.slice(48, 50)) * 10 / 3600,//[dm/h]=>[m/s]
-		int guestAveragePace = bytesToInt2(bytes[50],bytes[51]);//bytesToInt(bytes.slice(50, 52)),
+		//int guestTotalDuration =  bytesToInt4(bytes[40],bytes[41],bytes[42],bytes[43]);//bytesToInt(bytes.slice(40, 44)),
+		//int guestDistance = bytesToInt4(bytes[44],bytes[45],bytes[46],bytes[47]);//bytesToInt(bytes.slice(44, 48)),
+		//int guestAverageSpeed = bytesToInt2(bytes[48],bytes[49]) / 100.0;//bytesToInt(bytes.slice(48, 50)) * 10 / 3600,//[dm/h]=>[m/s]
+		//int guestAveragePace = bytesToInt2(bytes[50],bytes[51]);//bytesToInt(bytes.slice(50, 52)),
 		double maxSpeed = bytesToInt2(bytes[52],bytes[53]) / 100.0;//bytesToInt(bytes.slice(52, 54)) * 10 / 3600, // [dm/h] => [m/s]
 		double averageSpeed = bytesToInt2(bytes[54],bytes[55]) / 100.0;//bytesToInt(bytes.slice(54, 56)) * 10 / 3600,//[dm/h]=>[m/s]
-		int maxPace = bytesToInt2(bytes[56],bytes[57]);//bytesToInt(bytes.slice(56, 58)),
-		int averagePace = bytesToInt2(bytes[58],bytes[59]);//bytesToInt(bytes.slice(58, 60)),
+		//int maxPace = bytesToInt2(bytes[56],bytes[57]);//bytesToInt(bytes.slice(56, 58)),
+		//int averagePace = bytesToInt2(bytes[58],bytes[59]);//bytesToInt(bytes.slice(58, 60)),
 		int maxHeartRate =  bytes[60];
 		int averageHeartRate = bytes[61];
-		int averageCalory = bytesToInt2(bytes[62],bytes[63]);//bytesToInt(bytes.slice(62, 64)),
-		int maxCalory = bytesToInt2(bytes[64],bytes[65]);//bytesToInt(bytes.slice(64, 66)),
+		//int averageCalory = bytesToInt2(bytes[62],bytes[63]);//bytesToInt(bytes.slice(62, 64)),
+		//int maxCalory = bytesToInt2(bytes[64],bytes[65]);//bytesToInt(bytes.slice(64, 66)),
 		int totalCalory = bytesToInt2(bytes[66],bytes[67]);//bytesToInt(bytes.slice(66, 68)),
 		int weightLoss = bytesToInt2(bytes[68],bytes[69]);//bytesToInt(bytes.slice(68, 70)), // [g]
 		int ascent = bytesToInt2(bytes[70],bytes[71]);//bytesToInt(bytes.slice(70, 72)),
 		int descent = bytesToInt2(bytes[72],bytes[73]);//bytesToInt(bytes.slice(72, 74)),
-		int activityType = bytes[74]; // 0 : free ; 1 : training ; 2 : challenge ; 3 : indoor
-		int selectRoute = bytes[75];  // 0 or 1
+		//int activityType = bytes[74]; // 0 : free ; 1 : training ; 2 : challenge ; 3 : indoor
+		//int selectRoute = bytes[75];  // 0 or 1
 		char trainingName[16];//bytesToString(bytes.slice(76, 92).filter(BYTE_UTILS.suspiciousBytesForString)),
 		strncpy(trainingName,(const char*)&bytes[76],16);
-		int averageAscent = bytesToInt2(bytes[92],bytes[93]);// BYTE_UTILS.bytesToInt(bytes.slice(92, 94)),
-		int averageDescent = bytesToInt2(bytes[94],bytes[95]);// BYTE_UTILS.bytesToInt(bytes.slice(94, 96))
+		//int averageAscent = bytesToInt2(bytes[92],bytes[93]);// BYTE_UTILS.bytesToInt(bytes.slice(92, 94)),
+		//int averageDescent = bytesToInt2(bytes[94],bytes[95]);// BYTE_UTILS.bytesToInt(bytes.slice(94, 96))
 
 		session->setNbLaps(lapCount);
 		session->setNbPoints(totalPoint);

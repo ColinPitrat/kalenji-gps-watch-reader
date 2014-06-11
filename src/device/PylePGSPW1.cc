@@ -37,7 +37,7 @@ namespace device
 	{
 		DEBUG_CMD(std::cout << "PylePGSPW1::readMessage()" << std::endl);
 		unsigned char* responseData;
-		size_t prev_index = *index = 0;
+		*index = 0;
 		size_t transferred = 0;
 		size_t full_size = 0;
 		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
@@ -99,14 +99,14 @@ namespace device
 			std::cerr << "Unexpected header for getList: " << std::hex << (int) responseData[0] << std::dec << std::endl;
 			// TODO: Throw an exception
 		}
-		int size = responseData[12] + (responseData[13] << 8);
+		size_t size = responseData[12] + (responseData[13] << 8);
 		if(size + 8 != received)
 		{
 			std::cerr << "Unexpected size in header for getList: " << responseData[2] << " (!= " << received << " - 4)" << std::endl;
 			// TODO: Throw an exception
 		}
 		// 8 bytes per point
-		int nbLines = size / 8;
+		size_t nbLines = size / 8;
 		if(nbLines * 8 != size)
 		{
 			std::cerr << "Size is not a multiple of 8 in getList !" << std::endl;
@@ -115,8 +115,8 @@ namespace device
 		Session *currentSession = NULL;
 		int32_t numSess = 0;
 		bool first_lap = false;
-		time_t current_time;
-		for(int i = 0; i < nbLines; ++i)
+		time_t current_time = 0;
+		for(size_t i = 0; i < nbLines; ++i)
 		{
 			// Decoding of basic info about the session
 			unsigned char *line = &responseData[8*i + 24];

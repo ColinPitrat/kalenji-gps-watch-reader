@@ -53,30 +53,31 @@ namespace device
 			std::cerr << "Unexpected header for getList: " << std::hex << (int) responseData[0] << std::dec << std::endl;
 			// TODO: Throw an exception
 		}
-		int size = responseData[2] + (responseData[1] << 8);
+		size_t size = responseData[2] + (responseData[1] << 8);
 		if(size + 4 != received)
 		{
 			std::cerr << "Unexpected size in header for getList: " << responseData[2] << " (!= " << received << " - 4)" << std::endl;
 			// TODO: Throw an exception
 		}
-		int sizeRecord = 24;
+		size_t sizeRecord = 24;
 		if (type == Keymaze700Trial)
 		{
 			sizeRecord = 54;
 		}
-		int nbRecords = size / sizeRecord;
+		size_t nbRecords = size / sizeRecord;
 		if(nbRecords * sizeRecord != size)
 		{
 			std::cerr << "Size is not a multiple of " << sizeRecord << " in getList !" << std::endl;
 			// TODO: Throw an exception
 		}
-		for(int i = 0; i < nbRecords; ++i)
+		for(size_t i = 0; i < nbRecords; ++i)
 		{
 			// Decoding of basic info about the session
 			unsigned char *line = &responseData[sizeRecord*i+3];
 			SessionId id = SessionId(line, line+16);
 			uint32_t num = (line[19] << 8) + line[18];
 			tm time;
+			memset(&time, 0, sizeof(time));
 			// In tm, year is year since 1900. GPS returns year since 2000
 			time.tm_year = 100 + line[0];
 			// In tm, month is between 0 and 11.
@@ -172,7 +173,7 @@ namespace device
 					std::cerr << "Unexpected header for getSessionsDetails (step 2): " << (int)responseData[0] << std::endl;
 					// TODO: throw an exception
 				}
-				int size = responseData[2] + (responseData[1] << 8);
+				size_t size = responseData[2] + (responseData[1] << 8);
 				// TODO: Is checking the size everywhere really usefull ? Checks could be factorized !
 				if(size + 4 != received)
 				{
@@ -203,7 +204,7 @@ namespace device
 					// TODO: throw an exception
 				}
 
-				int size = responseData[2] + (responseData[1] << 8);
+				size_t size = responseData[2] + (responseData[1] << 8);
 				if(size + 4 != received)
 				{
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 2): " << size << " != " << received << " - 4" << std::endl;
@@ -211,14 +212,14 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 19);
 				Session *session = &(oSessions->find(id)->second);
-				int sizeRecord = 24;
-				int sizeLap = 44;
+				size_t sizeRecord = 24;
+				size_t sizeLap = 44;
 				if (type == Keymaze700Trial)
 				{
 					sizeRecord = 54;
 					sizeLap = 48;
 				}
-				int nbRecords = (size - sizeRecord) / sizeLap;
+				size_t nbRecords = (size - sizeRecord) / sizeLap;
 				if(nbRecords * sizeLap != size - sizeRecord)
 				{
 					std::cerr << "Size is not a multiple of " << sizeLap << " plus " << sizeRecord << " in getSessionsDetails (step 2): " << nbRecords << "*" << sizeLap << " != " << size << "-" << sizeRecord << "!" << std::endl;
@@ -229,7 +230,7 @@ namespace device
 				uint32_t firstPointOfRow = responseData[40+27] + (responseData[41+27] << 8);
 				uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
 				// ->8---
-				for(int i = 0; i < nbRecords; ++i)
+				for(size_t i = 0; i < nbRecords; ++i)
 				{ // Decoding and addition of the lap
 					unsigned char *line = &responseData[sizeLap*i + sizeRecord+3];
 					static uint32_t sum_calories = 0;
@@ -305,7 +306,7 @@ namespace device
 			} while(responseData[25] == 0xaa);
 
 			// Third response 80 retrieves info concerning the points of the session. There can be many.
-			Session *session;
+			Session *session = NULL;
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
@@ -318,7 +319,7 @@ namespace device
 					std::cerr << "Unexpected header for getSessionsDetails (step 3): " << (int)responseData[0] << std::endl;
 					// TODO: throw an exception
 				}
-				int size = responseData[2] + (responseData[1] << 8);
+				size_t size = responseData[2] + (responseData[1] << 8);
 				if(size + 4 != received)
 				{
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 3): " << size << " != " << received << " - 4" << std::endl;
@@ -332,14 +333,14 @@ namespace device
 				{
 					current_time = points.back()->getTime();
 				}
-				int sizeRecord = 24;
-				int sizePoint = 20;
+				size_t sizeRecord = 24;
+				size_t sizePoint = 20;
 				if (type == Keymaze700Trial)
 				{
 					sizeRecord = 54;
 					sizePoint = 17;
 				}
-				int nbRecords = (size - sizeRecord) / sizePoint;
+				size_t nbRecords = (size - sizeRecord) / sizePoint;
 				if(nbRecords * sizePoint != size - sizeRecord)
 				{
 					std::cerr << "Size is not a multiple of " << sizePoint << " plus " << sizeRecord << " in getSessionsDetails (step 3) !" << std::endl;
@@ -351,7 +352,7 @@ namespace device
 					++lap;
 				}
 				// TODO: Cleaner way to handle id_point ?
-				for(int i = 0; i < nbRecords; ++i)
+				for(size_t i = 0; i < nbRecords; ++i)
 				{
 					//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
 					{ // Decoding and addition of the point
@@ -408,7 +409,8 @@ namespace device
 					_dataSource->read_data(0x81, &responseData, &received);
 				}
 			}
-			std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
+			if(session) std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
+			else std::cout << "A session has not been retrieved !!" << std::endl;
 			if(responseData[0] == 0x8A) break;
 
 			_dataSource->write_data(0x03, dataMore, lengthDataMore);
@@ -527,7 +529,7 @@ namespace device
 		else if(transferred != 4 || responseData[0] != 0x93 || responseData[1] != 0 || responseData[2] != 0 || responseData[3] != 0)
 		{
 			std::cout << "Invalid response: " << std::hex;
-			for(int i = 0; i < transferred; ++i)
+			for(size_t i = 0; i < transferred; ++i)
 			{
 				std::cout << std::setw(2) << std::setfill('0') << (int)responseData[i] << " ";
 			}

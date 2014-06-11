@@ -88,6 +88,7 @@ namespace device
 				if(xmlStrlen(data) >= 20)
 				{
 					tm time;
+					memset(&time, 0, sizeof(time));
 					// In tm, year is year since 1900. GPS returns year since 2000
 					data[4]  = 0; time.tm_year = atoi((char*) data) - 1900;
 					// In tm, month is between 0 and 11.
@@ -313,6 +314,7 @@ namespace device
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				if(xmlStrlen(data) >= 20)
 				{
+					/*
 					tm time_tm;
 					// In tm, year is year since 1900. GPS returns year since 2000
 					data[4]  = 0; time_tm.tm_year = atoi((char*) data) - 1900;
@@ -323,6 +325,7 @@ namespace device
 					data[16] = 0; time_tm.tm_min  = atoi((char*) data + 14);
 					data[19] = 0; time_tm.tm_sec  = atoi((char*) data + 17);
 					time_tm.tm_isdst = -1;
+					*/
 					// TODO: We need to use startTime to find start point ! Should be added to Point ?
 				}
 				else

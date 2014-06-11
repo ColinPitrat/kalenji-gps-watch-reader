@@ -37,7 +37,7 @@ namespace device
 	{
 		DEBUG_CMD(std::cout << "Keymaze::readMessage()" << std::endl);
 		unsigned char* responseData;
-		size_t prev_index = *index = 0;
+		*index = 0;
 		size_t transferred = 0;
 		size_t full_size = 0;
 		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
@@ -190,26 +190,27 @@ namespace device
 			std::cerr << "Unexpected header for getList: " << std::hex << (int) responseData[0] << std::dec << std::endl;
 			// TODO: Throw an exception
 		}
-		int size = responseData[2] + (responseData[1] << 8);
+		size_t size = responseData[2] + (responseData[1] << 8);
 		if(size + 4 != received)
 		{
 			std::cerr << "Unexpected size in header for getList: " << responseData[2] << " (!= " << received << " - 4)" << std::endl;
 			// TODO: Throw an exception
 		}
 		// 31 bytes per session
-		int nbRecords = size / 31;
+		size_t nbRecords = size / 31;
 		if(nbRecords * 31 != size)
 		{
 			std::cerr << "Size is not a multiple of 31 in getList !" << std::endl;
 			// TODO: Throw an exception
 		}
-		for(int i = 0; i < nbRecords; ++i)
+		for(size_t i = 0; i < nbRecords; ++i)
 		{
 			// Decoding of basic info about the session
 			unsigned char *line = &responseData[31*i+3];
 			SessionId id = SessionId(line, line+26);
 			uint32_t num = (line[27] << 8) + line[28];
 			tm time;
+			memset(&time, 0, sizeof(time));
 			// In tm, year is year since 1900. GPS returns year since 2000
 			time.tm_year = 100 + line[0];
 			// In tm, month is between 0 and 11.
@@ -283,7 +284,7 @@ namespace device
 					// TODO: throw an exception
 				}
 
-				int size = responseData[2] + (responseData[1] << 8);
+				size_t size = responseData[2] + (responseData[1] << 8);
 				if(size + 4 != received)
 				{
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 1): " << size << " != " << received << " - 4" << std::endl;
@@ -296,19 +297,18 @@ namespace device
 					Session *session = &(it->second);
 					// TODO: Check in a multilap session if the 31 first byte are really not repeated (session info, not lap info)
 					// and if the lap info is 22 bytes long
-					int nbRecords = (size - 31) / 22;
+					size_t nbRecords = (size - 31) / 22;
 					if(nbRecords * 22 != size - 31)
 					{
 						std::cerr << "Size is not a multiple of 22 plus 31 in getSessionsDetails (step 1): " << nbRecords << "*22 != " << size << "-31" << "!" << std::endl;
 						// TODO: throw an exception
 					}
 					// -8<--- DIRTY: Ugly bug in the firmware, some laps have ff ff where there should be points ids
-					uint32_t prevLastPoint = 0;
-					uint32_t firstPointOfRow = responseData[53] + (responseData[52] << 8);
 					// TODO: Check if lastPointOfRow = responseData[55] + (responseData[54] << 8)
-					uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
+					//uint32_t firstPointOfRow = responseData[53] + (responseData[52] << 8);
+					//uint32_t lastPointOfRow = firstPointOfRow + nbRecords;
 					// ->8---
-					for(int i = 0; i < nbRecords; ++i)
+					for(size_t i = 0; i < nbRecords; ++i)
 					{
 						// Decoding and addition of the lap
 						unsigned char *line = &responseData[22*i + 31 + 3];
@@ -343,7 +343,7 @@ namespace device
 					std::cerr << "Unexpected header for getSessionsDetails (step 3): " << (int)responseData[0] << std::endl;
 					// TODO: throw an exception
 				}
-				int size = responseData[2] + (responseData[1] << 8);
+				size_t size = responseData[2] + (responseData[1] << 8);
 				if(size + 4 != received)
 				{
 					std::cerr << "Unexpected size in header for getSessionsDetails (step 3): " << size << " != " << received << " - 4" << std::endl;
@@ -360,7 +360,7 @@ namespace device
 					{
 						current_time = points.back()->getTime();
 					}
-					int nbRecords = (size - 31)/ 15;
+					size_t nbRecords = (size - 31)/ 15;
 					if(nbRecords * 15 != size - 31)
 					{
 						std::cerr << "Size is not a multiple of 15 plus 31 in getSessionsDetails (step 2) ! " << size << " " << nbRecords << std::endl;
@@ -372,7 +372,7 @@ namespace device
 						++lap;
 					}
 					// TODO: Cleaner way to handle id_point ?
-					for(int i = 0; i < nbRecords; ++i)
+					for(size_t i = 0; i < nbRecords; ++i)
 					{
 						//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
 						{ // Decoding and addition of the point

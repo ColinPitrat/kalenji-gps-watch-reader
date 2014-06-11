@@ -12,6 +12,7 @@ namespace source
 	class Source
 	{
 		public:
+			virtual ~Source() {};
 			/** 
 			  Initialize the source. Any action that needs to be taken before using the source.
 			 */ 
