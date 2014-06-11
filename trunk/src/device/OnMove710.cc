@@ -97,8 +97,8 @@ namespace device
 		DIR* folder = opendir(getPath().c_str());
 		if (folder == NULL) 
 		{
-			std::cout<< "Error: path '" << getPath() << "' does not exist" << std::endl;
-			//TODO: exit?
+			std::cout<< "Error: path '" << getPath() << "' does not exist (check option -p <path> on command line or line path=<path> in configuration file)." << std::endl;
+			throw std::exception();
 		}
 		closedir(folder);
 	}
@@ -123,7 +123,7 @@ namespace device
 		if (folder == NULL) 
 		{
 			std::cerr << "Couldn't open dir " << getPath() << std::endl;
-			//TODO exit? (with error) ? throw ?
+			throw std::exception();
 		}
 
 		std::set<std::string> filenamesPrefix;
