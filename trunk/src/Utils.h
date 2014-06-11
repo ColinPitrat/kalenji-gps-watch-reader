@@ -39,6 +39,7 @@ operator<< (StreamExcept e, const T& x)
 	return e;
 }
 
+void trimString(std::string &toTrim);
 std::string durationAsString(double sec, bool with_hundredth = false);
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",");
 

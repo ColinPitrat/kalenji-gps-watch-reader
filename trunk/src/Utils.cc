@@ -6,6 +6,19 @@
 #include <stdint.h>
 #include <cmath> 
 
+void trimString(std::string &toTrim)
+{
+	size_t startpos = toTrim.find_first_not_of(" \t");
+	if( startpos != std::string::npos )
+	{
+		toTrim = toTrim.substr(startpos);
+	}
+	size_t endpos = toTrim.find_last_not_of(" \t");
+	if( endpos != std::string::npos )
+	{
+		toTrim = toTrim.substr(0, endpos + 1);
+	}
+}
 
 std::string durationAsString(double sec, bool with_hundredth)
 {

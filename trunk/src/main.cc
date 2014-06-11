@@ -194,6 +194,8 @@ bool readConf(std::map<std::string, std::string>& options)
 				{
 					std::string key = line.substr(0, cut_place);
 					std::string value = line.substr(cut_place+1);
+					trimString(key);
+					trimString(value);
 					configuration[key] = value;
 				}
 			}
