@@ -2,6 +2,6 @@ directory=/tmp
 import=all
 trigger=distance
 log_transactions=no
-filters=FixElevation
+filters=FixElevation,ComputeInstantSpeed
 outputs=KML,GPX,TCX,CSV,GoogleMap
 gpx_extensions=none
