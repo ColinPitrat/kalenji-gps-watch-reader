@@ -15,17 +15,14 @@ typedef std::vector<char> SessionId;
 class Session
 {
 	public:
-		Session() : _id(0), _num(0), _nb_points(0), _duration(0), _distance(0), _nb_laps(0),
-			    _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef)
-		{
-			_name = "No name";
-		}
+		Session() : _id(0), _name("No name"), _num(0), _nb_points(0), _duration(0), _distance(0),
+			    _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(0)
+		{ }
 
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) : 
-			         _id(id), _num(num), _time(time), _nb_points(nb_points), _duration(duration), _distance(distance), _nb_laps(nb_laps),
-				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef)
+			         _id(id), _name("No name"), _num(num), _time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
+				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
-			_name = "No name";
 			_time_t = mktime(&_time);
 		}
 
@@ -75,7 +72,7 @@ class Session
 			return std::string(buffer);
 		};
 
-		const uint32_t getNum() const                  { return _num; };
+		uint32_t getNum() const                  { return _num; };
 		bool isComplete()                  { return _nb_points == _points.size(); };
 
 		std::list<Lap*> &getLaps()         { return _laps; };
@@ -84,17 +81,17 @@ class Session
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		const SessionId getId() const                  { return _id; };
 		const std::string getName() const              { return _name; };
-		const int getYear() const                      { return _time.tm_year + 1900; };
-		const int getMonth() const                     { return _time.tm_mon + 1; };
-		const int getDay() const                       { return _time.tm_mday; };
-		const int getHour() const                      { return _time.tm_hour; };
-		const int getMinutes() const                   { return _time.tm_min; };
-		const int getSeconds() const                   { return _time.tm_sec; };
+		int getYear() const                            { return _time.tm_year + 1900; };
+		int getMonth() const                           { return _time.tm_mon + 1; };
+		int getDay() const                             { return _time.tm_mday; };
+		int getHour() const                            { return _time.tm_hour; };
+		int getMinutes() const                         { return _time.tm_min; };
+		int getSeconds() const                         { return _time.tm_sec; };
 
-		const double getDuration() const               { return _duration; };
-		const uint32_t getDistance() const             { return _distance; };
-		const double getMaxSpeed() const               { return _max_speed; };
-		const double getAvgSpeed() const               { return _avg_speed; };
+		double getDuration() const                     { return _duration; };
+		uint32_t getDistance() const                   { return _distance; };
+		double getMaxSpeed() const                     { return _max_speed; };
+		double getAvgSpeed() const                     { return _avg_speed; };
 		const Field<uint32_t>& getMaxHeartrate() const { return _max_hr; };
 		const Field<uint32_t>& getAvgHeartrate() const { return _avg_hr; };
 		const Field<uint32_t>& getCalories() const     { return _calories; };
@@ -102,8 +99,8 @@ class Session
 		const Field<uint32_t>& getAscent() const       { return _ascent; };
 		const Field<uint32_t>& getDescent() const      { return _descent; };
 
-		const uint32_t getNbLaps() const               { return _nb_laps; };
-		const time_t getTime() const                   { return _time_t; };
+		uint32_t getNbLaps() const                     { return _nb_laps; };
+		time_t getTime() const                         { return _time_t; };
 
 		/* If watches doesn't set the distance for each point, we must try to compute them.
 		 * TODO: check against laps if computation is good enougth

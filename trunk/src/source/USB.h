@@ -16,7 +16,7 @@ namespace source
 	{
 		public:
 			// TODO: configurable timeout ?
-			USB() : _timeout(5000) { };
+			USB() : _USBContext(NULL), _device(NULL), _timeout(5000) { };
 			~USB() {};
 
 			/** 

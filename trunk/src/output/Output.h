@@ -13,6 +13,7 @@ namespace output
 	class Output
 	{
 		public:
+			virtual ~Output() {};
 			// TODO: I don't really like giving the configuration this way. Better way to configure each output ?
 			virtual void dump(Session *session, std::map<std::string, std::string> &configuration) = 0;
 			virtual bool exists(Session *session, std::map<std::string, std::string> &configuration) { return false; }

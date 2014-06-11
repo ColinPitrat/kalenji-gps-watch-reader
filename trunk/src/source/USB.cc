@@ -165,7 +165,7 @@ namespace source
 		int transferred;
 		int rc = libusb_bulk_transfer(_device, iEndPoint /*0x03*/, iData, iLength, &transferred, _timeout);
 		checkAndThrowUSBOperation(rc);
-		if(transferred != iLength)
+		if((size_t)transferred != iLength)
 		{
 			StreamExcept::sthrow() << "on USB write transferred (" << transferred << ") != length (" << iLength << ")";
 		}

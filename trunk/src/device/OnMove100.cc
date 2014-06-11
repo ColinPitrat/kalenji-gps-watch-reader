@@ -162,6 +162,7 @@ namespace device
 			try
 			{
 				tm time;
+				memset(&time, 0, sizeof(time));
 				time.tm_sec = responseData[0];
 				time.tm_min = responseData[1];
 				time.tm_hour = responseData[2];
@@ -178,8 +179,7 @@ namespace device
 				// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
 				Session mySession(id, num_session, time, nb_points, 0, 0, 0);
 				oSessions->insert(SessionsMapElement(id, mySession));
-				Session *session = &(oSessions->find(id)->second);
-				time_t current_time = session->getTime();
+				//Session *session = &(oSessions->find(id)->second);
 				// Ignore second line (for now ?)
 				_dataSource->read_data(0x81, &responseData, &received);
 			}
@@ -225,15 +225,17 @@ namespace device
 			{
 				//dump(responseData, 36);
 				double distance = (responseData[0] + (responseData[1] << 8) + (responseData[2] << 16) + (responseData[3] << 24)) / 100.0;
+				/*
 				int seconds = responseData[6];
 				int minutes = responseData[7];
 				int hours = responseData[8];
+				*/
 				double latitude = decodeCoordinate(&responseData[14]);
 				double longitude = decodeCoordinate(&responseData[20]);
 				double elapsed = responseData[28]*3600 + responseData[29]*60 + responseData[30] + responseData[31]/100.0;
 				int hundredth = responseData[31];
-				int pointID = (responseData[32] << 8) + responseData[33];
-				int sessionNum = responseData[34];
+				//int pointID = (responseData[32] << 8) + responseData[33];
+				//int sessionNum = responseData[34];
 				double speed = (distance * 3.6) / elapsed;
 				if(elapsed == 0) speed = 0;
 				// TODO: Find out altitude, speed
@@ -258,7 +260,6 @@ namespace device
 	{
 		DEBUG_CMD(std::cout << "OnMove100: Deleting sessions !" << std::endl);
 		unsigned char data[256] = { 0 };
-		unsigned char dataIn[256];
 
 		DEBUG_CMD(std::cout << "OnMove100::init() - step 1" << std::endl);
 		_dataSource->control_transfer(0x40, 0x0, 0x0, 0x0, data, 0);

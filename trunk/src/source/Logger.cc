@@ -25,7 +25,7 @@ namespace source
 
 		std::ofstream log_file_stream(_logfilename.c_str(), std::ios_base::out | std::ios_base::app);
 		log_file_stream << std::hex << " <= ";
-		for(int i = 0; i < *oLength; ++i)
+		for(size_t i = 0; i < *oLength; ++i)
 		{
 			log_file_stream << std::setw(2) << std::setfill('0') << (int) (*oData)[i] << " ";
 		}
@@ -51,7 +51,7 @@ namespace source
 		/* */
 		   std::ofstream log_file_stream(_logfilename.c_str(), std::ios_base::out | std::ios_base::app);
 		   log_file_stream << std::hex << " => ";
-		   for(int i = 0; i < iLength; ++i)
+		   for(size_t i = 0; i < iLength; ++i)
 		   {
 			   log_file_stream << std::setw(2) << std::setfill('0') << (int) iData[i] << " ";
 		   }

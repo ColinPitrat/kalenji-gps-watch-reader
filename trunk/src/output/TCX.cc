@@ -25,7 +25,7 @@ namespace output
 		std::list<Lap*> laps = session->getLaps();
 		std::list<Point*> points = session->getPoints();
 		std::list<Point*>::iterator pit = points.begin();
-		int point_id = 0;
+		uint32_t point_id = 0;
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			if((*it)->getStartPoint() != NULL)

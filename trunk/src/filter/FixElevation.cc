@@ -38,7 +38,7 @@ namespace filter
 					it2++;
 					// std::cout << "    Found elevation " << it2->c_str() << std::endl;
 					elevation = atol(it2->c_str());
-					if(elevation != (*first)->getAltitude())
+					if(!(*first)->getAltitude().isDefined() || elevation != (*first)->getAltitude())
 					{
 						fixed_points++;
 						//std::cout << "Moving " << (*first)->getLatitude() << "," << (*first)->getLongitude() << " from " << (*first)->getAltitude();
@@ -115,6 +115,10 @@ namespace filter
 
 				curl_easy_setopt(curl, CURLOPT_URL, url.str().c_str());
 				res = curl_easy_perform(curl);
+				if(res != CURLE_OK)
+				{
+					std::cout << "Error " << res << " when trying to get " << url.str() << std::endl;
+				}
 				request_last = it;
 				if(!parseHTTPData(session, request_first, request_last))
 				{

@@ -11,11 +11,11 @@ class Point
 {
 	public:
 		// TODO: Improve the way fiability is handled (0 / 3 doesn't make sense)
-                Point() : _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _time(0), _tenth(0), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
+                Point() : _time(0), _tenth(0), _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
 		{ };
 
                 Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t tenth, Field<uint16_t> bpm, uint16_t fiability) 
-		  : _lat(lat), _lon(lon), _alt(alt), _speed(speed), _time(time), _tenth(tenth), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
+		  : _time(time), _tenth(tenth), _lat(lat), _lon(lon), _alt(alt), _speed(speed), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
 		{ };
 
 		void setLatitude(Field<double> lat)        { _lat = lat; };
@@ -33,9 +33,9 @@ class Point
 		const Field<int16_t>& getAltitude() const   { return _alt; };
 		const Field<double>& getSpeed() const       { return _speed; };
 		const Field<uint16_t>& getHeartRate() const { return _bpm; };
-		const uint16_t getFiability() const         { return _fiability; };
-		const bool isImportant() const              { return _important; };
-		const time_t getTime() const                { return _time; };
+		uint16_t getFiability() const               { return _fiability; };
+		bool isImportant() const                    { return _important; };
+		time_t getTime() const                      { return _time; };
 		const Field<uint32_t> getDistance() const   { return _distance;}
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
 		const std::string getTimeAsString(bool human_readable=false) const
