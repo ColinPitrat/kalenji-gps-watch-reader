@@ -81,15 +81,21 @@ namespace output
 			mystream << std::hex << std::setw(2) << std::setfill('0') << sp;
 			mystream << "0000\"" << std::dec << std::setw(0) << std::setfill(' ');
 			// TODO: Use max hr and min hr to determine the width range
-			uint16_t hr = (*it)->getHeartRate();
-			if(hr <= 60) hr = 60;
 
 			mystream << ", elapsed: " << elapsed;
-			mystream << ", time: \"" << (*it)->getTimeAsString(true) << "\""; //TODO
+			mystream << ", time: \"" << (*it)->getTimeAsString(true, true) << "\""; //TODO
 			mystream << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
 			mystream << ", speed: " << (*it)->getSpeed();
-			mystream << ", heartrate: " << (*it)->getHeartRate();
-			mystream << ", altitude: " << (*it)->getAltitude();
+			mystream << ", heartrate: ";
+			if((*it)->getHeartRate().isDefined())
+				mystream << (*it)->getHeartRate();
+			else
+				mystream << 0;
+			mystream << ", altitude: ";
+			if((*it)->getAltitude().isDefined())
+				mystream << (*it)->getAltitude();
+			else
+				mystream << 0;
 			mystream << "}" << std::endl;
 
 			++point;

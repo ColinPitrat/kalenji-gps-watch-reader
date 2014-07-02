@@ -8,1434 +8,1434 @@
                           http://www.topografix.com/GPX/1/1/gpx.xsd">
   <metadata>
     <name>No name</name>
-    <time>2013-09-21T23:41:51Z</time>
+    <time>2013-09-21T21:41:51Z</time>
   </metadata>
   <trk>
     <trkseg>
       <trkpt lat="37.874567" lon="-122.26527" >
         <ele>96</ele>
-        <time>2013-09-21T23:41:51.0Z</time>
+        <time>2013-09-21T21:41:51.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874333" lon="-122.26573" >
         <ele>87</ele>
-        <time>2013-09-21T23:42:01.0Z</time>
+        <time>2013-09-21T21:42:01.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874183" lon="-122.26622" >
         <ele>95</ele>
-        <time>2013-09-21T23:42:11.0Z</time>
+        <time>2013-09-21T21:42:11.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87415" lon="-122.2665" >
         <ele>99</ele>
-        <time>2013-09-21T23:42:25.0Z</time>
+        <time>2013-09-21T21:42:25.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874017" lon="-122.26765" >
         <ele>82</ele>
-        <time>2013-09-21T23:42:55.0Z</time>
+        <time>2013-09-21T21:42:55.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873967" lon="-122.26808" >
         <ele>78</ele>
-        <time>2013-09-21T23:43:05.0Z</time>
+        <time>2013-09-21T21:43:05.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873917" lon="-122.26837" >
         <ele>68</ele>
-        <time>2013-09-21T23:43:15.0Z</time>
+        <time>2013-09-21T21:43:15.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873783" lon="-122.26888" >
         <ele>89</ele>
-        <time>2013-09-21T23:43:49.0Z</time>
+        <time>2013-09-21T21:43:49.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873833" lon="-122.26918" >
         <ele>71</ele>
-        <time>2013-09-21T23:43:59.0Z</time>
+        <time>2013-09-21T21:43:59.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873817" lon="-122.26957" >
         <ele>68</ele>
-        <time>2013-09-21T23:44:09.0Z</time>
+        <time>2013-09-21T21:44:09.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873733" lon="-122.26993" >
         <ele>72</ele>
-        <time>2013-09-21T23:44:19.0Z</time>
+        <time>2013-09-21T21:44:19.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873667" lon="-122.2703" >
         <ele>76</ele>
-        <time>2013-09-21T23:44:29.0Z</time>
+        <time>2013-09-21T21:44:29.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8736" lon="-122.27067" >
         <ele>85</ele>
-        <time>2013-09-21T23:44:39.0Z</time>
+        <time>2013-09-21T21:44:39.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873567" lon="-122.27093" >
         <ele>84</ele>
-        <time>2013-09-21T23:44:49.0Z</time>
+        <time>2013-09-21T21:44:49.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87355" lon="-122.27133" >
         <ele>70</ele>
-        <time>2013-09-21T23:44:59.0Z</time>
+        <time>2013-09-21T21:44:59.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873533" lon="-122.27173" >
         <ele>59</ele>
-        <time>2013-09-21T23:45:09.0Z</time>
+        <time>2013-09-21T21:45:09.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8735" lon="-122.27215" >
         <ele>55</ele>
-        <time>2013-09-21T23:45:19.0Z</time>
+        <time>2013-09-21T21:45:19.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873467" lon="-122.27258" >
         <ele>54</ele>
-        <time>2013-09-21T23:45:29.0Z</time>
+        <time>2013-09-21T21:45:29.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8734" lon="-122.27298" >
         <ele>58</ele>
-        <time>2013-09-21T23:45:39.0Z</time>
+        <time>2013-09-21T21:45:39.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873383" lon="-122.27327" >
         <ele>55</ele>
-        <time>2013-09-21T23:45:58.0Z</time>
+        <time>2013-09-21T21:45:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873283" lon="-122.2737" >
         <ele>53</ele>
-        <time>2013-09-21T23:46:08.0Z</time>
+        <time>2013-09-21T21:46:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8732" lon="-122.27415" >
         <ele>53</ele>
-        <time>2013-09-21T23:46:18.0Z</time>
+        <time>2013-09-21T21:46:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873183" lon="-122.2746" >
         <ele>48</ele>
-        <time>2013-09-21T23:46:28.0Z</time>
+        <time>2013-09-21T21:46:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873117" lon="-122.27498" >
         <ele>47</ele>
-        <time>2013-09-21T23:46:38.0Z</time>
+        <time>2013-09-21T21:46:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873067" lon="-122.27538" >
         <ele>45</ele>
-        <time>2013-09-21T23:46:48.0Z</time>
+        <time>2013-09-21T21:46:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873" lon="-122.27578" >
         <ele>44</ele>
-        <time>2013-09-21T23:46:58.0Z</time>
+        <time>2013-09-21T21:46:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87295" lon="-122.27622" >
         <ele>45</ele>
-        <time>2013-09-21T23:47:08.0Z</time>
+        <time>2013-09-21T21:47:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872933" lon="-122.27663" >
         <ele>44</ele>
-        <time>2013-09-21T23:47:18.0Z</time>
+        <time>2013-09-21T21:47:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872883" lon="-122.27703" >
         <ele>43</ele>
-        <time>2013-09-21T23:47:28.0Z</time>
+        <time>2013-09-21T21:47:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87295" lon="-122.27738" >
         <ele>40</ele>
-        <time>2013-09-21T23:47:38.0Z</time>
+        <time>2013-09-21T21:47:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873" lon="-122.27778" >
         <ele>41</ele>
-        <time>2013-09-21T23:47:48.0Z</time>
+        <time>2013-09-21T21:47:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87295" lon="-122.27818" >
         <ele>42</ele>
-        <time>2013-09-21T23:47:58.0Z</time>
+        <time>2013-09-21T21:47:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87285" lon="-122.27855" >
         <ele>42</ele>
-        <time>2013-09-21T23:48:08.0Z</time>
+        <time>2013-09-21T21:48:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8728" lon="-122.27888" >
         <ele>41</ele>
-        <time>2013-09-21T23:48:18.0Z</time>
+        <time>2013-09-21T21:48:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872583" lon="-122.27912" >
         <ele>37</ele>
-        <time>2013-09-21T23:48:28.0Z</time>
+        <time>2013-09-21T21:48:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87255" lon="-122.27952" >
         <ele>33</ele>
-        <time>2013-09-21T23:48:38.0Z</time>
+        <time>2013-09-21T21:48:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872567" lon="-122.27985" >
         <ele>29</ele>
-        <time>2013-09-21T23:48:48.0Z</time>
+        <time>2013-09-21T21:48:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872683" lon="-122.28018" >
         <ele>31</ele>
-        <time>2013-09-21T23:48:58.0Z</time>
+        <time>2013-09-21T21:48:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872767" lon="-122.28052" >
         <ele>34</ele>
-        <time>2013-09-21T23:49:08.0Z</time>
+        <time>2013-09-21T21:49:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8728" lon="-122.28085" >
         <ele>36</ele>
-        <time>2013-09-21T23:49:18.0Z</time>
+        <time>2013-09-21T21:49:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87285" lon="-122.2812" >
         <ele>36</ele>
-        <time>2013-09-21T23:49:28.0Z</time>
+        <time>2013-09-21T21:49:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87305" lon="-122.28145" >
         <ele>40</ele>
-        <time>2013-09-21T23:49:38.0Z</time>
+        <time>2013-09-21T21:49:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873" lon="-122.28185" >
         <ele>50</ele>
-        <time>2013-09-21T23:49:48.0Z</time>
+        <time>2013-09-21T21:49:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873083" lon="-122.28223" >
         <ele>45</ele>
-        <time>2013-09-21T23:49:58.0Z</time>
+        <time>2013-09-21T21:49:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873083" lon="-122.28262" >
         <ele>37</ele>
-        <time>2013-09-21T23:50:08.0Z</time>
+        <time>2013-09-21T21:50:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873033" lon="-122.283" >
         <ele>34</ele>
-        <time>2013-09-21T23:50:18.0Z</time>
+        <time>2013-09-21T21:50:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872967" lon="-122.28338" >
         <ele>33</ele>
-        <time>2013-09-21T23:50:28.0Z</time>
+        <time>2013-09-21T21:50:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872917" lon="-122.28377" >
         <ele>31</ele>
-        <time>2013-09-21T23:50:38.0Z</time>
+        <time>2013-09-21T21:50:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87285" lon="-122.28413" >
         <ele>32</ele>
-        <time>2013-09-21T23:50:48.0Z</time>
+        <time>2013-09-21T21:50:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872867" lon="-122.28452" >
         <ele>32</ele>
-        <time>2013-09-21T23:50:58.0Z</time>
+        <time>2013-09-21T21:50:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873167" lon="-122.28458" >
         <ele>30</ele>
-        <time>2013-09-21T23:51:08.0Z</time>
+        <time>2013-09-21T21:51:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873467" lon="-122.28463" >
         <ele>31</ele>
-        <time>2013-09-21T23:51:18.0Z</time>
+        <time>2013-09-21T21:51:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873783" lon="-122.2847" >
         <ele>32</ele>
-        <time>2013-09-21T23:51:28.0Z</time>
+        <time>2013-09-21T21:51:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874067" lon="-122.28475" >
         <ele>35</ele>
-        <time>2013-09-21T23:51:38.0Z</time>
+        <time>2013-09-21T21:51:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874333" lon="-122.28478" >
         <ele>38</ele>
-        <time>2013-09-21T23:51:48.0Z</time>
+        <time>2013-09-21T21:51:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8746" lon="-122.28483" >
         <ele>37</ele>
-        <time>2013-09-21T23:51:58.0Z</time>
+        <time>2013-09-21T21:51:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874683" lon="-122.28512" >
         <ele>38</ele>
-        <time>2013-09-21T23:52:08.0Z</time>
+        <time>2013-09-21T21:52:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874833" lon="-122.2854" >
         <ele>38</ele>
-        <time>2013-09-21T23:52:18.0Z</time>
+        <time>2013-09-21T21:52:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875017" lon="-122.2857" >
         <ele>37</ele>
-        <time>2013-09-21T23:52:28.0Z</time>
+        <time>2013-09-21T21:52:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87515" lon="-122.28602" >
         <ele>36</ele>
-        <time>2013-09-21T23:52:38.0Z</time>
+        <time>2013-09-21T21:52:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87525" lon="-122.28635" >
         <ele>36</ele>
-        <time>2013-09-21T23:52:48.0Z</time>
+        <time>2013-09-21T21:52:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875433" lon="-122.28662" >
         <ele>37</ele>
-        <time>2013-09-21T23:52:58.0Z</time>
+        <time>2013-09-21T21:52:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875617" lon="-122.2869" >
         <ele>35</ele>
-        <time>2013-09-21T23:53:08.0Z</time>
+        <time>2013-09-21T21:53:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87565" lon="-122.28723" >
         <ele>35</ele>
-        <time>2013-09-21T23:53:18.0Z</time>
+        <time>2013-09-21T21:53:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87595" lon="-122.28733" >
         <ele>34</ele>
-        <time>2013-09-21T23:53:28.0Z</time>
+        <time>2013-09-21T21:53:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876233" lon="-122.2873" >
         <ele>31</ele>
-        <time>2013-09-21T23:53:38.0Z</time>
+        <time>2013-09-21T21:53:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876517" lon="-122.28737" >
         <ele>31</ele>
-        <time>2013-09-21T23:53:48.0Z</time>
+        <time>2013-09-21T21:53:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876717" lon="-122.28755" >
         <ele>32</ele>
-        <time>2013-09-21T23:53:58.0Z</time>
+        <time>2013-09-21T21:53:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87695" lon="-122.28773" >
         <ele>31</ele>
-        <time>2013-09-21T23:54:08.0Z</time>
+        <time>2013-09-21T21:54:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87705" lon="-122.288" >
         <ele>29</ele>
-        <time>2013-09-21T23:54:18.0Z</time>
+        <time>2013-09-21T21:54:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877233" lon="-122.2882" >
         <ele>29</ele>
-        <time>2013-09-21T23:54:28.0Z</time>
+        <time>2013-09-21T21:54:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877483" lon="-122.2883" >
         <ele>28</ele>
-        <time>2013-09-21T23:54:38.0Z</time>
+        <time>2013-09-21T21:54:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87775" lon="-122.28843" >
         <ele>28</ele>
-        <time>2013-09-21T23:54:48.0Z</time>
+        <time>2013-09-21T21:54:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877983" lon="-122.28862" >
         <ele>28</ele>
-        <time>2013-09-21T23:54:58.0Z</time>
+        <time>2013-09-21T21:54:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.878233" lon="-122.28873" >
         <ele>26</ele>
-        <time>2013-09-21T23:55:08.0Z</time>
+        <time>2013-09-21T21:55:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.878517" lon="-122.28867" >
         <ele>26</ele>
-        <time>2013-09-21T23:55:18.0Z</time>
+        <time>2013-09-21T21:55:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.878783" lon="-122.28877" >
         <ele>26</ele>
-        <time>2013-09-21T23:55:28.0Z</time>
+        <time>2013-09-21T21:55:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87905" lon="-122.28887" >
         <ele>25</ele>
-        <time>2013-09-21T23:55:38.0Z</time>
+        <time>2013-09-21T21:55:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879333" lon="-122.28897" >
         <ele>22</ele>
-        <time>2013-09-21T23:55:48.0Z</time>
+        <time>2013-09-21T21:55:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879617" lon="-122.2891" >
         <ele>22</ele>
-        <time>2013-09-21T23:55:58.0Z</time>
+        <time>2013-09-21T21:55:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8799" lon="-122.28923" >
         <ele>22</ele>
-        <time>2013-09-21T23:56:08.0Z</time>
+        <time>2013-09-21T21:56:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8802" lon="-122.28937" >
         <ele>23</ele>
-        <time>2013-09-21T23:56:18.0Z</time>
+        <time>2013-09-21T21:56:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.880483" lon="-122.28948" >
         <ele>23</ele>
-        <time>2013-09-21T23:56:28.0Z</time>
+        <time>2013-09-21T21:56:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88075" lon="-122.28962" >
         <ele>21</ele>
-        <time>2013-09-21T23:56:38.0Z</time>
+        <time>2013-09-21T21:56:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.881033" lon="-122.28973" >
         <ele>23</ele>
-        <time>2013-09-21T23:56:48.0Z</time>
+        <time>2013-09-21T21:56:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88125" lon="-122.28987" >
         <ele>24</ele>
-        <time>2013-09-21T23:56:58.0Z</time>
+        <time>2013-09-21T21:56:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8814" lon="-122.2901" >
         <ele>21</ele>
-        <time>2013-09-21T23:57:08.0Z</time>
+        <time>2013-09-21T21:57:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8817" lon="-122.29025" >
         <ele>21</ele>
-        <time>2013-09-21T23:57:18.0Z</time>
+        <time>2013-09-21T21:57:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.881983" lon="-122.29037" >
         <ele>19</ele>
-        <time>2013-09-21T23:57:28.0Z</time>
+        <time>2013-09-21T21:57:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.882267" lon="-122.29053" >
         <ele>19</ele>
-        <time>2013-09-21T23:57:38.0Z</time>
+        <time>2013-09-21T21:57:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8825" lon="-122.29067" >
         <ele>17</ele>
-        <time>2013-09-21T23:57:48.0Z</time>
+        <time>2013-09-21T21:57:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.882767" lon="-122.29077" >
         <ele>19</ele>
-        <time>2013-09-21T23:57:58.0Z</time>
+        <time>2013-09-21T21:57:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.883017" lon="-122.2907" >
         <ele>16</ele>
-        <time>2013-09-21T23:58:08.0Z</time>
+        <time>2013-09-21T21:58:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88325" lon="-122.29077" >
         <ele>18</ele>
-        <time>2013-09-21T23:58:18.0Z</time>
+        <time>2013-09-21T21:58:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88325" lon="-122.29075" >
         <ele>20</ele>
-        <time>2013-09-21T23:58:28.0Z</time>
+        <time>2013-09-21T21:58:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.883017" lon="-122.2906" >
         <ele>22</ele>
-        <time>2013-09-21T23:58:38.0Z</time>
+        <time>2013-09-21T21:58:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88275" lon="-122.2906" >
         <ele>20</ele>
-        <time>2013-09-21T23:58:48.0Z</time>
+        <time>2013-09-21T21:58:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.882517" lon="-122.29045" >
         <ele>18</ele>
-        <time>2013-09-21T23:58:58.0Z</time>
+        <time>2013-09-21T21:58:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88225" lon="-122.29038" >
         <ele>20</ele>
-        <time>2013-09-21T23:59:08.0Z</time>
+        <time>2013-09-21T21:59:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.882" lon="-122.29027" >
         <ele>24</ele>
-        <time>2013-09-21T23:59:18.0Z</time>
+        <time>2013-09-21T21:59:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88175" lon="-122.29013" >
         <ele>28</ele>
-        <time>2013-09-21T23:59:28.0Z</time>
+        <time>2013-09-21T21:59:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.881517" lon="-122.29007" >
         <ele>24</ele>
-        <time>2013-09-21T23:59:38.0Z</time>
+        <time>2013-09-21T21:59:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8813" lon="-122.28983" >
         <ele>26</ele>
-        <time>2013-09-21T23:59:48.0Z</time>
+        <time>2013-09-21T21:59:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8811" lon="-122.28963" >
         <ele>27</ele>
-        <time>2013-09-21T23:59:58.0Z</time>
+        <time>2013-09-21T21:59:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.880867" lon="-122.28948" >
         <ele>25</ele>
-        <time>2013-09-22T00:00:08.0Z</time>
+        <time>2013-09-21T22:00:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.880567" lon="-122.28938" >
         <ele>26</ele>
-        <time>2013-09-22T00:00:18.0Z</time>
+        <time>2013-09-21T22:00:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8803" lon="-122.28927" >
         <ele>28</ele>
-        <time>2013-09-22T00:00:28.0Z</time>
+        <time>2013-09-21T22:00:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.88005" lon="-122.28913" >
         <ele>32</ele>
-        <time>2013-09-22T00:00:38.0Z</time>
+        <time>2013-09-21T22:00:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879767" lon="-122.289" >
         <ele>30</ele>
-        <time>2013-09-22T00:00:48.0Z</time>
+        <time>2013-09-21T22:00:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879467" lon="-122.2889" >
         <ele>29</ele>
-        <time>2013-09-22T00:00:58.0Z</time>
+        <time>2013-09-21T22:00:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879217" lon="-122.28878" >
         <ele>32</ele>
-        <time>2013-09-22T00:01:08.0Z</time>
+        <time>2013-09-21T22:01:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.879" lon="-122.28863" >
         <ele>28</ele>
-        <time>2013-09-22T00:01:18.0Z</time>
+        <time>2013-09-21T22:01:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87875" lon="-122.28852" >
         <ele>31</ele>
-        <time>2013-09-22T00:01:28.0Z</time>
+        <time>2013-09-21T22:01:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.878483" lon="-122.28855" >
         <ele>27</ele>
-        <time>2013-09-22T00:01:38.0Z</time>
+        <time>2013-09-21T22:01:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8782" lon="-122.28857" >
         <ele>24</ele>
-        <time>2013-09-22T00:01:48.0Z</time>
+        <time>2013-09-21T22:01:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877983" lon="-122.2884" >
         <ele>26</ele>
-        <time>2013-09-22T00:01:58.0Z</time>
+        <time>2013-09-21T22:01:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877733" lon="-122.28828" >
         <ele>28</ele>
-        <time>2013-09-22T00:02:08.0Z</time>
+        <time>2013-09-21T22:02:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877467" lon="-122.28817" >
         <ele>28</ele>
-        <time>2013-09-22T00:02:18.0Z</time>
+        <time>2013-09-21T22:02:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877233" lon="-122.28805" >
         <ele>25</ele>
-        <time>2013-09-22T00:02:28.0Z</time>
+        <time>2013-09-21T22:02:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.877117" lon="-122.28778" >
         <ele>26</ele>
-        <time>2013-09-22T00:02:38.0Z</time>
+        <time>2013-09-21T22:02:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876983" lon="-122.28755" >
         <ele>25</ele>
-        <time>2013-09-22T00:02:48.0Z</time>
+        <time>2013-09-21T22:02:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876783" lon="-122.28738" >
         <ele>26</ele>
-        <time>2013-09-22T00:02:58.0Z</time>
+        <time>2013-09-21T22:02:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.876517" lon="-122.28722" >
         <ele>26</ele>
-        <time>2013-09-22T00:03:08.0Z</time>
+        <time>2013-09-21T22:03:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87625" lon="-122.28722" >
         <ele>27</ele>
-        <time>2013-09-22T00:03:18.0Z</time>
+        <time>2013-09-21T22:03:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875983" lon="-122.28725" >
         <ele>31</ele>
-        <time>2013-09-22T00:03:28.0Z</time>
+        <time>2013-09-21T22:03:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875767" lon="-122.28708" >
         <ele>31</ele>
-        <time>2013-09-22T00:03:38.0Z</time>
+        <time>2013-09-21T22:03:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875733" lon="-122.28677" >
         <ele>28</ele>
-        <time>2013-09-22T00:03:48.0Z</time>
+        <time>2013-09-21T22:03:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87555" lon="-122.28653" >
         <ele>32</ele>
-        <time>2013-09-22T00:03:58.0Z</time>
+        <time>2013-09-21T22:03:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.875367" lon="-122.28627" >
         <ele>33</ele>
-        <time>2013-09-22T00:04:08.0Z</time>
+        <time>2013-09-21T22:04:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87525" lon="-122.286" >
         <ele>29</ele>
-        <time>2013-09-22T00:04:18.0Z</time>
+        <time>2013-09-21T22:04:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87515" lon="-122.2857" >
         <ele>23</ele>
-        <time>2013-09-22T00:04:28.0Z</time>
+        <time>2013-09-21T22:04:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874967" lon="-122.28543" >
         <ele>24</ele>
-        <time>2013-09-22T00:04:38.0Z</time>
+        <time>2013-09-21T22:04:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8748" lon="-122.28515" >
         <ele>27</ele>
-        <time>2013-09-22T00:04:48.0Z</time>
+        <time>2013-09-21T22:04:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874683" lon="-122.28485" >
         <ele>31</ele>
-        <time>2013-09-22T00:04:58.0Z</time>
+        <time>2013-09-21T22:04:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87455" lon="-122.28465" >
         <ele>35</ele>
-        <time>2013-09-22T00:05:08.0Z</time>
+        <time>2013-09-21T22:05:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874283" lon="-122.28463" >
         <ele>31</ele>
-        <time>2013-09-22T00:05:18.0Z</time>
+        <time>2013-09-21T22:05:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874" lon="-122.2846" >
         <ele>31</ele>
-        <time>2013-09-22T00:05:28.0Z</time>
+        <time>2013-09-21T22:05:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873717" lon="-122.28457" >
         <ele>31</ele>
-        <time>2013-09-22T00:05:38.0Z</time>
+        <time>2013-09-21T22:05:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87345" lon="-122.2845" >
         <ele>32</ele>
-        <time>2013-09-22T00:05:48.0Z</time>
+        <time>2013-09-21T22:05:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873183" lon="-122.28452" >
         <ele>31</ele>
-        <time>2013-09-22T00:05:58.0Z</time>
+        <time>2013-09-21T22:05:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872933" lon="-122.28442" >
         <ele>31</ele>
-        <time>2013-09-22T00:06:08.0Z</time>
+        <time>2013-09-21T22:06:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87295" lon="-122.28412" >
         <ele>29</ele>
-        <time>2013-09-22T00:06:18.0Z</time>
+        <time>2013-09-21T22:06:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872967" lon="-122.28382" >
         <ele>26</ele>
-        <time>2013-09-22T00:06:28.0Z</time>
+        <time>2013-09-21T22:06:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873017" lon="-122.2835" >
         <ele>25</ele>
-        <time>2013-09-22T00:06:38.0Z</time>
+        <time>2013-09-21T22:06:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873067" lon="-122.28318" >
         <ele>25</ele>
-        <time>2013-09-22T00:06:48.0Z</time>
+        <time>2013-09-21T22:06:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873117" lon="-122.28285" >
         <ele>25</ele>
-        <time>2013-09-22T00:06:58.0Z</time>
+        <time>2013-09-21T22:06:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87315" lon="-122.28257" >
         <ele>27</ele>
-        <time>2013-09-22T00:07:08.0Z</time>
+        <time>2013-09-21T22:07:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8732" lon="-122.28222" >
         <ele>33</ele>
-        <time>2013-09-22T00:07:27.0Z</time>
+        <time>2013-09-21T22:07:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8731" lon="-122.28192" >
         <ele>30</ele>
-        <time>2013-09-22T00:07:37.0Z</time>
+        <time>2013-09-21T22:07:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873083" lon="-122.28162" >
         <ele>30</ele>
-        <time>2013-09-22T00:07:47.0Z</time>
+        <time>2013-09-21T22:07:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873" lon="-122.28133" >
         <ele>36</ele>
-        <time>2013-09-22T00:07:57.0Z</time>
+        <time>2013-09-21T22:07:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872883" lon="-122.28103" >
         <ele>43</ele>
-        <time>2013-09-22T00:08:07.0Z</time>
+        <time>2013-09-21T22:08:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8729" lon="-122.2807" >
         <ele>42</ele>
-        <time>2013-09-22T00:08:17.0Z</time>
+        <time>2013-09-21T22:08:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8728" lon="-122.28037" >
         <ele>45</ele>
-        <time>2013-09-22T00:08:27.0Z</time>
+        <time>2013-09-21T22:08:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872733" lon="-122.28003" >
         <ele>48</ele>
-        <time>2013-09-22T00:08:37.0Z</time>
+        <time>2013-09-21T22:08:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872617" lon="-122.27973" >
         <ele>40</ele>
-        <time>2013-09-22T00:08:47.0Z</time>
+        <time>2013-09-21T22:08:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87265" lon="-122.27945" >
         <ele>36</ele>
-        <time>2013-09-22T00:08:57.0Z</time>
+        <time>2013-09-21T22:08:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872717" lon="-122.27912" >
         <ele>42</ele>
-        <time>2013-09-22T00:09:07.0Z</time>
+        <time>2013-09-21T22:09:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872767" lon="-122.27885" >
         <ele>44</ele>
-        <time>2013-09-22T00:09:17.0Z</time>
+        <time>2013-09-21T22:09:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87275" lon="-122.27857" >
         <ele>38</ele>
-        <time>2013-09-22T00:09:27.0Z</time>
+        <time>2013-09-21T22:09:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872767" lon="-122.27827" >
         <ele>36</ele>
-        <time>2013-09-22T00:09:37.0Z</time>
+        <time>2013-09-21T22:09:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8728" lon="-122.27792" >
         <ele>35</ele>
-        <time>2013-09-22T00:09:47.0Z</time>
+        <time>2013-09-21T22:09:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872833" lon="-122.2776" >
         <ele>39</ele>
-        <time>2013-09-22T00:09:57.0Z</time>
+        <time>2013-09-21T22:09:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872917" lon="-122.27732" >
         <ele>38</ele>
-        <time>2013-09-22T00:10:07.0Z</time>
+        <time>2013-09-21T22:10:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87295" lon="-122.27695" >
         <ele>47</ele>
-        <time>2013-09-22T00:10:17.0Z</time>
+        <time>2013-09-21T22:10:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.872983" lon="-122.27663" >
         <ele>47</ele>
-        <time>2013-09-22T00:10:27.0Z</time>
+        <time>2013-09-21T22:10:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873033" lon="-122.27628" >
         <ele>47</ele>
-        <time>2013-09-22T00:10:37.0Z</time>
+        <time>2013-09-21T22:10:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873067" lon="-122.27598" >
         <ele>47</ele>
-        <time>2013-09-22T00:10:47.0Z</time>
+        <time>2013-09-21T22:10:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873133" lon="-122.27565" >
         <ele>50</ele>
-        <time>2013-09-22T00:10:57.0Z</time>
+        <time>2013-09-21T22:10:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873167" lon="-122.27537" >
         <ele>46</ele>
-        <time>2013-09-22T00:11:07.0Z</time>
+        <time>2013-09-21T22:11:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8732" lon="-122.27502" >
         <ele>45</ele>
-        <time>2013-09-22T00:11:17.0Z</time>
+        <time>2013-09-21T22:11:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873233" lon="-122.27472" >
         <ele>46</ele>
-        <time>2013-09-22T00:11:27.0Z</time>
+        <time>2013-09-21T22:11:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873267" lon="-122.27438" >
         <ele>44</ele>
-        <time>2013-09-22T00:11:37.0Z</time>
+        <time>2013-09-21T22:11:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873317" lon="-122.27403" >
         <ele>47</ele>
-        <time>2013-09-22T00:11:47.0Z</time>
+        <time>2013-09-21T22:11:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873383" lon="-122.27368" >
         <ele>53</ele>
-        <time>2013-09-22T00:11:57.0Z</time>
+        <time>2013-09-21T22:11:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873467" lon="-122.27338" >
         <ele>51</ele>
-        <time>2013-09-22T00:12:07.0Z</time>
+        <time>2013-09-21T22:12:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873467" lon="-122.27303" >
         <ele>53</ele>
-        <time>2013-09-22T00:12:56.0Z</time>
+        <time>2013-09-21T22:12:56.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873483" lon="-122.27272" >
         <ele>50</ele>
-        <time>2013-09-22T00:13:06.0Z</time>
+        <time>2013-09-21T22:13:06.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873517" lon="-122.27238" >
         <ele>51</ele>
-        <time>2013-09-22T00:13:16.0Z</time>
+        <time>2013-09-21T22:13:16.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873567" lon="-122.27205" >
         <ele>54</ele>
-        <time>2013-09-22T00:13:26.0Z</time>
+        <time>2013-09-21T22:13:26.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873617" lon="-122.27172" >
         <ele>55</ele>
-        <time>2013-09-22T00:13:36.0Z</time>
+        <time>2013-09-21T22:13:36.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87365" lon="-122.27137" >
         <ele>54</ele>
-        <time>2013-09-22T00:13:46.0Z</time>
+        <time>2013-09-21T22:13:46.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873683" lon="-122.27105" >
         <ele>59</ele>
-        <time>2013-09-22T00:13:56.0Z</time>
+        <time>2013-09-21T22:13:56.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873733" lon="-122.2708" >
         <ele>63</ele>
-        <time>2013-09-22T00:14:06.0Z</time>
+        <time>2013-09-21T22:14:06.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873717" lon="-122.2705" >
         <ele>65</ele>
-        <time>2013-09-22T00:14:16.0Z</time>
+        <time>2013-09-21T22:14:16.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87375" lon="-122.27018" >
         <ele>61</ele>
-        <time>2013-09-22T00:14:26.0Z</time>
+        <time>2013-09-21T22:14:26.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873767" lon="-122.26988" >
         <ele>60</ele>
-        <time>2013-09-22T00:14:36.0Z</time>
+        <time>2013-09-21T22:14:36.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873833" lon="-122.26958" >
         <ele>58</ele>
-        <time>2013-09-22T00:14:46.0Z</time>
+        <time>2013-09-21T22:14:46.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873867" lon="-122.26925" >
         <ele>57</ele>
-        <time>2013-09-22T00:14:56.0Z</time>
+        <time>2013-09-21T22:14:56.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873917" lon="-122.26892" >
         <ele>55</ele>
-        <time>2013-09-22T00:15:06.0Z</time>
+        <time>2013-09-21T22:15:06.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87395" lon="-122.26853" >
         <ele>80</ele>
-        <time>2013-09-22T00:15:28.0Z</time>
+        <time>2013-09-21T22:15:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873933" lon="-122.26823" >
         <ele>74</ele>
-        <time>2013-09-22T00:15:38.0Z</time>
+        <time>2013-09-21T22:15:38.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.87395" lon="-122.2679" >
         <ele>77</ele>
-        <time>2013-09-22T00:15:48.0Z</time>
+        <time>2013-09-21T22:15:48.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.873967" lon="-122.26758" >
         <ele>78</ele>
-        <time>2013-09-22T00:15:58.0Z</time>
+        <time>2013-09-21T22:15:58.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874017" lon="-122.26725" >
         <ele>68</ele>
-        <time>2013-09-22T00:16:08.0Z</time>
+        <time>2013-09-21T22:16:08.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874033" lon="-122.26688" >
         <ele>77</ele>
-        <time>2013-09-22T00:16:18.0Z</time>
+        <time>2013-09-21T22:16:18.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874133" lon="-122.2665" >
         <ele>78</ele>
-        <time>2013-09-22T00:16:28.0Z</time>
+        <time>2013-09-21T22:16:28.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874333" lon="-122.2662" >
         <ele>118</ele>
-        <time>2013-09-22T00:17:17.0Z</time>
+        <time>2013-09-21T22:17:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874317" lon="-122.266" >
         <ele>108</ele>
-        <time>2013-09-22T00:17:27.0Z</time>
+        <time>2013-09-21T22:17:27.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.8743" lon="-122.26578" >
         <ele>98</ele>
-        <time>2013-09-22T00:17:37.0Z</time>
+        <time>2013-09-21T22:17:37.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874367" lon="-122.26548" >
         <ele>94</ele>
-        <time>2013-09-22T00:17:47.0Z</time>
+        <time>2013-09-21T22:17:47.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="37.874533" lon="-122.26545" >
         <ele>98</ele>
-        <time>2013-09-22T00:17:57.0Z</time>
+        <time>2013-09-21T22:17:57.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="0" lon="0" >
         <ele>-18384</ele>
-        <time>2013-09-22T00:18:07.0Z</time>
+        <time>2013-09-21T22:18:07.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
       <trkpt lat="0" lon="0" >
         <ele>-18384</ele>
-        <time>2013-09-22T00:18:17.0Z</time>
+        <time>2013-09-21T22:18:17.0Z</time>
         <extensions>
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
