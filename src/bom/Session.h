@@ -6,6 +6,7 @@
 #include <map>
 #include <stdint.h>
 #include <ctime>
+#include <cstring>
 #include "../bom/Lap.h"
 #include "../bom/Point.h"
 #include "../Utils.h"
@@ -20,10 +21,10 @@ class Session
 		{ }
 
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) : 
-			         _id(id), _name("No name"), _num(num), _time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
+			         _id(id), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
 				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
-			_time_t = mktime(&_time);
+			convertToGMT();
 		}
 
 		~Session()
@@ -43,10 +44,16 @@ class Session
 		void addPoint(Point* point) { _points.push_back(point); }
 		void addLap(Lap *lap)       { _laps.push_back(lap); }
 
+		void convertToGMT()         
+		{
+			_time_t = mktime(&_local_time);
+			gmtime_r(&_time_t, &_time);
+		}
+
 		void setId(SessionId id)                   { _id = id; };
 		void setNum(uint32_t num)                  { _num = num; };
 		void setName(std::string name)             { _name = name; };
-		void setTime(tm time)                      { _time = time; _time_t = mktime(&_time); };
+		void setTime(tm time)                      { _local_time = time; convertToGMT(); };
 		void setNbPoints(uint32_t nbPoints)        { _nb_points = nbPoints; };
 		void setNbLaps(uint32_t nbLaps)            { _nb_laps = nbLaps; };
 
@@ -81,12 +88,12 @@ class Session
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		const SessionId getId() const                  { return _id; };
 		const std::string getName() const              { return _name; };
-		int getYear() const                            { return _time.tm_year + 1900; };
-		int getMonth() const                           { return _time.tm_mon + 1; };
-		int getDay() const                             { return _time.tm_mday; };
-		int getHour() const                            { return _time.tm_hour; };
-		int getMinutes() const                         { return _time.tm_min; };
-		int getSeconds() const                         { return _time.tm_sec; };
+		int getYear() const                            { return _local_time.tm_year + 1900; };
+		int getMonth() const                           { return _local_time.tm_mon + 1; };
+		int getDay() const                             { return _local_time.tm_mday; };
+		int getHour() const                            { return _local_time.tm_hour; };
+		int getMinutes() const                         { return _local_time.tm_min; };
+		int getSeconds() const                         { return _local_time.tm_sec; };
 
 		double getDuration() const                     { return _duration; };
 		uint32_t getDistance() const                   { return _distance; };
@@ -134,6 +141,7 @@ class Session
 		std::string _name;
 		uint32_t _num;
 		tm _time;
+		tm _local_time;
 		time_t _time_t;
 		uint32_t _nb_points;
 

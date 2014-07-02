@@ -38,16 +38,24 @@ class Point
 		time_t getTime() const                      { return _time; };
 		const Field<uint32_t> getDistance() const   { return _distance;}
 		// TODO: Is it really the right place ? We may want to do it with any time ! To move in a "utils" part
-		const std::string getTimeAsString(bool human_readable=false) const
+		const std::string getTimeAsString(bool human_readable=false, bool local=false) const
 		{
 			char buffer[256];
-			tm *time_tm = localtime(&_time);
+			tm time_tm;
+			if(local)
+			{
+				localtime_r(&_time, &time_tm);
+			}
+			else
+			{
+				gmtime_r(&_time, &time_tm);
+			}
 			std::stringstream format_string;
 			if(human_readable)
 				format_string << "%Y-%m-%d %H:%M:%S." << _tenth;
 			else
 				format_string << "%Y-%m-%dT%H:%M:%S." << _tenth << "Z";
-			strftime(buffer, 256, format_string.str().c_str(), time_tm);
+			strftime(buffer, 256, format_string.str().c_str(), &time_tm);
 			return std::string(buffer);
 		};
 
