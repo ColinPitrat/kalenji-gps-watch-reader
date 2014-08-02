@@ -256,8 +256,10 @@
 //                                                                                                          ** ** ** ** ** 
 //                                                                                                                         ** ** Latitude degres (decimal - 1) ?
 //                                                                                                                               ** ** ** Latitude minutes (decimal - 0.179132) ?
+//                                                                                                                                        ** 4e = N - 53 = S (north / south => sign of latitude)
 //                                                                                                                                           ** ** Longitude degres (decimal - 103) ?
 //                                                                                                                                                 ** ** ** Longitude minutes (decimal 0.467268) ?
+//                                                                                                                                                          ** 45 = E - 57 = W (east / west => sign of longitude)
 //                                                                                                                                                                   ** ** ** ** Time (hh:mm:ss:ct)
 //                                                                                                                                                                               ** ** Point number
 //                                                                                                                                                                                     ** Session number
