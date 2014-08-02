@@ -73,7 +73,7 @@ namespace output
 			// Max speed is bright red, 5 km/h or less is black
 			// TODO: Dynamic way to find lower bound ?
 			double min_speed = 5;
-			double speed_factor = 0xFF / (session->getMaxSpeed() - min_speed);
+			double speed_factor = (double)0xFF / (session->getMaxSpeed() - min_speed);
 			int16_t sp = ((*it)->getSpeed() - min_speed) * speed_factor;
 			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
 			if(sp < 0) sp = 0;
