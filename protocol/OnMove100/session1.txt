@@ -847,7 +847,7 @@ URB setup
 0010  00 03 00 02 00 80 02 08 00 00 00 00 00 09 01 00   ................
 0020  00 00 00 00                                       ....
 
-// Status of step 7777777
+// Status of step 7
 No.     Time        Source                Destination           Protocol Length Info
     101 5.599320    2.0                   host                  USB      28     SET CONFIGURATION Status
 
