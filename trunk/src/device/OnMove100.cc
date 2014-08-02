@@ -141,7 +141,13 @@ namespace device
 			min *= 100;
 			min += 10*((buffer[i+2] & 0xF0) >> 4) + (buffer[i+2] & 0xF);
 		}
-		return deg + (min/600000.0);
+		double pos_neg = 1.0;
+		// W (west) and S (south) correspond to negative coordinates
+		if(buffer[5] == 'W' || buffer[5] == 'S')
+		{
+			pos_neg = -1.0;
+		}
+		return pos_neg * (deg + (min/600000.0));
 	}
 
 	void OnMove100::getSessionsList(SessionsMap *oSessions)
