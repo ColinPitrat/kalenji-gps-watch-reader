@@ -46,11 +46,6 @@ namespace device
 			 */ 
 			virtual void getSessionsDetails(SessionsMap *ioSessions);
 
-			/**
-			  Clean the watch by removing all sessions stored in it.
-		        */
-			virtual void deleteSessions();
-			
 			virtual std::string getName() { return "OnMove100"; };
 			virtual unsigned int getVendorId() { return 0x10c4; };
 			virtual unsigned int getProductId() { return 0xea61; };

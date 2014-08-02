@@ -112,10 +112,10 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 			case 'D':
 				options["device"] = std::string(optarg);
 				break;
-		        case 'p':
-			        options["source"] = "Path";
-			        options["path"] = std::string(optarg);
-                                break;
+			case 'p':
+				options["source"] = "Path";
+				options["path"] = std::string(optarg);
+				break;
 			case 'i':
 				options["source"] = "File";
 				options["sourcefile"] = std::string(optarg);
@@ -155,7 +155,6 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["outputs"] = "GPX,GoogleMap";
 	configuration["gpx_extensions"] = "gpxdata";
 	configuration["tcx_sport"] = "Running";
-	configuration["onmove100_delete"] = "no";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
@@ -413,12 +412,6 @@ int main(int argc, char *argv[])
 		std::string to_import = filterSessionsToImport(&sessions, outputs);
 
 		myDevice->getSessionsDetails(&sessions);
-
-		if(configuration["device"] == "OnMove100" && configuration["onmove100_delete"] == "yes" && to_import == "all")
-		{
-			DEBUG_CMD(std::cout << "main() - Delete sessions" << std::endl);
-			myDevice->deleteSessions();
-		}
 
 		myDevice->release();
 		delete myDevice;
