@@ -79,7 +79,7 @@ class Session
 			return std::string(buffer);
 		};
 
-		uint32_t getNum() const                  { return _num; };
+		uint32_t getNum() const            { return _num; };
 		bool isComplete()                  { return _nb_points == _points.size(); };
 
 		std::list<Lap*> &getLaps()         { return _laps; };

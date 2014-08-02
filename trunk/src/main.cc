@@ -453,7 +453,14 @@ int main(int argc, char *argv[])
 				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
 				if(output)
 				{
-					output->dump(&(it->second), configuration);
+					try
+					{
+						output->dump(&(it->second), configuration);
+					}
+					catch(std::exception &e)
+					{
+						std::cerr << "Error: couldn't export to output " << *it2 << ":" << e.what() << std::endl;
+					}
 				}
 				else
 				{
