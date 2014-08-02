@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include <cstdlib>
+#include <unistd.h>
 
 namespace filter
 {
@@ -129,6 +130,9 @@ namespace filter
 				request_first = it;
 				i = 0;
 				urlparams.str("");
+				// Limit to 10 queries per second:
+				// https://developers.google.com/maps/documentation/elevation/#Limits
+				usleep(100000);
 			}
 		}
 
