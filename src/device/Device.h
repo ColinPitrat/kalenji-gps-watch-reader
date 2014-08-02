@@ -52,12 +52,6 @@ namespace device
 			 */ 
 			virtual void getSessionsDetails(SessionsMap *ioSessions) = 0;
 
-			/**
-			  Deleting sessions is not the primary function of this software. The way it's handled is not very user friendly.
-			  This function should only be implemented for devices that do not offer a way to delete sessions from the watch. (e.g: OnMove100)
-			*/
-			virtual void deleteSessions() { std::cerr << "deleteSessions() not implemented for this device" << std::endl; };
-
 			virtual std::string getName() = 0;
 
 			virtual unsigned int getVendorId() = 0;
