@@ -15,7 +15,7 @@ namespace output
 
 	void GoogleMap::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
 	{
-	        session->ensurePointDistanceAreOk();
+		session->ensurePointDistanceAreOk();
 
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(8);
@@ -112,7 +112,8 @@ namespace output
 			{
 			       mystream << std::endl;
 			       
-			       if(addComa) {
+			       if(addComa) 
+			       {
 			          mystream << ",";
 			       }
 			       addComa = true;
@@ -205,17 +206,20 @@ namespace output
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "// point ID, elapsed time (ms), speed (km/h), heartrate (bpm), elevation (m)" << std::endl;
 		
-		
 		int i = 0;
 		laps = session->getLaps();
 		std::list<Lap*>::iterator itLaps = laps.begin();
 		std::list<uint32_t> lapsList;
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
+			if(itLaps == laps.end())
+				break;
 			while((*itLaps)->getEndPoint() == *it)
 			{
 				lapsList.push_back(i);
 				itLaps++;
+				if(itLaps == laps.end())
+					break;
 			}
 			++i;
 		}
