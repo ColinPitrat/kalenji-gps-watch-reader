@@ -1,0 +1,7 @@
+directory=/tmp
+import=all
+trigger=distance
+log_transactions=no
+filters=ComputeInstantSpeed
+outputs=GPX
+gpx_extensions=none
