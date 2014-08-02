@@ -46,6 +46,7 @@ $(WINOBJECTS): %.os:%.cc $(HEADERS)
 debug: all
 
 test: all
+	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].*
 	cd test && ./run.sh && cd ..
 
 clean:
