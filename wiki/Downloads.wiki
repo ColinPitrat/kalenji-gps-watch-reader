@@ -16,9 +16,6 @@ It is possible to benefit from improvements of a newer version for all the sessi
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.8.tar.gz kalenji-gps-watch-reader-4.8.tar.gz]<br/>
  _*Release date*_: Aug 3, 2014<br/>
  _*Size*_: 56 kB<br/>
- _*SHA1 checksum*_:  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.8.tar.gz kalenji-gps-watch-reader-4.8.tar.gz]<br/>
- _*Release date*_: Aug 3, 2014<br/>
- _*Size*_: 56 kB<br/>
  _*SHA1 checksum*_: 4b55de4ae653aa5ff2a6dd4f03817a297b302afc
 
  Few bug fixes.
