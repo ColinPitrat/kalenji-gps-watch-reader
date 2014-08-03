@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <stdint.h>
+#include "../Utils.h"
 #include "../bom/Field.h"
 
 class Point

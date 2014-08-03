@@ -6,6 +6,31 @@
 #include <stdint.h>
 #include <cmath> 
 
+#ifdef WINDOWS
+struct tm * localtime_r (const time_t *timer, struct tm *result)
+{
+	struct tm *local_result; 
+	local_result = localtime (timer); 
+
+	if (local_result == NULL || result == NULL) 
+		return NULL; 
+
+	memcpy (result, local_result, sizeof (result)); 
+	return result; 
+} 
+struct tm * gmtime_r (const time_t *timer, struct tm *result)
+{
+	struct tm *local_result; 
+	local_result = gmtime (timer); 
+
+	if (local_result == NULL || result == NULL) 
+		return NULL; 
+
+	memcpy (result, local_result, sizeof (result)); 
+	return result; 
+} 
+#endif 
+
 void trimString(std::string &toTrim)
 {
 	size_t startpos = toTrim.find_first_not_of(" \t");
