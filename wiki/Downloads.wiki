@@ -10,18 +10,34 @@ It is possible to benefit from improvements of a newer version for all the sessi
 
 <wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
 
-= Latest release - version 4.7 =
+= Latest release - version 4.8 =
 
 == Source code packages ==
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.7.tar.gz kalenji-gps-watch-reader-4.7.tar.gz]<br/>
- _*Release date*_: Apr 4, 2014<br/>
- _*Size*_: 141.5 kB<br/>
- _*SHA1 checksum*_: be017c4114fdc50959d16eb8fd17986814673347
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.8.tar.gz kalenji-gps-watch-reader-4.8.tar.gz]<br/>
+ _*Release date*_: Aug 3, 2014<br/>
+ _*Size*_: 56 kB<br/>
+ _*SHA1 checksum*_:  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.8.tar.gz kalenji-gps-watch-reader-4.8.tar.gz]<br/>
+ _*Release date*_: Aug 3, 2014<br/>
+ _*Size*_: 56 kB<br/>
+ _*SHA1 checksum*_: 4b55de4ae653aa5ff2a6dd4f03817a297b302afc
 
- Support of On Move 710 and On Move 100.<br/>
- Improve HTML !GoogleMap output by adding graphs and linking them to the map.
+ Few bug fixes.
 
 == Windows version ==
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.8_win.zip kalenji-gps-watch-reader-4.8_win.zip]<br/>
+ _*Release date*_: Aug 3, 2014<br/>
+ _*Size*_: 9.8 MB<br/>
+ _*SHA1 checksum*_: e3e213485c1b676fba8d5497a813e1b41ca662d1
+
+  Few bug fixes.
+
+<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
+
+= Older releases =
+
+== Windows versions ==
+
+*Version 4.7*
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.7_win.zip kalenji-gps-watch-reader-4.7_win.zip]<br/>
  _*Release date*_: Apr 4, 2014<br/>
  _*Size*_: 9.7 MB<br/>
@@ -29,12 +45,6 @@ It is possible to benefit from improvements of a newer version for all the sessi
 
   Support of On Move 710 and On Move 100.<br/>
   Improve HTML !GoogleMap output by adding graphs and linking them to the map.
-
-<wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
-
-= Older releases =
-
-== Windows versions ==
 
 *Version 4.6*
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.6_win.zip kalenji-gps-watch-reader-4.6_win.zip]<br/>
@@ -63,6 +73,13 @@ It is possible to benefit from improvements of a newer version for all the sessi
 
 == Source code ==
 
+*Version 4.7*
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.7.tar.gz kalenji-gps-watch-reader-4.7.tar.gz]<br/>
+ _*Release date*_: Apr 4, 2014<br/>
+ _*Size*_: 56 kB<br/>
+ _*SHA1 checksum*_: be017c4114fdc50959d16eb8fd17986814673347
+
+ Few bug fixes.
 *Version 4.6*
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.6.tar.gz kalenji-gps-watch-reader-4.6.tar.gz]<br/>
  _*Release date*_: Jan 13, 2014<br/>
