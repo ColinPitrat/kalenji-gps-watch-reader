@@ -60,7 +60,7 @@ namespace device
 			enum KalenjiType
 			{
 				GH675,
-				Keymaze700Trial
+				Keymaze700Trail
 			} type;
 			};
 }

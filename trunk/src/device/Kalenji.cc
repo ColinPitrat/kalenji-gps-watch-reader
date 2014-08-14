@@ -24,16 +24,22 @@ namespace device
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);
 		_dataSource->read_data(0x81, &responseData, &transferred);
 		std::string typeGH = "GH-675";
-		std::string typeKeymaze = "Keymaze 700 Trial";
+		std::string typeKeymaze700 = "Keymaze 700 Trial";
+		std::string typeKeymaze500 = "Keymaze 500 Hiking";
 		if(memcmp(&(responseData[3]), typeGH.c_str(), typeGH.size()) == 0)
 		{
 			type = GH675;
 			std::cout << "Using device type Kalenji 500 or 700: " << &(responseData[3]) << std::endl;
 		}
-		else if(memcmp(&(responseData[3]), typeKeymaze.c_str(), typeKeymaze.size()) == 0)
+		else if(memcmp(&(responseData[3]), typeKeymaze700.c_str(), typeKeymaze700.size()) == 0)
 		{
-			type = Keymaze700Trial;
-			std::cout << "Using device type Keymaze 700 Trial" << std::endl;
+			type = Keymaze700Trail;
+			std::cout << "Using device type " << typeKeymaze700 << std::endl;
+		}
+		else if(memcmp(&(responseData[3]), typeKeymaze500.c_str(), typeKeymaze500.size()) == 0)
+		{
+			type = Keymaze700Trail;
+			std::cout << "Using device type " << typeKeymaze500 << std::endl;
 		}
 		else
 		{
@@ -60,7 +66,7 @@ namespace device
 			// TODO: Throw an exception
 		}
 		size_t sizeRecord = 24;
-		if (type == Keymaze700Trial)
+		if (type == Keymaze700Trail)
 		{
 			sizeRecord = 54;
 		}
@@ -95,7 +101,7 @@ namespace device
 			// nb_laps has no interest as we read laps later except to display it in the list of sessions before import
 			uint32_t nb_laps = line[16] + (line[17] << 8);
 			// In Keymaze 700 Trial, some values are at different places
-			if(type == Keymaze700Trial)
+			if(type == Keymaze700Trail)
 			{
 				num = (line[47] << 8) + line[46];
 				nb_points = line[7] + (line[8] << 8);
@@ -105,7 +111,7 @@ namespace device
 			}
 
 			Session mySession(id, num, time, nb_points, duration, distance, nb_laps);
-			if(type == Keymaze700Trial)
+			if(type == Keymaze700Trail)
 			{
 				double max_speed = (line[19] + (line[20] << 8)) / 100.0;
 				double avg_speed = (line[17] + (line[18] << 8)) / 100.0;
@@ -163,7 +169,7 @@ namespace device
 		{
 			// First response 80 retrieves info concerning the session
 			// Doesn't exist for Keymaze 700 trial (all info is in 78)
-			if(type != Keymaze700Trial)
+			if(type != Keymaze700Trail)
 			{
 				// TODO: Use more info from this first call (some data global to the session: calories, grams, ascent, descent ...)
 				_dataSource->read_data(0x81, &responseData, &received);
@@ -214,7 +220,7 @@ namespace device
 				Session *session = &(oSessions->find(id)->second);
 				size_t sizeRecord = 24;
 				size_t sizeLap = 44;
-				if (type == Keymaze700Trial)
+				if (type == Keymaze700Trail)
 				{
 					sizeRecord = 54;
 					sizeLap = 48;
@@ -282,7 +288,7 @@ namespace device
 						prevLastPoint = lastPoint;
 					}
 					// ->8---
-					if(type == Keymaze700Trial)
+					if(type == Keymaze700Trail)
 					{
 						duration = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 100.0;
 						length = line[8] + (line[9] << 8) + (line[10] << 16) + (line[11] << 24);
@@ -335,7 +341,7 @@ namespace device
 				}
 				size_t sizeRecord = 24;
 				size_t sizePoint = 20;
-				if (type == Keymaze700Trial)
+				if (type == Keymaze700Trail)
 				{
 					sizeRecord = 54;
 					sizePoint = 17;
@@ -370,7 +376,7 @@ namespace device
 							current_time += cumulated_tenth / 10;
 							cumulated_tenth = cumulated_tenth % 10;
 						}
-						else if(type == Keymaze700Trial)
+						else if(type == Keymaze700Trail)
 						{
 							fiability = 3;
 							cumulated_tenth += line[13];
@@ -430,7 +436,7 @@ namespace device
 		}
 		uint32_t headerSize = 32;
 		uint32_t pointSize = 8;
-		if(type == Keymaze700Trial)
+		if(type == Keymaze700Trail)
 		{
 			headerSize = 20;
 			pointSize = 12;
@@ -490,7 +496,7 @@ namespace device
 			buffer[headerSize+4+i++] = (lon / 256) % 256;
 			buffer[headerSize+4+i++] = (lon / (256*256)) % 256;
 			buffer[headerSize+4+i++] = (lon / (256*256*256)) % 256;
-			if(type == Keymaze700Trial)
+			if(type == Keymaze700Trail)
 			{
 				int dist = distanceEarth(**it, *prevPoint);
 				unsigned int alt = (*it)->getAltitude();
