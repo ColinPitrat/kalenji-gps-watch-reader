@@ -379,7 +379,7 @@ namespace device
 						else if(type == Keymaze700Trail)
 						{
 							fiability = 3;
-							cumulated_tenth += line[13];
+							cumulated_tenth += line[13] + (line[14] << 8);
 							current_time += cumulated_tenth / 100;
 							cumulated_tenth = cumulated_tenth % 100;
 						}
