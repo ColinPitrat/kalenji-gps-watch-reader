@@ -21,19 +21,26 @@ It is possible to benefit from improvements of a newer version for all the sessi
  Fix issue 35.
 
 == Windows version ==
-
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.9_win.zip kalenji-gps-watch-reader-4.9_win.zip]<br/>
- _*Release date*_: Aug 19, 2014<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.9_win.zip kalenji-gps-watch-reader-4.9.1_win.zip]<br/>
+ _*Release date*_: Aug 23, 2014<br/>
  _*Size*_: 9.8 MB<br/>
- _*SHA1 checksum*_: 737d144bfc31ed37180f85d057c3d10af98d09eb
+ _*SHA1 checksum*_: 18686eca567117519ed349415e8e09596e465fb0
 
-  Fix issue 35.
+  Fix issue 39.
 
 <wiki:gadget url="https://gcodeadsense.googlecode.com/svn/release/gCodeAdSense/gCodeAdSense.xml" width="728" height="90" up_ad_client="3040795652020570" up_ad_slot="3638377687" />
 
 = Older releases =
 
 == Windows versions ==
+
+*Version 4.9*
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.9_win.zip kalenji-gps-watch-reader-4.9_win.zip]<br/>
+ _*Release date*_: Aug 19, 2014<br/>
+ _*Size*_: 9.8 MB<br/>
+ _*SHA1 checksum*_: 737d144bfc31ed37180f85d057c3d10af98d09eb
+
+  Fix issue 35.
 
 *Version 4.8*
  _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.8_win.zip kalenji-gps-watch-reader-4.8_win.zip]<br/>
