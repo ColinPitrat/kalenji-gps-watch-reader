@@ -21,7 +21,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
  Fix issue 35.
 
 == Windows version ==
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.9_win.zip kalenji-gps-watch-reader-4.9.1_win.zip]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/win/kalenji-gps-watch-reader-4.9.1_win.zip kalenji-gps-watch-reader-4.9.1_win.zip]<br/>
  _*Release date*_: Aug 23, 2014<br/>
  _*Size*_: 9.8 MB<br/>
  _*SHA1 checksum*_: 18686eca567117519ed349415e8e09596e465fb0
