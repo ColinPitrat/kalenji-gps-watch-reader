@@ -363,8 +363,10 @@ namespace device
 					//std::cout << "We should have " << (*lap)->getFirstPointId() << " <= " << id_point << " <= " << (*lap)->getLastPointId() << std::endl;
 					{ // Decoding and addition of the point
 						unsigned char *line = &responseData[sizePoint*i + sizeRecord + 3];
-						double lat = (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 1000000.0;
-						double lon = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 1000000.0;
+						Field<double> lat = (line[0] + (line[1] << 8) + (line[2] << 16) + (line[3] << 24)) / 1000000.0;
+						if(line[0] == 0xFF && line[1] == 0xFF && line[2] == 0xFF && line[3] == 0x0F) lat = FieldUndef;
+						Field<double> lon = (line[4] + (line[5] << 8) + (line[6] << 16) + (line[7] << 24)) / 1000000.0;
+						if(line[4] == 0xFF && line[5] == 0xFF && line[6] == 0xFF && line[7] == 0x0F) lon = FieldUndef;
 						// Altitude can be signed (yes, I already saw negative ones with the watch !) and is on 16 bits
 						int16_t alt = line[8] + (line[9] << 8);
 						uint16_t bpm = line[12];
