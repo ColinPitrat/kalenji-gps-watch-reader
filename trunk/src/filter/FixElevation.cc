@@ -36,12 +36,14 @@ namespace filter
 				std::list<std::string>::iterator it2 = tokens.begin(); 
 				if((*it2) == "\"elevation\"")
 				{
-					it2++;
+					while(!((*first)->getLatitude().isDefined() && (*first)->getLongitude().isDefined()))
+						++first;
+					++it2;
 					// std::cout << "    Found elevation " << it2->c_str() << std::endl;
 					elevation = atol(it2->c_str());
 					if(!(*first)->getAltitude().isDefined() || elevation != (*first)->getAltitude())
 					{
-						fixed_points++;
+						++fixed_points;
 						//std::cout << "Moving " << (*first)->getLatitude() << "," << (*first)->getLongitude() << " from " << (*first)->getAltitude();
 						(*first)->setAltitude(elevation);
 						//std::cout << " to " << (*first)->getAltitude() << std::endl;
@@ -102,12 +104,15 @@ namespace filter
 		std::stringstream urlparams; 
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); )
 		{
-			if(i != 0)
-				urlparams << "|";
-			urlparams << (*it)->getLatitude() << "," << (*it)->getLongitude();
-			++i;
+			if((*it)->getLatitude().isDefined() && (*it)->getLongitude().isDefined())
+			{
+				if(i != 0)
+					urlparams << "|";
+				urlparams << (*it)->getLatitude() << "," << (*it)->getLongitude();
+				++i;
+			}
 
-			if(++it == points.end() || i == 89)
+			if((++it == points.end() && i != 0) || i == 89)
 			{
 				std::stringstream url; 
 				url << "http://maps.googleapis.com/maps/api/elevation/json?sensor=true&locations=";
