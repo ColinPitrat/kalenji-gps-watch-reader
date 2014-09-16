@@ -8,6 +8,7 @@ fi
 FILE=`realpath "$1"`
 BINPATH=`realpath "$0"`
 BINDIR=`dirname "$BINPATH"`
+BINDIR=`dirname $(realpath "$BINDIR")`
 
 pushd $BINDIR > /dev/null
 echo $BINDIR
