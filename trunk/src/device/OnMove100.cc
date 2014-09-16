@@ -150,6 +150,8 @@ namespace device
 		return pos_neg * (deg + (min/600000.0));
 	}
 
+#define READ_MORE_DATA if(received > 36) { responseData += 36; received -= 36; } else { _dataSource->read_data(0x81, &responseData, &received); }
+
 	void OnMove100::getSessionsList(SessionsMap *oSessions)
 	{
 		DEBUG_CMD(std::cout << "OnMove100: Get sessions list !" << std::endl);
@@ -161,7 +163,7 @@ namespace device
 		{
 			std::cout << "Unexpected line termination " << responseData[35] << " instead of 0xFF." << std::endl;
 		}
-		_dataSource->read_data(0x81, &responseData, &received);
+		READ_MORE_DATA;
 		// First lines to be reverse engineered (sessions global infos ?)
 		while(responseData[35] == 0xfd)
 		{
@@ -187,14 +189,14 @@ namespace device
 				oSessions->insert(SessionsMapElement(id, mySession));
 				//Session *session = &(oSessions->find(id)->second);
 				// Ignore second line (for now ?)
-				_dataSource->read_data(0x81, &responseData, &received);
+				READ_MORE_DATA;
 			}
 			catch(std::runtime_error e)
 			{
 				DEBUG_CMD(std::cout << "OnMove100: read_data failed: " << e.what() << " - Retrying a get data." << std::endl;)
 				_dataSource->write_data(0x01, getData, lengthGetData);
 			}
-			_dataSource->read_data(0x81, &responseData, &received);
+			READ_MORE_DATA;
 		}
 		while(responseData[35] == 0xfa)
 		{
@@ -225,7 +227,7 @@ namespace device
 			SessionId id = SessionId(responseData[34], responseData[34]+1);
 			Session *session = &(oSessions->find(id)->second);
 			time_t current_time = session->getTime();
-			_dataSource->read_data(0x81, &responseData, &received);
+			READ_MORE_DATA;
 			// Can a session have more than 65536 points ? (bytes 32 & 33 contains the point number)
 			while((responseData[32] != 0 || responseData[33] != 0) && received == 36)
 			{
@@ -247,16 +249,13 @@ namespace device
 				// TODO: Find out altitude, speed
 				Point *myPoint = new Point(latitude, longitude, FieldUndef, speed, current_time+elapsed, hundredth, FieldUndef, 3);
 				session->addPoint(myPoint);
-				_dataSource->read_data(0x81, &responseData, &received);
-			}
-			// Stop condition ?
-			if(received > 36) 
-			{
-				break;
+				READ_MORE_DATA;
 			}
 		}
 		DEBUG_CMD(std::cout << "OnMove100: Finished !" << std::endl);
 	}
+
+#undef READ_MORE_DATA
 
 	void OnMove100::getSessionsDetails(SessionsMap *oSessions) 
 	{
