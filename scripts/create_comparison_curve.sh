@@ -1,5 +1,16 @@
 #!/bin/sh
 
+GNUPLOT_CMD="set term png size 1366, 768
+set output \"comparison.png\"
+plot"
+separator=
+for file in $@
+do
+    GNUPLOT_CMD=${GNUPLOT_CMD}${separator}" '$file' using \"%lf,%lf\" with lines"
+    separator=","
+done
+echo "$GNUPLOT_CMD" | gnuplot
+
 sed '1d' $1 > /tmp/comparison_full.csv
 shift
 
@@ -18,4 +29,5 @@ do
 done
 
 (echo "$HEADER" && cat /tmp/comparison_full.csv) > comparison.csv
-echo "Output available in comparison.csv"
+echo "Output available in comparison.csv and comparison.png"
+
