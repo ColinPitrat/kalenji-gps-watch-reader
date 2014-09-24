@@ -218,11 +218,13 @@ namespace device
 	void OnMove710::exportSession(Session *iSession) 
 	{
 		std::string filename;
+		int filenumber = 0;
 		do
 		{
 			std::ostringstream oss;
-			oss << getPath() << "/" << "E9HG" << random() % 10000 << ".GHR";
+			oss << getPath() << "/" << "E9HG" << std::setw(4) << std::setfill('0') << (filenumber % 10000) << ".GHR";
 			filename = oss.str();
+			filenumber++;
 		} while(fileExists(filename));
 
 		std::ofstream fl;
