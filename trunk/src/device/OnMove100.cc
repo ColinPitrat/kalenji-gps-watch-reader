@@ -229,7 +229,7 @@ namespace device
 			time_t current_time = session->getTime();
 			READ_MORE_DATA;
 			// Can a session have more than 65536 points ? (bytes 32 & 33 contains the point number)
-			while((responseData[32] != 0 || responseData[33] != 0) && received == 36)
+			while(responseData[32] != 0 || responseData[33] != 0)
 			{
 				//dump(responseData, 36);
 				double distance = (responseData[0] + (responseData[1] << 8) + (responseData[2] << 16) + (responseData[3] << 24)) / 100.0;
