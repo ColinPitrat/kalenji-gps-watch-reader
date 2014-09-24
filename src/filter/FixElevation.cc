@@ -78,7 +78,7 @@ namespace filter
 		return true;
 	}
 
-	void FixElevation::filter(Session *session)
+	void FixElevation::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		CURL *curl;
 		CURLcode res;

@@ -8,7 +8,7 @@ namespace filter
 	class ComputeInstantSpeed : public Filter
 	{
 		public:
-			virtual void filter(Session *session);
+			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
 			virtual std::string getName() { return "ComputeInstantSpeed"; };
 
 		private:

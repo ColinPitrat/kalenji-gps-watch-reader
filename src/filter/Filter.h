@@ -13,7 +13,7 @@ namespace filter
 	{
 		public:
 			virtual ~Filter() {};
-			virtual void filter(Session *session) = 0;
+			virtual void filter(Session *session, std::map<std::string, std::string> configuration) = 0;
 			virtual std::string getName() = 0;
 	};
 }

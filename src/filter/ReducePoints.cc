@@ -1,18 +1,21 @@
 #include "ReducePoints.h"
 #include "../Common.h"
 #include <cmath>
+#include <sstream>
 
 namespace filter
 {
 	REGISTER_FILTER(ReducePoints);
 
-	void ReducePoints::filter(Session *session)
+	void ReducePoints::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
 		std::list<Lap*> &laps = session->getLaps();
 		uint32_t nbPointsOri = points.size();
 		
-		uint32_t maxNbPoints = 200;
+		std::istringstream iss(configuration["reduce_points_max"]);
+		uint32_t maxNbPoints = 0;
+		iss >> maxNbPoints;
 		uint32_t divider = 64;
 
 		while(points.size() > maxNbPoints && divider > 4)

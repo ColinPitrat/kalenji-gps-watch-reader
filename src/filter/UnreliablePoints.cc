@@ -4,7 +4,7 @@ namespace filter
 {
 	REGISTER_FILTER(UnreliablePoints);
 
-	void UnreliablePoints::filter(Session *session)
+	void UnreliablePoints::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
 		std::list<Lap*> &laps = session->getLaps();

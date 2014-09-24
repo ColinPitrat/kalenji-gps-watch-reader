@@ -155,6 +155,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["outputs"] = "GPX,GoogleMap";
 	configuration["gpx_extensions"] = "gpxdata";
 	configuration["tcx_sport"] = "Running";
+	configuration["reduce_points_max"] = "200";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
@@ -441,7 +442,7 @@ int main(int argc, char *argv[])
 				if(filter)
 				{
 					std::cout << "  Applying filter " << *it2 << std::endl;
-					filter->filter(&(it->second));
+					filter->filter(&(it->second), configuration);
 				}
 				else
 				{
