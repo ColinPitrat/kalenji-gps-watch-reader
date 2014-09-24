@@ -3,4 +3,5 @@ import=all
 trigger=distance
 log_transactions=no
 filters=ReducePoints
+reduce_points_max=250
 outputs=KML,GPX,TCX,CSV
