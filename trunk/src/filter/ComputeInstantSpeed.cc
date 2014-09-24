@@ -6,7 +6,7 @@ namespace filter
 {
 	REGISTER_FILTER(ComputeInstantSpeed);
 
-	void ComputeInstantSpeed::filter(Session *session)
+	void ComputeInstantSpeed::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
 		Point* prevPoint = NULL;

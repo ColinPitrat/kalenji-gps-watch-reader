@@ -6,7 +6,7 @@ namespace filter
 {
 	REGISTER_FILTER(ComputeSessionStats);
 
-	void ComputeSessionStats::filter(Session *session)
+	void ComputeSessionStats::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
 		uint32_t ascent = 0;

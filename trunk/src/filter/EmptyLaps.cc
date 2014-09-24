@@ -4,7 +4,7 @@ namespace filter
 {
 	REGISTER_FILTER(EmptyLaps);
 
-	void EmptyLaps::filter(Session *session)
+	void EmptyLaps::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Lap*> &laps = session->getLaps();
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); )
