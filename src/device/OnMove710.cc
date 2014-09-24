@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 #include <dirent.h>
 #include <sys/stat.h>
@@ -204,9 +205,62 @@ namespace device
 		}
 	}
 
+	void OnMove710::dumpInt2(std::ostream &oStream, unsigned int aInt) 
+	{
+		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8);
+	}
+
+	void OnMove710::dumpInt4(std::ostream &oStream, unsigned int aInt) 
+	{
+		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8) << (char)((aInt & 0xFF0000) >> 16) << (char)((aInt & 0xFF000000) >> 24);
+	}
+
 	void OnMove710::exportSession(Session *iSession) 
 	{
-		std::cerr << "Unsupported export of session with OnMove 710" << std::endl;
+		std::string filename;
+		do
+		{
+			std::ostringstream oss;
+			oss << getPath() << "/" << "E9HG" << random() % 10000 << ".GHR";
+			filename = oss.str();
+		} while(fileExists(filename));
+
+		std::ofstream fl;
+		fl.open(filename.c_str(), std::ios::out | std::ios::binary);  
+		// First is session name (align on 8 or 16 bytes ?)
+		fl << iSession->getName().c_str() << (char)'\0';
+		// Then comes distance on 4 bytes
+		dumpInt4(fl, iSession->getDistance());
+		// 4 bytes of padding ?
+		dumpInt4(fl, 0);
+		// Ascent & descent, each on 2 bytes
+		dumpInt2(fl, iSession->getAscent());
+		dumpInt2(fl, iSession->getDescent());
+		// Number of points
+		dumpInt4(fl, iSession->getPoints().size());
+		// Then 8 bytes per point: 4 bytes for latitude, 4 bytes for longitude
+		int i = 0;
+		for(std::list<Point*>::iterator it = iSession->getPoints().begin(); it != iSession->getPoints().end(); ++it)
+		{
+			unsigned int lat = (*it)->getLatitude() * 1000000;
+			unsigned int lon = (*it)->getLongitude() * 1000000;
+			dumpInt4(fl, lat);
+			dumpInt4(fl, lon);
+			++i;
+			if(i >= 200) 
+			{
+				std::cerr << "Error: Too much points to export - truncating session" << std::endl;
+				break;
+			}
+		}
+		// Then padding up to 200 points
+		while(i < 200)
+		{
+			dumpInt4(fl, 0);
+			++i;
+		}
+		fl.close();
+		std::cout << "Transferred session " << iSession->getName() << std::endl;
 	}
 
 	void OnMove710::parseGHPFile(unsigned char* bytes, int length, Session* session) 

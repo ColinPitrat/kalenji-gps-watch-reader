@@ -34,6 +34,8 @@ namespace device
 			 */ 
 			virtual void getSessionsList(SessionsMap *oSessions);
 
+			void dumpInt2(std::ostream &oStream, unsigned int iInt);
+			void dumpInt4(std::ostream &oStream, unsigned int iInt);
 			/** 
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
