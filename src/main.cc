@@ -153,6 +153,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["device"] = "auto";
 	configuration["filters"] = "UnreliablePoints,EmptyLaps";
 	configuration["outputs"] = "GPX,GoogleMap";
+	configuration["output_name"] = "date";
 	configuration["gpx_extensions"] = "gpxdata";
 	configuration["tcx_sport"] = "Running";
 	configuration["reduce_points_max"] = "200";
