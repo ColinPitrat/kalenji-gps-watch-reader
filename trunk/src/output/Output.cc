@@ -10,13 +10,21 @@ namespace output
 	std::string FileOutput::getFileName(Session *session, std::map<std::string, std::string> &configuration)
 	{
 		std::ostringstream filename;
-		filename << configuration["directory"] << "/" << session->getYear() <<
-			std::setw(2) << std::setfill('0') << session->getMonth() <<
-			std::setw(2) << std::setfill('0') << session->getDay() << "_" <<
-			std::setw(2) << std::setfill('0') << session->getHour() <<
-			std::setw(2) << std::setfill('0') << session->getMinutes() <<
-			std::setw(2) << std::setfill('0') << session->getSeconds() <<
-			"." << getExt();
+		filename << configuration["directory"] << "/";
+		if(configuration["output_name"] == "name")
+		{
+			filename << session->getName();
+		}
+		else
+		{
+			filename << session->getYear() <<
+				std::setw(2) << std::setfill('0') << session->getMonth() <<
+				std::setw(2) << std::setfill('0') << session->getDay() << "_" <<
+				std::setw(2) << std::setfill('0') << session->getHour() <<
+				std::setw(2) << std::setfill('0') << session->getMinutes() <<
+				std::setw(2) << std::setfill('0') << session->getSeconds();
+		}
+		filename << "." << getExt();
 		return filename.str();
 	}
 
