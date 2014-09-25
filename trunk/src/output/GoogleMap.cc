@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
 
 // TODOs:
 // Add session information
@@ -85,7 +86,9 @@ namespace output
 			mystream << ", elapsed: " << elapsed;
 			mystream << ", time: \"" << (*it)->getTimeAsString(true, true) << "\""; //TODO
 			mystream << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
-			mystream << ", speed: " << (*it)->getSpeed();
+			double speed = (*it)->getSpeed();
+			if(std::isnan(speed)) speed = 0;
+			mystream << ", speed: " << speed;
 			mystream << ", heartrate: ";
 			if((*it)->getHeartRate().isDefined())
 				mystream << (*it)->getHeartRate();
