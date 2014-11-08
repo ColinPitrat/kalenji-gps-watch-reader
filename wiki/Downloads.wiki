@@ -13,7 +13,7 @@ It is possible to benefit from improvements of a newer version for all the sessi
 = Latest release - version 4.9 =
 
 == Source code packages ==
- _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.9.tar.gz kalenji-gps-watch-reader-4.9.tar.gz]<br/>
+ _*Link*_: [https://kalenji-gps-watch-reader.googlecode.com/svn/downloads/sources/kalenji-gps-watch-reader-4.9.2.tar.gz kalenji-gps-watch-reader-4.9.2.tar.gz]<br/>
  _*Release date*_: Nov 8, 2014<br/>
  _*Size*_: 56 kB<br/>
  _*SHA1 checksum*_: e97528e02c580810589b974a538713003395b070
