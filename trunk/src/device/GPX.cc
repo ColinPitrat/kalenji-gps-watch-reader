@@ -359,8 +359,8 @@ namespace device
 		{
 			fileContent.append((char*)line, length);
 		}
-		_docAsString = new xmlChar[fileContent.size()];
-		strcpy((char*)_docAsString, fileContent.c_str());
+		_docAsString = new xmlChar[fileContent.size()+2];
+		strncpy((char*)_docAsString, fileContent.c_str(), fileContent.size()+1);
 	}
 
 	void GPX::getSessionsList(SessionsMap *oSessions)
