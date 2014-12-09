@@ -25,11 +25,7 @@
 #include "Registry.h"
 #include "Utils.h"
 
-#ifdef DEBUG
-#define DEBUG_CMD(x) x;
-#else
-#define DEBUG_CMD(x) ;
-#endif
+#define LOG_VERBOSE(x) if(configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
 
 std::map<std::string, std::string> configuration;
 
@@ -80,8 +76,9 @@ bool checkAndCreateDir(std::string path)
 
 void usage(char *progname)
 {
-	std::cout << "Usage: " << progname << " [ -h | [ -c <rc_file> ] [ -d <output_directory> ] [ -f <filters> ] [-D <device> ] [ -i <input_file> ] [ -o <outputs> ] [ -t <trigger_type> ] ]" << std::endl;
+	std::cout << "Usage: " << progname << " [ -h | [ -v ] [ -c <rc_file> ] [ -d <output_directory> ] [ -f <filters> ] [-D <device> ] [ -i <input_file> ] [ -o <outputs> ] [ -t <trigger_type> ] ]" << std::endl;
 	std::cout << "  - h: help:        Show this help message " << std::endl;
+	std::cout << "  - v: verbose:     Print some debug messages " << std::endl;
 	std::cout << "  - c: conf file:   Provide alternate configuration file instead of ~/.kalenji_readerrc" << std::endl;
 	std::cout << "  - d: output dir:  Directory to which output files should be produced" << std::endl;
 	std::cout << "  - f: filters:     Comma separated list of filters to apply on data before the export. Use 'none' for empty list" << std::endl;
@@ -96,7 +93,7 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 {
 	std::map<std::string, std::string> options;
 	int option;
-	while((option = getopt(argc, argv, ":c:d:f:D:p:i:o:t:h")) != -1)
+	while((option = getopt(argc, argv, ":c:d:f:D:p:i:o:t:vh")) != -1)
 	{
 		switch(option)
 		{
@@ -113,7 +110,13 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 				options["device"] = std::string(optarg);
 				break;
 			case 'p':
-				options["source"] = "Path";
+				// UGLY: 
+				// Issue 43: if source is File it means -i option was used
+				// In this case, the -p option is used to specify output directory, not input !
+				if(options["source"] != "File")
+				{
+					options["source"] = "Path";
+				}
 				options["path"] = std::string(optarg);
 				break;
 			case 'i':
@@ -125,6 +128,9 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 				break;
 			case 't':
 				options["trigger"] = std::string(optarg);
+				break;
+			case 'v':
+				options["verbose"] = "true";
 				break;
 			case 'h':
 				usage(argv[0]);
@@ -157,6 +163,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["gpx_extensions"] = "gpxdata";
 	configuration["tcx_sport"] = "Running";
 	configuration["reduce_points_max"] = "200";
+	configuration["verbose"] = "false";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 
@@ -319,29 +326,31 @@ int main(int argc, char *argv[])
 	try
 	{
 		if(!parseConfAndOptions(argc, argv)) return -1;
+		LOG_VERBOSE("Configuration parsed");
 
 		// First attempt, creating dir if it doesn't exist
 		if(!checkAndCreateDir(configuration["directory"])) return -1;
+		LOG_VERBOSE("Create output directory '" << configuration["directory"] << "'");
 
 		// TODO: Use registry for source too 
 		source::Source *dataSource = NULL;
 		if(configuration["source"] == "File")
 		{
-			DEBUG_CMD(std::cout << "main() - Source is File" << std::endl);
+			LOG_VERBOSE("Source is File");
 			dataSource = new source::File(configuration["sourcefile"]);
 		}
 		else if(configuration["source"] == "HexdumpFile")
 		{
-			DEBUG_CMD(std::cout << "main() - Source is HexdumpFile" << std::endl);
+			LOG_VERBOSE("Source is HexdumpFile");
 			dataSource = new source::HexdumpFile(configuration["sourcefile"]);
 		}
 		else if(configuration["source"] == "USB")
 		{
-			DEBUG_CMD(std::cout << "main() - Source is USB" << std::endl);
+			LOG_VERBOSE("Source is USB");
 			dataSource = new source::USB();
 			if(configuration["log_transactions"] == "yes")
 			{
-				DEBUG_CMD(std::cout << "main() - With transaction logger" << std::endl);
+				LOG_VERBOSE("With transaction logger");
 				if(!checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
 
 				// Create log file name 
@@ -361,6 +370,7 @@ int main(int argc, char *argv[])
 		{
 			if(configuration["source"] == "USB")
 			{
+				LOG_VERBOSE("Auto-detecting device");
 				libusb_context *myUSBContext;
 				libusb_device **listOfDevices;
 				libusb_init(&myUSBContext);
@@ -388,6 +398,7 @@ int main(int argc, char *argv[])
 					std::cerr << "No known USB device found." << std::endl;
 					return 1;
 				}
+				LOG_VERBOSE("Auto-detected " << configuration["device"]);
 			}
 			else
 			{
@@ -396,30 +407,38 @@ int main(int argc, char *argv[])
 			}
 		}
 
+		LOG_VERBOSE("Registering device");
 		device::Device *myDevice = LayerRegistry<device::Device>::getInstance()->getObject(configuration["device"]);
 		if(myDevice == NULL)
 		{
 			std::cerr << "Error trying to register device " << configuration["device"] << ": Unknown device" << std::endl;
 			throw std::exception();
 		}
+		LOG_VERBOSE("Attaching source to device");
 		myDevice->setSource(dataSource);
 		myDevice->setConfiguration(configuration);
+		LOG_VERBOSE("Initializing device");
 		myDevice->init();
+		LOG_VERBOSE("Device initialized");
 		SessionsMap sessions;
+		LOG_VERBOSE("Get sessions list");
 		myDevice->getSessionsList(&sessions);
 
 		// If import = ask, prompt the user for sessions to import. 
 		// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
 		std::list<std::string> outputs = splitString(configuration["outputs"]);
+		LOG_VERBOSE("Filter out sessions");
 		std::string to_import = filterSessionsToImport(&sessions, outputs);
 
+		LOG_VERBOSE("Get sessions details");
 		myDevice->getSessionsDetails(&sessions);
 
+		LOG_VERBOSE("Release device");
 		myDevice->release();
 		delete myDevice;
 		if(dataSource != NULL) 
 		{
-			DEBUG_CMD(std::cout << "main() - Release datasource" << std::endl);
+			LOG_VERBOSE("Release datasource");
 			dataSource->release();
 			delete dataSource;
 		}
