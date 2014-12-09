@@ -418,7 +418,6 @@ namespace device
 				}
 			}
 			if(session) std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
-			else std::cout << "A session has not been retrieved !!" << std::endl;
 			if(responseData[0] == 0x8A) break;
 
 			_dataSource->write_data(0x03, dataMore, lengthDataMore);
