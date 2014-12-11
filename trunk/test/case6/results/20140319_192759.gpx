@@ -6091,6 +6091,10 @@
         <ele>17</ele>
         <time>2014-03-19T19:23:42.9Z</time>
       </trkpt>
+      <trkpt lat="1.2992267" lon="103.7787" >
+        <ele>17</ele>
+        <time>2014-03-19T19:23:42.77Z</time>
+      </trkpt>
     </trkseg>
   </trk>
 </gpx>
