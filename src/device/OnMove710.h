@@ -36,6 +36,7 @@ namespace device
 
 			void dumpInt2(std::ostream &oStream, unsigned int iInt);
 			void dumpInt4(std::ostream &oStream, unsigned int iInt);
+			void dumpString(std::ostream &oStream, const std::string &iString, size_t iLength);
 			/** 
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
