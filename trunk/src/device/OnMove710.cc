@@ -215,6 +215,17 @@ namespace device
 		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8) << (char)((aInt & 0xFF0000) >> 16) << (char)((aInt & 0xFF000000) >> 24);
 	}
 
+	void OnMove710::dumpString(std::ostream &oStream, const std::string &aString, size_t aLength) 
+	{
+		size_t toCopy = aString.length();
+		if(aLength <= toCopy) toCopy = aLength - 1;
+		oStream.write(aString.c_str(), toCopy);
+		for(size_t i = toCopy; i < aLength; ++i)
+		{
+			oStream.put('\0');
+		}
+	}
+
 	void OnMove710::exportSession(Session *iSession) 
 	{
 		std::string filename;
@@ -230,7 +241,7 @@ namespace device
 		std::ofstream fl;
 		fl.open(filename.c_str(), std::ios::out | std::ios::binary);  
 		// First is session name (align on 8 or 16 bytes ?)
-		fl << iSession->getName().c_str() << (char)'\0';
+		dumpString(fl, iSession->getName(), 16);
 		// Then comes distance on 4 bytes
 		dumpInt4(fl, iSession->getDistance());
 		// 4 bytes of padding ?
