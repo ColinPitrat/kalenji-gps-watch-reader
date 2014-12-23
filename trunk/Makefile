@@ -1,5 +1,5 @@
 TARGET=kalenji_reader
-INCPATH=$(shell pkg-config --cflags libusb-1.0) $(shell pkg-config --cflags libxml-2.0) $(shell pkg-config --cflags libcurl)
+INCPATH=-Isrc $(shell pkg-config --cflags libusb-1.0) $(shell pkg-config --cflags libxml-2.0) $(shell pkg-config --cflags libcurl)
 LIBS=$(shell pkg-config --libs libusb-1.0) $(shell pkg-config --libs libxml-2.0) $(shell pkg-config --libs libcurl)
 WINOBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.os/')
 OBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.o/')
@@ -8,13 +8,19 @@ CFLAGS=-Wall -Wextra -Wno-unused-parameter -O2
 WININCPATH=-I/usr/i486-mingw32/include/libusb-1.0/ -I/usr/i486-mingw32/include/libxml2/
 WINLIBS=/usr/i486-mingw32/lib/libusb-1.0.dll.a /usr/i486-mingw32/lib/libxml2.dll.a /usr/i486-mingw32/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
+TEST_TARGET=test/unit/unit_tester
+TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') 
+TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
+GTEST_LIB=/usr/lib/libgtest.so
 
 debug: CFLAGS=-D DEBUG=1 -g
 
-.PHONY: all debug clean check_deps
+.PHONY: unit_test build debug clean check_deps
 
-all: check_deps $(OBJECTS)
+all: build unit_test test
 	@ctags -R . || echo -e "!!!!!!!!!!!\n!! Warning: ctags not found - if you are a developer, you might want to install it.\n!!!!!!!!!!!"
+
+build: check_deps $(OBJECTS)
 	g++ $(CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
 
 windows: $(WINOBJECTS)
@@ -40,14 +46,21 @@ check_deps:
 $(OBJECTS): %.o:%.cc $(HEADERS)
 	g++ $(CFLAGS) -c $(INCPATH) -o $@ $<
 
+$(TEST_OBJECTS): %.o:%.cc $(HEADERS)
+	g++ $(CFLAGS) -c $(INCPATH) -o $@ $<
+
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
-debug: all
+debug: build
 
-test: all
+unit_test: $(TEST_OBJECTS) build
+	g++ $(CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS) $(GTEST_LIB)
+	./test/unit/unit_tester
+
+test: build
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
-	cd test && ./run.sh && cd ..
+	cd test/integrated/ && ./run.sh && cd ..
 
 clean:
 	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win
