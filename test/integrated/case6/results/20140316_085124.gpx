@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<gpx version="1.1"
+     creator="Kalenji Reader"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1
+                          http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <name>No name</name>
+    <time>2014-03-16T07:51:24Z</time>
+  </metadata>
+  <trk>
+    <trkseg>
+      <trkpt lat="1.2934017" lon="103.76863" >
+        <ele>11</ele>
+        <time>2014-03-16T07:51:24.0Z</time>
+      </trkpt>
+      <trkpt lat="1.2931183" lon="103.76841" >
+        <ele>10</ele>
+        <time>2014-03-16T07:51:36.47Z</time>
+      </trkpt>
+      <trkpt lat="1.2930867" lon="103.76838" >
+        <ele>10</ele>
+        <time>2014-03-16T07:51:38.47Z</time>
+      </trkpt>
+      <trkpt lat="1.2930317" lon="103.76832" >
+        <ele>10</ele>
+        <time>2014-03-16T07:51:41.47Z</time>
+      </trkpt>
+      <trkpt lat="1.29298" lon="103.76829" >
+        <ele>10</ele>
+        <time>2014-03-16T07:51:43.47Z</time>
+      </trkpt>
+      <trkpt lat="1.29291" lon="103.76824" >
+        <ele>9</ele>
+        <time>2014-03-16T07:51:46.47Z</time>
+      </trkpt>
+      <trkpt lat="1.2928567" lon="103.76822" >
+        <ele>9</ele>
+        <time>2014-03-16T07:51:48.47Z</time>
+      </trkpt>
+      <trkpt lat="1.29279" lon="103.76816" >
+        <ele>9</ele>
+        <time>2014-03-16T07:51:51.47Z</time>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>

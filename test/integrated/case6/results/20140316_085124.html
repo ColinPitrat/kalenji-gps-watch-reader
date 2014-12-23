@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<title>Session from 2014-03-16T07:51:24Z</title>
+<style media='screen' type='text/css'>
+.dygraph-legend {
+    width: 100px;
+    background-color: transparent !important;
+    left: 75px !important;
+    top: 5px !important;
+    width: 400px !important;
+    
+}
+</style>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+popupGlobal = null;
+highlightedPoint = null;
+function lap_popup_callback(event, dataLapPoint)
+{
+    var popup = new google.maps.InfoWindow({position: event.latLng, content: dataLapPoint.infos});
+    popup.open(map);
+    return popup;
+}
+function point_popup_callback(event,dataPoint)
+{
+    var popup = new google.maps.InfoWindow({position: event.latLng, 
+                                            content: "<b>Time:</b> " + dataPoint.time + "<br /><b>Elapsed:</b> " + dataPoint.duration +"<br /><b>Speed:</b> " + dataPoint.speed + " km/h<br /><b>Heartrate:</b> " + dataPoint.heartrate +" bpm<br/><b>Elevation:</b> "+ dataPoint.altitude + " m"});
+    popup.open(map);
+    return popup;
+}
+pointsList = Array(
+{lat:1.2934017, long:103.76863, distance:0, color: "#000000", elapsed: 0, time: "2014-03-16 08:51:24.0", duration: "0s", speed: 11.7, heartrate: 0, altitude: 11}
+,{lat:1.2931183, long:103.76841, distance:39, color: "#000000", elapsed: 12000, time: "2014-03-16 08:51:36.47", duration: "12s", speed: 9, heartrate: 0, altitude: 10}
+,{lat:1.2930867, long:103.76838, distance:45, color: "#000000", elapsed: 14000, time: "2014-03-16 08:51:38.47", duration: "14s", speed: 10.8, heartrate: 0, altitude: 10}
+,{lat:1.2930317, long:103.76832, distance:54, color: "#000000", elapsed: 17000, time: "2014-03-16 08:51:41.47", duration: "17s", speed: 10.8, heartrate: 0, altitude: 10}
+,{lat:1.29298, long:103.76829, distance:60, color: "#000000", elapsed: 19000, time: "2014-03-16 08:51:43.47", duration: "19s", speed: 9.6, heartrate: 0, altitude: 10}
+,{lat:1.29291, long:103.76824, distance:69, color: "#000000", elapsed: 22000, time: "2014-03-16 08:51:46.47", duration: "22s", speed: 10.8, heartrate: 0, altitude: 9}
+,{lat:1.2928567, long:103.76822, distance:76, color: "#000000", elapsed: 24000, time: "2014-03-16 08:51:48.47", duration: "24s", speed: 10.8, heartrate: 0, altitude: 9}
+,{lat:1.29279, long:103.76816, distance:85, color: "#000000", elapsed: 27000, time: "2014-03-16 08:51:51.47", duration: "27s", speed: 10.8, heartrate: 0, altitude: 9}
+);
+waypointsList = Array ();
+
+var graph;
+var XValueToPointId = {};
+var PointIdToXValue = {};
+var xAxisAttribute = "elapsed";
+function loadMap() 
+{
+	var centerLatLng = new google.maps.LatLng(pointsList[0].lat, pointsList[0].long);
+	var myOptions = {
+	      zoom: 14,
+	      center: centerLatLng,
+	      scaleControl: true,
+	      mapTypeId: google.maps.MapTypeId.HYBRID
+	};
+
+	map = new google.maps.Map(document.getElementById("map"), myOptions);
+   highlightedPoint = new google.maps.Marker({position: centerLatLng, map: map, zIndex: 1});
+	var image_size = new google.maps.Size(32, 32);
+	var image_origin = new google.maps.Point(0, 0);
+	var image_anchor = new google.maps.Point(3, 25);
+	for (i=0; i<waypointsList.length; i++)
+	{
+	        var dataLapPoint = waypointsList[i];
+		var point = new google.maps.LatLng(dataLapPoint.lat, dataLapPoint.long);
+		var markerImage = new google.maps.MarkerImage("http://www.icone-gif.com/icone/isometrique/32x32/green-flag.png", image_size, image_origin, image_anchor);
+		var markerOptions = {
+			icon: markerImage,
+			position: point}
+		var markerD = new google.maps.Marker(markerOptions); 
+		markerD.setMap(map);
+		attachLapPopupHandler(markerD, dataLapPoint);
+	}
+
+	for (i=0; i<pointsList.length; i++)
+	{
+		if(i > 0)
+		{
+			var previousDataPoint = pointsList[i-1];
+			var currentDataPoint = pointsList[i];
+			var startPoint = new google.maps.LatLng(previousDataPoint.lat, previousDataPoint.long);
+			var endPoint = new google.maps.LatLng(currentDataPoint.lat, currentDataPoint.long);
+			var pathArray = Array(startPoint, endPoint);
+			var polyline = new google.maps.Polyline({path: pathArray,
+					strokeColor: currentDataPoint.color,
+					strokeOpacity: 0.9,
+					strokeWeight: 5,
+					});
+			polyline.setMap(map);
+			attachPopupHandler(polyline, currentDataPoint);
+		        attachMouseOverHandler(polyline, i);
+		}
+	}
+}
+function attachLapPopupHandler(mapElement, dataLapPoint) {
+     google.maps.event.addListener(mapElement, 'click', function(evt) {lap_popup_callback(evt,dataLapPoint);});
+}
+function attachPopupHandler(mapElement, dataPoint) {
+     google.maps.event.addListener(mapElement, 'click', function(evt) {point_popup_callback(evt,dataPoint);});
+}
+function attachMouseOverHandler(mapElement, point) {
+     google.maps.event.addListener(mapElement, 'mouseover', function() {graph.setSelection(point);});
+}
+//]]>
+</script>
+<script type="text/javascript" src="http://dygraphs.com/1.0.1/dygraph-combined.js"></script>
+<script type="text/javascript">
+// point ID, elapsed time (ms), speed (km/h), heartrate (bpm), elevation (m)
+var laps = [];
+var displayData = [true, true, true];
+var labelsData = ["Speed", "Heart Rate", "Altitude"];
+var XAxisValueFormater = {
+    "elapsed": function(ms,multiline) {
+	     var h = Math.floor(ms / (61 * 60 * 1000));
+	     ms = ms - h * (60 * 60 * 1000);
+	     var m = Math.floor(ms / (60 * 1000));
+	     ms = ms - m * (60 * 1000);
+	     var s = Math.floor(ms / 1000);
+	     ms = ms - (s * 1000);
+	     ths = Math.floor(ms / 10);
+	     var r = "";
+	     if(h!==0) {r = r + h +"h"; if(multiline) {r = r +"<br/>"}}
+	     r = r + m + "mn"; if(multiline) {r = r +"<br/>"}
+	     r = r + s + "." + ths +"s";
+	     return r;
+    },
+    "distance": function(dInMeter,multiline) {
+	     var tm = Math.floor(dInMeter / 100);
+	     var r = "" + (tm / 10.);
+	     if(multiline) {r = r +"<br/>"};
+	     r = r + "Km";
+	     return r;
+    }
+}
+function loadGraph() 
+{
+        if(document.getElementById("xAxisAttributeDistance").checked) {
+           xAxisAttribute = "distance";
+        }
+        else {
+           xAxisAttribute = "elapsed";
+        }
+   var lapsXValues = [];
+	var graphDatas=[];
+	var labels=[];
+	var iLaps = 0;
+	for(var i = 0; i < pointsList.length; i++)
+	{
+		var col = 0;
+		graphDatas[i] = [];
+		labels[col] = "Point ID";
+		var xValue = pointsList[i][xAxisAttribute];
+		graphDatas[i][col++] = xValue;
+		XValueToPointId[xValue] = i;
+		PointIdToXValue[i] = xValue;
+		labels[col] = "Laps";
+		graphDatas[i][col++] = null;
+		if(displayData[0]) { //speed
+		    labels[col] = labelsData[0];
+		    graphDatas[i][col++] = pointsList[i].speed;
+	        }
+		if(displayData[1]) { //heartrate
+		    labels[col] = labelsData[1];
+		    graphDatas[i][col++] = pointsList[i].heartrate;
+	        }
+		if(displayData[2]) { //altitude
+		    labels[col] = labelsData[2];
+		    graphDatas[i][col++] = pointsList[i].altitude;
+	        }
+	        
+	        if(i === laps[iLaps]) {
+	            lapsXValues.push(xValue);
+	            iLaps = iLaps + 1;
+	        }
+	}
+	graph = new Dygraph(
+	document.getElementById("graph")
+	,graphDatas
+	,{
+	labels: labels,
+	'Speed': { axis: {includeZero:true}},
+   colors: ["#000000", "#0000FF", "#00AA00", "#FF0000"],
+	axes: { 
+	x: {
+	 valueFormatter: function(xValue) {return XAxisValueFormater[xAxisAttribute](xValue,false);}
+	 ,axisLabelFormatter: function(xValue) {return XAxisValueFormater[xAxisAttribute](xValue,true);}
+	}
+	}
+	,ylabel: 'Altitude (m) / Heart rate (bpm)'
+	,y2label: 'Speed (km/h)'
+	}
+	);
+	graph.updateOptions({clickCallback : function(e, x, points) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[XValueToPointId[x]].lat, pointsList[XValueToPointId[x]].long); popupGlobal = point_popup_callback(e,pointsList[XValueToPointId[x]]); } });
+	graph.updateOptions({highlightCallback : function(e, x, points) { center = new google.maps.LatLng(pointsList[XValueToPointId[x]].lat, pointsList[XValueToPointId[x]].long); map.setCenter(center); highlightedPoint.setPosition(center); } });
+	graph.updateOptions({annotationClickHandler : function(ann, pt, dg, e) { if(popupGlobal) popupGlobal.close(); e.latLng = new google.maps.LatLng(pointsList[XValueToPointId[ann.xval]].lat, pointsList[XValueToPointId[ann.xval]].long); popupGlobal = lap_popup_callback(e,waypointsList[ann.shortText-1]); } });
+	graph.updateOptions({underlayCallback: function(canvas, area, g) {
+			for(var i = 0; i+1 < lapsXValues.length; i+=2)
+			{
+              var left = graph.toDomCoords(lapsXValues[i], 0)[0];
+              var right = graph.toDomCoords(lapsXValues[i+1], 0)[0];
+              canvas.fillStyle = "rgba(220, 220, 220, 1.0)";
+              canvas.fillRect(left, area.y, right - left, area.h);
+			}
+		}});
+	annotations = [];
+	for(var i = 0; i < lapsXValues.length; ++i)
+	{
+		annotations.push({
+			series: 'Laps',
+			xval: lapsXValues[i],
+			attachAtBottom: true,
+			shortText: (i+1),
+			text: 'Lap ' + (i+1)
+		});
+	}
+	graph.setAnnotations(annotations);
+}
+function toggleDisplay(i)
+{
+	displayData[i] = !displayData[i];
+	loadGraph();
+}
+function load()
+{
+	loadGraph();
+	loadMap();
+}
+</script>
+</head>
+<body onload="load()" style="cursor:crosshair" border="0">
+<div id="map" style="width: 100%; height: 500px; top: 0px; left: 0px"></div>
+<div id="graph" style="width: 100%; height: 300px; top: 0px; left: 0px"></div>
+<div id="spacer" style="height: 25px"></div>
+<div id="controls" style="width: 100%; text-align:center"><input type="checkbox" name="Speed" onchange="toggleDisplay(0)" checked="checked">Speed</input><input type="checkbox" name="Heartrate" onchange="toggleDisplay(1)" checked="checked">Heartrate</input><input type="checkbox" name="Elevation" onchange="toggleDisplay(2)" checked="checked">Elevation</input>
+  <div id="xAxisOptions">
+  <span>X Axis:</span>&nbsp;
+    <input id="xAxisAttributeTime" type="radio" name="group1" value="elapsed" checked onChange="loadGraph();">Time</input>
+    <input id="xAxisAttributeDistance" type="radio" name="group1" value="distance" onChange="loadGraph();">Distance</input>
+  </div>
+</div>
+</body>
+</html>
