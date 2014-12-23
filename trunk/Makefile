@@ -17,7 +17,12 @@ debug: CFLAGS=-D DEBUG=1 -g -coverage
 
 .PHONY: unit_test build debug clean check_deps
 
-all: build unit_test test
+all: build unit_test test tags
+
+debug: build unit_test test tags
+	gcov -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
+
+tags:
 	@ctags -R . || echo -e "!!!!!!!!!!!\n!! Warning: ctags not found - if you are a developer, you might want to install it.\n!!!!!!!!!!!"
 
 build: check_deps $(OBJECTS)
@@ -52,9 +57,6 @@ $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
-debug: build unit_test test
-	gcov -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
-
 unit_test: $(TEST_OBJECTS) build
 	g++ $(CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS) $(GTEST_LIB)
 	./test/unit/unit_tester
@@ -63,8 +65,9 @@ test: build
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
 	cd test/integrated/ && ./run.sh && cd ..
 
-coverage_clean:
-	find . '(' -name \*.gcno -or -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;
+cleancov:
+	find . '(' -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;
 
-clean: coverage_clean
+clean: cleancov
+	find . -name \*.gcno -exec rm '{}' \;
 	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win
