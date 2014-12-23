@@ -13,7 +13,7 @@ TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/')
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 GTEST_LIB=/usr/lib/libgtest.so
 
-debug: CFLAGS=-D DEBUG=1 -g
+debug: CFLAGS=-D DEBUG=1 -g -coverage
 
 .PHONY: unit_test build debug clean check_deps
 
@@ -52,7 +52,8 @@ $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
-debug: build
+debug: build unit_test test
+	gcov -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
 
 unit_test: $(TEST_OBJECTS) build
 	g++ $(CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS) $(GTEST_LIB)
@@ -62,5 +63,8 @@ test: build
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
 	cd test/integrated/ && ./run.sh && cd ..
 
-clean:
+coverage_clean:
+	find . '(' -name \*.gcno -or -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;
+
+clean: coverage_clean
 	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win
