@@ -12,15 +12,25 @@ TEST_TARGET=test/unit/unit_tester
 TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') 
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 GTEST_LIB=/usr/lib/libgtest.so
+LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 
 debug: CFLAGS=-D DEBUG=1 -g -coverage
 
 .PHONY: unit_test build debug clean check_deps
 
-all: build unit_test test tags
+ifeq ($(LAST_BUILD_IN_DEBUG), 1)
+all: 
+	@echo -e "\n!!!!!!!!!!!\n!! Warning: previous build was in debug - rebuilding in debug.\n!! Use make clean before running make to rebuild in release.\n!!!!!!!!!!!\n"
+	@make debug
+else
+all: build
+endif
 
-debug: build unit_test test tags
+debug: debug_flag build unit_test test tags
 	gcov -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
+
+debug_flag:
+	@touch .debug
 
 tags:
 	@ctags -R . || echo -e "!!!!!!!!!!!\n!! Warning: ctags not found - if you are a developer, you might want to install it.\n!!!!!!!!!!!"
@@ -70,4 +80,4 @@ cleancov:
 
 clean: cleancov
 	find . -name \*.gcno -exec rm '{}' \;
-	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win
+	rm -rf $(TARGET) $(OBJECTS) $(WINOBJECTS) tags core win .debug
