@@ -5,6 +5,7 @@
 #include <iostream>
 #include <ctime>
 #include <stdint.h>
+#include <iomanip>
 #include "../Utils.h"
 #include "../bom/Field.h"
 
@@ -12,11 +13,11 @@ class Point
 {
 	public:
 		// TODO: Improve the way fiability is handled (0 / 3 doesn't make sense)
-                Point() : _time(0), _tenth(0), _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
+                Point() : _time(0), _millis(0), _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
 		{ };
 
-                Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t tenth, Field<uint16_t> bpm, uint16_t fiability) 
-		  : _time(time), _tenth(tenth), _lat(lat), _lon(lon), _alt(alt), _speed(speed), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
+                Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t millis, Field<uint16_t> bpm, uint16_t fiability) 
+		  : _time(time), _millis(millis), _lat(lat), _lon(lon), _alt(alt), _speed(speed), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
 		{ };
 
 		void setLatitude(Field<double> lat)        { _lat = lat; };
@@ -53,16 +54,16 @@ class Point
 			}
 			std::stringstream format_string;
 			if(human_readable)
-				format_string << "%Y-%m-%d %H:%M:%S." << _tenth;
+				format_string << "%Y-%m-%d %H:%M:%S." << std::setw(3) << std::setfill('0') << _millis;
 			else
-				format_string << "%Y-%m-%dT%H:%M:%S." << _tenth << "Z";
+				format_string << "%Y-%m-%dT%H:%M:%S." << std::setw(3) << std::setfill('0') << _millis << "Z";
 			strftime(buffer, 256, format_string.str().c_str(), &time_tm);
 			return std::string(buffer);
 		};
 
 	private:
 		time_t   _time;
-		uint32_t _tenth;
+		uint32_t _millis;
 		Field<double>   _lat;
 		Field<double>   _lon;
 		Field<int16_t>  _alt;

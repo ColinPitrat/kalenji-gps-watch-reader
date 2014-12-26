@@ -294,7 +294,7 @@ namespace device
 			uint16_t heartRate = (unsigned char)chunk[12];//bytesToInt(chunk[12]),
 			uint16_t status = chunk[13];//bytesToInt(chunk[13]),
 			//TODO: Don't know what at 14-15
-			Point *p = new Point(latitude, longitude, altitude, speed, current_time, cumulated_tenth, heartRate, status);
+			Point *p = new Point(latitude, longitude, altitude, speed, current_time, cumulated_tenth*100, heartRate, status);
 			session->addPoint(p);
 			// cumulated_tenth contains delay before next point
 			cumulated_tenth += bytesToInt4(chunk[16],chunk[17],chunk[18],chunk[19]);//bytesToInt(chunk.slice(16, 20))//[s/10]

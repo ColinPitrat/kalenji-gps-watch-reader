@@ -13,75 +13,75 @@
     <trkseg>
       <trkpt lat="1.2994383" lon="103.77837" >
         <ele>15</ele>
-        <time>2014-03-19T18:27:59.0Z</time>
+        <time>2014-03-19T18:27:59.000Z</time>
       </trkpt>
       <trkpt lat="1.2993467" lon="103.77807" >
         <ele>16</ele>
-        <time>2014-03-19T18:28:11.10Z</time>
+        <time>2014-03-19T18:28:11.100Z</time>
       </trkpt>
       <trkpt lat="1.2993117" lon="103.77803" >
         <ele>16</ele>
-        <time>2014-03-19T18:28:13.9Z</time>
+        <time>2014-03-19T18:28:13.090Z</time>
       </trkpt>
       <trkpt lat="1.2992683" lon="103.77799" >
         <ele>16</ele>
-        <time>2014-03-19T18:28:15.9Z</time>
+        <time>2014-03-19T18:28:15.090Z</time>
       </trkpt>
       <trkpt lat="1.29922" lon="103.77797" >
         <ele>17</ele>
-        <time>2014-03-19T18:28:17.9Z</time>
+        <time>2014-03-19T18:28:17.090Z</time>
       </trkpt>
       <trkpt lat="1.2991733" lon="103.77796" >
         <ele>17</ele>
-        <time>2014-03-19T18:28:19.9Z</time>
+        <time>2014-03-19T18:28:19.090Z</time>
       </trkpt>
       <trkpt lat="1.2991217" lon="103.77796" >
         <ele>17</ele>
-        <time>2014-03-19T18:28:21.9Z</time>
+        <time>2014-03-19T18:28:21.090Z</time>
       </trkpt>
       <trkpt lat="1.2990667" lon="103.77796" >
         <ele>18</ele>
-        <time>2014-03-19T18:28:23.9Z</time>
+        <time>2014-03-19T18:28:23.090Z</time>
       </trkpt>
       <trkpt lat="1.2990117" lon="103.77796" >
         <ele>18</ele>
-        <time>2014-03-19T18:28:25.9Z</time>
+        <time>2014-03-19T18:28:25.090Z</time>
       </trkpt>
       <trkpt lat="1.298955" lon="103.77797" >
         <ele>19</ele>
-        <time>2014-03-19T18:28:27.9Z</time>
+        <time>2014-03-19T18:28:27.090Z</time>
       </trkpt>
       <trkpt lat="1.2989033" lon="103.77797" >
         <ele>20</ele>
-        <time>2014-03-19T18:28:29.9Z</time>
+        <time>2014-03-19T18:28:29.090Z</time>
       </trkpt>
       <trkpt lat="1.2988517" lon="103.77798" >
         <ele>20</ele>
-        <time>2014-03-19T18:28:31.9Z</time>
+        <time>2014-03-19T18:28:31.090Z</time>
       </trkpt>
       <trkpt lat="1.2987967" lon="103.77798" >
         <ele>21</ele>
-        <time>2014-03-19T18:28:33.10Z</time>
+        <time>2014-03-19T18:28:33.100Z</time>
       </trkpt>
       <trkpt lat="1.2987483" lon="103.77799" >
         <ele>21</ele>
-        <time>2014-03-19T18:28:35.9Z</time>
+        <time>2014-03-19T18:28:35.090Z</time>
       </trkpt>
       <trkpt lat="1.2986933" lon="103.77799" >
         <ele>22</ele>
-        <time>2014-03-19T18:28:37.10Z</time>
+        <time>2014-03-19T18:28:37.100Z</time>
       </trkpt>
       <trkpt lat="1.2986417" lon="103.77799" >
         <ele>22</ele>
-        <time>2014-03-19T18:28:39.9Z</time>
+        <time>2014-03-19T18:28:39.090Z</time>
       </trkpt>
       <trkpt lat="1.2985883" lon="103.778" >
         <ele>23</ele>
-        <time>2014-03-19T18:28:41.10Z</time>
+        <time>2014-03-19T18:28:41.100Z</time>
       </trkpt>
       <trkpt lat="1.2985283" lon="103.77801" >
         <ele>24</ele>
-        <time>2014-03-19T18:28:43.9Z</time>
+        <time>2014-03-19T18:28:43.090Z</time>
       </trkpt>
     </trkseg>
   </trk>

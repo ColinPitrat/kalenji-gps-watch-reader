@@ -49,7 +49,7 @@ void trimString(std::string &toTrim)
 	}
 }
 
-std::string durationAsString(double sec, bool with_hundredth)
+std::string durationAsString(double sec, bool with_millis)
 {
 	uint32_t days = sec / (24*3600);
 	sec -= days * 24 * 3600; 
@@ -59,7 +59,7 @@ std::string durationAsString(double sec, bool with_hundredth)
 	sec -= minutes * 60; 
 	uint32_t seconds = sec;
 	sec -= seconds;
-	uint32_t hundredth = sec * 100;
+	uint32_t millis = sec * 1000;
 	std::string result;
 	std::ostringstream oss;
 	if(days != 0)
@@ -69,8 +69,8 @@ std::string durationAsString(double sec, bool with_hundredth)
 	if(minutes != 0 or hours != 0 or days !=0)
 		oss << minutes << "m";
 	oss << seconds << "s";
-	if(with_hundredth)
-		oss << std::setw(2) << std::setfill('0') << hundredth;
+	if(with_millis)
+		oss << std::setw(3) << std::setfill('0') << millis;
 	return oss.str();
 }
 
