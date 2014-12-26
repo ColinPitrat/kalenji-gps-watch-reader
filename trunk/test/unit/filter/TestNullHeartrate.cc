@@ -40,7 +40,7 @@ TEST_F(NullHeartrateTest, BetweenTwoPointsWithDifferentValues)
 
 	// Current implementation is that the last heartrate is copied until a non-null heartrate is found
 	// Interpolating could be a better idea
-	ASSERT_NE(secondPoint->getHeartRate(), 95);
+	ASSERT_EQ(secondPoint->getHeartRate(), 95);
 }
 
 TEST_F(NullHeartrateTest, FirstPointNotFixed)

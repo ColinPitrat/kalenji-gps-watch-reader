@@ -48,7 +48,7 @@ operator<< (StreamExcept e, const T& x)
 }
 
 void trimString(std::string &toTrim);
-std::string durationAsString(double sec, bool with_hundredth = false);
+std::string durationAsString(double sec, bool with_millis = false);
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",");
 
 double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);

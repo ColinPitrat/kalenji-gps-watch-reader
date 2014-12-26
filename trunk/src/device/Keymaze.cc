@@ -388,7 +388,7 @@ namespace device
 							cumulated_tenth += line[14];
 							current_time += cumulated_tenth / 10;
 							cumulated_tenth = cumulated_tenth % 10;
-							Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth, bpm, 3);
+							Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth*100, bpm, 3);
 							session->addPoint(point);
 						}
 						if(id_point == (*lap)->getFirstPointId())
