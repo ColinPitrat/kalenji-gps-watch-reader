@@ -32,8 +32,8 @@ namespace output
 		{
 			mystream << "    <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\" DurationSeconds=\"" << (*it)->getDuration() << "\" >" << std::endl;
 			mystream << "     <Distance TotalMeters=\"" << (*it)->getDistance() << "\" />" << std::endl;
-			mystream << (*it)->getAvgHeartrate().toStream("     <HeartRate AverageBPM=\"", "\" />");
-			mystream << (*it)->getCalories().toStream("     <Calories TotalCal=\"", "\" />");
+			mystream << (*it)->getAvgHeartrate().toStream("     <HeartRate AverageBPM=\"", "\" />\n");
+			mystream << (*it)->getCalories().toStream("     <Calories TotalCal=\"", "\" />\n");
 			mystream << "    </Lap>" << std::endl;
 		}
 		mystream << "   </Laps>" << std::endl;
