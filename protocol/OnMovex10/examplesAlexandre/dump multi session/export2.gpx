@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.topografix.com/GPX/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd">
+	<trk>
+		<name>ONmove 510/710 - 26/01/2014</name>
+		<trkseg>
+			<trkpt lat="46.3206" lon="-0.439602">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:22Z</time>
+			</trkpt>
+			<trkpt lat="46.320598" lon="-0.439615">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:24Z</time>
+			</trkpt>
+			<trkpt lat="46.320563" lon="-0.439615">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:26Z</time>
+			</trkpt>
+			<trkpt lat="46.320513" lon="-0.439622">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:28Z</time>
+			</trkpt>
+			<trkpt lat="46.320483" lon="-0.439572">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:30Z</time>
+			</trkpt>
+			<trkpt lat="46.320457" lon="-0.439535">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:32Z</time>
+			</trkpt>
+			<trkpt lat="46.320455" lon="-0.43951">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:35Z</time>
+			</trkpt>
+			<trkpt lat="46.320453" lon="-0.439517">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:37Z</time>
+			</trkpt>
+			<trkpt lat="46.32045" lon="-0.439505">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:39Z</time>
+			</trkpt>
+			<trkpt lat="46.320448" lon="-0.43949">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:41Z</time>
+			</trkpt>
+			<trkpt lat="46.320453" lon="-0.439502">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:43Z</time>
+			</trkpt>
+			<trkpt lat="46.320472" lon="-0.439543">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:45Z</time>
+			</trkpt>
+			<trkpt lat="46.320473" lon="-0.43954">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:48Z</time>
+			</trkpt>
+			<trkpt lat="46.320475" lon="-0.43957">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:50Z</time>
+			</trkpt>
+			<trkpt lat="46.320457" lon="-0.43954">
+				<ele>25</ele>
+				<time>2014-01-26T15:18:52Z</time>
+			</trkpt>
+			<trkpt lat="46.32046" lon="-0.439543">
+				<ele>27</ele>
+				<time>2014-01-26T15:18:54Z</time>
+			</trkpt>
+			<trkpt lat="46.320468" lon="-0.439545">
+				<ele>29</ele>
+				<time>2014-01-26T15:18:56Z</time>
+			</trkpt>
+			<trkpt lat="46.320467" lon="-0.439547">
+				<ele>29</ele>
+				<time>2014-01-26T15:18:58Z</time>
+			</trkpt>
+			<trkpt lat="46.320467" lon="-0.439518">
+				<ele>29</ele>
+				<time>2014-01-26T15:19:01Z</time>
+			</trkpt>
+			<trkpt lat="46.320495" lon="-0.439527">
+				<ele>29</ele>
+				<time>2014-01-26T15:19:03Z</time>
+			</trkpt>
+			<trkpt lat="46.3205" lon="-0.43951">
+				<ele>29</ele>
+				<time>2014-01-26T15:19:05Z</time>
+			</trkpt>
+		</trkseg>
+	</trk>
+</gpx>

@@ -1,0 +1,184 @@
+###########################
+# 85 : global information #
+###########################
+# out
+00000000  02 00 01 85 84                                   .....           
+# in
+00000000  85                                               .               
+# in
+# 00 56 = 86 Size without header nor checksum
+# TICH = Username
+# 44 = 68 kg = Poids
+# 96 = 150 ???
+00000000  00 56 4B 65 79 4D 61 7A 65 20 37 30 30 00 00 28  .VKeyMaze 700..(
+00000010  82 04 25 06 40 B7 99 01 A9 14 25 46 2D 44 47 48  ..%.@.....%F-DGH
+00000020  2D 30 52 2D 30 39 30 34 32 34 33 00 54 49 43 48  -0R-0904243.TICH
+00000030  00 4E 41 4D 45 20 00 00 27 00 96 00 44 00 44 00  .NAME ..'...D.D.
+# in
+# 07B6 = 1974 - 09 = OCT - 0C = 12 => 12-OCT-1974 = birth date of runner
+# AC = 172 cm = Taille
+# 01 = sexe ? (male)
+00000000  AC 00 01 00 07 B6 09 0C 00 04 03 A1              ............    
+# in
+00000000  00 1D 02 68 ED 9B FF C8                          ...h....        
+# in
+00000000  6D 5E 02 BF A2                                   m^...           
+
+#########################
+# 78 : list of sessions #
+#########################
+# out
+00000000  02 00 01 78 79                                   ...xy           
+
+# Race info:
+# 9.65 km
+# 1h01m21s
+# 656 - 709 m min/max altitude (= 290 - 2C5)
+# 101 m up - 116 m down (65 - 75)
+# ~9.4 km/h avg
+# ~16.4 km/h max
+######
+# 78 #
+######
+# in
+00000000  78                                               x               
+# in
+# 00 1F = 31 = Size without header nor checksum
+# 0D 08 1B = Date (13 08 27 = 27 AUG 2013)
+# 14 1E 18 = Hour (20 30 24 = 20:30:24)
+# 01 = Number of laps ?
+# 00 00 8F D3 = 36819 = Duration in tenth of seconds
+# 00 00 25 6D = 9581 = Distance in meters
+# 03 D1 = 977 = Number of calories
+# 07 D9 = ?
+00000000  00 1F 0D 08 1B 14 1E 18 01 00 00 8F D3 00 00 25  ...............%
+00000010  6D 03 D1 07 D9                                   m....           
+# in
+# AE = 174 = Max BPM
+# 99 = 153 = Avg BPM
+# 00 65 = 101 / 00 78 = 120 dénivelés positif / négatif
+# 06 E8 = 1768 = nombre de points
+# 00 00 = identifiant A (used for retrieval) 
+00000000  AE 99 00 65 00 78 06 E8 00 00                    ...e.x....      
+# in
+# 00 00 = identifiant B ?!
+# CE = checksum
+00000000  00 00 CE                                         ...             
+
+#########################
+# 80 : laps information #
+#########################
+# out
+00000000  02 00 05 80 00 01 00 00 84                       .........       
+# in
+00000000  80                                               .               
+# in
+# 0D 08 1B = 2013-AUG-27
+# 14 1E 18 = 20:30:24
+# 01 = num laps
+# 00 00 8F D3 = 36819 = 3681.9 seconds = total duration
+# 00 00 25 6D = 9581 = total meters
+# 03 D1 = 977 = total calories
+# 07 D9 = 2009 ???
+# ou D9 = 217 ???
+# AE = 174 = max bpm
+# 99 = 153 = avg bpm
+# 00 65 = 101 = dénivelé positif
+00000000  00 35 0D 08 1B 14 1E 18 01 00 00 8F D3 00 00 25  .5.............%
+00000010  6D 03 D1 07 D9 AE 99 00 65 00                    m.......e.      
+# in
+# 00 78 = 120 = dénivelé négatif
+# 06 E8 = 1768 = nb points
+# 00 00 8F D3 (with next line) = 36819 = 3681.9 seconds = total duration
+# First FF is byte 27 (30 including header + size)
+00000000  78 06 E8 FF FF FF FF 00 00 8F                    x.........      
+# 00 00 8F D3 = 36819 = 3681.9 seconds = lap duration
+# 00 00 25 6D = 9581 = lap meters
+# 03 D1 (with next line) = 977 = lap calories
+00000000  D3 00 00 8F D3 00 00 25 6D 03                    .......%m.      
+# in
+# 07 D9
+# AE = 174 = Max RPM on lap
+# 99 = 163 = Avg BPM on lap
+# 00 00 = first point of lap
+# 06 E7 = last point of lap = 1767 = nb points - 1 = last point ? :-)
+# 76 = checksum
+00000000  D1 07 D9 AE 99 00 00 06 E7 76                    .........v      
+
+###########################
+# 80 : points information #
+###########################
+# out
+00000000  02 00 01 81 80                                   .....           
+# in
+00000000  80                                               .               
+# in
+# 0D 08 1B = 27-AUG-2013
+# 14 1E 18 = 20:30:24
+# 00 00 8F D3 = 36819 = 3681.9 seconds = total duration
+# 00 00 25 6D = 9581 meters = total length
+# 03 D1 = 977 = total calories
+# 07 D9 = 2009 ???
+# AE = 174 = max HR
+# 99 = 153 = avg HR
+# 65 = 101 dén up
+# 78 = 120 dén down
+# 06 E8 = 1768 = nombre total de points ? (1767 dans le fitlog mais 1768 dans gpx ! (à vérifier) )
+# 00 00 = num of first point
+# 00 87 = num of last point (136 points in this answer: from 0 to 135 - 8B per point => 136 * 15 + 31 (header) = 2071 bytes = 08 17 = size of payload)
+# For each point (15 bytes): latitude (4B) - longitude (4B) - elevation (2B) - something (2B) - hr (1B) - time (2B)
+# 02 68 ED 45 = lat point 1
+# FF C8 6D FA = lon point 1
+# 02 BE (with next line) = 702 (elevation point 1)
+# point 1 - point 2 = 31 m - 13 s
+# point 2 - point 3 = 10 m - 2 s
+# point 3 - point 4 = 4 m - 2 s
+# point 4 - point 5 = 5 m - 2 s
+00000000  08 17 0D 08 1B 14 1E 18 01 00 00 8F D3 00 00 25  ...............%
+00000010  6D 03 D1 07 D9 AE 99 00 65 00 78 06 E8 00 00 00  m.......e.x.....
+00000020  87 02 68 ED 45 FF C8 6D FA 02                    ..h.E..m..      
+# in
+# 00 FE = 254
+# 4C = 76 (hr point 1)
+# 00 00 = time
+# 02 68 ED 20 = 40430880 = 40.430880 = lat point 2
+00000000  BE 00 FE 4C 00 00 02 68 ED 20                    ...L...h.       
+# in
+# FF C8 6C 6E = -3642257 = -3.642257 = lon point 2
+# 02 B2 = 690 (elevation point 2)
+# 06 AA = 1706 (speed or distance since last point ? or time ?)
+# 5D = 83 (hr point 2)
+# 00 82 = 130 = time
+00000000  FF C8 6C 6E 02 B2 06 AA 5D 00                    ..ln....].      
+# in
+# 02 B0 (with next line) = 688 (elevation point 3)
+00000000  82 02 68 ED 0F FF C8 6B F9 02                    ..h....k..      
+# in
+# 06 A8 = 1704
+# 63 = 99 (hr point 3)
+# 00 14 = 20 = time
+00000000  B0 06 A8 63 00 14 02 68 ED 1E                    ...c...h..      
+# 02 AE = 686 (elevation point 4)
+# 06 69 = 1641
+# 68 = 104 (hr point 4)
+00000000  FF C8 6B B1 02 AE 06 69 68 00                    ..k....ih.      
+(...)
+
+# latitude - longitude - elevation - speed ??? - hr - time since previous point 
+02 68 ED 45  FF C8 6D FA  02 BE  00 FE  4C  00 00  
+# 82 = 130 = 13s
+02 68 ED 20  FF C8 6C 6E  02 B2  06 AA  5D  00 82
+# 14 = 20 = 2s
+02 68 ED 0F  FF C8 6B F9  02 B0  06 A8  63  00 14
+02 68 ED 1E  FF C8 6B B1  02 AE  06 69  68  00 14
+02 68 ED 22  FF C8 6B 68  02 AC  05 FF  69  00 14
+
+# Last point latitude (4 bytes), longitude (4 bytes), elevation (2 bytes), something (2 bytes), heartrate (1 byte), something (2 bytes)
+# End (after last point + checksum)
+
+# out
+00000000  02 00 01 81 80                                   .....           
+# in
+00000000  8A                                               .               
+# in
+00000000  00 00 00                                         ...             

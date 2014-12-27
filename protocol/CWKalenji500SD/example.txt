@@ -1,0 +1,109 @@
+Create
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x01)
+URB - 12 01 00 02 00 00 00 20 CF 0F 08 10 00 01 01 02 03 01
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x02)
+URB - 09 02 20 00 01 01 02 80 32 
+Get descriptor from device (DescriptorType 0x02)
+URB - 09 02 20 00 01 01 02 80 32 09 04 00 00 02 FF 00 00 02 07 05 81 02 40 00 01 07 05 01 02 40 00 01 
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 2)
+URB - 1E 03 41 00 4E 00 54 00 20 00 55 00 53 00 42 00 53 00 74 00 69 00 63 00 6B 00 32 00 00 00
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 3)
+URB - 2A 03 31 00 33 00 37 00 00 00 89 00 AD 00 1A 00 00 00 00 00 00 00 89 00 AD 00 1A 00 00 00 00 00 44 00 53 00 49 00 00 00 42 00
+Cleanup
+Close
+Create
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x01)
+URB - 12 01 00 02 00 00 00 20 CF 0F 08 10 00 01 01 02 03 01
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 2)
+URB - 1E 03 41 00 4E 00 54 00 20 00 55 00 53 00 42 00 53 00 74 00 69 00 63 00 6B 00 32 00 00 00
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 3)
+URB - 2A 03 31 00 33 00 37 00 00 00 89 00 AD 00 1A 00 00 00 00 00 00 00 89 00 AD 00 1A 00 00 00 00 00 44 00 53 00 49 00 00 00 42 00
+Cleanup
+Close
+Create
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x01)
+URB - 12 01 00 02 00 00 00 20 CF 0F 08 10 00 01 01 02 03 01
+Cleanup
+Close
+Create
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 2)
+URB - 1E 03 41 00 4E 00 54 00 20 00 55 00 53 00 42 00 53 00 74 00 69 00 63 00 6B 00 32 00 00 00
+Get descriptor from device (DescriptorType 0x03)
+URB - 04 03 09 04
+Get descriptor from device (DescriptorType 0x03, index 3)
+URB - 2A 03 31 00 33 00 37 00 00 00 89 00 AD 00 1A 00 00 00 00 00 00 00 89 00 AD 00 1A 00 00 00 00 00 44 00 53 00 49 00 00 00 42 00
+Cleanup
+Close
+Create
+Cleanup
+Close
+Create
+# Data = 08 03 00 BA 36 00
+Bulk In - A4 06 54 08 03 00 BA 36 00 71
+Bulk Out - A4 02 4D 00 54 BF 00 00
+Bulk In - A4 01 6F 00 CA
+Bulk Out - A4 01 4A 00 EF 00 00
+Bulk In - A4 03 40 00 46 00 A1
+Bulk Out - A4 09 46 00 A8 A4 23 B9 F5 5E 63 C1 74 00 00 
+Bulk In - A4 03 40 00 47 00 A0
+Bulk Out - A4 02 47 00 03 E2 00 00
+Bulk In - A4 03 42 00 00 00 E5 00 00
+Bulk Out - A4 03 40 00 42 00 A5
+Bulk In - A4 03 40 00 43 00 A4
+Bulk Out - A4 03 43 00 00 08 EC 00 00
+Bulk In - A4 03 40 00 45 00 A2
+Bulk Out - A4 02 45 00 32 D1 00 00
+Bulk In - A4 03 40 00 44 00 A3
+Bulk Out - A4 02 44 00 FF 1D 00 00
+Bulk In - A4 03 40 00 51 00 B6
+Bulk Out - A4 05 51 00 00 00 01 05 F4 00 00
+Bulk In - A4 03 40 00 4B 00 AC
+Bulk Out - A4 01 4B 00 EE 00 00
+Bulk In - A4 03 40 00 5B 19 A5
+Bulk Out - A4 01 5B 00 FE 00 00
+Bulk In - A4 03 40 00 5B 19 A5
+Bulk In - A4 09 4E 00 43 3B 00 03 64 00 03 00 FF
+Bulk In - A4 09 4E 00 43 3B 00 03 65 00 03 00 FF
+Bulk Out - A4 02 4D 00 51 BA 00 00
+Bulk In - A4 05 51 00 81 10 01 05 65
+Bulk In - A4 09 4E 00 43 3B 00 03 64 00 03 00 FF
+Bulk In - A4 09 4E 00 43 3B 00 03 64 00 03 00 FF
+Bulk Out - A4 09 4F 00 44 02 32 04 00 00 00 00 92 00 00
+Bulk In - A4 09 4E 00 43 3B 00 03 64 00 03 00 FF
+Bulk In - A4 03 40 00 01 05 E3
+Bulk In - A4 09 4E 00 43 3B 01 03 64 00 03 00 FE
+Bulk In - A4 09 4E 00 43 3B 01 03 64 00 03 00 FE
+Bulk Out - A4 09 4F 00 44 02 32 04 00 00 00 00 92 00 00
+Bulk In - A4 09 4E 00 43 3B 01 03 64 00 03 00 FE
+Bulk In - A4 03 40 00 01 05 E3
+Bulk Out - A4 09 4F 00 44 04 01 00 00 00 00 00 A3 00 00
+Bulk In - A4 09 4E 00 43 3B 01 03 64 00 03 00 FE
+Bulk In - A4 03 40 00 01 05 E3

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="GPS Master" version="1.1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd"
+xmlns:gpxtpx="http://www.garmin.com/xmlschemas/TrackPointExtension/v1">
+<trk>
+ <name>1 (2014-06-03 20:01:51)</name>
+ <number>1</number>
+ <trkseg>
+ <trkpt lat="48.804277800" lon="2.169718300"><ele>52</ele><time>2014-06-03T19:01:51Z</time><extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>105</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions></trkpt>
+ <trkpt lat="48.806593700" lon="2.171689500"><ele>75</ele><time>2014-06-03T19:11:51Z</time><extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>111</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions></trkpt>
+ <trkpt lat="48.806666600" lon="2.171883300"><ele>88</ele><time>2014-06-03T19:17:32Z</time><extensions><gpxtpx:TrackPointExtension><gpxtpx:hr>104</gpxtpx:hr></gpxtpx:TrackPointExtension></extensions></trkpt>
+</trkseg>
+</trk>
+<extensions>
+</extensions>
+</gpx>

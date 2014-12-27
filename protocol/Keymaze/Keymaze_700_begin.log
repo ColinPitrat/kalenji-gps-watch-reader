@@ -1,0 +1,1927 @@
+        <urb sequence="1">
+            <function>SET_FEATURE_TO_DEVICE</function>
+        </urb>
+        <urb sequence="1">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="2">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>00000000000207</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="2">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="3">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="3">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="4">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="4">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="5">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="5">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="6">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="6">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="7">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="7">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="8">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="8">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="9">
+            <function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        </urb>
+        <urb sequence="9">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>18</payloadcount>
+                <payloadbytes>12011001000000407b060323000401020001</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="10">
+            <function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        </urb>
+        <urb sequence="10">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>48</payloadcount>
+                <payloadbytes>30035500530042002d00530065007200690061006c00200043006f006e00740072006f006c006c006500720020004400</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="11">
+            <function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        </urb>
+        <urb sequence="11">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>52</payloadcount>
+                <payloadbytes>3403500072006f006c006900660069006300200054006500630068006e006f006c006f0067007900200049006e0063002e002000</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="12">
+            <function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        </urb>
+        <urb sequence="12">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>9</payloadcount>
+                <payloadbytes>09022700010100a032</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="13">
+            <function>GET_DESCRIPTOR_FROM_DEVICE</function>
+        </urb>
+        <urb sequence="13">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>39</payloadcount>
+                <payloadbytes>09022700010100a0320904000003ff000000070581030a00010705020240000007058302400000</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="14">
+            <function>SELECT_CONFIGURATION</function>
+        </urb>
+        <urb sequence="14">
+            <function>SELECT_CONFIGURATION</function>
+        </urb>
+        <urb sequence="15">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="15">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="16">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>2</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="16">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>aa</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="17">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="17">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="18">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="18">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="19">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="19">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="20">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="20">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="21">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="21">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="22">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="22">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="23">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="23">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="24">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="24">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="25">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="25">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="26">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="26">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="27">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="27">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="28">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="28">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="29">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="29">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="30">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="30">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="31">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="31">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="32">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="32">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="33">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="33">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="34">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="34">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="35">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="35">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="36">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="36">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="37">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="37">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="38">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="38">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="39">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="39">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="40">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="40">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>44</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="41">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="42">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>384</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="41">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes>a1200000000002008b18</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="43">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="43">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes>a1200000000002000018</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="44">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="45">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="45">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="46">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="46">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="47">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="47">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="48">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="48">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="49">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="49">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="50">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="50">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="51">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="51">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="52">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="52">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="53">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="53">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="54">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="54">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="55">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="55">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="56">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="56">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="57">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="57">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="58">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="58">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="59">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="59">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="60">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="60">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="61">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="61">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="62">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="62">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="63">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="63">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="64">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="64">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="65">
+            <function>SET_FEATURE_TO_DEVICE</function>
+        </urb>
+        <urb sequence="65">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="66">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>00000000000207</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="66">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="67">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="67">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="68">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="68">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="69">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="69">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="70">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="70">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="71">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="71">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="72">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="72">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="73">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="73">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="74">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="74">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="75">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="75">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="76">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="76">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="77">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="77">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="78">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="78">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="79">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="79">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="80">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="80">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="81">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="81">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="82">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="82">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="83">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="83">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="84">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="84">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="85">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="85">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="86">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="86">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="87">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="87">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="88">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="88">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="89">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="89">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="90">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>b0040000000207</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="90">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="91">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>b0040000000007</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="91">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="92">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="92">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="93">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="93">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="94">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="94">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="95">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="95">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="96">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="96">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="97">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="97">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="98">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="98">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="99">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="99">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="100">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="100">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="101">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="101">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="102">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="102">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="103">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="103">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="104">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="104">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="105">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="105">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="106">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="106">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="107">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="107">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="108">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="108">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="109">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="109">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="110">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="110">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="111">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="111">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="112">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="112">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="113">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="113">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="114">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="114">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="115">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="115">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="116">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="116">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="117">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="117">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="118">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="118">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="119">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="119">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="120">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="120">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="121">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="121">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="122">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="122">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="123">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="123">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="124">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="124">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="125">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="125">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="126">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="126">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="127">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="127">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="128">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="128">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="129">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="129">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="130">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="130">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="131">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="131">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="132">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="132">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="133">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="133">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="134">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="134">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="135">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="135">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="44">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+        </urb>
+        <urb sequence="42">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+        </urb>
+        <urb sequence="136">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>10</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="137">
+            <function>BULK_OR_INTERRUPT_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>384</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="138">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="138">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="139">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="139">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="140">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="140">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="141">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="141">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="142">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="142">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="143">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="143">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="144">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="144">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="145">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="145">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="146">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="146">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="147">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="147">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="148">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="148">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="149">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="149">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="150">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="150">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="151">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="151">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="152">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="152">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>02</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="153">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="153">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>ff</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="154">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="154">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="155">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="155">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="156">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="156">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="157">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="157">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="158">
+            <function>SET_FEATURE_TO_DEVICE</function>
+        </urb>
+        <urb sequence="158">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="159">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>b0040000000007</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="159">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="160">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="160">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="161">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="161">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="162">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="162">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>00</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="163">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="163">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="164">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="164">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="165">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="165">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="166">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="166">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="167">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="167">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="168">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="168">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="169">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="169">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="170">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="170">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="171">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="171">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="172">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="172">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="173">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="173">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="174">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="174">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="175">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="175">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="176">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="176">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="177">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>00e10000000007</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="177">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="178">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="178">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="179">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="179">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="180">
+            <function>CLASS_INTERFACE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes>00e10000000008</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="180">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>7</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="181">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="181">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="182">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="182">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="183">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="183">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="184">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="184">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="185">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="185">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="186">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="186">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="187">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="187">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="188">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="188">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="189">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="189">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="190">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="190">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="191">
+            <function>VENDOR_DEVICE</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes></payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="191">
+            <function>CONTROL_TRANSFER</function>
+            <packetcount>1</packetcount>
+            <payload packet="0">
+                <payloadcount>1</payloadcount>
+                <payloadbytes>01</payloadbytes>
+            </payload>
+        </urb>
+        <urb sequence="192">
+            <function>VENDOR_DEVICE</function>
+        </urb>
+        <urb sequence="192">
+            <function>CONTROL_TRANSFER</function>
+        </urb>
+        <urb sequence="193">
+            <function>CLASS_INTERFACE</function>
+        </urb>
+        <urb sequence="193">
+            <function>CONTROL_TRANSFER</function>
+        </urb>

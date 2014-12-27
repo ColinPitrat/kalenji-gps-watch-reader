@@ -1,0 +1,1474 @@
+<Item>
+<Type>URB</Type>
+<Seq>0013-0012</Seq>
+<Time>22:33:47.107</Time>
+<Elapsed>41.901912 s</Elapsed>
+<Duration>1.482 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0015-0014</Seq>
+<Time>22:33:47.107</Time>
+<Elapsed>41.903910 s</Elapsed>
+<Duration>1.978 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0017-0016</Seq>
+<Time>22:33:47.117</Time>
+<Elapsed>41.912954 s</Elapsed>
+<Duration>2.531 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0019-0018</Seq>
+<Time>22:33:47.117</Time>
+<Elapsed>41.914953 s</Elapsed>
+<Duration>1.972 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>FF</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>FF</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0021-0020</Seq>
+<Time>22:33:47.127</Time>
+<Elapsed>41.923854 s</Elapsed>
+<Duration>3.361 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0023-0022</Seq>
+<Time>22:33:47.127</Time>
+<Elapsed>41.925879 s</Elapsed>
+<Duration>2.002 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0025-0024</Seq>
+<Time>22:33:47.137</Time>
+<Elapsed>41.933670 s</Elapsed>
+<Duration>2.406 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0027-0026</Seq>
+<Time>22:33:47.137</Time>
+<Elapsed>41.935595 s</Elapsed>
+<Duration>1.897 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>FF</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>FF</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0029-0028</Seq>
+<Time>22:33:47.147</Time>
+<Elapsed>41.944613 s</Elapsed>
+<Duration>4.142 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0031-0030</Seq>
+<Time>22:33:47.147</Time>
+<Elapsed>41.946578 s</Elapsed>
+<Duration>1.936 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0033-0032</Seq>
+<Time>22:33:47.157</Time>
+<Elapsed>41.953576 s</Elapsed>
+<Duration>3.097 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0035-0034</Seq>
+<Time>22:33:47.157</Time>
+<Elapsed>41.955501 s</Elapsed>
+<Duration>1.892 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>FF</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>FF</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0037-0036</Seq>
+<Time>22:33:47.167</Time>
+<Elapsed>41.964689 s</Elapsed>
+<Duration>4.073 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0039-0038</Seq>
+<Time>22:33:47.167</Time>
+<Elapsed>41.966590 s</Elapsed>
+<Duration>1.872 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0041-0040</Seq>
+<Time>22:33:47.177</Time>
+<Elapsed>41.973619 s</Elapsed>
+<Duration>3.028 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>02</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>02</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0043-0042</Seq>
+<Time>22:33:47.177</Time>
+<Elapsed>41.975686 s</Elapsed>
+<Duration>2.042 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>FF</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>FF</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0045-0044</Seq>
+<Time>22:33:47.177</Time>
+<Elapsed>41.977636 s</Elapsed>
+<Duration>1.920 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>00</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0047-0046</Seq>
+<Time>22:33:47.177</Time>
+<Elapsed>41.979599 s</Elapsed>
+<Duration>1.934 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0049-0048</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.981562 s</Elapsed>
+<Duration>1.943 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0051-0050</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.983516 s</Elapsed>
+<Duration>1.941 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0052</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.983530 s</Elapsed>
+<Request>Set Feature to Device</Request>
+<Request Details>Remote Wakeup</Request Details>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0053-0052</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.985590 s</Elapsed>
+<Duration>2.060 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Set Feature (Dvc, Remote Wakeup)</Request Details>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0054</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.985611 s</Elapsed>
+<Request>Class Interface</Request>
+<Raw Data>00 E1 00 00 00 00 08</Raw Data>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<RawDataSize>7</RawDataSize>
+<Raw Data>00 E1 00 00 00 00 08</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0055-0054</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.987677 s</Elapsed>
+<Duration>2.066 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0057-0056</Seq>
+<Time>22:33:47.187</Time>
+<Elapsed>41.989596 s</Elapsed>
+<Duration>1.889 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0059-0058</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.991531 s</Elapsed>
+<Duration>1.908 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0061-0060</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.993579 s</Elapsed>
+<Duration>2.037 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>00</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0063-0062</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.995644 s</Elapsed>
+<Duration>2.053 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0065-0064</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.997578 s</Elapsed>
+<Duration>1.900 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0067-0066</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.999738 s</Elapsed>
+<Duration>2.136 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0068</Seq>
+<Time>22:33:47.197</Time>
+<Elapsed>41.999777 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0069-0068</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.001580 s</Elapsed>
+<Duration>1.803 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0070</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.001606 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0071-0070</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.003598 s</Elapsed>
+<Duration>1.992 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0073-0072</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.005540 s</Elapsed>
+<Duration>1.923 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0075-0074</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.007587 s</Elapsed>
+<Duration>2.033 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0077-0076</Seq>
+<Time>22:33:47.207</Time>
+<Elapsed>42.009599 s</Elapsed>
+<Duration>1.987 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0079-0078</Seq>
+<Time>22:33:47.217</Time>
+<Elapsed>42.011467 s</Elapsed>
+<Duration>1.842 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0081-0080</Seq>
+<Time>22:33:47.217</Time>
+<Elapsed>42.013600 s</Elapsed>
+<Duration>2.122 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0083-0082</Seq>
+<Time>22:33:47.217</Time>
+<Elapsed>42.015651 s</Elapsed>
+<Duration>2.025 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0085-0084</Seq>
+<Time>22:33:47.217</Time>
+<Elapsed>42.017586 s</Elapsed>
+<Duration>1.904 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0087-0086</Seq>
+<Time>22:33:47.217</Time>
+<Elapsed>42.019601 s</Elapsed>
+<Duration>1.986 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0089-0088</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.021481 s</Elapsed>
+<Duration>1.823 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>Create</Type>
+<Seq>0090-0003</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.021511 s</Elapsed>
+<Duration>126.052 ms</Duration>
+<Request>Create</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>80E01040h</DevObjAddr>
+<DevObjName>ProlificSerial2</DevObjName>
+<DrvObjName>Ser2pl</DrvObjName>
+<IrpAddr>80E22888h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>Create</Type>
+<Seq>0091-0002</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.021519 s</Elapsed>
+<Duration>126.086 ms</Duration>
+<Request>Create</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>FFB54260h</DevObjAddr>
+<DrvObjName>Serenum</DrvObjName>
+<IrpAddr>80E22888h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0092</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.021602 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0093-0092</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.023500 s</Elapsed>
+<Duration>1.898 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0094</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.023515 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0095-0094</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.025638 s</Elapsed>
+<Duration>2.123 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0097-0096</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.027581 s</Elapsed>
+<Duration>1.889 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0098</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.027665 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0099-0098</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.029726 s</Elapsed>
+<Duration>2.061 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0100</Seq>
+<Time>22:33:47.227</Time>
+<Elapsed>42.029786 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0101-0100</Seq>
+<Time>22:33:47.237</Time>
+<Elapsed>42.031496 s</Elapsed>
+<Duration>1.710 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0103-0102</Seq>
+<Time>22:33:47.237</Time>
+<Elapsed>42.033498 s</Elapsed>
+<Duration>1.977 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0104</Seq>
+<Time>22:33:47.237</Time>
+<Elapsed>42.033535 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>0105-0104</Seq>
+<Time>22:33:47.237</Time>
+<Elapsed>42.035519 s</Elapsed>
+<Duration>1.984 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFB15008h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+
+<Item>
+<Type>URB</Type>
+<Seq>5401-5400</Seq>
+<Time>22:33:54.698</Time>
+<Elapsed>49.493469 s</Elapsed>
+<Duration>2.443 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>Cleanup</Type>
+<Seq>5402</Seq>
+<Time>22:33:54.698</Time>
+<Elapsed>49.493550 s</Elapsed>
+<Request>Cleanup</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>FFB54260h</DevObjAddr>
+<DrvObjName>Serenum</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+</Item>
+<Item>
+<Type>Cleanup</Type>
+<Seq>5403</Seq>
+<Time>22:33:54.698</Time>
+<Elapsed>49.493558 s</Elapsed>
+<Request>Cleanup</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>80E01040h</DevObjAddr>
+<DevObjName>ProlificSerial2</DevObjName>
+<DrvObjName>Ser2pl</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+</Item>
+<Item>
+<Type>Cleanup</Type>
+<Seq>5404-5403</Seq>
+<Time>22:33:54.728</Time>
+<Elapsed>49.521466 s</Elapsed>
+<Duration>27.908 ms</Duration>
+<Request>Cleanup</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>80E01040h</DevObjAddr>
+<DevObjName>ProlificSerial2</DevObjName>
+<DrvObjName>Ser2pl</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>Cleanup</Type>
+<Seq>5405-5402</Seq>
+<Time>22:33:54.728</Time>
+<Elapsed>49.521478 s</Elapsed>
+<Duration>27.928 ms</Duration>
+<Request>Cleanup</Request>
+<Request Details>GeonauteSoftware.exe</Request Details>
+<DevObjAddr>FFB54260h</DevObjAddr>
+<DrvObjName>Serenum</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>Close</Type>
+<Seq>5406</Seq>
+<Time>22:33:54.728</Time>
+<Elapsed>49.521488 s</Elapsed>
+<Request>Close</Request>
+<DevObjAddr>FFB54260h</DevObjAddr>
+<DrvObjName>Serenum</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+</Item>
+<Item>
+<Type>Close</Type>
+<Seq>5407</Seq>
+<Time>22:33:54.728</Time>
+<Elapsed>49.521494 s</Elapsed>
+<Request>Close</Request>
+<DevObjAddr>80E01040h</DevObjAddr>
+<DevObjName>ProlificSerial2</DevObjName>
+<DrvObjName>Ser2pl</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5409-5408</Seq>
+<Time>22:33:54.738</Time>
+<Elapsed>49.539314 s</Elapsed>
+<Duration>7.069 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5411-5410</Seq>
+<Time>22:33:54.738</Time>
+<Elapsed>49.541232 s</Elapsed>
+<Duration>1.889 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5413-5412</Seq>
+<Time>22:33:54.748</Time>
+<Elapsed>49.543257 s</Elapsed>
+<Duration>1.996 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5415-5414</Seq>
+<Time>22:33:54.748</Time>
+<Elapsed>49.545170 s</Elapsed>
+<Duration>1.867 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5417-5416</Seq>
+<Time>22:33:54.748</Time>
+<Elapsed>49.547123 s</Elapsed>
+<Duration>1.925 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>00</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5419-5418</Seq>
+<Time>22:33:54.748</Time>
+<Elapsed>49.549242 s</Elapsed>
+<Duration>2.109 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5421-5420</Seq>
+<Time>22:33:54.748</Time>
+<Elapsed>49.551212 s</Elapsed>
+<Duration>1.941 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5423-5422</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.553282 s</Elapsed>
+<Duration>2.033 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5425-5424</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.555144 s</Elapsed>
+<Duration>1.834 ms</Duration>
+<Request>Control Transfer</Request>
+<Raw Data>01</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>1</RawDataSize>
+<Raw Data>01</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5427-5426</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.557096 s</Elapsed>
+<Duration>1.932 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5428</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.557111 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5429-5428</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.559109 s</Elapsed>
+<Duration>1.998 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5430</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.559130 s</Elapsed>
+<Request>Class Interface</Request>
+<IO>out</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5431-5430</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.561161 s</Elapsed>
+<Duration>2.030 ms</Duration>
+<Request>Control Transfer</Request>
+<IO>out</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FF9946C0h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+</Item>
+<Item>
+<Type>Close</Type>
+<Seq>5432-5407</Seq>
+<Time>22:33:54.758</Time>
+<Elapsed>49.561177 s</Elapsed>
+<Duration>39.683 ms</Duration>
+<Request>Close</Request>
+<DevObjAddr>80E01040h</DevObjAddr>
+<DevObjName>ProlificSerial2</DevObjName>
+<DrvObjName>Ser2pl</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>Close</Type>
+<Seq>5433-5406</Seq>
+<Time>22:33:54.788</Time>
+<Elapsed>49.581431 s</Elapsed>
+<Duration>59.943 ms</Duration>
+<Request>Close</Request>
+<DevObjAddr>FFB54260h</DevObjAddr>
+<DrvObjName>Serenum</DrvObjName>
+<IrpAddr>80E542B8h</IrpAddr>
+<IrpStatus>Success</IrpStatus>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5436</Seq>
+<Time>22:34:04.862</Time>
+<Elapsed>59.664910 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Cfg ind:0</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5437-5436</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.667113 s</Elapsed>
+<Duration>2.203 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Cfg ind:0)</Request Details>
+<Raw Data>09 02 27 00 01 01 00 A0...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>39</RawDataSize>
+<Raw Data>09 02 27 00 01 01 00 A0 32 09 04 00 00 03 FF 00 00 00 07 05 81 03 0A 00 01 07 05 02 02 40 00 00 07 05 83 02 40 00 00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5438</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.667132 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str Lang Id</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5439-5438</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.669121 s</Elapsed>
+<Duration>1.989 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str Lang Id)</Request Details>
+<Raw Data>04 03 09 04</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>4</RawDataSize>
+<Raw Data>04 03 09 04</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5440</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.669153 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str ind:1</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5441-5440</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.671103 s</Elapsed>
+<Duration>1.950 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str ind:1)</Request Details>
+<Raw Data>34 03 50 00 72 00 6F 00...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>52</RawDataSize>
+<Raw Data>34 03 50 00 72 00 6F 00 6C 00 69 00 66 00 69 00 63 00 20 00 54 00 65 00 63 00 68 00 6E 00 6F 00 6C 00 6F 00 67 00 79 00 20 00 49 00 6E 00 63 00 2E 00 20 00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5442</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.671123 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str ind:2</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5443-5442</Seq>
+<Time>22:34:04.872</Time>
+<Elapsed>59.673117 s</Elapsed>
+<Duration>1.994 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str ind:2)</Request Details>
+<Raw Data>30 03 55 00 53 00 42 00...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>80EE1728h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>48</RawDataSize>
+<Raw Data>30 03 55 00 53 00 42 00 2D 00 53 00 65 00 72 00 69 00 61 00 6C 00 20 00 43 00 6F 00 6E 00 74 00 72 00 6F 00 6C 00 6C 00 65 00 72 00 20 00 44 00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5444</Seq>
+<Time>22:34:10.570</Time>
+<Elapsed>65.373415 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Cfg ind:0</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5445-5444</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.375238 s</Elapsed>
+<Duration>1.823 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Cfg ind:0)</Request Details>
+<Raw Data>09 02 27 00 01 01 00 A0...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>39</RawDataSize>
+<Raw Data>09 02 27 00 01 01 00 A0 32 09 04 00 00 03 FF 00 00 00 07 05 81 03 0A 00 01 07 05 02 02 40 00 00 07 05 83 02 40 00 00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5446</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.375254 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str Lang Id</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5447-5446</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.377235 s</Elapsed>
+<Duration>1.981 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str Lang Id)</Request Details>
+<Raw Data>04 03 09 04</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>4</RawDataSize>
+<Raw Data>04 03 09 04</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5448</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.377250 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str ind:1</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5449-5448</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.379203 s</Elapsed>
+<Duration>1.953 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str ind:1)</Request Details>
+<Raw Data>34 03 50 00 72 00 6F 00...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>52</RawDataSize>
+<Raw Data>34 03 50 00 72 00 6F 00 6C 00 69 00 66 00 69 00 63 00 20 00 54 00 65 00 63 00 68 00 6E 00 6F 00 6C 00 6F 00 67 00 79 00 20 00 49 00 6E 00 63 00 2E 00 20 00</Raw Data>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5450</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.379219 s</Elapsed>
+<Request>Get Descriptor from Device</Request>
+<Request Details>Str ind:2</Request Details>
+<IO>in</IO>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+</Item>
+<Item>
+<Type>URB</Type>
+<Seq>5451-5450</Seq>
+<Time>22:34:10.580</Time>
+<Elapsed>65.381265 s</Elapsed>
+<Duration>2.046 ms</Duration>
+<Request>Control Transfer</Request>
+<Request Details>Get Descriptor (Str ind:2)</Request Details>
+<Raw Data>30 03 55 00 53 00 42 00...</Raw Data>
+<IO>in</IO>
+<CIE>--:--:00</CIE>
+<DevObjAddr>FF9A6758h</DevObjAddr>
+<DevObjName>USBPDO-3</DevObjName>
+<DrvObjName>usbhub</DrvObjName>
+<IrpAddr>FFAE2208h</IrpAddr>
+<IrpStatus>Success (Success)</IrpStatus>
+<RawDataSize>48</RawDataSize>
+<Raw Data>30 03 55 00 53 00 42 00 2D 00 53 00 65 00 72 00 69 00 61 00 6C 00 20 00 43 00 6F 00 6E 00 74 00 72 00 6F 00 6C 00 6C 00 65 00 72 00 20 00 44 00</Raw Data>
+</Item>

@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FitnessWorkbook xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.zonefivesoftware.com/xmlschemas/FitnessLogbook/v2">
+ <AthleteLog>
+  <Athlete Id="115cacd2-4695-49d4-a689-bedc5cba1034" Name="Colin Pitrat" />
+  <Activity StartTime="2012-11-29T12:34:00" Id="e1329019-4ee9-45ec-b6fd-5c2c3219ce73">
+   <Metadata Source="Pulso SD" Created="2013-01-08T12:38:21" Modified="2013-01-08T12:38:58" />
+   <Duration TotalSeconds="15.3" />
+   <Distance TotalMeters="47" />
+   <Calories TotalCal="3" />
+   <Notes>Mode libre </Notes>
+   <Name>Speed &amp; Distance</Name>
+   <Laps>
+    <Lap StartTime="2012-11-29T12:34:00" DurationSeconds="15.3">
+     <Distance TotalMeters="47" />
+     <HeartRate AverageBPM="0" />
+     <Cadence AverageRPM="0" />
+     <Calories TotalCal="0" />
+    </Lap>
+   </Laps>
+   <Category Id="0277c86c-cf72-11db-9705-005056c00008" Name="Les séances de mes amis" />
+   <Track StartTime="2012-11-29T12:34:00">
+    <pt tm="0" dist="7.222222" hr="0" />
+    <pt tm="5" dist="25.43056" hr="0" />
+    <pt tm="10" dist="44.27778" hr="0" />
+   </Track>
+  </Activity>
+ </AthleteLog>
+</FitnessWorkbook>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+		<gpx
+		 version="1.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xmlns="http://www.topografix.com/GPX/1/0"
+		 xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd"
+		 creator="http://www.openrunner.com">
+			<trk>
+			    <name>--Saint-Pierre-la-Bourlhonne-- OR-4317694:beal</name>
+			    <trkseg>
+	
+			<trkpt lat="45.68519" lon="3.78273">
+			 <ele>1389</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68459" lon="3.77943">
+			 <ele>1384</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68424" lon="3.77664">
+			 <ele>1357</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68388" lon="3.77806">
+			 <ele>1360</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68313" lon="3.77904">
+			 <ele>1344</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6819" lon="3.77887">
+			 <ele>1324</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68001" lon="3.77844">
+			 <ele>1302</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67836" lon="3.77797">
+			 <ele>1292</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67737" lon="3.7775">
+			 <ele>1268</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6762" lon="3.77883">
+			 <ele>1264</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67464" lon="3.78054">
+			 <ele>1297</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67254" lon="3.7823">
+			 <ele>1299</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67149" lon="3.78248">
+			 <ele>1293</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6711" lon="3.78187">
+			 <ele>1290</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67092" lon="3.78102">
+			 <ele>1285</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66945" lon="3.78145">
+			 <ele>1286</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66906" lon="3.78321">
+			 <ele>1307</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66822" lon="3.78415">
+			 <ele>1312</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6681" lon="3.78548">
+			 <ele>1334</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66726" lon="3.78698">
+			 <ele>1340</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6678" lon="3.78981">
+			 <ele>1398</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66846" lon="3.79205">
+			 <ele>1417</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66852" lon="3.79389">
+			 <ele>1457</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6681" lon="3.79548">
+			 <ele>1479</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66795" lon="3.79617">
+			 <ele>1479</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66834" lon="3.7972">
+			 <ele>1485</ele>
+			</trkpt>
+		
+			<trkpt lat="45.66918" lon="3.79681">
+			 <ele>1488</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67047" lon="3.79788">
+			 <ele>1532</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67182" lon="3.79788">
+			 <ele>1535</ele>
+			</trkpt>
+		
+			<trkpt lat="45.6741" lon="3.79569">
+			 <ele>1518</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67647" lon="3.79342">
+			 <ele>1524</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67776" lon="3.79192">
+			 <ele>1510</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67875" lon="3.78994">
+			 <ele>1472</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68013" lon="3.78844">
+			 <ele>1457</ele>
+			</trkpt>
+		
+			<trkpt lat="45.67932" lon="3.78647">
+			 <ele>1452</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68209" lon="3.78503">
+			 <ele>1428</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68325" lon="3.78402">
+			 <ele>1417</ele>
+			</trkpt>
+		
+			<trkpt lat="45.68498" lon="3.78267">
+			 <ele>1389</ele>
+			</trkpt>
+		
+				</trkseg>
+			   </trk>
+			 </gpx>
+	

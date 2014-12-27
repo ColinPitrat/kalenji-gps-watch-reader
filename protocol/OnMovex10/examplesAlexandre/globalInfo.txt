@@ -1,0 +1,8 @@
+parameter entering into the watch: 
+male or female: male 
+Date of birth: 08 May 1978 (8 - 5 - 7BA)
+Weight: 71 Kg (47)
+size: 181 cm (B5)
+Heart rate max: 185 bpm  (B9)
+Heart rate for a relaxing break 51 bpm (33)
+
