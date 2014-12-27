@@ -27,7 +27,7 @@ all: build
 endif
 
 debug: debug_flag build unit_test test tags
-	gcov -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
+	gcov -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
 
 debug_flag:
 	@touch .debug
