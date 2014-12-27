@@ -1,8 +1,0 @@
-USB mass storage is used by OnMove510 & 710
-The device contains 3 file per session:
- - GHT contains the track information
- - GHL contains the laps details
- - GHP contains the points details
-With minimal modifications, using File as source and a slightly modified version of Kalenji as device should do the trick.
-Only difference is that there are three files, and list of sessions is done with a ls => some dev to do for this.
-But asking user for an automount and for the path in configuration, it should be really simple.
