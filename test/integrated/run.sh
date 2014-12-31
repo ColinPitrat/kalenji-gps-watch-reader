@@ -7,10 +7,10 @@ OK_CASES=0
 KO_CASES=0
 diff_command=""
 echo "" > $RESULT_FILE
-for case in case*
+for c in cas*
 do
-	echo " ===== Case $case =====" >> $RESULT_FILE
-	pushd $case > /dev/null
+	echo " ===== Case $c =====" >> $RESULT_FILE
+	pushd $c > /dev/null
 	./run.sh >> $RESULT_FILE
 	pushd results > /dev/null
 	for result in *
@@ -18,10 +18,10 @@ do
 		diff $result /tmp/$result >> $RESULT_FILE
 		if [ $? -eq 0 ]
 		then
-			echo "OK - $case - $result" | tee -a $RESULT_FILE
+			echo "OK - $c - $result" | tee -a $RESULT_FILE
 			let OK_CASES=$OK_CASES+1
 		else
-			echo "KO - $case - $result" | tee -a $RESULT_FILE
+			echo "KO - $c - $result" | tee -a $RESULT_FILE
 			diff_command="$diff_command
 vi -d `pwd`/$result /tmp/$result"
 			let KO_CASES=$KO_CASES+1
@@ -36,5 +36,10 @@ echo ""
 echo "Result = $percentage % ($OK_CASES OK - $KO_CASES KO)"
 echo "See $RESULT_FILE for details"
 echo ""
-echo "To obtain diff:"
-echo "$diff_command"
+if [ ! -z "$diff_command" ]
+then
+    echo "To obtain diff:"
+    echo "$diff_command"
+    echo ""
+    exit 1
+fi
