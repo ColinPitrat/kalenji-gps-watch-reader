@@ -78,7 +78,10 @@ namespace output
 				    "</Value></HeartRateBpm>") << std::endl;
 				mystream << "      <Extensions>" << std::endl;
 				mystream << "       <TPX xmlns=\"http://www.garmin.com/xmlschemas/ActivityExtension/v2\" CadenceSensor=\"Footpod\">" << std::endl;
-				mystream << "         <Speed>" << (*pit)->getSpeed() / 3.6 << "</Speed>" << std::endl;
+				if((*pit)->getSpeed().isDefined())
+				{
+					mystream << "         <Speed>" << (*pit)->getSpeed() / 3.6 << "</Speed>" << std::endl;
+				}
 				mystream << "       </TPX>" << std::endl;
 				mystream << "      </Extensions>" << std::endl;
 				mystream << "     </Trackpoint>" << std::endl;
