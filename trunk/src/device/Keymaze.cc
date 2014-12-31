@@ -367,7 +367,7 @@ namespace device
 						// TODO: throw an exception
 					}
 					std::list<Lap*>::iterator lap = session->getLaps().begin();
-					while(id_point > (*lap)->getLastPointId() && lap != session->getLaps().end())
+					while(lap != session->getLaps().end() && id_point > (*lap)->getLastPointId())
 					{
 						++lap;
 					}
@@ -395,7 +395,7 @@ namespace device
 						{
 							(*lap)->setStartPoint(session->getPoints().back());
 						}
-						while(id_point >= (*lap)->getLastPointId() && lap != session->getLaps().end())
+						while(lap != session->getLaps().end() && id_point >= (*lap)->getLastPointId())
 						{
 							// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
 							if((*lap)->getStartPoint() == NULL)
