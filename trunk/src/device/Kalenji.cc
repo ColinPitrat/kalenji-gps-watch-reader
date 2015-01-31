@@ -388,7 +388,7 @@ namespace device
 						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth*100, bpm, fiability);
 						session->addPoint(point);
 					}
-					if(id_point == (*lap)->getFirstPointId())
+					if(lap != session->getLaps().end() && id_point == (*lap)->getFirstPointId())
 					{
 						(*lap)->setStartPoint(session->getPoints().back());
 					}
