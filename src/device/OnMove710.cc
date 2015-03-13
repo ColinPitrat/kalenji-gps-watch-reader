@@ -302,7 +302,7 @@ namespace device
 			current_time += cumulated_tenth / 10;
 			cumulated_tenth = cumulated_tenth % 10;
 
-			if(id_point == (*lap)->getFirstPointId())
+			if(lap != session->getLaps().end() && id_point == (*lap)->getFirstPointId())
 			{
 				(*lap)->setStartPoint(session->getPoints().back());
 			}

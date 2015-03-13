@@ -31,7 +31,14 @@ namespace output
 		mystream << "&markers=";
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
-			mystream << "%7C" << (*it)->getStartPoint()->getLatitude() << "," << (*it)->getStartPoint()->getLongitude();
+            if((*it)->getStartPoint() != NULL)
+            {
+                mystream << "%7C" << (*it)->getStartPoint()->getLatitude() << "," << (*it)->getStartPoint()->getLongitude();
+            }
+            else
+            {
+                std::cerr << "Start point of lap is NULL - This deserves a bug report !" << std::endl;
+            }
 		}
 		mystream << std::endl;
 	}
