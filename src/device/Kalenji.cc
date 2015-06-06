@@ -187,6 +187,7 @@ namespace device
 					// TODO: throw an exception
 				}
 				SessionId id(responseData + 3, responseData + 19);
+				// TODO: This find can fail (already occured: communication error ? - kalenji_reader_20150606_212854.log (next attempt succeeded)) 
 				Session *session = &(oSessions->find(id)->second);
 				double max_speed = (responseData[55] + (responseData[56] << 8)) / 100.0;
 				double avg_speed = (responseData[57] + (responseData[58] << 8)) / 100.0;
