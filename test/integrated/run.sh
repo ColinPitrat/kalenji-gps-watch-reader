@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 export TZ="Europe/Paris"
 
