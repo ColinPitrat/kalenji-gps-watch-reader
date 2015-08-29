@@ -1062,13 +1062,6 @@
           <gpxdata:hr>0</gpxdata:hr>
         </extensions>
       </trkpt>
-      <trkpt lat="45.726212" lon="4.389525" >
-        <ele>553</ele>
-        <time>2013-12-27T14:24:44.000Z</time>
-        <extensions>
-          <gpxdata:hr>0</gpxdata:hr>
-        </extensions>
-      </trkpt>
       <trkpt lat="45.726212" lon="4.389527" >
         <ele>553</ele>
         <time>2013-12-27T14:24:45.000Z</time>
