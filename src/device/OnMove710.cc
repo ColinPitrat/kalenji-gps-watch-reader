@@ -22,38 +22,38 @@ namespace device
 	REGISTER_DEVICE(OnMove710);
 
 
-	int bytesToInt2(unsigned char b0, unsigned char b1) 
+	int bytesToInt2(unsigned char b0, unsigned char b1)
 	{
 		int Int = b0 | ( (int)b1 << 8 );
 		return Int;
 	}
 
-	int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3) 
+	int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3)
 	{
 		int Int = b0 | ( (int)b1 << 8 ) | ( (int)b2 << 16 ) | ( (int)b3 << 24 );
 		return Int;
 	}
 
-	unsigned char* readAllBytes(std::string filename,size_t& size) 
+	unsigned char* readAllBytes(std::string filename, size_t& size)
 	{
-		std::ifstream fl(filename.c_str());  
-		fl.seekg( 0, std::ios::end );  
-		size_t len = fl.tellg();  
-		char* buffer = new char[len];  
-		fl.seekg(0, std::ios::beg);   
-		fl.read(buffer, len);  
-		fl.close();  
+		std::ifstream fl(filename.c_str());
+		fl.seekg( 0, std::ios::end );
+		size_t len = fl.tellg();
+		char* buffer = new char[len];
+		fl.seekg(0, std::ios::beg);
+		fl.read(buffer, len);
+		fl.close();
 		size = len;
-		return (unsigned char*)buffer;  
-	}  
+		return (unsigned char*)buffer;
+	}
 
-	bool fileExists(std::string filename) 
+	bool fileExists(std::string filename)
 	{
 		struct stat fileInfo;
 		return stat(filename.c_str(), &fileInfo) == 0;
 	}
 
-	tm parseFilename(std::string filename) 
+	tm parseFilename(std::string filename)
 	{
 		std::string yearStr = filename.substr(0,1);
 		std::string monthStr = filename.substr(1,1);
@@ -96,7 +96,7 @@ namespace device
 	{
 		//check if getPath() is a valid path
 		DIR* folder = opendir(getPath().c_str());
-		if (folder == NULL) 
+		if (folder == NULL)
 		{
 			std::cout<< "Error: path '" << getPath() << "' does not exist (check option -p <path> on command line or line path=<path> in configuration file)." << std::endl;
 			throw std::exception();
@@ -109,7 +109,7 @@ namespace device
 		DEBUG_CMD(std::cout << "OnMove710: Release (nothing to do)" << std::endl);
 	}
 
-	std::string OnMove710::getPath() 
+	std::string OnMove710::getPath()
 	{
 		return _configuration["path"];
 	}
@@ -121,7 +121,7 @@ namespace device
 		DIR* folder = NULL;
 		struct dirent* file = NULL;
 		folder = opendir(getPath().c_str());
-		if (folder == NULL) 
+		if (folder == NULL)
 		{
 			std::cerr << "Couldn't open dir " << getPath() << std::endl;
 			throw std::exception();
@@ -129,19 +129,19 @@ namespace device
 
 		std::set<std::string> filenamesPrefix;
 
-		while ((file = readdir(folder)) != NULL) 
+		while ((file = readdir(folder)) != NULL)
 		{
 			std::string fn = std::string(file->d_name);
-			if(strstr(file->d_name,".GHP") || strstr(file->d_name,".GHT") || strstr(file->d_name,".GHL")) 
+			if(strstr(file->d_name,".GHP") || strstr(file->d_name,".GHT") || strstr(file->d_name,".GHL"))
 			{
 				std::string fileprefix = fn.substr(0,fn.length() - 4);
 				std::string filepathprefix = getPath() + std::string("/") + fileprefix;
 				//check if all 3 files (with the 3 extensions) exists
-				if(fileExists(filepathprefix + ".GHP") && fileExists(filepathprefix + ".GHT") && fileExists(filepathprefix + ".GHL")) 
+				if(fileExists(filepathprefix + ".GHP") && fileExists(filepathprefix + ".GHT") && fileExists(filepathprefix + ".GHL"))
 				{
 					filenamesPrefix.insert(fileprefix);
 				}
-				else 
+				else
 				{
 					std::cout << "Discarding " << fileprefix << std::endl;
 				}
@@ -152,7 +152,7 @@ namespace device
 
 		int i = 0;
 		std::set<std::string>::iterator iter;
-		for (iter=filenamesPrefix.begin(); iter!=filenamesPrefix.end(); ++iter) 
+		for (iter=filenamesPrefix.begin(); iter!=filenamesPrefix.end(); ++iter)
 		{
 			std::string fileprefix = *iter;
 
@@ -164,19 +164,26 @@ namespace device
 
 			tm time = parseFilename(fileprefix);
 
-			//TODO
 			double duration = 0;
 			uint32_t distance = 0;
 			uint32_t nbLaps = 999;
 
 			Session mySession(id, num, time, 0, duration, distance, nbLaps);
+
+			// Properly fill necessary session info (duration, distance, nbLaps)
+			std::string ghtFilename = getPath() + std::string("/") + fileprefix + std::string(".GHT");
+			size_t size = -1;
+			unsigned char* buffer = readAllBytes(ghtFilename, size);
+			parseGHTFile(buffer, &mySession);
+			delete buffer;
+
 			oSessions->insert(SessionsMapElement(id, mySession));
 		}
 	}
 
-	void OnMove710::getSessionsDetails(SessionsMap *oSessions) 
+	void OnMove710::getSessionsDetails(SessionsMap *oSessions)
 	{
-		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it) 
+		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
 		{
 			Session* session = &(it->second);
 			SessionId sessionId = it->second.getId();
@@ -205,17 +212,17 @@ namespace device
 		}
 	}
 
-	void OnMove710::dumpInt2(std::ostream &oStream, unsigned int aInt) 
+	void OnMove710::dumpInt2(std::ostream &oStream, unsigned int aInt)
 	{
 		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8);
 	}
 
-	void OnMove710::dumpInt4(std::ostream &oStream, unsigned int aInt) 
+	void OnMove710::dumpInt4(std::ostream &oStream, unsigned int aInt)
 	{
 		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8) << (char)((aInt & 0xFF0000) >> 16) << (char)((aInt & 0xFF000000) >> 24);
 	}
 
-	void OnMove710::dumpString(std::ostream &oStream, const std::string &aString, size_t aLength) 
+	void OnMove710::dumpString(std::ostream &oStream, const std::string &aString, size_t aLength)
 	{
 		size_t toCopy = aString.length();
 		if(aLength <= toCopy) toCopy = aLength - 1;
@@ -226,7 +233,7 @@ namespace device
 		}
 	}
 
-	void OnMove710::exportSession(Session *iSession) 
+	void OnMove710::exportSession(Session *iSession)
 	{
 		std::string filename;
 		int filenumber = 0;
@@ -239,7 +246,7 @@ namespace device
 		} while(fileExists(filename));
 
 		std::ofstream fl;
-		fl.open(filename.c_str(), std::ios::out | std::ios::binary);  
+		fl.open(filename.c_str(), std::ios::out | std::ios::binary);
 		// First is session name (align on 8 or 16 bytes ?)
 		dumpString(fl, iSession->getName(), 16);
 		// Then comes distance on 4 bytes
@@ -260,7 +267,7 @@ namespace device
 			dumpInt4(fl, lat);
 			dumpInt4(fl, lon);
 			++i;
-			if(i >= 200) 
+			if(i >= 200)
 			{
 				std::cerr << "Error: Too much points to export - truncating session" << std::endl;
 				break;
@@ -276,7 +283,7 @@ namespace device
 		std::cout << "Transferred session " << iSession->getName() << std::endl;
 	}
 
-	void OnMove710::parseGHPFile(unsigned char* bytes, int length, Session* session) 
+	void OnMove710::parseGHPFile(unsigned char* bytes, int length, Session* session)
 	{
 		unsigned char* chunk;
 		time_t current_time = session->getTime();
@@ -284,7 +291,7 @@ namespace device
 		uint32_t id_point = 0;
 		std::list<Lap*>::iterator lap = session->getLaps().begin();
 
-		for(int i=0; i<length; i=i+20) 
+		for(int i=0; i<length; i=i+20)
 		{
 			chunk = &bytes[i];
 			double latitude = ((double)bytesToInt4(chunk[0],chunk[1],chunk[2],chunk[3])) / 1000000.;//bytesToInt(chunk.slice(0, 4)) / 1000000,
@@ -325,11 +332,11 @@ namespace device
 		}
 	}
 
-	void OnMove710::parseGHLFile(unsigned char* bytes, int length, Session *session) 
+	void OnMove710::parseGHLFile(unsigned char* bytes, int length, Session *session)
 	{
 		unsigned char* chunk;
 		DEBUG_CMD(int lapIndex = 0);
-		for(int i=0;i<length;i=i+48) 
+		for(int i=0;i<length;i=i+48)
 		{
 			chunk = &bytes[i];
 
@@ -362,15 +369,15 @@ namespace device
 			DEBUG_CMD(std::cout << "Lap " << lapIndex++ << std::endl);
 			//TODO:
 			/*uint32_t firstPointId;
-			  uint32_t lastPointId; 
+			  uint32_t lastPointId;
 			  double duration;
 			  uint32_t distance;
 			  double max_speed;
-			  double avg_speed; 
+			  double avg_speed;
 			  double max_hr;
-			  double avg_hr; 
+			  double avg_hr;
 			  uint32_t calories;
-			  uint32_t grams; 
+			  uint32_t grams;
 			  uint32_t descent;
 			  uint32_t ascent;*/
 			Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, maxSpeed, averageSpeed, maxHeartRate, averageHeartRate, averageCalory, weightLoss, averageDescent, averageAscent);
@@ -378,7 +385,7 @@ namespace device
 		}
 	}
 
-	void OnMove710::parseGHTFile(const unsigned char* bytes,Session* session) 
+	void OnMove710::parseGHTFile(const unsigned char* bytes,Session* session)
 	{
 		/*
 		int year = bytes[0];

@@ -1,0 +1,9 @@
+*.o
+*.os
+*.gcda
+*.gcno
+/.debug
+/kalenji_reader
+/test/unit/unit_tester
+/test/integrated/test_result*.log
+/win/
