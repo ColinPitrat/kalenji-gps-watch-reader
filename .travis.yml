@@ -1,10 +1,10 @@
 language: cpp
-sudo: required
-before_install:
- - sudo apt-get update -qq
- - sudo apt-get install -y libxml2-dev
- - sudo apt-get install -y libusb-dev
- - sudo apt-get install -y libcurl-dev
- - sudo apt-get install -y gtest
- - sudo apt-get install -y gcov
+addons:
+ apt:
+  packages:
+   - libxml2-dev 
+   - libusb-dev
+   - libcurl4-openssl-dev
+   - gtest
+   - gcov
 script: make debug
