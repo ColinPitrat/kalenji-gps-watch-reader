@@ -1,5 +1,6 @@
 language: cpp
-sudo: required
+#To uncomment in case a core occurs:
+#sudo: required
 addons:
  apt:
   packages:
@@ -10,11 +11,10 @@ addons:
    - gdb
    - gcov
 script: 
- - ulimit -c 
- - ulimit -c unlimited
- - ulimit -c 
- - sysctl -a | grep core_pat
- - sudo sysctl kernel.core_pattern=core
+#To uncomment in case a core occurs:
+# - ulimit -c unlimited
+# - sudo sysctl kernel.core_pattern=core
  - make test
- - find ./ -name 'core*'
- - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
+#To uncomment in case a core occurs:
+# - find ./ -name 'core*'
+# - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
