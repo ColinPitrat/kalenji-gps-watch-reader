@@ -5,6 +5,7 @@
 *.gcov
 /.debug
 /tags
+/googletest
 /kalenji_reader
 /test/unit/unit_tester
 /test/integrated/test_result*.log
