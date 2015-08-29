@@ -16,7 +16,11 @@ namespace source
 		_kernelDriver1 = false;
 		_hasInterface1 = false;
 
-		libusb_init(&_USBContext);
+		rc = libusb_init(&_USBContext);
+        if (rc != 0)
+        {
+			StreamExcept::sthrow() << "failed to initialize libusb";
+        }
 		ssize_t nbDevices = libusb_get_device_list(_USBContext, &listOfDevices);
 		if (nbDevices < 0)
 		{
