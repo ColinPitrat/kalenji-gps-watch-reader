@@ -27,6 +27,9 @@ vi -d `pwd`/$result /tmp/$result"
 			let KO_CASES=$KO_CASES+1
             echo "travis_fold:start:test_error$KO_CASES"
             diff -u `pwd`/$result /tmp/$result
+            hexdump -C `pwd`/$result > `pwd`/${result}.hex
+            hexdump -C /tmp/$result > /tmp/${result}.hex
+            diff -u `pwd`/${result}.hex /tmp/${result}.hex
             echo "travis_fold:end:test_error$KO_CASES"
 		fi
 	done
