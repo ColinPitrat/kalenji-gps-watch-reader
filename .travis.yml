@@ -3,6 +3,8 @@ language: cpp
 #sudo: required
 addons:
  apt:
+  sources:
+   - ubuntu-toolchain-r-test
   packages:
    - libxml2-dev 
    - libusb-1.0-0-dev
