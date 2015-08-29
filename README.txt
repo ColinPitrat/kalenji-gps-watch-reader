@@ -40,6 +40,7 @@ Main functionalities are:
     GPS On Move 100
     GPS On Move 510
     GPS On Move 710 
+    NavBike 400
 
 Watches that should be supported but for which feedback would be appreciated:
 
@@ -206,4 +207,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
    - -i: input file
      Provide input file. This is mandatory for device 'GPX'. When used with device 'Kalenji' this allows to import from logs of a previous import.
+
+   - -v: verbose
+     Display detailed information of what is going on. Very useful for debugging or when reporting issues.
 
