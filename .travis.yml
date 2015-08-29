@@ -1,4 +1,5 @@
 language: cpp
+sudo: required
 addons:
  apt:
   packages:
@@ -12,6 +13,7 @@ script:
  - ulimit -c unlimited
  - ulimit -c 
  - sysctl -a | grep core_pat
+ - sudo sysctl kernel.core_pattern=core
  - make test
  - find ./ -name 'core*'
  - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
