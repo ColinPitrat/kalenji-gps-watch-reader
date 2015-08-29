@@ -6,6 +6,7 @@ addons:
    - libusb-1.0-0-dev
    - libcurl4-openssl-dev
    - libgtest-dev
-   - g++-4.9
+   - g++-5
+   - gcc-5
    - gcov
 script: make debug
