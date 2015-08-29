@@ -7,9 +7,9 @@ addons:
    - libcurl4-openssl-dev
    - libgtest-dev
    - gcov
-before_script:
+script: 
  - ulimit -c 
  - ulimit -c unlimited
-script: 
+ - ulimit -c 
  - make test
  - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
