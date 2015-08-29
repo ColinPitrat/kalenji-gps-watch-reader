@@ -26,7 +26,7 @@ do
 vi -d `pwd`/$result /tmp/$result"
 			let KO_CASES=$KO_CASES+1
             echo "travis_fold:start:test_error$KO_CASES"
-            diff `pwd`/$result /tmp/$result
+            diff -u `pwd`/$result /tmp/$result
             echo "travis_fold:end:test_error$KO_CASES"
 		fi
 	done
