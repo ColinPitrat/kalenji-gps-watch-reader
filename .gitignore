@@ -2,7 +2,9 @@
 *.os
 *.gcda
 *.gcno
+*.gcov
 /.debug
+/tags
 /kalenji_reader
 /test/unit/unit_tester
 /test/integrated/test_result*.log
