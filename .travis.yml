@@ -3,7 +3,7 @@ addons:
  apt:
   packages:
    - libxml2-dev 
-   - libusb-dev
+   - libusb-1.0-0-dev
    - libcurl4-openssl-dev
    - gtest
    - gcov
