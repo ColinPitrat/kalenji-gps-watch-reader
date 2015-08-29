@@ -51,6 +51,9 @@ Watches that should be supported but for which feedback would be appreciated:
 If the information above is not correct or if you have a watch that is missing from the list, please contact me so that I can update it.
 
 You have another device and would like to have it supported ? If you are ready to spend some time to provide me samples of USB dumps from imports done on windows, please contact me (if you don't know how to do the dumps, I'll explain you).
+You can also have a look at other projects to check if they support your watch:
+    https://github.com/mru00/crane_gps_watch
+    http://www.gpsbabel.org/
 
 Special thanks to:
 
