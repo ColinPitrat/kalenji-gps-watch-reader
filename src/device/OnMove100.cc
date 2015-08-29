@@ -165,7 +165,7 @@ namespace device
 		_dataSource->read_data(0x81, &responseData, &received);
 		if(responseData[35] != 0xff)
 		{
-			std::cout << "Unexpected line termination " << responseData[35] << " instead of 0xFF." << std::endl;
+			std::cout << "Unexpected line termination " << (int)responseData[35] << " instead of 0xFF." << std::endl;
 		}
 		READ_MORE_DATA;
 		// First lines to be reverse engineered (sessions global infos ?)
