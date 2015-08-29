@@ -8,7 +8,8 @@ addons:
    - libgtest-dev
    - gcov
 before_script:
- - ulimit -c unlimited -S
+ - ulimit -c 
+ - ulimit -c unlimited
 script: 
  - make test
  - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
