@@ -1,5 +1,4 @@
 language: cpp
-sudo: required
 addons:
  apt:
   packages:
@@ -8,11 +7,4 @@ addons:
    - libcurl4-openssl-dev
    - libgtest-dev
    - gcov
-before_script:
- - cp -r /usr/src/gtest gtest
- - cd gtest
- - cmake . 
- - make 
- - sudo mv libg* /usr/lib/ 
- - cd - 
 script: make debug
