@@ -15,7 +15,7 @@ TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 GTEST_LIB=/usr/lib/libgtest.so
 LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 
-debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage
+debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -g -coverage
 
 .PHONY: unit_test build debug clean check_deps
 
