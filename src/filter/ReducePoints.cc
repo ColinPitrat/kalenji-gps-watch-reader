@@ -13,6 +13,8 @@ namespace filter
 		std::list<Lap*> &laps = session->getLaps();
 		uint32_t nbPointsOri = points.size();
 		
+		// TODO: Add a fixed minimal distance between points (for example 10m or 20m)
+		// TODO: Add a dynamic maximal distance between points (computed from session's length, for example 2% of session length (200m for 10km, 400m for 20k ...))
 		std::istringstream iss(configuration["reduce_points_max"]);
 		uint32_t maxNbPoints = 0;
 		iss >> maxNbPoints;
@@ -38,6 +40,7 @@ namespace filter
 				double lon2 = (*previousPoint)->getLongitude();
 				double lat3 = (*previousKept)->getLatitude();
 				double lon3 = (*previousKept)->getLongitude();
+				// TODO: Compare not only (pK, p) with (pP, p) but also (pK, pK+1) with (pK, p)
 				orientation1 = atan2(lat1 - lat2, lon1 - lon2);
 				orientation2 = atan2(lat1 - lat3, lon1 - lon3);
 				double dOrientation = fabs(orientation1 - orientation2);

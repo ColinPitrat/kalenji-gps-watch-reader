@@ -267,6 +267,7 @@ namespace device
 			dumpInt4(fl, lat);
 			dumpInt4(fl, lon);
 			++i;
+			// TODO: Maximum number of points should be 100 ?
 			if(i >= 200)
 			{
 				std::cerr << "Error: Too much points to export - truncating session" << std::endl;
