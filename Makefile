@@ -17,6 +17,9 @@ LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 ifndef CXX
 CXX=g++
 endif
+ifndef COV
+COV=gcov
+endif
 
 debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -g -coverage -pthread -I$(GTEST_DIR)/include -I$(GTEST_DIR)
 
@@ -31,7 +34,7 @@ all: build
 endif
 
 debug: debug_flag gtest build unit_test test tags
-	gcov -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
+	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
 
 gtest:
 	[ -d googletest ] || git clone https://github.com/google/googletest.git
