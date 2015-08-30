@@ -14,6 +14,9 @@ TEST_TARGET=test/unit/unit_tester
 TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') $(GTEST_DIR)/src/gtest-all.o
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
+ifndef CXX
+CXX=g++
+endif
 
 debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -g -coverage -pthread -I$(GTEST_DIR)/include -I$(GTEST_DIR)
 
@@ -40,7 +43,7 @@ tags:
 	@ctags -R . || echo -e "!!!!!!!!!!!\n!! Warning: ctags not found - if you are a developer, you might want to install it.\n!!!!!!!!!!!"
 
 build: check_deps $(OBJECTS)
-	g++ $(CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
 
 windows: $(WINOBJECTS)
 	mkdir -p win
@@ -63,16 +66,16 @@ check_deps:
 	@pkg-config --libs libcurl >/dev/null 2>&1 || (echo "Error: missing dependency libcurl. Try installing libcurl development package (e.g: libcurl-dev libcurl4-gnutls-dev ...)" && false)
 
 $(OBJECTS): %.o:%.cc $(HEADERS)
-	g++ $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
-	g++ $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) build
-	g++ $(CFLAGS) $(ADD_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
 	./$(TEST_TARGET)
 
 test: build
