@@ -277,6 +277,7 @@ namespace device
 		while(i < 200)
 		{
 			dumpInt4(fl, 0);
+			dumpInt4(fl, 0);
 			++i;
 		}
 		fl.close();
