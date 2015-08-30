@@ -14,6 +14,8 @@ addons:
    - g++-4.8
 #To uncomment in case a core occurs:
 #   - gdb
+before_script:
+ - export CXX=g++-4.8
 script: 
 #To uncomment in case a core occurs:
 # - ulimit -c unlimited
