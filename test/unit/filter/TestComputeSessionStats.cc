@@ -39,8 +39,8 @@ TEST_F(ComputeSessionStatsTest, AscentDescentComputationWhenClimbing)
 
 	aComputeSessionsStatsFilter.filter(&aSession, emptyConfiguration);
 
-	ASSERT_EQ(aSession.getAscent(), 100);
-	ASSERT_EQ(aSession.getDescent(), 0);
+	ASSERT_EQ(aSession.getAscent(), 100u);
+	ASSERT_EQ(aSession.getDescent(), 0u);
 }
 
 TEST_F(ComputeSessionStatsTest, AscentDescentComputationWhenGoingDown)

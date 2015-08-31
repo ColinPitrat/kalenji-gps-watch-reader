@@ -1,5 +1,4 @@
 #include "OnMove100.h"
-#include "../Common.h"
 #include <cstring>
 #include <iostream>
 #include <iomanip>

@@ -125,6 +125,14 @@ double ArcInRadians(double lat1,double long1,double lat2,double long2)
 	return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));  
 }  
       
+uint32_t str_to_int(std::string intAsString)
+{
+	std::istringstream iss(intAsString);
+	uint32_t result(0);
+	iss >> result;
+	return result;
+}
+
 /** Computes the distance, in meters, between two WGS-84 positions. 
  * 
  * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code> 
