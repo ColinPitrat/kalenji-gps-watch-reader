@@ -1,5 +1,5 @@
 #include "ReducePoints.h"
-#include "../Common.h"
+#include "../Utils.h"
 #include <cmath>
 #include <sstream>
 
@@ -7,19 +7,67 @@ namespace filter
 {
 	REGISTER_FILTER(ReducePoints);
 
+	std::list<Point*>::iterator removePoint(Session *session, std::list<Point*>::iterator itToRemove, Point *previousKept)
+	{
+		Point *point = *itToRemove;
+		// Change lap boundary if it references the point
+		std::list<Lap*> &laps = session->getLaps();
+		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		{
+			if((*it)->getStartPoint() == point)
+			{
+				(*it)->setStartPoint(previousKept);
+			}
+			if((*it)->getEndPoint() == point)
+			{
+				(*it)->setEndPoint(previousKept);
+			}
+		}
+
+		// Remove point from list of points of the session
+		std::list<Point*> &points = session->getPoints();
+		std::list<Point*>::iterator it = points.erase(itToRemove);
+		delete (point);
+
+		return it;
+	}
+
 	void ReducePoints::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
-		std::list<Lap*> &laps = session->getLaps();
 		uint32_t nbPointsOri = points.size();
 		
-		// TODO: Add a fixed minimal distance between points (for example 10m or 20m)
-		// TODO: Add a dynamic maximal distance between points (computed from session's length, for example 2% of session length (200m for 10km, 400m for 20k ...))
-		std::istringstream iss(configuration["reduce_points_max"]);
-		uint32_t maxNbPoints = 0;
-		iss >> maxNbPoints;
-		uint32_t divider = 64;
+		uint32_t maxNbPoints = str_to_int(configuration["reduce_points_max"]);
+		if(maxNbPoints < 3) maxNbPoints = 3;
+		uint32_t minDistBetweenPoints = str_to_int(configuration["reduce_points_min_dist"]);
+		uint32_t maxDistBetweenPoints = str_to_int(configuration["reduce_points_max_dist"]);
+		// Arbitrary distance of 10k because session->getDistance() can return 0 in some cases
+		if(maxDistBetweenPoints == 0) maxDistBetweenPoints = 10000;
 
+		if(points.size() <= maxNbPoints) return;
+
+		// First pass: remove points that are too close
+		if(minDistBetweenPoints > 0)
+		{
+			std::list<Point*>::iterator it = points.begin();
+			std::list<Point*>::iterator previousKept = it;
+			++it;
+			while(it != points.end())
+			{
+				if(distanceEarth(**previousKept, **it) >= minDistBetweenPoints)
+				{
+					previousKept = it;
+					++it;
+				}
+				else
+				{
+					it = removePoint(session, it, *previousKept);
+				}
+			}
+		}
+
+		// Second pass: remove points that are 'nearly' aligned with the previous/next ones
+		uint32_t divider = 64;
 		while(points.size() > maxNbPoints && divider > 4)
 		{
 			std::list<Point*>::iterator it = points.begin();
@@ -50,22 +98,11 @@ namespace filter
 				if(dOrientation < -pi) dOrientation += 2*pi;
 
 				// TODO: Arbitrary limit to determine in a smarter way ?
-				if(dOrientation < (pi / divider) && !(*previousPoint)->isImportant())
+				if(dOrientation < (pi / divider)
+				   && !(*previousPoint)->isImportant()
+				   && distanceEarth(**previousKept, **it) <= maxDistBetweenPoints)
 				{
-					for(std::list<Lap*>::iterator it2 = laps.begin(); it2 != laps.end(); ++it2)
-					{
-						if((*it2)->getStartPoint() == (*previousPoint))
-						{
-							(*it2)->setStartPoint(*previousKept);
-						}
-						if((*it2)->getEndPoint() == (*previousPoint))
-						{
-							(*it2)->setEndPoint(*previousKept);
-						}
-					}
-					Point *toDelete = *previousPoint;
-					previousPoint = points.erase(previousPoint);
-					delete (toDelete);
+					previousPoint = removePoint(session, previousPoint, *previousKept);
 				}
 				else
 				{

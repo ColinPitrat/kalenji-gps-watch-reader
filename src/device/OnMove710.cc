@@ -1,5 +1,4 @@
 #include "OnMove710.h"
-#include "../Common.h"
 #include <cstring>
 #include <iomanip>
 #include <set>

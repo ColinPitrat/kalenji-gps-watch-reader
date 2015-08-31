@@ -1,9 +1,10 @@
 #include "Kalenji.h"
-#include "../Common.h"
 #include "../Utils.h"
 #include <cstring>
 #include <iomanip>
 #include <cmath>
+
+#define KALENJI_EXPORT_MAX_POINTS 250
 
 namespace device
 {

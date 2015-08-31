@@ -31,7 +31,7 @@ class EmptyLapsTest : public testing::Test
     private:
         void addLapToSession(double lat, double lon, double duration, uint32_t length, uint32_t nbPoints)
         {
-            ASSERT_NE(0, nbPoints);
+            ASSERT_NE(0u, nbPoints);
 
             Point *startPoint(NULL), *endPoint(NULL);
             for(uint32_t j = 0; j < nbPoints; ++j)
@@ -59,7 +59,7 @@ TEST_F(EmptyLapsTest, NoLapRemovedIfNoEmptyLap)
 
     aEmptyLapsFilter.filter(&aSession, emptyConfiguration);
 
-    ASSERT_EQ(5, aSession.getLaps().size());
+    ASSERT_EQ(5u, aSession.getLaps().size());
 }
 
 TEST_F(EmptyLapsTest, NullDistanceLapsRemoved)
