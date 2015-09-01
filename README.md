@@ -104,6 +104,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Output directory
 
       Name: directory
+
       Default value: /tmp/kalenji_import
 
       You can configure the directory where the imported file will be put. 
@@ -114,6 +115,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Default import behavior
 
       Name: import
+
       Default value: all
 
       You can decide whether you prefer to always:
@@ -127,6 +129,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Default trigger type
 
       Name: trigger
+
       Default value: manual
 
       The information of the kind of event that triggered the end of a lap is, as far as I know, not given by the watch. 
@@ -141,6 +144,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Filters
 
       Name: filters
+
       Default value: UnreliablePoints,EmptyLaps
 
       List of filters to apply on imported data before exporting it. A list of filters separated by coma. Use 'none' for no filter.
@@ -157,6 +161,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Outputs
 
       Name: outputs
+
       Default value: GPX,GoogleMap
 
       List of formats to which data should be exported.
@@ -172,6 +177,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Log transactions
 
       Name: log_transactions
+
       Default value: yes
 
       If set to yes, the raw information read from the watch is logged in hexadecimal in log files. 
@@ -183,6 +189,7 @@ This way, program output will also be written in the file kalenji_reader_output.
    - Log transactions directory
 
       Name: log_transactions_directory
+
       Default value: logs subdirectory in output directory
 
       The directory where raw data from the watch is logged if this functionality is activated. 
