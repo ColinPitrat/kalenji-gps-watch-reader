@@ -51,11 +51,6 @@ namespace device
 			LOG_VERBOSE("OnMove100::init() - step 4");
 			_dataSource->control_transfer(0x80, 0x6, 0x302, 0x409, dataIn, 256);
 
-			/* Same as step 5 but buffer to small
-			LOG_VERBOSE("OnMove100::init() - step 5");
-			_dataSource->control_transfer(0x80, 0x6, 0x200, 0x0, dataIn, 9);
-			*/
-
 			LOG_VERBOSE("OnMove100::init() - step 6");
 			_dataSource->control_transfer(0x80, 0x6, 0x200, 0x0, dataIn, 32);
 
@@ -71,31 +66,12 @@ namespace device
 			LOG_VERBOSE("OnMove100::init() - step 10");
 			_dataSource->control_transfer(0xc0, 0xFF, 0x370b, 0x0, dataIn, 1);
 
-			/* Same as step 10 - useless ?
-			LOG_VERBOSE("OnMove100::init() - step 11");
-			_dataSource->control_transfer(0xc0, 0xFF, 0x370b, 0x0, dataIn, 1);
-			*/
-
 			LOG_VERBOSE("OnMove100::init() - step 12");
 			data[0] = 0; data[1] = 0xc2; data[2] = 1; data[3] = 0;
 			_dataSource->control_transfer(0x40, 0x1e, 0x0, 0x0, data, 4);
 
 			LOG_VERBOSE("OnMove100::init() - step 13");
 			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
-
-			/* Same as step 13 - useless ?
-			LOG_VERBOSE("OnMove100::init() - step 14");
-			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
-
-			LOG_VERBOSE("OnMove100::init() - step 15");
-			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
-
-			LOG_VERBOSE("OnMove100::init() - step 16");
-			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
-
-			LOG_VERBOSE("OnMove100::init() - step 17");
-			_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
-			*/
 		}
 		// Step 2 - Device initialization ?
 		{
@@ -103,9 +79,8 @@ namespace device
 			//unsigned char initResponse[sizeInitResponse] = { 0x45, 0x0c, 0x0c, 0x18, 0x01, 0x65 };
 			// In issue 23, a dump attached as 45 0c 04 18 00 as answer, considered correct by OnConnect software
 			// So let's only check 45 0c as it's the common part to all dumps until now
-			// In issue 48, Navbike 40 answers 45 0d ... so only check 0x45 ...
-			const size_t sizeInitResponse = 1;
-			unsigned char initResponse[sizeInitResponse] = { 0x45 };
+			const size_t sizeInitResponse = 2;
+			unsigned char initResponse[sizeInitResponse] = { 0x45, 0xc };
 			size_t received = 0;
 			unsigned char *responseData;
 			int attempts = 0;
