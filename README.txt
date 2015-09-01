@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader.svg?branch=master)](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader)
+
 ************************
 * About kalenji_reader *
 ************************
