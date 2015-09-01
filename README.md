@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader.svg?branch=master)](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader)
 
-# About kalenji_reader *
+# About kalenji_reader
 
 This tool allows to import data from some running watches.
 
@@ -67,7 +67,7 @@ Some help would also be appreciated to build the software on Mac OS.
 
 A functionality is missing ? You found a bug ? Please go in issues and open one. 
  
-# Install and use *
+# Install and use
 
 From the directory containing this README.txt:
 
@@ -91,7 +91,7 @@ ulimit -c 1000000
 
 This way, program output will also be written in the file kalenji_reader_output.txt. You can attach this file and the core to a bug report to provide more information on what was the problem.
 
-# Configuration file *
+# Configuration file
 
  * Where to place your configuration file
 
@@ -177,7 +177,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
       The directory where raw data from the watch is logged if this functionality is activated. 
 
-# Command line options *
+# Command line options
 
    - -h: help
      Show the usual help message giving supported options
