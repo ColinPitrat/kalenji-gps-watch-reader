@@ -101,7 +101,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
  * Options available
 
-   - Output directory
+   - **Output directory**
 
       Name: directory
 
@@ -112,7 +112,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
       > directory=/home/toto/Running
 
-   - Default import behavior
+   - **Default import behavior**
 
       Name: import
 
@@ -126,7 +126,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
       The latter is longer if you don't want all sessions but it asks less questions so if you erase the sessions from your watch after importing them you will probably prefer it.
 
-   - Default trigger type
+   - **Default trigger type**
 
       Name: trigger
 
@@ -141,7 +141,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        - location: a given location being reached (not possible with those watch)
        - hr: a given heartrate being reached (not possible with those watch) 
 
-   - Filters
+   - **Filters**
 
       Name: filters
 
@@ -158,7 +158,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        - ComputeSessionStats: Compute information at session level from points (distance, duration, max and average speed, ascent, descent ...)
        - ReducePoints: Reduce the number of points by removing points that are not far from being aligned. This is usefull when needing to upload a route that has more than 200 points to the watch.
 
-   - Outputs
+   - **Outputs**
 
       Name: outputs
 
@@ -174,7 +174,7 @@ This way, program output will also be written in the file kalenji_reader_output.
        - KML: a file to be opened in Google Earth. It could also work with other software supporting KML files. 
        - Kalenji: to export a route to the device
 
-   - Log transactions
+   - **Log transactions**
 
       Name: log_transactions
 
@@ -186,7 +186,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
       By default, the log files are created in a subdirectory logs of the output directory but this can be configured with configuration variable described next.
 
-   - Log transactions directory
+   - **Log transactions directory**
 
       Name: log_transactions_directory
 
