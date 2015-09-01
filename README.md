@@ -1,9 +1,7 @@
 [![Build Status](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader.svg?branch=master)](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader)
 
-************************
-* About kalenji_reader *
-************************
- 
+# About kalenji_reader *
+
 This tool allows to import data from some running watches.
 
 It creates GPX, TCX and Fitlog files that should be usable with any software supporting those file formats.
@@ -69,9 +67,7 @@ Some help would also be appreciated to build the software on Mac OS.
 
 A functionality is missing ? You found a bug ? Please go in issues and open one. 
  
- *******************
- * Install and use *
- *******************
+# Install and use *
 
 From the directory containing this README.txt:
 
@@ -85,9 +81,7 @@ To import data from your watch, ensure it's properly connected then launch:
 
 GPX files created can then be imported in your favorite software. HTML files created can be displayed in a browser supporting java script provided you are connected to internet. KML files can be read in Google Earth or any other software supporting it.
 
- **************
- * Debug mode *
- **************
+# Debug mode *
 
 In case you encounter a core dump, please reproduce it in debug before submitting an issue. To do so, use make debug instead of make. Also use ulimit to allow the OS creating corefiles in case your distribution disable it by default.
 
@@ -97,9 +91,7 @@ ulimit -c 1000000
 
 This way, program output will also be written in the file kalenji_reader_output.txt. You can attach this file and the core to a bug report to provide more information on what was the problem.
 
- **********************
- * Configuration file *
- **********************
+# Configuration file *
 
  * Where to place your configuration file
 
@@ -185,9 +177,7 @@ This way, program output will also be written in the file kalenji_reader_output.
 
       The directory where raw data from the watch is logged if this functionality is activated. 
 
- ************************
- * Command line options *
- ************************
+# Command line options *
 
    - -h: help
      Show the usual help message giving supported options
