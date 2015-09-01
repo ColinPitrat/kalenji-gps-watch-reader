@@ -55,8 +55,8 @@ TEST_F(ComputeSessionStatsTest, AscentDescentComputationWhenGoingDown)
 
 	aComputeSessionsStatsFilter.filter(&aSession, emptyConfiguration);
 
-	ASSERT_EQ(aSession.getAscent(), 0);
-	ASSERT_EQ(aSession.getDescent(), 100);
+	ASSERT_EQ(aSession.getAscent(), 0u);
+	ASSERT_EQ(aSession.getDescent(), 100u);
 }
 
 TEST_F(ComputeSessionStatsTest, MaxAndAvgSpeedComputation)
@@ -95,5 +95,5 @@ TEST_F(ComputeSessionStatsTest, DurationComputation)
 
 	aComputeSessionsStatsFilter.filter(&aSession, emptyConfiguration);
 
-	ASSERT_EQ(aSession.getDuration(), 120);
+	ASSERT_EQ(aSession.getDuration(), 120u);
 }

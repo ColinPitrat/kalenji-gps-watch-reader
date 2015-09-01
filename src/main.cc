@@ -110,7 +110,7 @@ std::map<std::string, std::string> readOptions(int argc, char **argv)
 				options["device"] = std::string(optarg);
 				break;
 			case 'p':
-				// UGLY: 
+				// UGLY:
 				// Issue 43: if source is File it means -i option was used
 				// In this case, the -p option is used to specify output directory, not input !
 				if(options["source"] != "File")
@@ -209,9 +209,9 @@ bool readConf(std::map<std::string, std::string>& options)
 			}
 			conf_file.close();
 		}
-		else 
+		else
 		{
-			std::cerr << "Unable to open " << rcfile; 
+			std::cerr << "Unable to open " << rcfile;
 			return false;
 		}
 	}
@@ -228,7 +228,7 @@ bool parseConfAndOptions(int argc, char** argv)
 	std::map<std::string, std::string> options = readOptions(argc, argv);
 	readConf(options);
 
-	// Some configuration adaptation ... 
+	// Some configuration adaptation ...
 	// TODO: Cleaner way to handle it ?
 	if(configuration.count("log_transactions_directory") == 0)
 	{
@@ -257,7 +257,7 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
 		{
 			// TODO: Use a Session method instead !
-			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime(true); 
+			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime(true);
 			std::cout << " " << std::setw(5) << it->second.getNbLaps() << " laps ";
 			std::cout << std::setw(10) << (double)it->second.getDistance() / 1000 << " km ";
 			std::cout << std::setw(15) << durationAsString(it->second.getDuration()) << std::endl;
@@ -283,7 +283,7 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
 			{
 				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
-				if(output && !output->exists(&(it->second), configuration)) 
+				if(output && !output->exists(&(it->second), configuration))
 				{
 					to_import << " " << it->second.getNum();
 					import = true;
@@ -332,7 +332,7 @@ int main(int argc, char *argv[])
 		if(!checkAndCreateDir(configuration["directory"])) return -1;
 		LOG_VERBOSE("Create output directory '" << configuration["directory"] << "'");
 
-		// TODO: Use registry for source too 
+		// TODO: Use registry for source too
 		source::Source *dataSource = NULL;
 		if(configuration["source"] == "File")
 		{
@@ -353,7 +353,7 @@ int main(int argc, char *argv[])
 				LOG_VERBOSE("With transaction logger");
 				if(!checkAndCreateDir(configuration["log_transactions_directory"])) return -1;
 
-				// Create log file name 
+				// Create log file name
 				// TODO: Improve ?
 				char buffer[256];
 				time_t t = time(NULL);
@@ -424,7 +424,7 @@ int main(int argc, char *argv[])
 		LOG_VERBOSE("Get sessions list");
 		myDevice->getSessionsList(&sessions);
 
-		// If import = ask, prompt the user for sessions to import. 
+		// If import = ask, prompt the user for sessions to import.
 		// TODO: also prompt here for trigger type (and other info not found in the watch ?). This means at session level instead of global but could also be at lap level !
 		std::list<std::string> outputs = splitString(configuration["outputs"]);
 		LOG_VERBOSE("Filter out sessions");
@@ -436,7 +436,7 @@ int main(int argc, char *argv[])
 		LOG_VERBOSE("Release device");
 		myDevice->release();
 		delete myDevice;
-		if(dataSource != NULL) 
+		if(dataSource != NULL)
 		{
 			LOG_VERBOSE("Release datasource");
 			dataSource->release();

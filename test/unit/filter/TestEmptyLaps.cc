@@ -73,7 +73,7 @@ TEST_F(EmptyLapsTest, NullDistanceLapsRemoved)
 
     aEmptyLapsFilter.filter(&aSession, emptyConfiguration);
 
-    ASSERT_EQ(3, aSession.getLaps().size());
+    ASSERT_EQ(3u, aSession.getLaps().size());
 }
 
 TEST_F(EmptyLapsTest, NullDurationLapsRemoved)
@@ -87,7 +87,7 @@ TEST_F(EmptyLapsTest, NullDurationLapsRemoved)
 
     aEmptyLapsFilter.filter(&aSession, emptyConfiguration);
 
-    ASSERT_EQ(2, aSession.getLaps().size());
+    ASSERT_EQ(2u, aSession.getLaps().size());
 }
 
 TEST_F(EmptyLapsTest, SameStartAndEndPointsLapsRemoved)
@@ -101,5 +101,5 @@ TEST_F(EmptyLapsTest, SameStartAndEndPointsLapsRemoved)
 
     aEmptyLapsFilter.filter(&aSession, emptyConfiguration);
 
-    ASSERT_EQ(4, aSession.getLaps().size());
+    ASSERT_EQ(4u, aSession.getLaps().size());
 }
