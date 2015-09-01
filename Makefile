@@ -34,7 +34,7 @@ all: build
 endif
 
 debug: debug_flag gtest build unit_test test tags
-	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$"
+	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$" | sort -k 2 -t : -gr
 
 gtest:
 	[ -d googletest ] || git clone https://github.com/google/googletest.git
