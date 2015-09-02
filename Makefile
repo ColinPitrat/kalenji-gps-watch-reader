@@ -74,7 +74,7 @@ $(OBJECTS): %.o:%.cc $(HEADERS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
