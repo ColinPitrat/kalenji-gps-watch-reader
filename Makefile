@@ -10,6 +10,7 @@ WININCPATH=-I/usr/i486-mingw32/include/libusb-1.0/ -I/usr/i486-mingw32/include/l
 WINLIBS=/usr/i486-mingw32/lib/libusb-1.0.dll.a /usr/i486-mingw32/lib/libxml2.dll.a /usr/i486-mingw32/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
 GTEST_DIR=googletest/googletest/
+TEST_CFLAGS=-I$(GTEST_DIR)/include -I$(GTEST_DIR)
 TEST_TARGET=test/unit/unit_tester
 TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') $(GTEST_DIR)/src/gtest-all.o
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
@@ -21,7 +22,7 @@ ifndef COV
 COV=gcov
 endif
 
-debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -g -coverage -pthread -I$(GTEST_DIR)/include -I$(GTEST_DIR)
+debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
 
 .PHONY: unit_test build debug clean check_deps
 
@@ -79,7 +80,7 @@ $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) build
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
+	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
 	./$(TEST_TARGET)
 
 test: build
