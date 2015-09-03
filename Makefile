@@ -6,6 +6,7 @@ OBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.o/')
 HEADERS=$(shell find src -name \*.h)
 CFLAGS=-Wall -Wextra -Wno-unused-parameter
 ADD_CFLAGS=-O2
+DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
 WININCPATH=-I/usr/i486-mingw32/include/libusb-1.0/ -I/usr/i486-mingw32/include/libxml2/
 WINLIBS=/usr/i486-mingw32/lib/libusb-1.0.dll.a /usr/i486-mingw32/lib/libxml2.dll.a /usr/i486-mingw32/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
@@ -22,14 +23,14 @@ ifndef COV
 COV=gcov
 endif
 
-debug: ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
+debug: ADD_CFLAGS=$(DEBUG_ADD_CFLAGS)
 
 .PHONY: unit_test build debug clean check_deps
 
 ifeq ($(LAST_BUILD_IN_DEBUG), 1)
-all: 
-	@echo -e "\n!!!!!!!!!!!\n!! Warning: previous build was in debug - rebuilding in debug.\n!! Use make clean before running make to rebuild in release.\n!!!!!!!!!!!\n"
-	@make debug
+DUMMY:=$(shell echo -e '\n!!!!!!!!!!!\n!! Warning: previous build was in debug - rebuilding in debug.\n!! Use make clean before running make to rebuild in release.\n!!!!!!!!!!!\n' >&2)
+ADD_CFLAGS=$(DEBUG_ADD_CFLAGS)
+all: debug
 else
 all: build
 endif
@@ -47,7 +48,9 @@ debug_flag:
 tags:
 	@ctags -R . || echo -e "!!!!!!!!!!!\n!! Warning: ctags not found - if you are a developer, you might want to install it.\n!!!!!!!!!!!"
 
-build: check_deps $(OBJECTS)
+build: $(TARGET)
+
+$(TARGET): check_deps $(OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
 
 windows: $(WINOBJECTS)
@@ -79,11 +82,11 @@ $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
-unit_test: $(TEST_OBJECTS) build
+unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
-	./$(TEST_TARGET)
+	./$(TEST_TARGET) --gtest_shuffle
 
-test: build
+test: $(TARGET)
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
 	cd test/integrated/ && ./run.sh && cd ..
 
