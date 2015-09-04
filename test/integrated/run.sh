@@ -25,12 +25,12 @@ do
 			diff_command="$diff_command
 vi -d `pwd`/$result /tmp/$result"
 			let KO_CASES=$KO_CASES+1
-            echo "travis_fold:start:test_error$KO_CASES"
-            diff -u `pwd`/$result /tmp/$result
-            hexdump -C `pwd`/$result > `pwd`/${result}.hex
-            hexdump -C /tmp/$result > /tmp/${result}.hex
-            diff -u `pwd`/${result}.hex /tmp/${result}.hex
-            echo "travis_fold:end:test_error$KO_CASES"
+            #echo "travis_fold:start:test_error$KO_CASES"
+            #diff -u `pwd`/$result /tmp/$result
+            #hexdump -C `pwd`/$result > `pwd`/${result}.hex
+            #hexdump -C /tmp/$result > /tmp/${result}.hex
+            #diff -u `pwd`/${result}.hex /tmp/${result}.hex
+            #echo "travis_fold:end:test_error$KO_CASES"
 		fi
 	done
 	popd > /dev/null
@@ -41,9 +41,9 @@ percentage=$((100*$OK_CASES/($OK_CASES+$KO_CASES)))
 echo ""
 echo "Result = $percentage % ($OK_CASES OK - $KO_CASES KO)"
 echo "See $RESULT_FILE for details"
-echo "travis_fold:start:test_logs"
-cat "$RESULT_FILE"
-echo "travis_fold:end:test_logs"
+#echo "travis_fold:start:test_logs"
+#cat "$RESULT_FILE"
+#echo "travis_fold:end:test_logs"
 echo ""
 if [ ! -z "$diff_command" ]
 then
