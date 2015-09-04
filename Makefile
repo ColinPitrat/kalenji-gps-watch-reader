@@ -37,7 +37,7 @@ endif
 
 # the (read ...) part sorts the output except for the first line. The tac between and after make it sort the output except for the last line.
 debug: debug_flag gtest build unit_test test tags
-	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$" | tac | (read line; printf "%s\n" "$$line"; sort -k 2 -t : -gr) | tac
+	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$" | tac | (read line; printf "%s\n" "$$line"; sort -k 2 -t : -g) | tac
 
 gtest:
 	[ -d googletest ] || git clone https://github.com/google/googletest.git
