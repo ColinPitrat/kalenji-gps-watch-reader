@@ -31,15 +31,15 @@ namespace source
 				}
 				inputfile.close();
 			}
-			else 
+			else
 			{
-				std::cerr << "Unable to open " << inputfile; 
+				std::cerr << "Unable to open " << _filename;
 				// TODO: Throw an exception
 			}
 		}
-		else 
+		else
 		{
-			std::cerr << "Unable to access " << _filename; 
+			std::cerr << "Unable to access " << _filename;
 			// TODO: Throw an exception
 		}
 	}
