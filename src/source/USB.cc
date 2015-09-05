@@ -19,12 +19,12 @@ namespace source
 		rc = libusb_init(&_USBContext);
         if (rc != 0)
         {
-			StreamExcept::sthrow() << "failed to initialize libusb";
+			throw std::runtime_error(Formatter() << "failed to initialize libusb");
         }
 		ssize_t nbDevices = libusb_get_device_list(_USBContext, &listOfDevices);
 		if (nbDevices < 0)
 		{
-			StreamExcept::sthrow() << "can't retrieve USB devices list: " << nbDevices;
+			throw std::runtime_error(Formatter() << "can't retrieve USB devices list: " << nbDevices);
 		}
 		for(int i = 0; i < nbDevices; ++i)
 		{
@@ -150,7 +150,7 @@ namespace source
 	{
 		if(rc < 0)
 		{
-			StreamExcept::sthrow() << "on USB operation code " << rc << " - " << errno << getUSBErrorMessage(rc);
+			throw std::runtime_error(Formatter() << "on USB operation code " << rc << " - " << errno << getUSBErrorMessage(rc));
 		}
 	}
 
@@ -171,7 +171,7 @@ namespace source
 		checkAndThrowUSBOperation(rc);
 		if((size_t)transferred != iLength)
 		{
-			StreamExcept::sthrow() << "on USB write transferred (" << transferred << ") != length (" << iLength << ")";
+			throw std::runtime_error(Formatter() << "on USB write transferred (" << transferred << ") != length (" << iLength << ")");
 		}
 	}
 

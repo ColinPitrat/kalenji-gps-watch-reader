@@ -4,36 +4,47 @@
 #include <sstream>
 #include <iomanip>
 #include <stdint.h>
-#include <cmath> 
+#include <cmath>
 
 #ifdef WINDOWS
 struct tm * localtime_r (const time_t *timer, struct tm *result)
 {
-	struct tm *local_result; 
-	local_result = localtime (timer); 
+	struct tm *local_result;
+	local_result = localtime (timer);
 
-	if (local_result == NULL || result == NULL) 
+	if (local_result == NULL || result == NULL)
 	{
-		return NULL; 
+		return NULL;
 	}
 
-	memcpy (result, local_result, sizeof (*result)); 
-	return result; 
-} 
+	memcpy (result, local_result, sizeof (*result));
+	return result;
+}
+
 struct tm * gmtime_r (const time_t *timer, struct tm *result)
 {
-	struct tm *local_result; 
-	local_result = gmtime (timer); 
+	struct tm *local_result;
+	local_result = gmtime (timer);
 
-	if (local_result == NULL || result == NULL) 
+	if (local_result == NULL || result == NULL)
 	{
-		return NULL; 
+		return NULL;
 	}
 
-	memcpy (result, local_result, sizeof (*result)); 
-	return result; 
-} 
-#endif 
+	memcpy (result, local_result, sizeof (*result));
+	return result;
+}
+#endif
+
+std::string Formatter::str() const
+{
+    return _stream.str();
+}
+
+Formatter::operator std::string() const
+{
+    return _stream.str();
+}
 
 void trimString(std::string &toTrim)
 {
@@ -52,11 +63,11 @@ void trimString(std::string &toTrim)
 std::string durationAsString(double sec, bool with_millis)
 {
 	uint32_t days = sec / (24*3600);
-	sec -= days * 24 * 3600; 
+	sec -= days * 24 * 3600;
 	uint32_t hours = sec / 3600;
-	sec -= hours * 3600; 
+	sec -= hours * 3600;
 	uint32_t minutes = sec / 60;
-	sec -= minutes * 60; 
+	sec -= minutes * 60;
 	uint32_t seconds = sec;
 	sec -= seconds;
 	uint32_t millis = sec * 1000;
@@ -94,37 +105,37 @@ std::list<std::string> splitString(std::string toSplit, std::string separator)
 }
 
 static const double PI = 3.14159265358979323846;
-static const double DEG_TO_RAD = PI / 180.0;  
-/// Earth's quatratic mean radius for WGS-84  
-static const double EARTH_RADIUS_IN_METERS = 6372797.560856;  
-      
-/** Computes the arc, in radian, between two WGS-84 positions. 
- * 
- * The result is equal to <code>Distance(from,to)/EARTH_RADIUS_IN_METERS</code> 
- *    <code>= 2*asin(sqrt(h(d/EARTH_RADIUS_IN_METERS )))</code> 
- * 
- * where:<ul> 
- *    <li>d is the distance in meters between 'from' and 'to' positions.</li> 
- *    <li>h is the haversine function: <code>h(x)=sin²(x/2)</code></li> 
- * </ul> 
- * 
- * The haversine formula gives: 
- *    <code>h(d/R) = h(from.lat-to.lat)+h(from.lon-to.lon)+cos(from.lat)*cos(to.lat)</code> 
- * 
- * http://en.wikipedia.org/wiki/Law_of_haversines 
- */  
-double ArcInRadians(double lat1,double long1,double lat2,double long2) 
+static const double DEG_TO_RAD = PI / 180.0;
+/// Earth's quatratic mean radius for WGS-84
+static const double EARTH_RADIUS_IN_METERS = 6372797.560856;
+
+/** Computes the arc, in radian, between two WGS-84 positions.
+ *
+ * The result is equal to <code>Distance(from,to)/EARTH_RADIUS_IN_METERS</code>
+ *    <code>= 2*asin(sqrt(h(d/EARTH_RADIUS_IN_METERS )))</code>
+ *
+ * where:<ul>
+ *    <li>d is the distance in meters between 'from' and 'to' positions.</li>
+ *    <li>h is the haversine function: <code>h(x)=sin²(x/2)</code></li>
+ * </ul>
+ *
+ * The haversine formula gives:
+ *    <code>h(d/R) = h(from.lat-to.lat)+h(from.lon-to.lon)+cos(from.lat)*cos(to.lat)</code>
+ *
+ * http://en.wikipedia.org/wiki/Law_of_haversines
+ */ 
+double ArcInRadians(double lat1,double long1,double lat2,double long2)
 {
-	double latitudeArc  = (lat1 - lat2) * DEG_TO_RAD;  
-	double longitudeArc = (long1 - long2) * DEG_TO_RAD;  
-	double latitudeH = sin(latitudeArc * 0.5);  
-	latitudeH *= latitudeH;  
-	double lontitudeH = sin(longitudeArc * 0.5);  
-	lontitudeH *= lontitudeH;  
-	double tmp = cos(lat1*DEG_TO_RAD) * cos(lat2*DEG_TO_RAD);  
-	return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));  
-}  
-      
+	double latitudeArc  = (lat1 - lat2) * DEG_TO_RAD;
+	double longitudeArc = (long1 - long2) * DEG_TO_RAD;
+	double latitudeH = sin(latitudeArc * 0.5);
+	latitudeH *= latitudeH;
+	double lontitudeH = sin(longitudeArc * 0.5);
+	lontitudeH *= lontitudeH;
+	double tmp = cos(lat1*DEG_TO_RAD) * cos(lat2*DEG_TO_RAD);
+	return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));
+}
+
 uint32_t str_to_int(std::string intAsString)
 {
 	std::istringstream iss(intAsString);
@@ -133,14 +144,14 @@ uint32_t str_to_int(std::string intAsString)
 	return result;
 }
 
-/** Computes the distance, in meters, between two WGS-84 positions. 
- * 
- * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code> 
- */  
-double distanceEarth(double lat1,double long1,double lat2,double long2) 
+/** Computes the distance, in meters, between two WGS-84 positions.
+ *
+ * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code>
+ */
+double distanceEarth(double lat1,double long1,double lat2,double long2)
 {
-  return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, long1,lat2,long2);  
-}  
+  return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, long1,lat2,long2);
+}
 
 double distanceEarth(const Point& p1, const Point& p2)
 {

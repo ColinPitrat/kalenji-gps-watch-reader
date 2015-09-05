@@ -18,35 +18,29 @@ struct tm * gmtime_r (const time_t *timer, struct tm *result);
 
 class Point;
 
-class SExcept: public std::ostringstream 
-{
-	public:
-		friend class StreamExcept;
-		virtual ~SExcept() { throw std::runtime_error(str()); }
+#define THROW_STREAM(stream) throw std::runtime_error(Formatter() << stream);
 
-	private:
-		SExcept() {}
+class Formatter
+{
+    public:
+        Formatter() = default;
+        ~Formatter() = default;
+        Formatter(const Formatter &) = delete;
+        Formatter & operator= (Formatter &) = delete;
+
+        template <typename Type>
+        Formatter & operator<< (const Type & value)
+        {
+            _stream << value;
+            return *this;
+        }
+
+        std::string str() const;
+        operator std::string() const;
+
+    private:
+        std::stringstream _stream;
 };
-
-class StreamExcept: public std::tr1::shared_ptr<SExcept> 
-{
-	public:
-		static StreamExcept sthrow() { return StreamExcept(new SExcept()); }
-
-	private:
-		StreamExcept(SExcept *p):std::tr1::shared_ptr<SExcept>(p) {}
-};
-
-// If we use a reference as first argument, the following statement:
-// sthrow() << xxxx ...
-// will not be valid.
-// Anyway, thanks to the smart pointer the introduced overhead is low.
-template<typename T> StreamExcept
-operator<< (StreamExcept e, const T& x)
-{
-	*e << x;
-	return e;
-}
 
 void trimString(std::string &toTrim);
 std::string durationAsString(double sec, bool with_millis = false);
