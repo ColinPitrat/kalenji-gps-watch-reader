@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#include <cerrno>
 #include <ctime>
 #include <map>
 #include <vector>
@@ -9,9 +8,7 @@
 #include <fstream>
 #include <sstream>
 #include <cstdlib>
-#include <sys/stat.h>
 #include <iterator>
-#include <iostream>
 #include <unistd.h>
 
 #include "source/Logger.h"
@@ -29,42 +26,7 @@
 
 std::map<std::string, std::string> configuration;
 
-int testDir(std::string path, bool create_if_not_exist)
-{
-	if(access(path.c_str(), W_OK) != 0)
-	{
-		switch(errno)
-		{
-			case ENOENT:
-				if(create_if_not_exist)
-				{
-					#ifdef WINDOWS
-					mkdir(path.c_str());
-					#else
-					mkdir(path.c_str(), 0777);
-					#endif
-					return 1;
-				}
-				else
-				{
-					std::cerr << "Error: " << path << " doesn't exist and I couldn't create it" << std::endl;
-					return -1;
-				}
-			case EACCES:
-			case EROFS:
-				std::cerr << "Error: Don't have write access in " << path << std::endl;
-				return -1;
-			case ENOTDIR:
-				std::cerr << "Error: " << path << " is not a directory" << std::endl;
-				return -1;
-			default:
-				std::cerr << "Error: Unknown reason (" << errno << ") preventing write access to " << path << std::endl;
-				return -1;
-		}
-	}
-	return 0;
-}
-
+// TODO: move as much functions as possible in src/Utils or another separated file - unit test them
 bool checkAndCreateDir(std::string path)
 {
 	int dir_status = testDir(path, true);

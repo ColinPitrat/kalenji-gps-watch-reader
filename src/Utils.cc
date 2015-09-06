@@ -5,6 +5,10 @@
 #include <iomanip>
 #include <stdint.h>
 #include <cmath>
+#include <cerrno>
+#include <cstring>
+#include <unistd.h>
+#include <sys/stat.h>
 
 #ifdef WINDOWS
 struct tm * localtime_r (const time_t *timer, struct tm *result)
@@ -44,6 +48,59 @@ std::string Formatter::str() const
 Formatter::operator std::string() const
 {
     return _stream.str();
+}
+
+int testDir(std::string path, bool create_if_not_exist)
+{
+    // First verify that write access is granted
+	if(access(path.c_str(), W_OK) != 0)
+	{
+		switch(errno)
+		{
+			case ENOENT:
+				if(create_if_not_exist)
+				{
+					#ifdef WINDOWS
+					mkdir(path.c_str());
+					#else
+					mkdir(path.c_str(), 0777);
+					#endif
+					return 1;
+				}
+				else
+				{
+					std::cerr << "Error: " << path << " doesn't exist and I couldn't create it" << std::endl;
+					return -1;
+				}
+			case EACCES:
+			case EROFS:
+				std::cerr << "Error: Don't have write access in " << path << std::endl;
+				return -1;
+			case ENOTDIR:
+				std::cerr << "Error: An element in " << path << " is not a directory" << std::endl;
+				return -1;
+			default:
+				std::cerr << "Error: Unknown reason (" << errno << ":" << strerror(errno) << ") preventing write access to " << path << std::endl;
+				return -1;
+		}
+	}
+
+    // Then check this is a directory
+    struct stat fileStat;
+    if(stat(path.c_str(), &fileStat) == 0)
+    {
+        if(fileStat.st_mode & S_IFDIR)
+        {
+            return 0;
+        }
+        else
+        {
+            std::cerr << "Error: " << path << " is not a directory" << std::endl;
+            return -1;
+        }
+    }
+    std::cerr << "Error: Unexpected issue (" << errno << ":" << strerror(errno) << ") when calling stat on " << path << std::endl;
+	return -1;
 }
 
 void trimString(std::string &toTrim)

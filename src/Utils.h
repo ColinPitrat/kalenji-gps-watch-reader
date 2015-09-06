@@ -42,6 +42,8 @@ class Formatter
         std::stringstream _stream;
 };
 
+int testDir(std::string path, bool create_if_not_exist);
+
 void trimString(std::string &toTrim);
 std::string durationAsString(double sec, bool with_millis = false);
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",");

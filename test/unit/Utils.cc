@@ -2,8 +2,25 @@
 #include <Utils.h>
 #include <bom/Field.h>
 #include <bom/Point.h>
+#include <unistd.h>
 
-class UtilsTest : public testing::Test {};
+class UtilsTest : public testing::Test 
+{
+    public:
+        UtilsTest() 
+        { 
+            _testFileName = "/tmp/UtilsTest"; 
+        };
+
+    protected:
+        void checkTestFile()
+        {
+            rmdir(_testFileName.c_str());
+            unlink(_testFileName.c_str());
+        }
+
+        std::string _testFileName;
+};
 
 TEST_F(UtilsTest, FormatterStreamAndStr)
 {
@@ -131,4 +148,46 @@ TEST_F(UtilsTest, distanceEarthParisLondon)
     Point London(51.5085300, -0.1257400, FieldUndef, FieldUndef, 0, 0, FieldUndef, 3);
 
     ASSERT_NEAR(343867, distanceEarth(Paris, London), 1);
+}
+
+TEST_F(UtilsTest, testDirDoesntExistDoNotCreate)
+{
+    checkTestFile();
+
+    ASSERT_EQ(-1, testDir(_testFileName.c_str(), false));
+}
+
+TEST_F(UtilsTest, testDirDoesntExistCreate)
+{
+    checkTestFile();
+
+    ASSERT_EQ(1, testDir(_testFileName.c_str(), true));
+}
+
+TEST_F(UtilsTest, testDirNoPermissions)
+{
+    ASSERT_NE(0u, getuid());
+
+    ASSERT_EQ(-1, testDir("/root/UtilsTest", true));
+}
+
+TEST_F(UtilsTest, testDirWithParentDirARegularFile)
+{
+    checkTestFile();
+
+    FILE* f = fopen(_testFileName.c_str(), "w+");
+    fclose(f);
+    _testFileName += "/UtilsTest";
+
+    ASSERT_EQ(-1, testDir(_testFileName.c_str(), true));
+}
+
+TEST_F(UtilsTest, testDirOnRegularFile)
+{
+    checkTestFile();
+
+    FILE* f = fopen(_testFileName.c_str(), "w+");
+    fclose(f);
+
+    ASSERT_EQ(-1, testDir(_testFileName.c_str(), true));
 }
