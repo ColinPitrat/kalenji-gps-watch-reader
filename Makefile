@@ -4,7 +4,7 @@ LIBS=$(shell pkg-config --libs libusb-1.0) $(shell pkg-config --libs libxml-2.0)
 WINOBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.os/')
 OBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.o/')
 HEADERS=$(shell find src -name \*.h)
-CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++14
+CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++11
 ADD_CFLAGS=-O2
 DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
 WININCPATH=-I/usr/i486-mingw32/include/libusb-1.0/ -I/usr/i486-mingw32/include/libxml2/
