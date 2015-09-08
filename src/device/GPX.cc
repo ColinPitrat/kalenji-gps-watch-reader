@@ -1,6 +1,8 @@
 #include "GPX.h"
 #include <cstring>
 
+#define LOG_VERBOSE(x) if(_configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
+
 namespace device
 {
 	REGISTER_DEVICE(GPX);
@@ -63,7 +65,7 @@ namespace device
 			// Ignore text content of gpx node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -109,7 +111,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in metadata not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in metadata not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -134,7 +136,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in trk not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trk not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -157,7 +159,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in trkSeg not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trkSeg not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -225,7 +227,7 @@ namespace device
 			else 
 			if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in point not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in point not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -250,7 +252,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in trackPoint extensions not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trackPoint extensions not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -268,7 +270,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in extensions not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in extensions not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
@@ -337,7 +339,7 @@ namespace device
 			// Ignore text content of metadata node
 			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
 			{
-				std::cerr << "Warning: parsing of element '" << cur->name << "' in lap not implemented in device::GPX" << std::endl;
+				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in lap not implemented in device::GPX");
 			}
 			cur = cur->next;
 		}
