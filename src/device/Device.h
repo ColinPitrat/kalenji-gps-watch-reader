@@ -11,6 +11,8 @@
 #define DECLARE_DEVICE(DeviceClass) static LayerRegistrer<Device, DeviceClass> _registrer;
 #define REGISTER_DEVICE(DeviceClass) LayerRegistrer<Device, DeviceClass> DeviceClass::_registrer;
 
+#define LOG_VERBOSE(x) if(_configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
+
 namespace device
 {
 	/**

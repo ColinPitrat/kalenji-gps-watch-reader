@@ -1,4 +1,5 @@
  *                       Documentation on options
+ * device                Replace usage of DEBUG_CMD by LOG_VERBOSE
  * device::Kalenji:      Use info retrieved by the first 80 call and by 78 call
  * device::Kalenji:      Cleaner way to handle id_point (used to find first and last point of a lap)
  * device::Kalenji:      In case of error we should finish reading until getting 8Axxx so that the device is in a clean state (== implement release ?)

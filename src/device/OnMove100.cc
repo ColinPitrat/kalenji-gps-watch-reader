@@ -9,8 +9,6 @@
 #define DEBUG_CMD(x) ;
 #endif
 
-#define LOG_VERBOSE(x) if(_configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
-
 namespace device
 {
 	REGISTER_DEVICE(OnMove100);

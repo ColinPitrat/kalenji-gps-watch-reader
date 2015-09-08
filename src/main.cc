@@ -22,6 +22,7 @@
 #include "Registry.h"
 #include "Utils.h"
 
+#undef LOG_VERBOSE
 #define LOG_VERBOSE(x) if(configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
 
 std::map<std::string, std::string> configuration;
