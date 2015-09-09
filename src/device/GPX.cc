@@ -9,7 +9,7 @@ namespace device
 	{
 		_document = xmlParseDoc(_docAsString);
 
-		if (_document == NULL ) 
+		if (_document == NULL )
 		{
 			std::cerr << "Document not parsed successfully. \n";
 			return false;
@@ -17,14 +17,14 @@ namespace device
 
 		_rootNode = xmlDocGetRootElement(_document);
 
-		if (_rootNode == NULL) 
+		if (_rootNode == NULL)
 		{
 			std::cerr << "Empty document\n";
 			xmlFreeDoc(_document);
 			return false;
 		}
 
-		if (xmlStrcmp(_rootNode->name, (const xmlChar *) "gpx") != 0) 
+		if (xmlStrcmp(_rootNode->name, (const xmlChar *) "gpx") != 0)
 		{
 			std::cerr << "Document of the wrong type, root node != gpx (" << _rootNode->name << ")" << std::endl;
 			xmlFreeDoc(_document);
@@ -43,11 +43,11 @@ namespace device
 			{
 				parseMetadata(oSession, cur);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "trk") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "trk") == 0)
 			{
 				parseTrk(oSession, cur);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "rte") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "rte") == 0)
 			{
 				parseTrkSegOrRoute(oSession, cur);
 			}
@@ -56,12 +56,12 @@ namespace device
 			{
 				parseWayPoint(oSession, cur);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0)
 			{
 				parseExtensions(oSession, cur);
 			}
 			// Ignore text content of gpx node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' not implemented in device::GPX");
 			}
@@ -76,13 +76,13 @@ namespace device
 		xmlChar *data;
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				oSession->setName((const char*)data);
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "time") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "time") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				if(xmlStrlen(data) >= 20)
@@ -107,7 +107,7 @@ namespace device
 				xmlFree(data);
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in metadata not implemented in device::GPX");
 			}
@@ -121,18 +121,18 @@ namespace device
 		xmlChar *data;
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "trkseg") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "trkseg") == 0)
 			{
 				parseTrkSegOrRoute(oSession, cur);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				oSession->setName((const char*)data);
 				xmlFree(data);
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trk not implemented in device::GPX");
 			}
@@ -155,7 +155,7 @@ namespace device
 				oSession->setName((char*)xmlNodeListGetString(_document, cur->xmlChildrenNode, 1));
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trkSeg not implemented in device::GPX");
 			}
@@ -182,13 +182,13 @@ namespace device
 		// TODO: missing speed
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "ele") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "ele") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				aPoint->setAltitude(atoi((char*) data));
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "time") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "time") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				if(xmlStrlen(data) >= 20)
@@ -212,18 +212,17 @@ namespace device
 				}
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "extensions") == 0)
 			{
 				parseWayPointExtensions(aPoint, cur);
 			}
 			// Ignore comment but if a point have one, we consider it's an important point
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "cmt") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "cmt") == 0)
 			{
 				aPoint->setImportant(true);
 			}
 			// Ignore text content of metadata node
-			else 
-			if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in point not implemented in device::GPX");
 			}
@@ -241,14 +240,14 @@ namespace device
 		// TODO: missing summary elements for which attribute must be checked to now the info contained
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "hr") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "hr") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				oPoint->setHeartRate(atoi((char*)data));
 				xmlFree(data);
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in trackPoint extensions not implemented in device::GPX");
 			}
@@ -261,12 +260,12 @@ namespace device
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "lap") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "lap") == 0)
 			{
 				parseLap(oSession, cur);
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in extensions not implemented in device::GPX");
 			}
@@ -282,34 +281,34 @@ namespace device
 
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 
-		// TODO: Handle start point / end point 
+		// TODO: Handle start point / end point
 		while(cur != NULL)
 		{
-			if (xmlStrcmp(cur->name, (const xmlChar *) "index") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "index") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				aLap->setLapNum(atoi((char*) data));
 				xmlFree(data);
 			}
-			if (xmlStrcmp(cur->name, (const xmlChar *) "calories") == 0) 
+			if (xmlStrcmp(cur->name, (const xmlChar *) "calories") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				aLap->setCalories(atoi((char*) data));
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "distance") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "distance") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				aLap->setDistance(atoi((char*) data));
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "elapsedTime") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "elapsedTime") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				aLap->setDuration(atoi((char*) data));
 				xmlFree(data);
 			}
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "startTime") == 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "startTime") == 0)
 			{
 				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
 				if(xmlStrlen(data) >= 20)
@@ -335,7 +334,7 @@ namespace device
 				xmlFree(data);
 			}
 			// Ignore text content of metadata node
-			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0) 
+			else if (xmlStrcmp(cur->name, (const xmlChar *) "text") != 0)
 			{
 				LOG_VERBOSE("Warning: parsing of element '" << cur->name << "' in lap not implemented in device::GPX");
 			}

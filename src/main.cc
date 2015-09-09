@@ -203,7 +203,7 @@ bool parseConfAndOptions(int argc, char** argv)
 		configuration["import"] = "all";
 	}
 	// TODO: Find a better way to handle this (maybe a callback of device ?)
-	if(configuration["source"] == "File" && configuration["device"] != "GPX")
+	if(configuration["source"] == "File" && configuration["device"] != "GPX" && configuration["device"] != "TCX")
 	{
 		configuration["source"] = "HexdumpFile";
 	}
