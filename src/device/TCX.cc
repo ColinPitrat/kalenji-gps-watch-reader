@@ -181,11 +181,13 @@ namespace device
 				oLap->setCalories(atoi((char*) data));
 				xmlFree(data);
 			}
-			else if(xmlStrcmp(cur->name, (const xmlChar *) "Calories") == 0)
+			else if(xmlStrcmp(cur->name, (const xmlChar *) "AverageHeartRateBpm") == 0)
 			{
-				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
-				oLap->setCalories(atoi((char*) data));
-				xmlFree(data);
+				oLap->setAvgHeartrate(parseValue(cur));
+			}
+			else if(xmlStrcmp(cur->name, (const xmlChar *) "MaximumHeartRateBpm") == 0)
+			{
+				oLap->setMaxHeartrate(parseValue(cur));
 			}
 			else if(xmlStrcmp(cur->name, (const xmlChar *) "Track") == 0)
 			{
@@ -355,6 +357,24 @@ namespace device
 			}
 			cur = cur->next;
 		}
+	}
+
+	double TCX::parseValue(xmlNodePtr rootNode)
+	{
+		double result = 0;
+		xmlNodePtr cur = rootNode->xmlChildrenNode;
+		xmlChar *data;
+		while(cur != NULL)
+		{
+			if (xmlStrcmp(cur->name, (const xmlChar *) "Value") == 0)
+			{
+				data = xmlNodeListGetString(_document, cur->xmlChildrenNode, 1);
+				result = atof((char*) data);
+				xmlFree(data);
+			}
+			cur = cur->next;
+		}
+		return result;
 	}
 
 	void TCX::closeDoc()

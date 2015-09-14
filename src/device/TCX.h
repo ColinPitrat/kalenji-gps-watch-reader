@@ -57,6 +57,7 @@ namespace device
 			void parsePosition(Point *oPoint, xmlNodePtr rootNode);
 			void parsePointExtensions(Point *oPoint, xmlNodePtr rootNode);
 			void parsePointTPX(Point *oPoint, xmlNodePtr rootNode);
+			double parseValue(xmlNodePtr rootNode);
 			void closeDoc();
 
 			xmlChar *_docAsString;
