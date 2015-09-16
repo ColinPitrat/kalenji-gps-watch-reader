@@ -328,7 +328,7 @@ namespace device
 			} while(responseData[30] == 0xff && responseData[31] == 0xff && responseData[32] == 0xff && responseData[33] == 0xff);
 
 			// Following response 80 retrieves info concerning the points of the session. There can be many.
-			Session *session;
+			Session *session = NULL;
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
