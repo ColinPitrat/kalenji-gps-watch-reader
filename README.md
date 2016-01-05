@@ -1,6 +1,4 @@
-# About kalenji_reader
-
-Continuous integration status: [![Build Status](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader.svg?branch=master)](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader)
+# About kalenji_reader [![Build Status](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader.svg?branch=master)](https://travis-ci.org/ColinPitrat/kalenji-gps-watch-reader)
 
 This tool allows to import data from some running watches.
 
