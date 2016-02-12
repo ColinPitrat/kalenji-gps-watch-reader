@@ -20,19 +20,17 @@ namespace device
 {
 	REGISTER_DEVICE(OnMove200);
 
-/*
-	int bytesToInt2(unsigned char b0, unsigned char b1)
+	int OnMove200::bytesToInt2(unsigned char b0, unsigned char b1)
 	{
 		int Int = b0 | ( (int)b1 << 8 );
 		return Int;
 	}
 
-	int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3)
+	int OnMove200::bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3)
 	{
 		int Int = b0 | ( (int)b1 << 8 ) | ( (int)b2 << 16 ) | ( (int)b3 << 24 );
 		return Int;
 	}
-  */
 
 	unsigned char* OnMove200::readAllBytes(std::string filename, size_t& size)
 	{
@@ -133,7 +131,6 @@ namespace device
 			SessionId id = SessionId(_sessionId);
 			uint32_t num = i++; //Just increment by one each time
 
-      // TODO parseOMHFile();
 			tm time;
 
 			double duration = 0;
@@ -146,6 +143,7 @@ namespace device
 			std::string ghtFilename = getPath() + std::string("/") + fileprefix + std::string(".OMH");
 			size_t size = -1;
 			unsigned char* buffer = readAllBytes(ghtFilename, size);
+      // TODO: if(size != 60) error !
 			parseOMHFile(buffer, &mySession);
 			delete buffer;
 
@@ -169,7 +167,7 @@ namespace device
 
 			std::string omdFilename = filenamePrefix + std::string(".OMD");
 			buffer = readAllBytes(omdFilename,size);
-			parseOMDFile(buffer,session);
+			parseOMDFile(buffer, size, session);
 			delete buffer;
 		}
 	}
@@ -202,9 +200,57 @@ namespace device
 
 	void OnMove200::parseOMHFile(const unsigned char* bytes, Session* session)
 	{
+    uint32_t distance = bytesToInt4(bytes[0], bytes[1], bytes[2], bytes[3]);
+    uint32_t duration = bytesToInt2(bytes[4], bytes[5]);
+    uint32_t avgSpeed = bytesToInt2(bytes[6], bytes[7]);
+    uint32_t maxSpeed = bytesToInt2(bytes[8], bytes[9]);
+    uint32_t energy = bytesToInt2(bytes[10], bytes[11]);
+    uint32_t avgHeartRate = static_cast<uint32_t>(bytes[12]);
+    uint32_t maxHeartRate = static_cast<uint32_t>(bytes[13]);
+
+    uint32_t year = static_cast<uint32_t>(bytes[14]);
+    uint32_t month = static_cast<uint32_t>(bytes[15]);
+    uint32_t day = static_cast<uint32_t>(bytes[16]);
+    uint32_t hour = static_cast<uint32_t>(bytes[17]);
+    uint32_t minute = static_cast<uint32_t>(bytes[18]);
+    //uint32_t fileNum = static_cast<uint32_t>(bytes[19]);
+
+    tm time;
+		time.tm_year  = 100 + year;// In tm, year is year since 1900. GPS returns year since 2000
+		time.tm_mon   = month - 1;// In tm, month is between 0 and 11.
+		time.tm_mday  = day;
+		time.tm_hour  = hour;
+		time.tm_min   = minute;
+		time.tm_sec   = 0;
+		time.tm_isdst = -1;
+    session->setTime(time);
+    session->setDistance(distance);
+    session->setDuration(duration);
+    session->setAvgSpeed(avgSpeed);
+    session->setMaxSpeed(maxSpeed);
+    session->setCalories(energy);
+    session->setAvgHr(avgHeartRate);
+    session->setMaxHr(maxHeartRate);
 	}
 
-	void OnMove200::parseOMDFile(const unsigned char* bytes, Session *session)
+	void OnMove200::parseOMDFile(const unsigned char* bytes, int length, Session *session)
 	{
+		const unsigned char* chunk;
+    int numPoints = 0;
+    time_t startTime = session->getTime();
+    for(int i = 0; i < length; i += 20) 
+    {
+      numPoints++;
+      // Every other 3 line doesn't contain coordinates
+      if(numPoints % 3 == 0) continue;
+      chunk = &bytes[i];
+      double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
+      double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
+      // TODO: Distance on 2 bytes or 4 bytes ? 2 bytes = 65 km max ...
+      uint32_t distance = bytesToInt2(chunk[8], chunk[9]);
+      uint32_t time = bytesToInt2(chunk[12], chunk[13]);
+			Point *p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, FieldUndef, 3);
+			session->addPoint(p);
+    }
 	}
 }
