@@ -21,19 +21,19 @@ namespace device
 	REGISTER_DEVICE(OnMove710);
 
 
-	int bytesToInt2(unsigned char b0, unsigned char b1)
+	int OnMove710::bytesToInt2(unsigned char b0, unsigned char b1)
 	{
 		int Int = b0 | ( (int)b1 << 8 );
 		return Int;
 	}
 
-	int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3)
+	int OnMove710::bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3)
 	{
 		int Int = b0 | ( (int)b1 << 8 ) | ( (int)b2 << 16 ) | ( (int)b3 << 24 );
 		return Int;
 	}
 
-	unsigned char* readAllBytes(std::string filename, size_t& size)
+	unsigned char* OnMove710::readAllBytes(std::string filename, size_t& size)
 	{
 		std::ifstream fl(filename.c_str());
 		fl.seekg( 0, std::ios::end );
@@ -46,13 +46,13 @@ namespace device
 		return (unsigned char*)buffer;
 	}
 
-	bool fileExists(std::string filename)
+	bool OnMove710::fileExists(std::string filename)
 	{
 		struct stat fileInfo;
 		return stat(filename.c_str(), &fileInfo) == 0;
 	}
 
-	tm parseFilename(std::string filename)
+	tm OnMove710::parseFilename(std::string filename)
 	{
 		std::string yearStr = filename.substr(0,1);
 		std::string monthStr = filename.substr(1,1);

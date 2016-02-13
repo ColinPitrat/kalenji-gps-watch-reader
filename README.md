@@ -36,6 +36,7 @@ Watches known to be supported are:
   * Keymaze 700 Trail
   * Pyle PGSPW1 (but feedback would be appreciated)
   * GPS On Move 100
+  * GPS On Move 200
   * GPS On Move 510
   * GPS On Move 710
   * NavBike 400

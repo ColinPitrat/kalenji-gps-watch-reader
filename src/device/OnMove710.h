@@ -59,7 +59,14 @@ namespace device
 			virtual unsigned int getProductId() { return 0x0007; };
 
 		private:
+      int bytesToInt2(unsigned char b0, unsigned char b1);
+      int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
+      unsigned char* readAllBytes(std::string filename, size_t& size);
+      bool fileExists(std::string filename);
+      tm parseFilename(std::string filename);
+
 			std::string getPath();
+
 			DECLARE_DEVICE(OnMove710);
 	};
 }
