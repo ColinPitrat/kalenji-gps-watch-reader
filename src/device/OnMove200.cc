@@ -246,8 +246,8 @@ namespace device
       chunk = &bytes[i];
       double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
       double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-      // TODO: Distance on 2 bytes or 4 bytes ? 2 bytes = 65 km max ...
-      uint32_t distance = bytesToInt2(chunk[8], chunk[9]);
+      // Not sure if distance is really on 4 bytes or only on 2, but 2 would seem limited (65 km, can be short for a bike session)
+      uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
       uint32_t time = bytesToInt2(chunk[12], chunk[13]);
 			Point *p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, FieldUndef, 3);
 			session->addPoint(p);
