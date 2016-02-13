@@ -84,7 +84,7 @@ GPX files created can then be imported in your favorite software. HTML files cre
 In case you encounter a core dump, please reproduce it in debug before submitting an issue. To do so, use make debug instead of make. Also use ulimit to allow the OS creating corefiles in case your distribution disable it by default.
 
     make debug
-    ulimit -c 1000000
+    ulimit -c unlimited
     ./kalenji_reader 2>&1 | tee kalenji_reader_output.txt
 
 This way, program output will also be written in the file kalenji_reader_output.txt. You can attach this file and the core to a bug report to provide more information on what was the problem.
