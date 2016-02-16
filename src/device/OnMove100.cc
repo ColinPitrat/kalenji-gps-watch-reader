@@ -159,7 +159,8 @@ namespace device
 				LOG_VERBOSE("Session from: " << time.tm_year + 1900 << "-" << time.tm_mon + 1 << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec);
 				int nb_points = (responseData[14] << 8) + responseData[15];
 				int num_session = responseData[34];
-				SessionId id = SessionId(responseData[34], responseData[34]+1);
+				SessionId id = SessionId(&responseData[34], &responseData[35]);
+				LOG_VERBOSE("Header session " << (int)id[0]);
 				// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
 				Session mySession(id, num_session, time, nb_points, 0, 0, 0);
 				oSessions->insert(SessionsMapElement(id, mySession));
@@ -193,15 +194,27 @@ namespace device
 			LOG_VERBOSE("Session from: " << time.tm_year + 1900 << "-" << time.tm_mon + 1 << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec);
 			int nb_points = (responseData[14] << 8) + responseData[15];
 			int num_session = responseData[34];
-			SessionId id = SessionId(responseData[34], responseData[34]+1);
+			SessionId id = SessionId(&responseData[34], &responseData[35]);
 			// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
 			Session mySession(id, num_session, time, nb_points, 0, 0, 0);
 			oSessions->insert(SessionsMapElement(id, mySession));
 			Session *session = &(oSessions->find(id)->second);
 			time_t current_time = session->getTime();
 			*/
-			SessionId id = SessionId(responseData[34], responseData[34]+1);
-			Session *session = &(oSessions->find(id)->second);
+			SessionId id = SessionId(&responseData[34], &responseData[35]);
+			LOG_VERBOSE("Start of session " << (int)id[0]);
+			auto itSession = oSessions->find(id);
+			if(itSession == oSessions->end()) {
+				LOG_VERBOSE("Unknown session "  << (int)id[0]);
+				std::cerr << "ERROR: Unknown session " << (int)id[0] << std::endl;
+				READ_MORE_DATA;
+				while(responseData[32] != 0 || responseData[33] != 0)
+				{
+					READ_MORE_DATA;
+				}
+				continue;
+			}
+			Session *session = &(itSession->second);
 			time_t current_time = session->getTime();
 			READ_MORE_DATA;
 			// Can a session have more than 65536 points ? (bytes 32 & 33 contains the point number)
