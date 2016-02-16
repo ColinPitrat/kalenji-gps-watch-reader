@@ -55,7 +55,7 @@ $(TARGET): check_deps $(OBJECTS)
 
 windows: $(WINOBJECTS)
 	mkdir -p win
-	i486-mingw32-g++ $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
+	i486-mingw32-g++ $(CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
 	cp /usr/i486-mingw32/bin/libcurl-4.dll win/
 	cp /usr/i486-mingw32/bin/libeay32.dll win/
 	cp /usr/i486-mingw32/bin/libiconv-2.dll win/
@@ -80,7 +80,7 @@ $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
-	i486-mingw32-g++ $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
+	i486-mingw32-g++ $(CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
