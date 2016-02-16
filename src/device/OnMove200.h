@@ -59,7 +59,7 @@ namespace device
 
 			virtual std::string getName() { return "OnMove200"; };
 			virtual unsigned int getVendorId() { return 0x283E; };
-			virtual unsigned int getProductId() { return 0x0007; };
+			virtual unsigned int getProductId() { return 0x0009; };
 
 		private:
 			std::string getPath();
