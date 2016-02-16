@@ -32,7 +32,7 @@ fi
 
 rm -rf kalenji-gps-watch-reader
 mkdir kalenji-gps-watch-reader
-cp -r ../src/ ../Makefile ../scripts/ ../README.txt kalenji-gps-watch-reader
+cp -r ../etc/ ../src/ ../Makefile ../scripts/ ../README.md kalenji-gps-watch-reader
 pushd kalenji-gps-watch-reader
 make clean
 popd
