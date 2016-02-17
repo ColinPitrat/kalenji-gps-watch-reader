@@ -60,6 +60,7 @@ Special thanks to:
   * **Amílcar Guerra** for the support of "Keymaze" watches
   * **Christophe Jalady** for the support of "OnMove 510 and 710" watches and his multiple contributions to improve GoogleMap output
   * **Miguel Dias Costa** for the support of "OnMove 100" watches 
+  * **Jean Lasson** for the support of "OnMove 200" watches
 
 Some help would also be appreciated to build the software on Mac OS.
 
