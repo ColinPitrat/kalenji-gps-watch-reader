@@ -132,6 +132,7 @@ namespace device
       uint32_t num = i++; //Just increment by one each time
 
       tm time;
+      memset(&time, 0, sizeof(time));
 
       double duration = 0;
       uint32_t distance = 0;
