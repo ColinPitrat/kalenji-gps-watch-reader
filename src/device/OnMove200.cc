@@ -249,7 +249,10 @@ namespace device
       // Not sure if distance is really on 4 bytes or only on 2, but 2 would seem limited (65 km, can be short for a bike session)
       uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
       uint32_t time = bytesToInt2(chunk[12], chunk[13]);
-      Point *p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, FieldUndef, 3);
+      // Heart rate for points of lines n and n+1 are on line n+2 (the every other 3 line that doesn't contain coordinates)
+      uint32_t hr = chunk[46];
+      if(numPoints % 3 == 2) hr = chunk[36];
+      Point *p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, hr, 3);
       p->setDistance(distance);
       session->addPoint(p);
     }
