@@ -216,7 +216,6 @@ namespace device
 			auto itSession = oSessions->find(id);
 			if(itSession == oSessions->end()) {
 				LOG_VERBOSE("Unknown session "  << (int)id[0]);
-				std::cerr << "ERROR: Unknown session " << (int)id[0] << std::endl;
 				READ_MORE_DATA;
 				while(responseData[32] != 0 || responseData[33] != 0)
 				{
