@@ -141,32 +141,42 @@ namespace device
 		}
 		READ_MORE_DATA;
 		// First lines to be reverse engineered (sessions global infos ?)
+    SessionsMapElement currentSession;
 		while(responseData[35] == 0xfd)
 		{
 			try
 			{
-				tm time;
-				memset(&time, 0, sizeof(time));
-				time.tm_sec = responseData[0];
-				time.tm_min = responseData[1];
-				time.tm_hour = responseData[2];
-				time.tm_mday = responseData[3];
-				// In tm, month is between 0 and 11.
-				time.tm_mon = responseData[4] - 1;
-				// In tm, year is year since 1900. GPS returns year since 2000
-				time.tm_year = 100 + responseData[5];
-				time.tm_isdst = -1;
-				LOG_VERBOSE("Session from: " << time.tm_year + 1900 << "-" << time.tm_mon + 1 << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec);
-				int nb_points = (responseData[14] << 8) + responseData[15];
-				int num_session = responseData[34];
-				SessionId id = SessionId(&responseData[34], &responseData[35]);
-				LOG_VERBOSE("Header session " << (int)id[0]);
-				// TODO: Find duration, distance and # laps (watch doesn't support laps ?)
-				Session mySession(id, num_session, time, nb_points, 0, 0, 0);
-				oSessions->insert(SessionsMapElement(id, mySession));
-				//Session *session = &(oSessions->find(id)->second);
-				// Ignore second line (for now ?)
-				READ_MORE_DATA;
+        // There must be two lines per session. Byte 33 is 0 for the first one, 1 for the second one.
+        // The first line is the one to be parsed. If only one line is present, it's the second one
+        // and we must ignore it (deleted session ? watch error ? cf issue 50)
+        if (responseData[33] == 0)
+        {
+          tm time;
+          memset(&time, 0, sizeof(time));
+          time.tm_sec = responseData[0];
+          time.tm_min = responseData[1];
+          time.tm_hour = responseData[2];
+          time.tm_mday = responseData[3];
+          // In tm, month is between 0 and 11.
+          time.tm_mon = responseData[4] - 1;
+          // In tm, year is year since 1900. GPS returns year since 2000
+          time.tm_year = 100 + responseData[5];
+          time.tm_isdst = -1;
+          int nb_points = (responseData[14] << 8) + responseData[15];
+          int num_session = responseData[34];
+          SessionId id = SessionId(&responseData[34], &responseData[35]);
+          LOG_VERBOSE("Session " << (int)id[0] << " from: " << time.tm_year + 1900 << "-" << time.tm_mon + 1 << "-" << time.tm_mday << " " << time.tm_hour << ":" << time.tm_min << ":" << time.tm_sec);
+          // TODO: Find duration, distance and # laps (watch doesn't support laps ?)
+          Session mySession(id, num_session, time, nb_points, 0, 0, 0);
+          currentSession.first = id;
+          currentSession.second = mySession;
+        }
+        // Ignore content of second line, but if present session is considered as valid
+        else if(responseData[33] == 1)
+        {
+          LOG_VERBOSE("Session " << (int)currentSession.first[0] << " is valid !");
+          oSessions->insert(currentSession);
+        }
 			}
 			catch(std::runtime_error e)
 			{
@@ -246,11 +256,11 @@ namespace device
 
 #undef READ_MORE_DATA
 
-	void OnMove100::getSessionsDetails(SessionsMap *oSessions) 
+	void OnMove100::getSessionsDetails(SessionsMap *oSessions)
 	{
 	}
 
-	void OnMove100::exportSession(Session *iSession) 
+	void OnMove100::exportSession(Session *iSession)
 	{
 		std::cerr << "Unsupported export of session with OnMove 100" << std::endl;
 	}
