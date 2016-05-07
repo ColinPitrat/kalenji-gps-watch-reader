@@ -97,7 +97,7 @@ namespace device
 					LOG_VERBOSE("OnMove100::init() - step 13 (retry device init)");
 					_dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
 				}
-			} while(memcmp(responseData, initResponse, sizeInitResponse) && attempts < 10);
+			} while(memcmp(responseData, initResponse, std::min(sizeInitResponse, received)) && attempts < 10);
 		}
 	}
 
@@ -135,6 +135,11 @@ namespace device
 		size_t received;
 		_dataSource->write_data(0x01, getData, lengthGetData);
 		_dataSource->read_data(0x81, &responseData, &received);
+    if(received < 36)
+    {
+			std::cout << "Received buffer too small - aborting !" << std::endl;
+      return;
+    }
 		if(responseData[35] != 0xff)
 		{
 			std::cout << "Unexpected line termination " << (int)responseData[35] << " instead of 0xFF." << std::endl;
@@ -142,7 +147,7 @@ namespace device
 		READ_MORE_DATA;
 		// First lines to be reverse engineered (sessions global infos ?)
     SessionsMapElement currentSession;
-		while(responseData[35] == 0xfd)
+		while(received >= 36 && responseData[35] == 0xfd)
 		{
 			try
 			{
@@ -185,7 +190,7 @@ namespace device
 			}
 			READ_MORE_DATA;
 		}
-		while(responseData[35] == 0xfa)
+		while(received >= 36 && responseData[35] == 0xfa)
 		{
 			LOG_VERBOSE("OnMove100: Read session !");
 			// First line ending with fa is the header of the session

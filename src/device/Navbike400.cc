@@ -84,7 +84,7 @@ namespace device
           LOG_VERBOSE("Navbike400::init() - step 13 (retry device init)");
           _dataSource->control_transfer(0x40, 0x12, 0xc, 0x0, data, 0);
         }
-      } while(memcmp(responseData, initResponse, sizeInitResponse) && attempts < 10);
+      } while(memcmp(responseData, initResponse, std::min(sizeInitResponse, received)) && attempts < 10);
     }
   }
 
@@ -128,13 +128,18 @@ namespace device
     size_t received;
     _dataSource->write_data(0x01, getData, lengthGetData);
     _dataSource->read_data(0x81, &responseData, &received);
+    if(received < 36)
+    {
+      std::cout << "Received buffer too small - aborting !" << std::endl;
+      return;
+    }
     if(responseData[35] != 0xff)
     {
       std::cout << "Unexpected line termination " << (int)responseData[35] << " instead of 0xFF." << std::endl;
     }
     READ_MORE_DATA;
     // First lines to be reverse engineered (sessions global infos ?)
-    while(responseData[35] == 0xfd)
+    while(received >= 36 && responseData[35] == 0xfd)
     {
       try
       {
@@ -167,13 +172,12 @@ namespace device
       }
       READ_MORE_DATA;
     }
-    while(responseData[35] == 0xfa || responseData[0] != 0xee)
+    while(received >= 36 && (responseData[35] == 0xfa || responseData[0] != 0xee))
     {
       // If some data was added or lost in the point, just ignore it and try to find back the start of the next one
       if(responseData[35] != 0xfa)
       {
         LOG_VERBOSE("Point not ending with 0xfa - skipping");
-        dump(responseData, 36);
         while(responseData[0] != 0xfa && received > 0)
         {
           responseData++;
@@ -219,13 +223,12 @@ namespace device
       // Can a session have more than 65536 points ? (bytes 32 & 33 contains the point number)
       double prevDistance = 0;
       double prevElapsed = 0;
-      while(responseData[32] != 0 || responseData[33] != 0)
+      while(received >= 36 && (responseData[32] != 0 || responseData[33] != 0))
       {
         // If some data was added or lost in the point, just ignore it and try to find back the start of the next one
         if(responseData[35] != 0xfa)
         {
           LOG_VERBOSE("Point not ending with 0xfa - skipping");
-          dump(responseData, 36);
           while(responseData[0] != 0xfa && received > 0)
           {
             responseData++;
@@ -249,7 +252,11 @@ namespace device
           READ_MORE_DATA;
           continue;
         }
-        int16_t elevation = (responseData[10] << 8) + responseData[11];
+        Field<int16_t> elevation(FieldUndef);
+        // ff ff ff 8f means no elevation available. No elevation should start with 8f anyway
+        if (responseData[31] != 0x8f) {
+          elevation = (responseData[28] + (responseData[29] << 8) + (responseData[30] << 16) + (responseData[31] << 24)) / 100.0;
+        }
 
         double elapsed = (responseData[32] << 8) + responseData[33];
         //int pointID = (responseData[32] << 8) + responseData[33];
