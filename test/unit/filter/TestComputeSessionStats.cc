@@ -2,6 +2,7 @@
 #include <filter/ComputeSessionStats.h>
 #include <bom/Session.h>
 #include <bom/Point.h>
+#include <cmath>
 
 class ComputeSessionStatsTest : public testing::Test 
 {
@@ -24,7 +25,7 @@ TEST_F(ComputeSessionStatsTest, DistanceComputation)
 	aComputeSessionsStatsFilter.filter(&aSession, emptyConfiguration);
 
 	// Distance SF - NY: ~ 4130 km (4130.347 km with current version)
-	ASSERT_LT(abs(4130000 - aSession.getDistance()), 1000);
+	ASSERT_LT(abs(4130000 - static_cast<int>(aSession.getDistance())), 1000);
 }
 
 TEST_F(ComputeSessionStatsTest, AscentDescentComputationWhenClimbing)
@@ -75,9 +76,9 @@ TEST_F(ComputeSessionStatsTest, MaxAndAvgSpeedComputation)
 	aComputeSessionsStatsFilter.filter(&aSession, emptyConfiguration);
 
 	// SF - NY in 1 hour = 4130 km/h
-	ASSERT_LT(abs(4130 - aSession.getMaxSpeed()), 1);
+	ASSERT_LT(fabs(4130.0 - aSession.getMaxSpeed()), 1.0);
 	// SF - NY - SF in 3 hour = 8260 km / 3h = 2753 km/h
-	ASSERT_LT(abs(2753 - aSession.getAvgSpeed()), 1);
+	ASSERT_LT(fabs(2753.0 - aSession.getAvgSpeed()), 1.0);
 }
 
 TEST_F(ComputeSessionStatsTest, DurationComputation)

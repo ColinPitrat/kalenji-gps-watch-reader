@@ -7,8 +7,9 @@ HEADERS=$(shell find src -name \*.h)
 CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++11
 ADD_CFLAGS=-O2
 DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
-WININCPATH=-I/usr/i486-mingw32/include/libusb-1.0/ -I/usr/i486-mingw32/include/libxml2/
-WINLIBS=/usr/i486-mingw32/lib/libusb-1.0.dll.a /usr/i486-mingw32/lib/libxml2.dll.a /usr/i486-mingw32/lib/libcurl.dll.a
+MINGW_PATH=/usr/i686-w64-mingw32
+WININCPATH=-I$(MINGW_PATH)/include/libusb-1.0/ -I$(MINGW_PATH)/include/libxml2/
+WINLIBS=$(MINGW_PATH)/lib/libusb-1.0.dll.a $(MINGW_PATH)/lib/libxml2.dll.a $(MINGW_PATH)/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
 GTEST_DIR=googletest/googletest/
 TEST_CFLAGS=-I$(GTEST_DIR)/include -I$(GTEST_DIR)
@@ -18,6 +19,9 @@ TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 ifndef CXX
 CXX=g++
+endif
+ifndef WINCXX
+WINCXX=i686-w64-mingw32-g++
 endif
 ifndef COV
 COV=gcov
@@ -53,20 +57,24 @@ build: $(TARGET)
 $(TARGET): check_deps $(OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
 
-windows: $(WINOBJECTS)
+win:
 	mkdir -p win
-	i486-mingw32-g++ $(CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
-	cp /usr/i486-mingw32/bin/libcurl-4.dll win/
-	cp /usr/i486-mingw32/bin/libeay32.dll win/
-	cp /usr/i486-mingw32/bin/libiconv-2.dll win/
-	cp /usr/i486-mingw32/bin/libidn-11.dll win/
-	cp /usr/i486-mingw32/bin/libintl-8.dll win/
-	cp /usr/i486-mingw32/bin/libusb-1.0.dll win/
-	cp /usr/i486-mingw32/bin/libxml2-2.dll win/
-	cp /usr/i486-mingw32/bin/ssleay32.dll win/
-	cp /usr/i486-mingw32/bin/zlib1.dll win/
-	cp /usr/i486-mingw32/lib/libgcc_s_sjlj-1.dll win/
-	cp /usr/i486-mingw32/lib/libstdc++-6.dll win/
+
+$(TARGET).exe: $(WINOBJECTS) win
+	$(WINCXX) $(CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
+
+windows: $(TARGET).exe win
+	cp $(MINGW_PATH)/bin/libcurl-4.dll win/
+	cp $(MINGW_PATH)/bin/libeay32.dll win/
+	cp $(MINGW_PATH)/bin/libiconv-2.dll win/
+	cp $(MINGW_PATH)/bin/libidn-11.dll win/
+	cp $(MINGW_PATH)/bin/libintl-8.dll win/
+	cp $(MINGW_PATH)/bin/libusb-1.0.dll win/
+	cp $(MINGW_PATH)/bin/libxml2-2.dll win/
+	cp $(MINGW_PATH)/bin/ssleay32.dll win/
+	cp $(MINGW_PATH)/bin/zlib1.dll win/
+	cp $(MINGW_PATH)/bin/libgcc_s_sjlj-1.dll win/
+	cp $(MINGW_PATH)/bin/libstdc++-6.dll win/
 
 check_deps:
 	@pkg-config --libs libusb-1.0 >/dev/null 2>&1 || (echo "Error: missing dependency libusb-1.0. Try installing libusb development package (e.g: libusb libusb-1 libusb-1.0.0-dev ...)" && false)
@@ -80,7 +88,7 @@ $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
-	i486-mingw32-g++ $(CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
+	$(WINCXX) $(CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
