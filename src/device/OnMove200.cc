@@ -158,7 +158,7 @@ namespace device
     {
       Session* session = &(it->second);
       SessionId sessionId = it->second.getId();
-      std::string filenamePrefix(sessionId.begin(),sessionId.end());  
+      std::string filenamePrefix(sessionId.begin(),sessionId.end());
       std::cout << "Retrieve session " << filenamePrefix << std::endl;
 
       filenamePrefix = getPath() + std::string("/") + filenamePrefix;
@@ -239,7 +239,7 @@ namespace device
     const unsigned char* chunk;
     int numPoints = 0;
     time_t startTime = session->getTime();
-    for(int i = 0; i < length; i += 20) 
+    for(int i = 0; i < length; i += 20)
     {
       numPoints++;
       // Every other 3 line doesn't contain coordinates
