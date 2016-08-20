@@ -5,7 +5,7 @@
 #include <list>
 #include <stdexcept>
 #include <sstream>
-#include <tr1/memory>
+#include <memory>
 #include <stdint.h>
 
 #ifdef WINDOWS

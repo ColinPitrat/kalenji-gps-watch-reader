@@ -6,7 +6,7 @@ OBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.o/')
 HEADERS=$(shell find src -name \*.h)
 CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++11
 ADD_CFLAGS=-O2
-DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -Og -g -coverage -pthread
+DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -O0 -g -coverage -pthread
 MINGW_PATH=/usr/i686-w64-mingw32
 WININCPATH=-I$(MINGW_PATH)/include/libusb-1.0/ -I$(MINGW_PATH)/include/libxml2/
 WINLIBS=$(MINGW_PATH)/lib/libusb-1.0.dll.a $(MINGW_PATH)/lib/libxml2.dll.a $(MINGW_PATH)/lib/libcurl.dll.a
