@@ -61,8 +61,7 @@ Special thanks to:
   * **Christophe Jalady** for the support of "OnMove 510 and 710" watches and his multiple contributions to improve GoogleMap output
   * **Miguel Dias Costa** for the support of "OnMove 100" watches 
   * **Jean Lasson** for the support of "OnMove 200" watches
-
-Some help would also be appreciated to build the software on Mac OS.
+  * **Fernando Birra** for the support of Mac OS X
 
 A functionality is missing ? You found a bug ? Please go in issues and open one. 
  
