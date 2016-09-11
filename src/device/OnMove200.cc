@@ -235,118 +235,100 @@ namespace device
   }
 
   void OnMove200::parseOMDFile(const unsigned char* bytes, int length, Session *session)
-    {
-    const unsigned char* chunk;
-         	
-	uint32_t totalPoint = 0;
+ 	{
+	const unsigned char* chunk;
+ 	uint32_t totalPoint = 0;
+
 	for(int i=0;i<length;i=i+30) 
-    { 
-    chunk = &bytes[i]; 
-    totalPoint++;
+	{ 
+    	chunk = &bytes[i]; 
+    	totalPoint++;
 	}
 	  
 	uint32_t nPoints = 0;
-    uint32_t startPoint = 1 ; 
-    uint32_t endPoint = 0; 
-    uint32_t restTime = 0; 
-    uint32_t restDistance = 0; 
-                        
-    DEBUG_CMD(int lapIndex = 0); 
- 
-    for(int i=0;i<length;i=i+20) 
-    { 
-    chunk = &bytes[i]; 
-                               
-    nPoints++; 
-    if(nPoints % 3 == 0) continue ; 
-        
-    endPoint++;
-                
-    uint32_t time = bytesToInt2(chunk[12],chunk[13]); 
-    uint32_t time2 = bytesToInt2(chunk[32],chunk[33]); 
-    uint32_t time3 = bytesToInt2(chunk[52],chunk[53]); 
-    uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]); 
+	uint32_t startPoint = 1 ; 
+	uint32_t endPoint = 0; 
+	uint32_t restTime = 0; 
+	uint32_t restDistance = 0; 
                   
-    if((time == time2)||(time == time3))
-	{
-    uint32_t totalTime = time - restTime ; 
-    uint32_t totalDistance = distance - restDistance ; 
+    	DEBUG_CMD(int lapIndex = 0); 
  
-	if((startPoint == endPoint)||(distance = 0)) continue;
- 
-    double averageSpeed = totalDistance * 3.6 / totalTime ; 
- 
-    //DEBUG_CMD(std::cout << "Lap " << lapIndex++ << std::endl); 
-    Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, 0, averageSpeed, 0, 0, 0, 0, 0, 0); 
-    session->addLap(l); 
-      
-    //lapCount++;
-    startPoint = endPoint ; 
-    restTime = time ; 
-    restDistance = distance ;     
-	}  
-		
-	else if (endPoint == totalPoint)
+ 	for(int i=0;i<length;i=i+20) 
+	{ 
+	chunk = &bytes[i];          
+	nPoints++; 
+	if(nPoints % 3 == 0) continue ; 
+        
+	endPoint++;
+                
+	uint32_t time = bytesToInt2(chunk[12],chunk[13]); 
+	uint32_t time2 = bytesToInt2(chunk[32],chunk[33]); 
+	uint32_t time3 = bytesToInt2(chunk[52],chunk[53]); 
+	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]); 
+	if((startPoint +1 == endPoint)||(distance == 0)) continue; 
+                  
+	if((time == time2)||(time == time3))
 	{
 	uint32_t totalTime = time - restTime ; 
-    uint32_t totalDistance = distance - restDistance ; 
-       
-    double averageSpeed = totalDistance * 3.6 / totalTime ; 
+	uint32_t totalDistance = distance - restDistance ; 
+	double averageSpeed = totalDistance * 3.6 / totalTime ; 
  
-    DEBUG_CMD(std::cout << "Lap " << lapIndex++ << std::endl); 
-    Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, 0, averageSpeed, 0, 0, 0, 0, 0, 0); 
-    session->addLap(l); 
-    }
+	DEBUG_CMD(std::cout << "Lap " << lapIndex++ << std::endl); 
+	Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, 0, averageSpeed, 0, 0, 0, 0, 0, 0); 
+	session->addLap(l); 
+    
+	startPoint = endPoint ; 
+	restTime = time ; 
+	restDistance = distance ;     
+	}  
+		
+	else if (endPoint +1 == totalPoint)
+	{
+	uint32_t totalTime = time - restTime ; 
+	uint32_t totalDistance = distance - restDistance ; 
+	double averageSpeed = totalDistance * 3.6 / totalTime ; 
+ 
+	DEBUG_CMD(std::cout << "Lap " << lapIndex++ << std::endl); 
+	Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, 0, averageSpeed, 0, 0, 0, 0, 0, 0); 
+	session->addLap(l); 
 	}
-
-	//Recherche des points
+	}
+		
 	uint32_t numPoints = 0;
 	uint32_t aPoints = 0;
-    time_t startTime = session->getTime(); 
-    std::list<Lap*>::iterator lap = session->getLaps().begin();
+	time_t startTime = session->getTime(); 
+	std::list<Lap*>::iterator lap = session->getLaps().begin();
     
-    for(int i = 0; i < length; i += 20)
-    {
-      numPoints++;
-      if(numPoints % 3 == 0) continue ;
-      chunk = &bytes[i];
-      if((numPoints % 3 == 1)||(numPoints == 1))
-      {
-      double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
-      double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-      uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
-      uint32_t time = bytesToInt2(chunk[12], chunk[13]);
-      double speed = ((double)bytesToInt2(chunk[42],chunk[43]));
-      uint32_t hr = chunk[46];
-      
-      Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
-      p->setDistance(distance);
-      session->addPoint(p);
-      aPoints++;
-      }
-      else if((numPoints % 3 == 2)||(numPoints == 2))
-      {
-      double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
-      double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-      uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
-      uint32_t time = bytesToInt2(chunk[12], chunk[13]);
-      double speed = ((double)bytesToInt2(chunk[32],chunk[33]));
-      uint32_t hr = chunk[36];
-      
-      Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
-      p->setDistance(distance);
-      session->addPoint(p);
-      aPoints++;
-      }
-        
-   			if(lap != session->getLaps().end() && aPoints == (*lap)->getFirstPointId())
+	for(int i = 0; i < length; i += 20)
+	{
+	chunk = &bytes[i];
+	numPoints++;
+	if(numPoints % 3 == 0) continue ;
+	aPoints++;
+	if(aPoints == totalPoint) continue ;
+		
+	if((numPoints % 3 == 1)||(numPoints == 1))
+	{
+	double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
+	double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
+	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
+	uint32_t time = bytesToInt2(chunk[12], chunk[13]);
+	double speed = ((double)bytesToInt2(chunk[42],chunk[43]));
+	uint32_t hr = chunk[46];
+	if (distance > 50000) continue ;
+	 
+	Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
+	p->setDistance(distance);
+	session->addPoint(p);
+	
+	if(lap != session->getLaps().end() && aPoints == (*lap)->getFirstPointId())
 			{
 				(*lap)->setStartPoint(session->getPoints().back());
 			}
 			while(lap != session->getLaps().end() && aPoints >= (*lap)->getLastPointId())
 			{
 				// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-				if((*lap)->getStartPoint() == NULL)
+					if((*lap)->getStartPoint() == NULL)
 				{
 					std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 					(*lap)->setStartPoint(session->getPoints().back());
@@ -358,6 +340,43 @@ namespace device
 					(*lap)->setStartPoint(session->getPoints().back());
 				}
 			}
-    }
-  }
+	}
+	else if((numPoints % 3 == 2)||(numPoints == 2))
+	{
+	double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
+	double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
+	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
+	uint32_t time = bytesToInt2(chunk[12], chunk[13]);
+	double speed = ((double)bytesToInt2(chunk[32],chunk[33]));
+	uint32_t hr = chunk[36];
+	if (distance > 500000) continue ;
+	
+	Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
+	p->setDistance(distance);
+	session->addPoint(p);
+	
+	if(lap != session->getLaps().end() && aPoints == (*lap)->getFirstPointId())
+			{
+				(*lap)->setStartPoint(session->getPoints().back());
+			}
+			while(lap != session->getLaps().end() && aPoints >= (*lap)->getLastPointId())
+			{
+				// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
+					if((*lap)->getStartPoint() == NULL)
+				{
+					std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
+					(*lap)->setStartPoint(session->getPoints().back());
+				}
+				(*lap)->setEndPoint(session->getPoints().back());
+				++lap;
+				if(lap != session->getLaps().end())
+				{
+					(*lap)->setStartPoint(session->getPoints().back());
+				}
+			}
+	    
+			
+		}
+	}
+ }
 }
