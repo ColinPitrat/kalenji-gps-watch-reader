@@ -317,7 +317,7 @@ namespace device
 	uint32_t hr = chunk[46];
 	if (distance > 50000) continue ;
 	 
-	Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
+	Point *p = new Point(latitude, longitude, FieldUndef, speed, startTime + time, 0, hr, 3);
 	p->setDistance(distance);
 	session->addPoint(p);
 	
@@ -351,7 +351,7 @@ namespace device
 	uint32_t hr = chunk[36];
 	if (distance > 500000) continue ;
 	
-	Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
+	Point *p = new Point(latitude, longitude, FieldUndef, speed, startTime + time, 0, hr, 3);
 	p->setDistance(distance);
 	session->addPoint(p);
 	
