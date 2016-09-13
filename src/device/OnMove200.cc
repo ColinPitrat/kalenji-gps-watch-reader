@@ -293,7 +293,7 @@ namespace device
 	session->addLap(l); 
 	}
 	}
-		
+	
 	uint32_t numPoints = 0;
 	uint32_t aPoints = 0;
 	uint32_t hr = 0;
