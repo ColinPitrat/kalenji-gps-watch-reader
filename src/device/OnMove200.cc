@@ -296,6 +296,8 @@ namespace device
 		
 	uint32_t numPoints = 0;
 	uint32_t aPoints = 0;
+	uint32_t hr = 0;
+	double speed = 0;
 	time_t startTime = session->getTime(); 
 	std::list<Lap*>::iterator lap = session->getLaps().begin();
     
@@ -306,52 +308,26 @@ namespace device
 	if(numPoints % 3 == 0) continue ;
 	aPoints++;
 	if(aPoints == totalPoint) continue ;
-		
+	
+	double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
+	double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
+	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
+	uint32_t time = bytesToInt2(chunk[12], chunk[13]);
+	if (distance > 50000) continue ;
+			
 	if((numPoints % 3 == 1)||(numPoints == 1))
 	{
-	double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
-	double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
-	uint32_t time = bytesToInt2(chunk[12], chunk[13]);
 	double speed = ((double)bytesToInt2(chunk[42],chunk[43]));
 	uint32_t hr = chunk[46];
-	if (distance > 50000) continue ;
-	 
-	Point *p = new Point(latitude, longitude, FieldUndef, speed, startTime + time, 0, hr, 3);
-	p->setDistance(distance);
-	session->addPoint(p);
-	
-	if(lap != session->getLaps().end() && aPoints == (*lap)->getFirstPointId())
-			{
-				(*lap)->setStartPoint(session->getPoints().back());
-			}
-			while(lap != session->getLaps().end() && aPoints >= (*lap)->getLastPointId())
-			{
-				// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-					if((*lap)->getStartPoint() == NULL)
-				{
-					std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
-					(*lap)->setStartPoint(session->getPoints().back());
-				}
-				(*lap)->setEndPoint(session->getPoints().back());
-				++lap;
-				if(lap != session->getLaps().end())
-				{
-					(*lap)->setStartPoint(session->getPoints().back());
-				}
-			}
 	}
+		 
 	else if((numPoints % 3 == 2)||(numPoints == 2))
 	{
-	double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
-	double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-	uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
-	uint32_t time = bytesToInt2(chunk[12], chunk[13]);
 	double speed = ((double)bytesToInt2(chunk[32],chunk[33]));
 	uint32_t hr = chunk[36];
-	if (distance > 500000) continue ;
+	}
 	
-	Point *p = new Point(latitude, longitude, FieldUndef, speed, startTime + time, 0, hr, 3);
+	Point *p = new Point(latitude, longitude, 0, speed, startTime + time, 0, hr, 3);
 	p->setDistance(distance);
 	session->addPoint(p);
 	
@@ -374,9 +350,6 @@ namespace device
 					(*lap)->setStartPoint(session->getPoints().back());
 				}
 			}
-	    
-			
 		}
 	}
  }
-}
