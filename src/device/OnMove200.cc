@@ -239,10 +239,12 @@ namespace device
     const unsigned char* chunk;
     int numPoints = 0;
     time_t startTime = session->getTime();
-    for(int i = 0; i < length; i += 20)
+    // We remove 20 bytes from the length because the last line is always a 'metadata' one, 
+    // even if there's been only one 'data' line since the last one.
+    for(int i = 0; i < (length-20); i += 20)
     {
       numPoints++;
-      // Every other 3 line doesn't contain coordinates
+      // Every other 3 line doesn't contain coordinates ('metadata')
       if(numPoints % 3 == 0) continue;
       chunk = &bytes[i];
       double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
