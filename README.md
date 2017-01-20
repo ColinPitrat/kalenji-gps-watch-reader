@@ -97,7 +97,7 @@ This way, program output will also be written in the file kalenji_reader_output.
      You can modify the default behavior of kalenji_reader by putting a .kalenji_readerrc file in your home directory.
      For example for a user called toto, the configuration file will be:
 
-     > /home/toto/.kalenjirc
+     > /home/toto/.kalenji_readerrc
 
  * Options available
 
