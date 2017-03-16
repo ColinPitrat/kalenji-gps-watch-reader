@@ -37,6 +37,7 @@ Watches known to be supported are:
   * Pyle PGSPW1 (but feedback would be appreciated)
   * GPS On Move 100
   * GPS On Move 200
+  * GPS On Move 220 (specifying OnMove200 as device)
   * GPS On Move 510
   * GPS On Move 710
   * NavBike 400
@@ -96,7 +97,7 @@ This way, program output will also be written in the file kalenji_reader_output.
      You can modify the default behavior of kalenji_reader by putting a .kalenji_readerrc file in your home directory.
      For example for a user called toto, the configuration file will be:
 
-     > /home/toto/.kalenjirc
+     > /home/toto/.kalenji_readerrc
 
  * Options available
 
