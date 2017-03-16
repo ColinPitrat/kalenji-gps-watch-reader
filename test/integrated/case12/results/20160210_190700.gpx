@@ -1429,5 +1429,20 @@
     </trkseg>
   </trk>
   <extensions>
+    <gpxdata:lap>
+      <gpxdata:index>1</gpxdata:index>
+      <gpxdata:startPoint lat="47.164833" lon="2.348173"/>
+      <gpxdata:endPoint lat="47.238518" lon="2.258437" />
+      <gpxdata:startTime>2016-02-10T18:07:05.000Z</gpxdata:startTime>
+      <gpxdata:elapsedTime>1006</gpxdata:elapsedTime>
+      <gpxdata:calories>0</gpxdata:calories>
+      <gpxdata:distance>15789</gpxdata:distance>
+      <gpxdata:summary name="AverageSpeed" kind="avg">56.501392</gpxdata:summary>
+      <gpxdata:summary name="MaximumSpeed" kind="max">0</gpxdata:summary>
+      <gpxdata:summary name="AverageHeartRateBpm" kind="avg">0</gpxdata:summary>
+      <gpxdata:summary name="MaximumHeartRateBpm" kind="max">0</gpxdata:summary>
+      <gpxdata:trigger>distance</gpxdata:trigger>
+      <gpxdata:intensity>active</gpxdata:intensity>
+    </gpxdata:lap>
   </extensions>
 </gpx>

@@ -16,6 +16,10 @@ namespace output
 
 	void GoogleMap::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
 	{
+		if(configuration.find("google_api_key") == configuration.end()) {
+			std::cerr << "Using GoogleMap output requires a Google API Key. You can get one from https://developers.google.com/maps/documentation/javascript/get-api-key" << std::endl;
+			return;
+		}
 		session->ensurePointDistanceAreOk();
 
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
@@ -37,7 +41,7 @@ namespace output
 		mystream << "}" << std::endl;
 		mystream << "</style>" << std::endl;
 
-		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?sensor=false\"></script>" << std::endl;
+		mystream << "<script type=\"text/javascript\" src=\"http://maps.google.com/maps/api/js?key=" << configuration["google_api_key"] << "&sensor=false\"></script>" << std::endl;
 		mystream << "<script type=\"text/javascript\">" << std::endl;
 		mystream << "popupGlobal = null;" << std::endl;
 		mystream << "highlightedPoint = null;" << std::endl;
@@ -63,14 +67,14 @@ namespace output
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
-			if(it != points.begin()) 
+			if(it != points.begin())
 			{
-			  mystream << ","; 
+			  mystream << ",";
 			}
 			mystream <<  "{";
 			mystream << "lat:" << (*it)->getLatitude() << ", long:" << (*it)->getLongitude() << ", ";
 			mystream << "distance:" << (*it)->getDistance() << ", ";
-			mystream << "color: \"#"; 
+			mystream << "color: \"#";
 			// Max speed is bright red, 5 km/h or less is black
 			// TODO: Dynamic way to find lower bound ?
 			double min_speed = 5;
@@ -114,8 +118,8 @@ namespace output
 			if((*it)->getEndPoint() != NULL)
 			{
 			       mystream << std::endl;
-			       
-			       if(addComa) 
+
+			       if(addComa)
 			       {
 			          mystream << ",";
 			       }

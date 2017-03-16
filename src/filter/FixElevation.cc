@@ -33,7 +33,7 @@ namespace filter
 			if(tokens.size() == 2)
 			{
 				// std::cout << "  Cleaned token " << it->c_str() << std::endl;
-				std::list<std::string>::iterator it2 = tokens.begin(); 
+				std::list<std::string>::iterator it2 = tokens.begin();
 				if((*it2) == "\"elevation\"")
 				{
 					while(!((*first)->getLatitude().isDefined() && (*first)->getLongitude().isDefined()))
@@ -85,7 +85,7 @@ namespace filter
 		fixed_points = 0;
 
 		curl = curl_easy_init();
-		if(!curl) 
+		if(!curl)
 		{
 			std::cerr << "Error: Didn't manage to initialize curl" << std::endl;
 			return;
@@ -97,11 +97,11 @@ namespace filter
 		std::list<Point*> &points = session->getPoints();
 		//std::cout << "Retrieving elevation for " << points.size() << " points" << std::endl;
 
-		// Retrieve points elevation 89 by 89 (max url length = 2048 => (2048 - 75) / 22 = 89)
+		// Retrieve points elevation 87 by 87 (max url length = 2048 => (2048 - 119) / 22 = 87)
 		int i = 0;
 		std::list<Point*>::iterator request_first = points.begin();
 		std::list<Point*>::iterator request_last;
-		std::stringstream urlparams; 
+		std::stringstream urlparams;
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); )
 		{
 			if((*it)->getLatitude().isDefined() && (*it)->getLongitude().isDefined())
@@ -112,10 +112,19 @@ namespace filter
 				++i;
 			}
 
-			if((++it == points.end() && i != 0) || i == 89)
+			if((++it == points.end() && i != 0) || i == 87)
 			{
-				std::stringstream url; 
-				url << "http://maps.googleapis.com/maps/api/elevation/json?sensor=true&locations=";
+				std::stringstream url;
+				std::string api_url = "maps.googleapis.com/maps/api/elevation/json?";
+				std::string api_params = "sensor=true&locations=";
+				if(configuration.find("google_api_key") == configuration.end())
+				{
+					url << "http://" << api_url << api_params;
+				}
+				else
+				{
+					url << "https://" << api_url << "key=" << configuration["google_api_key"] << "&" << api_params;
+				}
 				url << urlparams.str();
 				//std::cout << "Doing a GET on " << url.str() << std::endl;
 
@@ -141,7 +150,7 @@ namespace filter
 			}
 		}
 
-		/* always cleanup */ 
+		/* always cleanup */
 		curl_easy_cleanup(curl);
 		std::cout << "    Fixed elevation of " << fixed_points << " points." << std::endl;
 	}

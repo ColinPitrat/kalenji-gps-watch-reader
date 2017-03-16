@@ -5,3 +5,4 @@ log_transactions=no
 filters=FixElevation,ComputeInstantSpeed
 outputs=KML,GPX,TCX,CSV,GoogleMap
 gpx_extensions=none
+google_api_key=AIzaSyCn1iq1fECU18IwjN1dwng9JakQOLVZzkk
