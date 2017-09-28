@@ -127,6 +127,7 @@ bool readConf(std::map<std::string, std::string>& options)
 	configuration["tcx_sport"] = "Running";
 	configuration["reduce_points_max"] = "200";
 	configuration["verbose"] = "false";
+	configuration["google_map_height"] = "500";
 	// Default value for log_transactions_directory is defined later (depends on directory)
 	// TODO: Check that content of file is correct (i.e key is already in the map, except for log_transactions_directory that we define later if given ?)
 

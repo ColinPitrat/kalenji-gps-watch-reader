@@ -365,7 +365,7 @@ namespace output
 		mystream << "</script>" << std::endl;
 		mystream << "</head>" << std::endl;
 		mystream << "<body onload=\"load()\" style=\"cursor:crosshair\" border=\"0\">" << std::endl;
-		mystream << "<div id=\"map\" style=\"width: 100%; height: 500px; top: 0px; left: 0px\"></div>" << std::endl;
+		mystream << "<div id=\"map\" style=\"width: 100%; height: " << configuration["google_map_height"] << "px; top: 0px; left: 0px\"></div>" << std::endl;
 		mystream << "<div id=\"graph\" style=\"width: 100%; height: 300px; top: 0px; left: 0px\"></div>" << std::endl;
 		mystream << "<div id=\"spacer\" style=\"height: 25px\"></div>" << std::endl;
 		mystream << "<div id=\"controls\" style=\"width: 100%; text-align:center\"><input type=\"checkbox\" name=\"Speed\" onchange=\"toggleDisplay(0)\" checked=\"checked\">Speed</input><input type=\"checkbox\" name=\"Heartrate\" onchange=\"toggleDisplay(1)\" checked=\"checked\">Heartrate</input><input type=\"checkbox\" name=\"Elevation\" onchange=\"toggleDisplay(2)\" checked=\"checked\">Elevation</input>" << std::endl;
