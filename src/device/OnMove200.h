@@ -52,10 +52,10 @@ namespace device
 			virtual void parseOMHFile(const unsigned char* bytes, Session* session);
 			virtual void parseOMDFile(const unsigned char* bytes, int length, Session* session);
 
-      int bytesToInt2(unsigned char b0, unsigned char b1);
-      int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
-      unsigned char* readAllBytes(std::string filename, size_t& size);
-      bool fileExists(std::string filename);
+			int bytesToInt2(unsigned char b0, unsigned char b1);
+			int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
+			unsigned char* readAllBytes(std::string filename, size_t& size);
+			bool fileExists(std::string filename);
 
 			virtual std::string getName() { return "OnMove200"; };
 			virtual unsigned int getVendorId() { return 0x283E; };
