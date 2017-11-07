@@ -41,9 +41,12 @@ percentage=$((100*$OK_CASES/($OK_CASES+$KO_CASES)))
 echo ""
 echo "Result = $percentage % ($OK_CASES OK - $KO_CASES KO)"
 echo "See $RESULT_FILE for details"
-#echo "travis_fold:start:test_logs"
-#cat "$RESULT_FILE"
-#echo "travis_fold:end:test_logs"
+if [ ! -z "$TRAVIS" ]
+then
+	echo "travis_fold:start:test_logs"
+	cat "$RESULT_FILE"
+	echo "travis_fold:end:test_logs"
+fi
 echo ""
 if [ ! -z "$diff_command" ]
 then
