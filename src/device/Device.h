@@ -15,6 +15,12 @@
 
 namespace device
 {
+  struct DeviceId
+  {
+    unsigned int vendorId;
+    unsigned int productId;
+  };
+
 	/**
 	  An interface for a GPS device. 
 	 */
@@ -29,7 +35,7 @@ namespace device
 			/** 
 			  Initialize the device. Any action that needs to be done before discussing with it.
 			 */ 
-			virtual void init() = 0;
+			virtual void init(const DeviceId& deviceId) = 0;
 
 			/** 
 			  Release the device. Any action that needs to be done once the work is over.
@@ -56,8 +62,7 @@ namespace device
 
 			virtual std::string getName() = 0;
 
-			virtual unsigned int getVendorId() = 0;
-			virtual unsigned int getProductId() = 0;
+      virtual DeviceId getDeviceId() = 0;
 
 		protected:
 			std::map<std::string, std::string> _configuration;

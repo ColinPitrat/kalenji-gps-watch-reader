@@ -16,36 +16,35 @@ namespace device
 			/** 
 			  Initialize the device. 
 			 */ 
-			virtual void init();
+			void init(const DeviceId& deviceId) override;
 
 			/** 
 			  Release the device. 
 			 */ 
 			// TODO: Do something in it ?!
 			// TODO: In case of error we should finish reading until getting 8Axxx so that the device is in a clean state. What if no error ?
-			virtual void release() {};
+			void release() override {};
 
 			/** 
 			  Read list of sessions from the device.
 			  @param oSessions The list of sessions to fill
 			 */ 
-			virtual void getSessionsList(SessionsMap *oSessions);
+			void getSessionsList(SessionsMap *oSessions) override;
 
 			/** 
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
 			 */ 
-			virtual void exportSession(Session *iSession);
+			void exportSession(Session *iSession) override;
 
 			/** 
 			  Send data to the source. 
 			  @param iData A pointer to data to be sent
 			 */ 
-			virtual void getSessionsDetails(SessionsMap *oSessions);
+			void getSessionsDetails(SessionsMap *oSessions) override;
 
-			virtual std::string getName() { return "Kalenji"; };
-			virtual unsigned int getVendorId() { return 0x0483; };
-			virtual unsigned int getProductId() { return 0x5740; };
+			std::string getName() override { return "Kalenji"; };
+      DeviceId getDeviceId() override { return { 0x0483, 0x5740 }; };
 
 		private:
 			DECLARE_DEVICE(Kalenji);

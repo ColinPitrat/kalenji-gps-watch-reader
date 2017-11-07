@@ -61,7 +61,7 @@ namespace device
     DEBUG_CMD(std::cout << std::endl);
   }
 
-  void OnMove200::init()
+  void OnMove200::init(const DeviceId& deviceId)
   {
     //check if getPath() is a valid path
     DIR* folder = opendir(getPath().c_str());

@@ -348,12 +348,13 @@ int main(int argc, char *argv[])
 				{
 					libusb_device_descriptor deviceDescriptor;
 					libusb_get_device_descriptor(listOfDevices[i], &deviceDescriptor);
-					std::map<std::string, device::Device*> objects = LayerRegistry<device::Device>::getInstance()->getObjects();
-					for(std::map<std::string, device::Device*>::iterator it = objects.begin(); it != objects.end(); ++it)
+					auto devices = LayerRegistry<device::Device>::getInstance()->getObjects();
+					for(const auto& device : devices)
 					{
-						if(it->second->getVendorId() == deviceDescriptor.idVendor && it->second->getProductId() == deviceDescriptor.idProduct)
+            auto deviceId = device.second->getDeviceId();
+						if(deviceId.vendorId == deviceDescriptor.idVendor && deviceId.productId == deviceDescriptor.idProduct)
 						{
-							configuration["device"] = it->second->getName();
+							configuration["device"] = device.second->getName();
 						}
 					}
 				}
@@ -382,7 +383,7 @@ int main(int argc, char *argv[])
 		myDevice->setSource(dataSource);
 		myDevice->setConfiguration(configuration);
 		LOG_VERBOSE("Initializing device");
-		myDevice->init();
+		myDevice->init(myDevice->getDeviceId());
 		LOG_VERBOSE("Device initialized");
 		SessionsMap sessions;
 		LOG_VERBOSE("Get sessions list");

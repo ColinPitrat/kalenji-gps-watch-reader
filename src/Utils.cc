@@ -6,9 +6,27 @@
 #include <stdint.h>
 #include <cmath>
 #include <cerrno>
+#include <cstdlib>
 #include <cstring>
 #include <unistd.h>
 #include <sys/stat.h>
+
+time_t mktime_utc(struct tm *tm)
+{
+  time_t ret;
+  char *tz;
+
+  tz = getenv("TZ");
+  setenv("TZ", "", 1);
+  tzset();
+  ret = mktime(tm);
+  if (tz)
+    setenv("TZ", tz, 1);
+  else
+    unsetenv("TZ");
+  tzset();
+  return ret;
+}
 
 std::string Formatter::str() const
 {

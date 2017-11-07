@@ -17,10 +17,10 @@ namespace source
 		_hasInterface1 = false;
 
 		rc = libusb_init(&_USBContext);
-        if (rc != 0)
-        {
+		if (rc != 0)
+		{
 			throw std::runtime_error(Formatter() << "failed to initialize libusb");
-        }
+		}
 		ssize_t nbDevices = libusb_get_device_list(_USBContext, &listOfDevices);
 		if (nbDevices < 0)
 		{

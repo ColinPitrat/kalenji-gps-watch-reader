@@ -84,9 +84,9 @@ namespace device
 		return false;
 	}
 
-	void CWKalenji500SD::init()
+	void CWKalenji500SD::init(const DeviceId& deviceId)
 	{
-		_dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		unsigned char *responseData;
 		size_t transferred;
 

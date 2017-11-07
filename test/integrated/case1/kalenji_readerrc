@@ -1,4 +1,4 @@
-directory=/tmp
+directory=/tmp/case1
 import=all
 trigger=distance
 log_transactions=no

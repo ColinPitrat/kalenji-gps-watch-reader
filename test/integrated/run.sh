@@ -15,7 +15,7 @@ do
 	pushd results > /dev/null
 	for result in *
 	do
-		diff $result /tmp/$result >> $RESULT_FILE
+		diff $result /tmp/$c/$result >> $RESULT_FILE
 		if [ $? -eq 0 ]
 		then
 			echo "OK - $c - $result" | tee -a $RESULT_FILE
@@ -23,14 +23,14 @@ do
 		else
 			echo "KO - $c - $result" | tee -a $RESULT_FILE
 			diff_command="$diff_command
-vi -d `pwd`/$result /tmp/$result"
+vi -d `pwd`/$result /tmp/$c/$result"
 			let KO_CASES=$KO_CASES+1
-            #echo "travis_fold:start:test_error$KO_CASES"
-            #diff -u `pwd`/$result /tmp/$result
-            #hexdump -C `pwd`/$result > `pwd`/${result}.hex
-            #hexdump -C /tmp/$result > /tmp/${result}.hex
-            #diff -u `pwd`/${result}.hex /tmp/${result}.hex
-            #echo "travis_fold:end:test_error$KO_CASES"
+			#echo "travis_fold:start:test_error$KO_CASES"
+			#diff -u `pwd`/$result /tmp/$c/$result
+			#hexdump -C `pwd`/$result > `pwd`/${result}.hex
+			#hexdump -C /tmp/$c/$result > /tmp/$c/${result}.hex
+			#diff -u `pwd`/${result}.hex /tmp/$c/${result}.hex
+			#echo "travis_fold:end:test_error$KO_CASES"
 		fi
 	done
 	popd > /dev/null
@@ -47,8 +47,8 @@ echo "See $RESULT_FILE for details"
 echo ""
 if [ ! -z "$diff_command" ]
 then
-    echo "To obtain diff:"
-    echo "$diff_command"
-    echo ""
-    exit 1
+	echo "To obtain diff:"
+	echo "$diff_command"
+	echo ""
+	exit 1
 fi

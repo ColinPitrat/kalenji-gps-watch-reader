@@ -53,10 +53,10 @@ namespace device
 		*buffer = message;
 	}
 
-	void PylePGSPW1::init()
+	void PylePGSPW1::init(const DeviceId& deviceId)
 	{
 		DEBUG_CMD(std::cout << "PylePGSPW1::init() - init device" << std::endl);
-		_dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		unsigned char *responseData;
 		size_t transferred;
 		// Step 1: Some control transfer, necessary to initialize the device ?

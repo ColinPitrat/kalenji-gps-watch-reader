@@ -17,9 +17,9 @@ namespace device
 	const int     Kalenji::lengthDataMore = 5;
 	unsigned char Kalenji::dataMore[lengthDataMore] = { 0x02, 0x00, 0x01, 0x81, 0x80 };
 
-	void Kalenji::init()
+	void Kalenji::init(const DeviceId& deviceId)
 	{
-		_dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		unsigned char *responseData;
 		size_t transferred;
 		_dataSource->write_data(0x03, dataDevice, lengthDataDevice);

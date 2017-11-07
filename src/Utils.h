@@ -16,6 +16,8 @@ struct tm * localtime_r (const time_t *timer, struct tm *result);
 struct tm * gmtime_r (const time_t *timer, struct tm *result);
 #endif
 
+time_t mktime_utc(struct tm *tm);
+
 class Point;
 
 #define THROW_STREAM(stream) throw std::runtime_error(Formatter() << stream);

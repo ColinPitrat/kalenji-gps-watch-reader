@@ -28,10 +28,10 @@ namespace device
     DEBUG_CMD(std::cout << std::endl);
   }
 
-  void Navbike400::init()
+  void Navbike400::init(const DeviceId& deviceId)
   {
     LOG_VERBOSE("Navbike400::init() - init device");
-    _dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
     // Step 1 - USB to UART initialization ?
     {
       unsigned char data[256] = { 0, 0xC2, 1, 0 };

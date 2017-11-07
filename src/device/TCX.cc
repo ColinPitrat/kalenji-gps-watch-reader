@@ -1,5 +1,6 @@
 #include "TCX.h"
 #include <cstring>
+#include "Utils.h"
 
 namespace device
 {
@@ -101,7 +102,7 @@ namespace device
 					data[16] = 0; time.tm_min  = atoi((char*) data + 14);
 					data[19] = 0; time.tm_sec  = atoi((char*) data + 17);
 					time.tm_isdst = -1;
-					oSession->setTime(time);
+					oSession->setTimeT(mktime_utc(&time));
 				}
 				else
 				{
@@ -149,7 +150,7 @@ namespace device
 					data[16] = 0; time.tm_min  = atoi((char*) data + 14);
 					data[19] = 0; time.tm_sec  = atoi((char*) data + 17);
 					time.tm_isdst = -1;
-					oLap->setTime(time);
+					oLap->setTimeT(mktime_utc(&time));
 				}
 				else
 				{
@@ -260,7 +261,7 @@ namespace device
 					data[16] = 0; time.tm_min  = atoi((char*) data + 14);
 					data[19] = 0; time.tm_sec  = atoi((char*) data + 17);
 					time.tm_isdst = -1;
-					oPoint->setTime(mktime(&time));
+					oPoint->setTime(mktime_utc(&time));
 				}
 				else
 				{
@@ -382,9 +383,9 @@ namespace device
 		xmlFreeDoc(_document);
 	}
 
-	void TCX::init()
+	void TCX::init(const DeviceId& deviceId)
 	{
-		_dataSource->init(0x0483, 0x5740);
+    _dataSource->init(deviceId.vendorId, deviceId.productId);
 		std::string fileContent;
 		unsigned char* line;
 		size_t length;

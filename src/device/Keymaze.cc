@@ -53,10 +53,10 @@ namespace device
 		*buffer = message;
 	}
 
-	void Keymaze::init()
+	void Keymaze::init(const DeviceId& deviceId)
 	{
 		DEBUG_CMD(std::cout << "Keymaze::init() - init device" << std::endl);
-		_dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		unsigned char *responseData;
 		size_t transferred;
 		// Step 1: Some control transfer, necessary to initialize the device ?

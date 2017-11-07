@@ -50,10 +50,18 @@ class Session
 			gmtime_r(&_time_t, &_time);
 		}
 
+    void timesFromTimeT()
+    {
+      localtime_r(&_time_t, &_local_time);
+      gmtime_r(&_time_t, &_time);
+    }
+
 		void setId(SessionId id)                   { _id = id; };
 		void setNum(uint32_t num)                  { _num = num; };
 		void setName(std::string name)             { _name = name; };
+    // TODO(cpitrat): Convert to a single setter/source of truth for time
 		void setTime(tm time)                      { _local_time = time; convertToGMT(); };
+    void setTimeT(time_t time)                 { _time_t = time; timesFromTimeT(); };
 		void setNbPoints(uint32_t nbPoints)        { _nb_points = nbPoints; };
 		void setNbLaps(uint32_t nbLaps)            { _nb_laps = nbLaps; };
 

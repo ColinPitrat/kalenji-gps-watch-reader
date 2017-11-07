@@ -91,7 +91,7 @@ namespace device
 	}
 
 
-	void OnMove710::init()
+	void OnMove710::init(const DeviceId& deviceId)
 	{
 		//check if getPath() is a valid path
 		DIR* folder = opendir(getPath().c_str());

@@ -16,7 +16,7 @@ namespace output
 		source::Source *dataSource = new source::USB();
 		device::Device *dev = new device::Kalenji();
 		dev->setSource(dataSource);
-		dev->init();
+		dev->init(dev->getDeviceId());
 		dev->exportSession(session);
 		delete dev;
 		delete dataSource;

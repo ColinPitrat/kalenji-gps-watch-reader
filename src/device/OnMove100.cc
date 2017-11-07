@@ -28,10 +28,10 @@ namespace device
 		DEBUG_CMD(std::cout << std::endl);
 	}
 
-	void OnMove100::init()
+	void OnMove100::init(const DeviceId& deviceId)
 	{
 		LOG_VERBOSE("OnMove100::init() - init device");
-		_dataSource->init(getVendorId(), getProductId());
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		// Step 1 - USB to UART initialization ?
 		{
 			unsigned char data[256] = { 0 };

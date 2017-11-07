@@ -11,7 +11,7 @@ namespace device
 
 		if (_document == NULL )
 		{
-			std::cerr << "Document not parsed successfully. \n";
+			std::cerr << "Document not parsed successfully. \n" << _docAsString << std::endl;
 			return false;
 		}
 
@@ -348,9 +348,9 @@ namespace device
 		xmlFreeDoc(_document);
 	}
 
-	void GPX::init()
+	void GPX::init(const DeviceId& deviceId)
 	{
-		_dataSource->init(0x0483, 0x5740);
+    _dataSource->init(deviceId.vendorId, deviceId.productId);
 		std::string fileContent;
 		unsigned char* line;
 		size_t length;

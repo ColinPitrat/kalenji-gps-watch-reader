@@ -1,4 +1,4 @@
-directory=/tmp
+directory=/tmp/case5
 source=Path
 import=all
 trigger=distance

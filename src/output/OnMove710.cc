@@ -17,7 +17,7 @@ namespace output
 		device::Device *dev = new device::OnMove710();
 		dev->setConfiguration(configuration);
 		dev->setSource(dataSource);
-		dev->init();
+		dev->init(dev->getDeviceId());
 		dev->exportSession(session);
 		delete dev;
 		delete dataSource;
