@@ -26,6 +26,7 @@ do
 vi -d `pwd`/$result /tmp/$c/$result"
 			let KO_CASES=$KO_CASES+1
 			if [ ! -z "$TRAVIS" ]
+      then
 				echo "travis_fold:start:test_error$KO_CASES"
 				diff -u `pwd`/$result /tmp/$c/$result
 				echo "travis_fold:end:test_error$KO_CASES"
