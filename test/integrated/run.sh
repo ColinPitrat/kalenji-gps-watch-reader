@@ -25,12 +25,16 @@ do
 			diff_command="$diff_command
 vi -d `pwd`/$result /tmp/$c/$result"
 			let KO_CASES=$KO_CASES+1
-			#echo "travis_fold:start:test_error$KO_CASES"
-			#diff -u `pwd`/$result /tmp/$c/$result
-			#hexdump -C `pwd`/$result > `pwd`/${result}.hex
-			#hexdump -C /tmp/$c/$result > /tmp/$c/${result}.hex
-			#diff -u `pwd`/${result}.hex /tmp/$c/${result}.hex
-			#echo "travis_fold:end:test_error$KO_CASES"
+			if [ ! -z "$TRAVIS" ]
+				echo "travis_fold:start:test_error$KO_CASES"
+				diff -u `pwd`/$result /tmp/$c/$result
+				echo "travis_fold:end:test_error$KO_CASES"
+				echo "travis_fold:start:test_error_hex$KO_CASES"
+				hexdump -C `pwd`/$result > `pwd`/${result}.hex
+				hexdump -C /tmp/$c/$result > /tmp/$c/${result}.hex
+				diff -u `pwd`/${result}.hex /tmp/$c/${result}.hex
+				echo "travis_fold:end:test_error_hex$KO_CASES"
+			fi
 		fi
 	done
 	popd > /dev/null
