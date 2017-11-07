@@ -17,7 +17,7 @@ namespace output
 
 		uint32_t distance = 0;
 		std::list<Point*> points = session->getPoints();
-		Point *prevPoint = NULL;
+		Point *prevPoint = nullptr;
 		uint32_t time_begin = (*points.begin())->getTime();
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{

@@ -10,7 +10,7 @@ class LayerRegistry
 	public:
 		static LayerRegistry* getInstance()
 		{
-			if(_instance == NULL)
+			if(_instance == nullptr)
 			{
 				_instance = new LayerRegistry();
 			}
@@ -40,7 +40,7 @@ class LayerRegistry
 		std::map<std::string, LayerType*> &getObjects() { return _objects; };
 
 	private:
-		LayerRegistry() {};
+		LayerRegistry() = default;
 		static LayerRegistry* _instance;
 		std::map<std::string, LayerType*> _objects;
 };
@@ -57,6 +57,6 @@ class LayerRegistrer
 };
 
 template <typename LayerType>
-LayerRegistry<LayerType> *LayerRegistry<LayerType>::_instance = NULL;
+LayerRegistry<LayerType> *LayerRegistry<LayerType>::_instance = nullptr;
 
 #endif

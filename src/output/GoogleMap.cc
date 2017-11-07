@@ -115,7 +115,7 @@ namespace output
 		mystream << "waypointsList = Array (";
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
-			if((*it)->getEndPoint() != NULL)
+			if((*it)->getEndPoint() != nullptr)
 			{
 			       mystream << std::endl;
 

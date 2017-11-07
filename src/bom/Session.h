@@ -20,7 +20,7 @@ class Session
 			    _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(0)
 		{ }
 
-		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) : 
+		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) :
 			         _id(id), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
 				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
@@ -44,7 +44,7 @@ class Session
 		void addPoint(Point* point) { _points.push_back(point); }
 		void addLap(Lap *lap)       { _laps.push_back(lap); }
 
-		void convertToGMT()         
+		void convertToGMT()
 		{
 			_time_t = mktime(&_local_time);
 			gmtime_r(&_time_t, &_time);
@@ -77,7 +77,7 @@ class Session
 		void setDescent(Field<uint32_t> descent)   { _descent = descent; };
 
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
-		const std::string getBeginTime(bool human_readable=false) const 
+		const std::string getBeginTime(bool human_readable=false) const
 		{
 			char buffer[256];
 			if(human_readable)
@@ -120,20 +120,20 @@ class Session
 		/* If watches doesn't set the distance for each point, we must try to compute them.
 		 * TODO: check against laps if computation is good enougth
 		 */
-		void ensurePointDistanceAreOk() 
+		void ensurePointDistanceAreOk()
 		{
-			Point* previousPoint = NULL;
+			Point* previousPoint = nullptr;
 			double totalDistance = 0; // counter to avoid precision lost (because we round to meter in point::distance;
-			for(std::list<Point*>::iterator it = _points.begin(); it != _points.end(); ++it) 
+			for(std::list<Point*>::iterator it = _points.begin(); it != _points.end(); ++it)
 			{
 				Point* point = (*it);
-				if(!point->getDistance().isDefined()) 
+				if(!point->getDistance().isDefined())
 				{
-					if(previousPoint == NULL) 
+					if(previousPoint == nullptr)
 					{
 						point->setDistance(0); // First point: distance equal to zero
 					}
-					else 
+					else
 					{
 						double distanceInMeter = distanceEarth(previousPoint->getLatitude(), previousPoint->getLongitude(), point->getLatitude(), point->getLongitude());
 						totalDistance = totalDistance + distanceInMeter;

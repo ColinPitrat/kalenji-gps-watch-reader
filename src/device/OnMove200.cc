@@ -65,7 +65,7 @@ namespace device
   {
     //check if getPath() is a valid path
     DIR* folder = opendir(getPath().c_str());
-    if (folder == NULL)
+    if (folder == nullptr)
     {
       std::cout<< "Error: path '" << getPath() << "' does not exist (check option -p <path> on command line or line path=<path> in configuration file)." << std::endl;
       throw std::exception();
@@ -87,10 +87,10 @@ namespace device
   {
     DEBUG_CMD(std::cout << "OnMove200: Get sessions list !" << std::endl);
 
-    DIR* folder = NULL;
-    struct dirent* file = NULL;
+    DIR* folder = nullptr;
+    struct dirent* file = nullptr;
     folder = opendir(getPath().c_str());
-    if (folder == NULL)
+    if (folder == nullptr)
     {
       std::cerr << "Couldn't open dir " << getPath() << std::endl;
       throw std::exception();
@@ -98,7 +98,7 @@ namespace device
 
     std::set<std::string> filenamesPrefix;
 
-    while ((file = readdir(folder)) != NULL)
+    while ((file = readdir(folder)) != nullptr)
     {
       std::string fn = std::string(file->d_name);
       if(strstr(file->d_name,".OMD") || strstr(file->d_name,".OMH"))

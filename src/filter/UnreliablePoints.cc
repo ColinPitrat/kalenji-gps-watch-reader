@@ -8,7 +8,7 @@ namespace filter
 	{
 		std::list<Point*> &points = session->getPoints();
 		std::list<Lap*> &laps = session->getLaps();
-		Point *previousValid = NULL;
+		Point *previousValid = nullptr;
 
 		// Find first reliable point. We'll need it to adjust laps if first points are not reliable.
 		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)

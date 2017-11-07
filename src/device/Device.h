@@ -27,8 +27,8 @@ namespace device
 	class Device
 	{
 		public:
-			Device() : _dataSource(NULL) {};
-			virtual ~Device() {};
+			Device() : _dataSource(nullptr) = default;
+			virtual ~Device() = default;
 			virtual void setConfiguration(std::map<std::string, std::string> configuration) {_configuration = configuration;}
 			virtual void setSource(source::Source *dataSource) { _dataSource = dataSource; };
 

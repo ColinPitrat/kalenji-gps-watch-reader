@@ -111,7 +111,7 @@ namespace device
 			std::cerr << "Size is not a multiple of 8 in getList !" << std::endl;
 			// TODO: Throw an exception
 		}
-		Session *currentSession = NULL;
+		Session *currentSession = nullptr;
 		int32_t numSess = 0;
 		bool first_lap = false;
 		time_t current_time = 0;

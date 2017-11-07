@@ -314,7 +314,7 @@ namespace device
 			} while(responseData[25] == 0xaa);
 
 			// Third response 80 retrieves info concerning the points of the session. There can be many.
-			Session *session = NULL;
+			Session *session = nullptr;
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
@@ -397,7 +397,7 @@ namespace device
 					while(lap != session->getLaps().end() && id_point >= (*lap)->getLastPointId())
 					{
 						// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-						if((*lap)->getStartPoint() == NULL)
+						if((*lap)->getStartPoint() == nullptr)
 						{
 							std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 							(*lap)->setStartPoint(session->getPoints().back());

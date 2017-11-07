@@ -10,7 +10,7 @@ namespace device
 	{
 		_document = xmlParseDoc(_docAsString);
 
-		if (_document == NULL )
+		if (_document == nullptr )
 		{
 			std::cerr << "Document not parsed successfully. \n" << _docAsString << std::endl;
 			return false;
@@ -18,7 +18,7 @@ namespace device
 
 		_rootNode = xmlDocGetRootElement(_document);
 
-		if (_rootNode == NULL)
+		if (_rootNode == nullptr)
 		{
 			std::cerr << "Empty document\n";
 			xmlFreeDoc(_document);
@@ -38,7 +38,7 @@ namespace device
 	{
 		// Ignored data: attributes version and creator
 		xmlNodePtr cur = _rootNode->xmlChildrenNode;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Activities") == 0)
 			{
@@ -56,7 +56,7 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		int nbActivities = 0;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Activity") == 0)
 			{
@@ -83,7 +83,7 @@ namespace device
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
 		int lapNum = 1;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Id") == 0)
 			{
@@ -130,7 +130,7 @@ namespace device
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
 		int nbTracks = 0;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			// To handle: AverageHeartRateBpm, MaximumHeartRateBpm, Intensity, TriggerMethod
 			if (xmlStrcmp(cur->name, (const xmlChar *) "StartTime") == 0)
@@ -214,14 +214,14 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		int nbPoints = oSession->getPoints().size();
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Trackpoint") == 0)
 			{
 				Point *aPoint = new Point();
 				parseTrackpoint(aPoint, cur);
 				oSession->addPoint(aPoint);
-				if(oLap->getStartPoint() == NULL)
+				if(oLap->getStartPoint() == nullptr)
 				{
 					oLap->setStartPoint(aPoint);
 					oLap->setFirstPointId(nbPoints);
@@ -242,7 +242,7 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			// To handle: HeartRateBpm, Extensions
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Time") == 0)
@@ -301,7 +301,7 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "LatitudeDegrees") == 0)
 			{
@@ -326,7 +326,7 @@ namespace device
 	void TCX::parsePointExtensions(Point *oPoint, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "TPX") == 0)
 			{
@@ -344,7 +344,7 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Speed") == 0)
 			{
@@ -365,7 +365,7 @@ namespace device
 		double result = 0;
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Value") == 0)
 			{

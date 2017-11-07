@@ -4,7 +4,7 @@
 class TFieldUndef 
 {
 	public:
-		TFieldUndef() {};
+		TFieldUndef() = default;
 };
 
 static const TFieldUndef FieldUndef;

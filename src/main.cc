@@ -297,7 +297,7 @@ int main(int argc, char *argv[])
 		LOG_VERBOSE("Create output directory '" << configuration["directory"] << "'");
 
 		// TODO: Use registry for source too
-		source::Source *dataSource = NULL;
+		source::Source *dataSource = nullptr;
 		if(configuration["source"] == "File")
 		{
 			LOG_VERBOSE("Source is File");
@@ -320,7 +320,7 @@ int main(int argc, char *argv[])
 				// Create log file name
 				// TODO: Improve ?
 				char buffer[256];
-				time_t t = time(NULL);
+				time_t t = time(nullptr);
 				strftime(buffer, 256, "%Y%m%d_%H%M%S", localtime(&t));
 				std::stringstream log_filename;
 				log_filename << configuration["log_transactions_directory"] << "/" << "kalenji_reader_" << buffer << ".log";
@@ -374,7 +374,7 @@ int main(int argc, char *argv[])
 
 		LOG_VERBOSE("Registering device");
 		device::Device *myDevice = LayerRegistry<device::Device>::getInstance()->getObject(configuration["device"]);
-		if(myDevice == NULL)
+		if(myDevice == nullptr)
 		{
 			std::cerr << "Error trying to register device " << configuration["device"] << ": Unknown device" << std::endl;
 			throw std::exception();
@@ -401,7 +401,7 @@ int main(int argc, char *argv[])
 		LOG_VERBOSE("Release device");
 		myDevice->release();
 		delete myDevice;
-		if(dataSource != NULL)
+		if(dataSource != nullptr)
 		{
 			LOG_VERBOSE("Release datasource");
 			dataSource->release();

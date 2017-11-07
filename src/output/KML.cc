@@ -60,7 +60,7 @@ namespace output
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
 			++i;
-			if((*it)->getEndPoint() != NULL)
+			if((*it)->getEndPoint() != nullptr)
 			{
 				mystream << "<Placemark>" << std::endl;
 				mystream << "<name>Lap " << i << "</name>" << std::endl;

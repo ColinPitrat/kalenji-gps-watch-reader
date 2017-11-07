@@ -61,10 +61,10 @@ namespace device
 		std::string minutesStr = filename.substr(4,2);
 		std::string secondsStr = filename.substr(6,2);
 
-		int year = (int)strtol(yearStr.c_str(),NULL,36);
-		int month = (int)strtol(monthStr.c_str(),NULL,36);
-		int day = (int)strtol(dayStr.c_str(),NULL,36);
-		int hours = (int)strtol(hoursStr.c_str(),NULL,36);
+		int year = (int)strtol(yearStr.c_str(),nullptr,36);
+		int month = (int)strtol(monthStr.c_str(),nullptr,36);
+		int day = (int)strtol(dayStr.c_str(),nullptr,36);
+		int hours = (int)strtol(hoursStr.c_str(),nullptr,36);
 		int minutes = atoi(minutesStr.c_str());
 		int seconds = atoi(secondsStr.c_str());
 
@@ -95,7 +95,7 @@ namespace device
 	{
 		//check if getPath() is a valid path
 		DIR* folder = opendir(getPath().c_str());
-		if (folder == NULL)
+		if (folder == nullptr)
 		{
 			std::cout<< "Error: path '" << getPath() << "' does not exist (check option -p <path> on command line or line path=<path> in configuration file)." << std::endl;
 			throw std::exception();
@@ -117,10 +117,10 @@ namespace device
 	{
 		DEBUG_CMD(std::cout << "OnMove710: Get sessions list !" << std::endl);
 
-		DIR* folder = NULL;
-		struct dirent* file = NULL;
+		DIR* folder = nullptr;
+		struct dirent* file = nullptr;
 		folder = opendir(getPath().c_str());
-		if (folder == NULL)
+		if (folder == nullptr)
 		{
 			std::cerr << "Couldn't open dir " << getPath() << std::endl;
 			throw std::exception();
@@ -128,7 +128,7 @@ namespace device
 
 		std::set<std::string> filenamesPrefix;
 
-		while ((file = readdir(folder)) != NULL)
+		while ((file = readdir(folder)) != nullptr)
 		{
 			std::string fn = std::string(file->d_name);
 			if(strstr(file->d_name,".GHP") || strstr(file->d_name,".GHT") || strstr(file->d_name,".GHL"))
@@ -317,7 +317,7 @@ namespace device
 			while(lap != session->getLaps().end() && id_point >= (*lap)->getLastPointId())
 			{
 				// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-				if((*lap)->getStartPoint() == NULL)
+				if((*lap)->getStartPoint() == nullptr)
 				{
 					std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 					(*lap)->setStartPoint(session->getPoints().back());

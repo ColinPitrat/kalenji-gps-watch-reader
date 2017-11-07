@@ -328,13 +328,13 @@ namespace device
 			} while(responseData[30] == 0xff && responseData[31] == 0xff && responseData[32] == 0xff && responseData[33] == 0xff);
 
 			// Following response 80 retrieves info concerning the points of the session. There can be many.
-			Session *session = NULL;
+			Session *session = nullptr;
 			uint32_t id_point = 0;
 			bool keep_going = true;
 			uint32_t cumulated_tenth = 0;
 			while(keep_going)
 			{
-				session = NULL;
+				session = nullptr;
 				if(responseData[0] == 0x8A) break;
 
 				if(responseData[0] != 0x80)
@@ -397,7 +397,7 @@ namespace device
 						while(lap != session->getLaps().end() && id_point >= (*lap)->getLastPointId())
 						{
 							// This if is a safe net but should never be used (unless laps are not in order or first lap doesn't start at 0 or ...)
-							if((*lap)->getStartPoint() == NULL)
+							if((*lap)->getStartPoint() == nullptr)
 							{
 								std::cerr << "Error: lap has no start point and yet I want to go to the next lap ! (lap: " << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 								(*lap)->setStartPoint(session->getPoints().back());
@@ -413,11 +413,11 @@ namespace device
 						id_point++;
 					}
 				}
-				keep_going = session == NULL || !session->isComplete();
+				keep_going = session == nullptr || !session->isComplete();
 				_dataSource->write_data(0x02, dataMore, lengthDataMore);
 				readMessage(&responseData, &received);
 			}
-			if(session != NULL)
+			if(session != nullptr)
 			{
 				std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
 			}

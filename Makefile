@@ -26,6 +26,10 @@ endif
 ifndef COV
 COV=gcov
 endif
+SOURCES:=$(shell find src test -name \*.cc)
+CLANG_TIDY=clang-tidy-3.8
+#CLANG_CHECKS=modernize-*,performance-*,misc-*,-misc-definitions-in-headers,readability-*,-readability-implicit-bool-cast,-readability-braces-around-statements
+CLANG_CHECKS=modernize-*
 
 debug: ADD_CFLAGS=$(DEBUG_ADD_CFLAGS)
 
@@ -97,6 +101,9 @@ unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
 test: $(TARGET)
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
 	cd test/integrated/ && ./run.sh && cd ..
+
+clang-tidy:
+	if $(CLANG_TIDY) -checks=-*,$(CLANG_CHECKS) $(SOURCES) -header-filter=src/* -- $(CFLAGS) $(ADD_CFLAGS) $(INCPATH) | grep "."; then false; fi
 
 cleancov:
 	find . '(' -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;

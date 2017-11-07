@@ -16,8 +16,8 @@ namespace source
 	{
 		public:
 			// TODO: configurable timeout ?
-			USB() : _USBContext(NULL), _device(NULL), _timeout(5000) { };
-			~USB() {};
+			USB() : _USBContext(nullptr), _device(nullptr), _timeout(5000) = default;
+			~USB() override = default;
 
 			/** 
 			  Initialize the source. Any action that needs to be taken before using the source.

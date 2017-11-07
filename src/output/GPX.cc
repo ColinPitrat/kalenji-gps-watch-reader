@@ -76,10 +76,10 @@ namespace output
 			for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 			{
 				// TODO: Remove this check (could be moved to the getters) ?
-				if((*it)->getStartPoint() == NULL || (*it)->getEndPoint() == NULL)
+				if((*it)->getStartPoint() == nullptr || (*it)->getEndPoint() == nullptr)
 				{
 					std::cerr << "Oups ! I've got a lap without ";
-					if((*it)->getStartPoint() == NULL)
+					if((*it)->getStartPoint() == nullptr)
 						std::cerr << "start";
 					else
 						std::cerr << "end";

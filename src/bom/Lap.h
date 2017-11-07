@@ -6,28 +6,28 @@
 class Lap
 {
 	public:
-		Lap() : _lapNum(0), 
-		        _firstPointId(0),       _lastPointId(0), 
-			_start(NULL),           _end(NULL), 
-			_duration(0),           _distance(0), 
-			_max_speed(FieldUndef), _avg_speed(FieldUndef), 
-			_max_hr(FieldUndef),    _avg_hr(FieldUndef), 
-			_calories(FieldUndef),  _grams(FieldUndef), 
+		Lap() : _lapNum(0),
+		        _firstPointId(0),       _lastPointId(0),
+			_start(nullptr),           _end(nullptr),
+			_duration(0),           _distance(0),
+			_max_speed(FieldUndef), _avg_speed(FieldUndef),
+			_max_hr(FieldUndef),    _avg_hr(FieldUndef),
+			_calories(FieldUndef),  _grams(FieldUndef),
 			_ascent(FieldUndef),    _descent(FieldUndef)
 		{ };
 
-		Lap(uint32_t firstPointId,    uint32_t lastPointId, 
-		    double duration,          uint32_t distance, 
-		    Field<double> max_speed,  Field<double> avg_speed, 
-		    Field<double> max_hr,     Field<double> avg_hr, 
-		    Field<uint32_t> calories, Field<uint32_t> grams, 
-		    Field<uint32_t> descent,  Field<uint32_t> ascent) :  _lapNum(0), 
-		                                                         _firstPointId(firstPointId), _lastPointId(lastPointId), 
-									 _start(NULL), _end(NULL), 
-									 _duration(duration), _distance(distance), 
-									 _max_speed(max_speed), _avg_speed(avg_speed), 
-									 _max_hr(max_hr), _avg_hr(avg_hr), 
-									 _calories(calories), _grams(grams), 
+		Lap(uint32_t firstPointId,    uint32_t lastPointId,
+		    double duration,          uint32_t distance,
+		    Field<double> max_speed,  Field<double> avg_speed,
+		    Field<double> max_hr,     Field<double> avg_hr,
+		    Field<uint32_t> calories, Field<uint32_t> grams,
+		    Field<uint32_t> descent,  Field<uint32_t> ascent) :  _lapNum(0),
+		                                                         _firstPointId(firstPointId), _lastPointId(lastPointId),
+									 _start(nullptr), _end(nullptr),
+									 _duration(duration), _distance(distance),
+									 _max_speed(max_speed), _avg_speed(avg_speed),
+									 _max_hr(max_hr), _avg_hr(avg_hr),
+									 _calories(calories), _grams(grams),
 									 _ascent(ascent), _descent(descent)
 		{ };
 

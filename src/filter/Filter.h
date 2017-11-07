@@ -12,7 +12,7 @@ namespace filter
 	class Filter
 	{
 		public:
-			virtual ~Filter() {};
+			virtual ~Filter() = default;
 			virtual void filter(Session *session, std::map<std::string, std::string> configuration) = 0;
 			virtual std::string getName() = 0;
 	};

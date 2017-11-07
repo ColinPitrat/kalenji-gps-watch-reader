@@ -9,7 +9,7 @@ namespace filter
 	void ComputeInstantSpeed::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
 		std::list<Point*> &points = session->getPoints();
-		Point* prevPoint = NULL;
+		Point* prevPoint = nullptr;
 
 		std::list<Point*>::iterator it = points.begin();
 		double speed = 0;

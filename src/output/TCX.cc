@@ -28,7 +28,7 @@ namespace output
 		uint32_t point_id = 0;
 		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
 		{
-			if((*it)->getStartPoint() != NULL)
+			if((*it)->getStartPoint() != nullptr)
 			{
 				mystream << "   <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\">" << std::endl;
 			}

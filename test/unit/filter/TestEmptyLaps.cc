@@ -33,7 +33,7 @@ class EmptyLapsTest : public testing::Test
         {
             ASSERT_NE(0u, nbPoints);
 
-            Point *startPoint(NULL), *endPoint(NULL);
+            Point *startPoint(nullptr), *endPoint(nullptr);
             for(uint32_t j = 0; j < nbPoints; ++j)
             {
                 Point *point = new Point(lat, lon+j*0.001, FieldUndef, FieldUndef, 0, 0, 100, 3);

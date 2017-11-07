@@ -9,7 +9,7 @@ namespace device
 	{
 		_document = xmlParseDoc(_docAsString);
 
-		if (_document == NULL )
+		if (_document == nullptr )
 		{
 			std::cerr << "Document not parsed successfully. \n" << _docAsString << std::endl;
 			return false;
@@ -17,7 +17,7 @@ namespace device
 
 		_rootNode = xmlDocGetRootElement(_document);
 
-		if (_rootNode == NULL)
+		if (_rootNode == nullptr)
 		{
 			std::cerr << "Empty document\n";
 			xmlFreeDoc(_document);
@@ -37,7 +37,7 @@ namespace device
 	{
 		// Ignored data: attributes version and creator
 		xmlNodePtr cur = _rootNode->xmlChildrenNode;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "metadata") == 0)
 			{
@@ -74,7 +74,7 @@ namespace device
 		// Ignored data: desc, author, copyright, link, keywords, bounds, extensions
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "name") == 0)
 			{
@@ -119,7 +119,7 @@ namespace device
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 		xmlChar *data;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "trkseg") == 0)
 			{
@@ -143,7 +143,7 @@ namespace device
 	void GPX::parseTrkSegOrRoute(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "trkpt") == 0 ||
 			    xmlStrcmp(cur->name, (const xmlChar *) "rtept") == 0)
@@ -180,7 +180,7 @@ namespace device
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 
 		// TODO: missing speed
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "ele") == 0)
 			{
@@ -238,7 +238,7 @@ namespace device
 		xmlChar *data;
 
 		// TODO: missing summary elements for which attribute must be checked to now the info contained
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "hr") == 0)
 			{
@@ -258,7 +258,7 @@ namespace device
 	void GPX::parseExtensions(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "lap") == 0)
 			{
@@ -282,7 +282,7 @@ namespace device
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 
 		// TODO: Handle start point / end point
-		while(cur != NULL)
+		while(cur != nullptr)
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "index") == 0)
 			{
