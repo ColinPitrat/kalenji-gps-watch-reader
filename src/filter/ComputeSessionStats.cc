@@ -18,7 +18,7 @@ namespace filter
 		time_t maxtime;
 		uint32_t duration = 0;
 
-		std::list<Point*>::iterator it = points.begin();
+		auto it = points.begin();
 		maxtime = mintime = (*it)->getTime();
 		while(true)
 		{

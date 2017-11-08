@@ -346,18 +346,18 @@ namespace device
 		// Let's just be happy with a third 50 !
 		//receive(0x81, &responseData, &received, 0x50, 0x21, 0x4A);
 		receive(0x81, &responseData, &received, 0x50);
-		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+		for(auto& session : *oSessions)
 		{
-			std::cout << "Retrieve session " << (int) it->second.getId().back() << std::endl;
-			time_t current_time = it->second.getTime();
-			dataAckData5[6] = it->second.getId().back();
+			std::cout << "Retrieve session " << (int) session.second.getId().back() << std::endl;
+			time_t current_time = session.second.getTime();
+			dataAckData5[6] = session.second.getId().back();
 			dataAckData5[12] = 0xAF ^ dataAckData5[6];
 			_dataSource->write_data(0x01, dataAckData5, lengthAckData);
 			receive(0x81, &responseData, &received, 0x40, 0x01, 0x05);
 
 			std::vector<unsigned char> buffer;
 			int ligne = 0;
-			int nb_laps = it->second.getNbLaps();
+			int nb_laps = session.second.getNbLaps();
 			int no_burst = 0;
 			do
 			{
@@ -414,15 +414,15 @@ namespace device
 				total_duration += duration;
 				offset += 16;
 				auto l = new Lap(0, 0, duration, distance, max_speed, 0, max_hr, avg_hr, 0, 0, 0, 0);
-				it->second.addLap(l);
+				session.second.addLap(l);
 			}
-			it->second.setDistance(total_distance);
-			it->second.setDuration(total_duration);
+			session.second.setDistance(total_distance);
+			session.second.setDuration(total_duration);
 			offset += 16;
 			int nb_points = 0;
 			std::cout << std::dec; 
-			std::list<Lap*> laps = it->second.getLaps();
-			std::list<Lap*>::iterator it_lap = laps.begin();
+			std::list<Lap*> laps = session.second.getLaps();
+			auto it_lap = laps.begin();
 			double cumulated_duration = 0;
 			DEBUG_CMD(std::cout << "Points ..." << std::endl);
 			while(offset + 3 < end)
@@ -441,7 +441,7 @@ namespace device
 				double speed = (point[1] + 256.0*point[2]) / 100;
 
 				auto p = new Point(FieldUndef, FieldUndef, FieldUndef, speed, current_time + 5*nb_points, 0, hr, 3);
-				it->second.addPoint(p);
+				session.second.addPoint(p);
 
 				if(nb_points == 0)
 				{

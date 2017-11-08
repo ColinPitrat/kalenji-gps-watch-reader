@@ -9,15 +9,15 @@ namespace filter
 		// TODO: If first heartrates are 0, they will stay 0
 		uint16_t previousHeartrate = 0;
 		std::list<Point*> &points = session->getPoints();
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
-			if((*it)->getHeartRate() == 0)
+			if(point->getHeartRate() == 0)
 			{
-				(*it)->setHeartRate(previousHeartrate);
+				point->setHeartRate(previousHeartrate);
 			}
 			else
 			{
-				previousHeartrate = (*it)->getHeartRate();
+				previousHeartrate = point->getHeartRate();
 			}
 		}
 	}

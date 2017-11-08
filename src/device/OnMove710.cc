@@ -182,10 +182,10 @@ namespace device
 
 	void OnMove710::getSessionsDetails(SessionsMap *oSessions)
 	{
-		for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+		for(auto& sessionPair : *oSessions)
 		{
-			Session* session = &(it->second);
-			SessionId sessionId = it->second.getId();
+			Session* session = &(sessionPair.second);
+			SessionId sessionId = sessionPair.second.getId();
 			std::string filenamePrefix(sessionId.begin(),sessionId.end());	
 			std::cout << "Retrieve session " << filenamePrefix << std::endl;
 
@@ -290,7 +290,7 @@ namespace device
 		time_t current_time = session->getTime();
 		uint32_t cumulated_tenth = 0;
 		uint32_t id_point = 0;
-		std::list<Lap*>::iterator lap = session->getLaps().begin();
+		auto lap = session->getLaps().begin();
 
 		for(int i=0; i<length; i=i+20)
 		{

@@ -103,7 +103,7 @@ test: $(TARGET)
 	cd test/integrated/ && ./run.sh && cd ..
 
 clang-tidy:
-	if $(CLANG_TIDY) -checks=-*,$(CLANG_CHECKS) $(SOURCES) -header-filter=src/* -- $(CFLAGS) $(ADD_CFLAGS) $(INCPATH) | grep "."; then false; fi
+	if $(CLANG_TIDY) -checks=-*,$(CLANG_CHECKS) $(SOURCES) -header-filter=src/* -- $(CFLAGS) $(ADD_CFLAGS) $(INCPATH) $(TEST_CFLAGS) | grep "."; then false; fi
 
 cleancov:
 	find . '(' -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;

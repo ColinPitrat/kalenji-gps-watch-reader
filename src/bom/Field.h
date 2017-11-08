@@ -7,7 +7,7 @@ class TFieldUndef
 		TFieldUndef() = default;
 };
 
-static const TFieldUndef FieldUndef;
+static const TFieldUndef FieldUndef = TFieldUndef();
 
 template<typename T>
 class Field

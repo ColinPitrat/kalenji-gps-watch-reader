@@ -36,12 +36,12 @@ class EmptyLapsTest : public testing::Test
             Point *startPoint(nullptr), *endPoint(nullptr);
             for(uint32_t j = 0; j < nbPoints; ++j)
             {
-                Point *point = new Point(lat, lon+j*0.001, FieldUndef, FieldUndef, 0, 0, 100, 3);
+                auto point = new Point(lat, lon+j*0.001, FieldUndef, FieldUndef, 0, 0, 100, 3);
                 aSession.addPoint(point);
                 if(j == 0) startPoint = point;
                 endPoint = point;
             }
-            Lap *lap = new Lap(0, 0, duration, length, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef);
+            auto lap = new Lap(0, 0, duration, length, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef, FieldUndef);
             lap->setStartPoint(startPoint);
             lap->setEndPoint(endPoint);
             aSession.addLap(lap);

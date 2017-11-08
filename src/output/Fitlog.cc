@@ -28,12 +28,12 @@ namespace output
 		}
 		mystream << "   <Laps>" << std::endl;
 		std::list<Lap*> laps = session->getLaps();
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(const auto& lap : laps)
 		{
-			mystream << "    <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\" DurationSeconds=\"" << (*it)->getDuration() << "\" >" << std::endl;
-			mystream << "     <Distance TotalMeters=\"" << (*it)->getDistance() << "\" />" << std::endl;
-			mystream << (*it)->getAvgHeartrate().toStream("     <HeartRate AverageBPM=\"", "\" />\n");
-			mystream << (*it)->getCalories().toStream("     <Calories TotalCal=\"", "\" />\n");
+			mystream << "    <Lap StartTime=\"" << lap->getStartPoint()->getTimeAsString() << "\" DurationSeconds=\"" << lap->getDuration() << "\" >" << std::endl;
+			mystream << "     <Distance TotalMeters=\"" << lap->getDistance() << "\" />" << std::endl;
+			mystream << lap->getAvgHeartrate().toStream("     <HeartRate AverageBPM=\"", "\" />\n");
+			mystream << lap->getCalories().toStream("     <Calories TotalCal=\"", "\" />\n");
 			mystream << "    </Lap>" << std::endl;
 		}
 		mystream << "   </Laps>" << std::endl;
@@ -44,18 +44,18 @@ namespace output
 		time_t prev_time = (*points.begin())->getTime();
 		time_t first_time = (*points.begin())->getTime();
 		double total_dist = 0;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
-			double tm = difftime((*it)->getTime(), first_time);
-			double delta_tm = difftime((*it)->getTime(), prev_time);
-			total_dist += delta_tm * (*it)->getSpeed() / 3.6;
+			double tm = difftime(point->getTime(), first_time);
+			double delta_tm = difftime(point->getTime(), prev_time);
+			total_dist += delta_tm * point->getSpeed() / 3.6;
 			mystream << "    <pt tm=\"" << (int) tm << "\" dist=\"" << total_dist << "\" ";
-			mystream << (*it)->getHeartRate().toStream("hr=\"", "\" ");
-			mystream << (*it)->getLatitude().toStream("lat=\"", "\" ");
-			mystream << (*it)->getLongitude().toStream("lon=\"", "\" ");
-			mystream << (*it)->getAltitude().toStream("ele=\"", "\" ");
+			mystream << point->getHeartRate().toStream("hr=\"", "\" ");
+			mystream << point->getLatitude().toStream("lat=\"", "\" ");
+			mystream << point->getLongitude().toStream("lon=\"", "\" ");
+			mystream << point->getAltitude().toStream("ele=\"", "\" ");
 			mystream << "/>" << std::endl;
-			prev_time = (*it)->getTime();
+			prev_time = point->getTime();
 		}
 		mystream << "   </Track>" << std::endl;
 		mystream << "  </Activity>" << std::endl;

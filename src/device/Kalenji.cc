@@ -146,10 +146,10 @@ namespace device
 			data[4] = oSessions->size() & 0xFF;
 			data[5] = (oSessions->size() & 0xFF00) / 256;
 			int i = 6;
-			for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+			for(const auto& session : *oSessions)
 			{
-				data[i++] = it->second.getNum() & 0xFF;
-				data[i++] = (it->second.getNum() & 0xFF00) / 256;
+				data[i++] = session.second.getNum() & 0xFF;
+				data[i++] = (session.second.getNum() & 0xFF00) / 256;
 			}
 			unsigned char checksum = 0;
 			for(int i = 2; i < length-1; ++i)
@@ -354,7 +354,7 @@ namespace device
 					std::cerr << "Size is not a multiple of " << sizePoint << " plus " << sizeRecord << " in getSessionsDetails (step 3) !" << std::endl;
 					// TODO: throw an exception
 				}
-				std::list<Lap*>::iterator lap = session->getLaps().begin();
+				auto lap = session->getLaps().begin();
 				while(lap != session->getLaps().end() && id_point > (*lap)->getLastPointId())
 				{
 					++lap;

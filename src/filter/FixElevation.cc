@@ -25,22 +25,22 @@ namespace filter
 		std::list<std::string> lines = splitString(HTTPdata, "\n");
 		int i = 0;
 		int n = 0;
-		for(std::list<std::string>::iterator it = lines.begin(); it != lines.end(); ++it)
+		for(auto& line : lines)
 		{
-			// std::cout << "Found token " << it->c_str() << std::endl;
-			it->erase(remove_if(it->begin(), it->end(), isspace), it->end());
-			std::list<std::string> tokens = splitString(*it, ":");
+			// std::cout << "Found token " << line.c_str() << std::endl;
+			line.erase(remove_if(line.begin(), line.end(), isspace), line.end());
+			std::list<std::string> tokens = splitString(line, ":");
 			if(tokens.size() == 2)
 			{
-				// std::cout << "  Cleaned token " << it->c_str() << std::endl;
-				std::list<std::string>::iterator it2 = tokens.begin();
-				if((*it2) == "\"elevation\"")
+				// std::cout << "  Cleaned token " << line.c_str() << std::endl;
+				auto it = tokens.begin();
+				if((*it) == "\"elevation\"")
 				{
 					while(!((*first)->getLatitude().isDefined() && (*first)->getLongitude().isDefined()))
 						++first;
-					++it2;
-					// std::cout << "    Found elevation " << it2->c_str() << std::endl;
-					elevation = atol(it2->c_str());
+					++it;
+					// std::cout << "    Found elevation " << it->c_str() << std::endl;
+					elevation = atol(it->c_str());
 					if(!(*first)->getAltitude().isDefined() || elevation != (*first)->getAltitude())
 					{
 						++fixed_points;
@@ -51,12 +51,12 @@ namespace filter
 					++first;
 					++i;
 				}
-				if((*it2) == "\"status\"")
+				if((*it) == "\"status\"")
 				{
-					it2++;
-					if((*it2) != "\"OK\"")
+					it++;
+					if((*it) != "\"OK\"")
 					{
-						std::cerr << "Error: received an error from Google API: " << (*it2) << "." << std::endl;
+						std::cerr << "Error: received an error from Google API: " << (*it) << "." << std::endl;
 						return false;
 					}
 				}
@@ -99,10 +99,10 @@ namespace filter
 
 		// Retrieve points elevation 87 by 87 (max url length = 2048 => (2048 - 119) / 22 = 87)
 		int i = 0;
-		std::list<Point*>::iterator request_first = points.begin();
+		auto request_first = points.begin();
 		std::list<Point*>::iterator request_last;
 		std::stringstream urlparams;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); )
+		for(auto it = points.begin(); it != points.end(); )
 		{
 			if((*it)->getLatitude().isDefined() && (*it)->getLongitude().isDefined())
 			{

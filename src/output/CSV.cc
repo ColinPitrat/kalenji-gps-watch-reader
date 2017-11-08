@@ -19,19 +19,19 @@ namespace output
 		std::list<Point*> points = session->getPoints();
 		Point *prevPoint = nullptr;
 		uint32_t time_begin = (*points.begin())->getTime();
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
 			// -8<--- This part computes the distance between the 2 points
 			if(prevPoint)
 			{
-				if( (*it)->getLatitude().isDefined() && prevPoint->getLatitude().isDefined() && (*it)->getLongitude().isDefined() && prevPoint->getLongitude().isDefined() )
+				if( point->getLatitude().isDefined() && prevPoint->getLatitude().isDefined() && point->getLongitude().isDefined() && prevPoint->getLongitude().isDefined() )
 				{
 					static double pi = 3.14159265358979323846;
 					static double R = 6371000; // Approximate radius of the Earth in meters
-					double dLatRad = ((*it)->getLatitude()  - prevPoint->getLatitude())  * pi / 180.0;
-					double dLonRad = ((*it)->getLongitude() - prevPoint->getLongitude()) * pi / 180.0;
+					double dLatRad = (point->getLatitude()  - prevPoint->getLatitude())  * pi / 180.0;
+					double dLonRad = (point->getLongitude() - prevPoint->getLongitude()) * pi / 180.0;
 					double lat1Rad =  prevPoint->getLatitude() * pi / 180.0;
-					double lat2Rad =  (*it)->getLatitude()     * pi / 180.0;
+					double lat2Rad =  point->getLatitude()     * pi / 180.0;
 					double a = sin(dLatRad/2) * sin(dLatRad/2) + sin(dLonRad/2) * sin(dLonRad/2) * cos(lat1Rad) * cos(lat2Rad);
 					double c = 2 * atan2(sqrt(a), sqrt(1-a));
 					double dist = R * c;
@@ -39,15 +39,15 @@ namespace output
 				}
 				else
 				{
-					distance += ( (*it)->getTime() - prevPoint->getTime() ) * (double) (*it)->getSpeed() / 3.6;
+					distance += ( point->getTime() - prevPoint->getTime() ) * (double) point->getSpeed() / 3.6;
 				}
 			}
-			prevPoint = *it;
+			prevPoint = point;
 			// ->8---
-			uint32_t time = (*it)->getTime() - time_begin;
+			uint32_t time = point->getTime() - time_begin;
 			mystream << time << ",";
 			mystream << distance << ",";
-      mystream << (*it)->getAltitude() << std::endl;
+      mystream << point->getAltitude() << std::endl;
 		}
 	}
 }

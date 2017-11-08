@@ -249,10 +249,10 @@ namespace device
 			data[4] = (oSessions->size() & 0xFF00) >> 8;
 			data[5] = oSessions->size() & 0xFF;
 			int i = 6;
-			for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+			for(const auto& session : *oSessions)
 			{
-				data[i++] = (it->second.getNum() & 0xFF00) >> 8;
-				data[i++] = it->second.getNum() & 0xFF;
+				data[i++] = (session.second.getNum() & 0xFF00) >> 8;
+				data[i++] = session.second.getNum() & 0xFF;
 			}
 			unsigned char checksum = 0;
 			for(int i = 2; i < length-1; ++i)
@@ -290,7 +290,7 @@ namespace device
 					// TODO: throw an exception
 				}
 				SessionId id(responseData + 3, responseData + 29);
-				SessionsMap::iterator it = oSessions->find(id);
+				auto it = oSessions->find(id);
 				if(it != oSessions->end())
 				{
 					Session *session = &(it->second);
@@ -349,7 +349,7 @@ namespace device
 					// TODO: throw an exception
 				}
 				SessionId id(responseData + 3, responseData + 29);
-				SessionsMap::iterator it = oSessions->find(id);
+				auto it = oSessions->find(id);
 				if(it != oSessions->end())
 				{
 					session = &(it->second);
@@ -365,7 +365,7 @@ namespace device
 						std::cerr << "Size is not a multiple of 15 plus 31 in getSessionsDetails (step 2) ! " << size << " " << nbRecords << std::endl;
 						// TODO: throw an exception
 					}
-					std::list<Lap*>::iterator lap = session->getLaps().begin();
+					auto lap = session->getLaps().begin();
 					while(lap != session->getLaps().end() && id_point > (*lap)->getLastPointId())
 					{
 						++lap;

@@ -17,7 +17,7 @@ void ReducePointsTest::addPointsToSession(uint32_t nbPoints, double startLat, do
 {
 	for(uint32_t i = 0; i < nbPoints; ++i)
 	{
-		Point *point = new Point(startLat+i*deltaLat, startLon+i*deltaLon, FieldUndef, FieldUndef, 0, 0, 100, 3);
+		auto point = new Point(startLat+i*deltaLat, startLon+i*deltaLon, FieldUndef, FieldUndef, 0, 0, 100, 3);
 		aSession.addPoint(point);
 	}
 }

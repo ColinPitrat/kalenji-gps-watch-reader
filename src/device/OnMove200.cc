@@ -154,10 +154,10 @@ namespace device
 
   void OnMove200::getSessionsDetails(SessionsMap *oSessions)
   {
-    for(SessionsMap::iterator it = oSessions->begin(); it != oSessions->end(); ++it)
+    for(auto& sessionPair : *oSessions)
     {
-      Session* session = &(it->second);
-      SessionId sessionId = it->second.getId();
+      Session* session = &(sessionPair.second);
+      SessionId sessionId = sessionPair.second.getId();
       std::string filenamePrefix(sessionId.begin(),sessionId.end());
       std::cout << "Retrieve session " << filenamePrefix << std::endl;
 

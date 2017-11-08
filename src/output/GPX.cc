@@ -40,25 +40,25 @@ namespace output
 		mystream << "  <trk>" << std::endl;
 		mystream << "    <trkseg>" << std::endl;
 		std::list<Point*> points = session->getPoints();
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
 			mystream << "      <trkpt ";
-			mystream << (*it)->getLatitude().toStream("lat=\"", "\" ");
-			mystream << (*it)->getLongitude().toStream("lon=\"", "\" ");
+			mystream << point->getLatitude().toStream("lat=\"", "\" ");
+			mystream << point->getLongitude().toStream("lon=\"", "\" ");
 			mystream << ">" << std::endl;
-			mystream << (*it)->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
-			mystream << "        <time>" << (*it)->getTimeAsString() << "</time>" << std::endl;
+			mystream << point->getAltitude().toStream("        <ele>", "</ele>") << std::endl;
+			mystream << "        <time>" << point->getTimeAsString() << "</time>" << std::endl;
 			if(has_extension)
 			{
 				mystream << "        <extensions>" << std::endl;
 			}
 			if(gpxdata_ext)
 			{
-				mystream << (*it)->getHeartRate().toStream("          <gpxdata:hr>", "</gpxdata:hr>\n");
+				mystream << point->getHeartRate().toStream("          <gpxdata:hr>", "</gpxdata:hr>\n");
 			}
 			if(gpxtpx_ext)
 			{
-				mystream << (*it)->getHeartRate().toStream("          <gpxtpx:TrackPointExtension><gpxtpx:hr>", "</gpxtpx:hr></gpxtpx:TrackPointExtension>\n");
+				mystream << point->getHeartRate().toStream("          <gpxtpx:TrackPointExtension><gpxtpx:hr>", "</gpxtpx:hr></gpxtpx:TrackPointExtension>\n");
 			}
 			if(has_extension)
 			{
@@ -71,41 +71,41 @@ namespace output
 		if(gpxdata_ext)
 		{
 			mystream << "  <extensions>" << std::endl;
-			int lap = 0;
+			int nbLap = 0;
 			std::list<Lap*> laps = session->getLaps();
-			for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+			for(const auto& lap : laps)
 			{
 				// TODO: Remove this check (could be moved to the getters) ?
-				if((*it)->getStartPoint() == nullptr || (*it)->getEndPoint() == nullptr)
+				if(lap->getStartPoint() == nullptr || lap->getEndPoint() == nullptr)
 				{
 					std::cerr << "Oups ! I've got a lap without ";
-					if((*it)->getStartPoint() == nullptr)
+					if(lap->getStartPoint() == nullptr)
 						std::cerr << "start";
 					else
 						std::cerr << "end";
-					std::cerr << " point: (" << (*it)->getFirstPointId() << " - " << (*it)->getLastPointId() << "). This shouldn't happen ! Report a bug ..." << std::endl;
+					std::cerr << " point: (" << lap->getFirstPointId() << " - " << lap->getLastPointId() << "). This shouldn't happen ! Report a bug ..." << std::endl;
 				}
 				else
 				{
-					lap++;
+					nbLap++;
 					mystream << "    <gpxdata:lap>" << std::endl;
-					mystream << "      <gpxdata:index>" << lap << "</gpxdata:index>" << std::endl;
-					if((*it)->getStartPoint()->getLatitude().isDefined() && (*it)->getStartPoint()->getLongitude().isDefined())
+					mystream << "      <gpxdata:index>" << nbLap << "</gpxdata:index>" << std::endl;
+					if(lap->getStartPoint()->getLatitude().isDefined() && lap->getStartPoint()->getLongitude().isDefined())
 					{
-						mystream << "      <gpxdata:startPoint lat=\"" << (*it)->getStartPoint()->getLatitude() << "\" lon=\"" << (*it)->getStartPoint()->getLongitude() << "\"/>" << std::endl;
+						mystream << "      <gpxdata:startPoint lat=\"" << lap->getStartPoint()->getLatitude() << "\" lon=\"" << lap->getStartPoint()->getLongitude() << "\"/>" << std::endl;
 					}
-					if((*it)->getEndPoint()->getLatitude().isDefined() && (*it)->getEndPoint()->getLongitude().isDefined())
+					if(lap->getEndPoint()->getLatitude().isDefined() && lap->getEndPoint()->getLongitude().isDefined())
 					{
-						mystream << "      <gpxdata:endPoint lat=\"" << (*it)->getEndPoint()->getLatitude() << "\" lon=\"" << (*it)->getEndPoint()->getLongitude() << "\" />" << std::endl;
+						mystream << "      <gpxdata:endPoint lat=\"" << lap->getEndPoint()->getLatitude() << "\" lon=\"" << lap->getEndPoint()->getLongitude() << "\" />" << std::endl;
 					}
-					mystream << "      <gpxdata:startTime>" << (*it)->getStartPoint()->getTimeAsString() << "</gpxdata:startTime>" << std::endl;
-					mystream << "      <gpxdata:elapsedTime>" << (*it)->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
-					mystream << (*it)->getCalories().toStream("      <gpxdata:calories>", "</gpxdata:calories>\n");
-					mystream << "      <gpxdata:distance>" << (*it)->getDistance() << "</gpxdata:distance>" << std::endl;
-					mystream << (*it)->getAvgSpeed().toStream("      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">", "</gpxdata:summary>\n");
-					mystream << (*it)->getMaxSpeed().toStream("      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">", "</gpxdata:summary>\n");
-					mystream << (*it)->getAvgHeartrate().toStream("      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">", "</gpxdata:summary>\n");
-					mystream << (*it)->getMaxHeartrate().toStream("      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">", "</gpxdata:summary>\n");
+					mystream << "      <gpxdata:startTime>" << lap->getStartPoint()->getTimeAsString() << "</gpxdata:startTime>" << std::endl;
+					mystream << "      <gpxdata:elapsedTime>" << lap->getDuration() << "</gpxdata:elapsedTime>" << std::endl;
+					mystream << lap->getCalories().toStream("      <gpxdata:calories>", "</gpxdata:calories>\n");
+					mystream << "      <gpxdata:distance>" << lap->getDistance() << "</gpxdata:distance>" << std::endl;
+					mystream << lap->getAvgSpeed().toStream("      <gpxdata:summary name=\"AverageSpeed\" kind=\"avg\">", "</gpxdata:summary>\n");
+					mystream << lap->getMaxSpeed().toStream("      <gpxdata:summary name=\"MaximumSpeed\" kind=\"max\">", "</gpxdata:summary>\n");
+					mystream << lap->getAvgHeartrate().toStream("      <gpxdata:summary name=\"AverageHeartRateBpm\" kind=\"avg\">", "</gpxdata:summary>\n");
+					mystream << lap->getMaxHeartrate().toStream("      <gpxdata:summary name=\"MaximumHeartRateBpm\" kind=\"max\">", "</gpxdata:summary>\n");
 					// I didn't find a way to differentiate manual lap taking versus automatic (triggered by time or distance)
 					// This is the correct syntax, but pytrainer doesn't support it
 					//mystream << "      <gpxdata:trigger kind=\"" << configuration["trigger"] << "\" />" << std::endl;

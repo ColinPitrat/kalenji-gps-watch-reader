@@ -24,31 +24,31 @@ namespace output
 		mystream << "   <Id>" << session->getBeginTime() << "</Id>" << std::endl;
 		std::list<Lap*> laps = session->getLaps();
 		std::list<Point*> points = session->getPoints();
-		std::list<Point*>::iterator pit = points.begin();
+		auto pit = points.begin();
 		uint32_t point_id = 0;
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(const auto& lap : laps)
 		{
-			if((*it)->getStartPoint() != nullptr)
+			if(lap->getStartPoint() != nullptr)
 			{
-				mystream << "   <Lap StartTime=\"" << (*it)->getStartPoint()->getTimeAsString() << "\">" << std::endl;
+				mystream << "   <Lap StartTime=\"" << lap->getStartPoint()->getTimeAsString() << "\">" << std::endl;
 			}
 			else
 			{
 				mystream << "   <Lap>" << std::endl;
 			}
-			mystream << "    <TotalTimeSeconds>" << (*it)->getDuration() << "</TotalTimeSeconds>" << std::endl;
-			mystream << "    <DistanceMeters>" << (*it)->getDistance() << "</DistanceMeters>" << std::endl;
-			mystream << "    <MaximumSpeed>" << (*it)->getMaxSpeed() << "</MaximumSpeed>" << std::endl;
-			mystream << "    <Calories>" << (*it)->getCalories() << "</Calories>" << std::endl;
+			mystream << "    <TotalTimeSeconds>" << lap->getDuration() << "</TotalTimeSeconds>" << std::endl;
+			mystream << "    <DistanceMeters>" << lap->getDistance() << "</DistanceMeters>" << std::endl;
+			mystream << "    <MaximumSpeed>" << lap->getMaxSpeed() << "</MaximumSpeed>" << std::endl;
+			mystream << "    <Calories>" << lap->getCalories() << "</Calories>" << std::endl;
 			mystream << "    <AverageHeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>"
-				<< (*it)->getAvgHeartrate() << "</Value></AverageHeartRateBpm>" << std::endl;
+				<< lap->getAvgHeartrate() << "</Value></AverageHeartRateBpm>" << std::endl;
 			mystream << "    <MaximumHeartRateBpm xsi:type=\"HeartRateInBeatsPerMinute_t\"><Value>"
-				<< (*it)->getMaxHeartrate() << "</Value></MaximumHeartRateBpm>" << std::endl;
+				<< lap->getMaxHeartrate() << "</Value></MaximumHeartRateBpm>" << std::endl;
 			mystream << "    <Intensity>Active</Intensity>" << std::endl;
 			mystream << "    <TriggerMethod>Distance</TriggerMethod>" << std::endl;
 
 			// goto first point of this lap
-			while (point_id < (*it)->getFirstPointId()) {
+			while (point_id < lap->getFirstPointId()) {
 				if (pit == points.end())
 					break;
 				++point_id;
@@ -87,7 +87,7 @@ namespace output
 				mystream << "     </Trackpoint>" << std::endl;
 
 				prev_time = (*pit)->getTime();
-				if (point_id == (*it)->getLastPointId())
+				if (point_id == lap->getLastPointId())
 					break;
 			}
 			mystream << "    </Track>" << std::endl;

@@ -57,24 +57,24 @@ namespace output
 
 		std::list<Lap*> laps = session->getLaps();
 		uint32_t i = 0;
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(const auto& lap : laps)
 		{
 			++i;
-			if((*it)->getEndPoint() != nullptr)
+			if(lap->getEndPoint() != nullptr)
 			{
 				mystream << "<Placemark>" << std::endl;
 				mystream << "<name>Lap " << i << "</name>" << std::endl;
 				mystream << "<styleUrl>kalenji_lap</styleUrl>" << std::endl;
 				mystream << "<description>" << std::endl;
-				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
-				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
-				mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
-				mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
-				mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
-				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
+				mystream << "<b>Distance:</b> " << lap->getDistance()/1000.0 << " km<br/>";
+				mystream << "<b>Time:</b> " << durationAsString(lap->getDuration()) << "<br/>";
+				mystream << lap->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
+				mystream << lap->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
+				mystream << lap->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
+				mystream << lap->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
 				mystream << "</description>" << std::endl;
 				mystream << "<Point>" << std::endl;
-				mystream << "<coordinates>" << (*it)->getEndPoint()->getLongitude() << "," << (*it)->getEndPoint()->getLatitude() << "," << (*it)->getEndPoint()->getAltitude() << "</coordinates>" << std::endl;
+				mystream << "<coordinates>" << lap->getEndPoint()->getLongitude() << "," << lap->getEndPoint()->getLatitude() << "," << lap->getEndPoint()->getAltitude() << "</coordinates>" << std::endl;
 				mystream << "</Point>" << std::endl;
 				mystream << "</Placemark>" << std::endl;
 			}
@@ -87,9 +87,9 @@ namespace output
 		mystream << "<tessellate>1</tessellate>" << std::endl;
 		mystream << "<coordinates>" << std::endl;
 		std::list<Point*> points = session->getPoints();
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
-			mystream << (*it)->getLongitude() << "," << (*it)->getLatitude() << "," << (*it)->getAltitude() << " ";
+			mystream << point->getLongitude() << "," << point->getLatitude() << "," << point->getAltitude() << " ";
 		}
 		mystream << "</coordinates>" << std::endl;
 		mystream << "</LineString>" << std::endl;
@@ -99,7 +99,7 @@ namespace output
 		mystream << "<name>Runner</name>" << std::endl;
 		mystream << "<styleUrl>kalenji_runner</styleUrl>" << std::endl;
 		mystream << "<Point id=\"runner\">" << std::endl;
-		std::list<Point*>::iterator it = points.begin();
+		auto it = points.begin();
 		mystream << "<coordinates>" << (*it)->getLongitude() << "," << (*it)->getLatitude() << "," << (*it)->getAltitude() << "</coordinates>" << std::endl;
 		mystream << "</Point>" << std::endl;
 		mystream << "</Placemark>" << std::endl << std::endl;
@@ -107,7 +107,7 @@ namespace output
 		mystream << "<gx:Tour>" << std::endl;
 		mystream << "<name>Animation</name>" << std::endl;
 		mystream << "<gx:Playlist>" << std::endl;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
 			double duration = 0.1;
 			mystream << "<gx:AnimatedUpdate>" << std::endl;
@@ -116,7 +116,7 @@ namespace output
 			mystream << "<targetHref></targetHref>" << std::endl;
 			mystream << "<Change>" << std::endl;
 			mystream << "<Point targetId=\"runner\"> " << std::endl;
-			mystream << "<coordinates>" << (*it)->getLongitude() << "," << (*it)->getLatitude() << "," << (*it)->getAltitude() << "</coordinates> " << std::endl;
+			mystream << "<coordinates>" << point->getLongitude() << "," << point->getLatitude() << "," << point->getAltitude() << "</coordinates> " << std::endl;
 			mystream << "</Point>" << std::endl;
 			mystream << "</Change> " << std::endl;
 			mystream << "</Update>" << std::endl;

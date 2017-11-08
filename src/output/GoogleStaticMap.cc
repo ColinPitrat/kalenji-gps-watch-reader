@@ -22,18 +22,18 @@ namespace output
 		std::list<Lap*> laps = session->getLaps();
 		uint32_t filter = 1 + points.size() / (89 - laps.size());
 		uint32_t filter_index = 0;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
 			if(filter_index % filter == 0)
-				mystream << "%7C" << (*it)->getLatitude() << "," << (*it)->getLongitude();
+				mystream << "%7C" << point->getLatitude() << "," << point->getLongitude();
 			filter_index++;
 		}
 		mystream << "&markers=";
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(const auto& lap : laps)
 		{
-            if((*it)->getStartPoint() != nullptr)
+            if(lap->getStartPoint() != nullptr)
             {
-                mystream << "%7C" << (*it)->getStartPoint()->getLatitude() << "," << (*it)->getStartPoint()->getLongitude();
+                mystream << "%7C" << lap->getStartPoint()->getLatitude() << "," << lap->getStartPoint()->getLongitude();
             }
             else
             {

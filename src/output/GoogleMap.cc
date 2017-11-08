@@ -64,7 +64,7 @@ namespace output
 		mystream << "pointsList = Array(" << std::endl;
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(auto it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
 			if(it != points.begin())
@@ -110,12 +110,12 @@ namespace output
 		mystream << ");" << std::endl;
 
 		std::list<Lap*> laps = session->getLaps();
-		uint32_t lap = 0;
+		uint32_t nbLap = 0;
 		bool addComa = false;
 		mystream << "waypointsList = Array (";
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(const auto& lap : laps)
 		{
-			if((*it)->getEndPoint() != nullptr)
+			if(lap->getEndPoint() != nullptr)
 			{
 			       mystream << std::endl;
 
@@ -126,19 +126,19 @@ namespace output
 			       addComa = true;
 
 			        mystream << "{";
-				mystream << "lat:" << (*it)->getEndPoint()->getLatitude() << ", long:" << (*it)->getEndPoint()->getLongitude() << ", lap:" << lap;
+				mystream << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap;
 				mystream << ", infos: \"";
 				mystream << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap+1 << "</h3>";
-				mystream << "<b>Distance:</b> " << (*it)->getDistance()/1000.0 << " km<br/>";
-				mystream << "<b>Time:</b> " << durationAsString((*it)->getDuration()) << "<br/>";
-				mystream << (*it)->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
-				mystream << (*it)->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
-				mystream << (*it)->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
-				mystream << (*it)->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
+				mystream << "<b>Distance:</b> " << lap->getDistance()/1000.0 << " km<br/>";
+				mystream << "<b>Time:</b> " << durationAsString(lap->getDuration()) << "<br/>";
+				mystream << lap->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
+				mystream << lap->getMaxSpeed().toStream("<b>Maximum speed:</b> ", " km/h<br/>");
+				mystream << lap->getAvgHeartrate().toStream("<b>Average heartrate:</b> ", " bpm<br/>");
+				mystream << lap->getMaxHeartrate().toStream("<b>Maximum heartrate:</b> ", " bpm<br/>");
 				mystream << "\"";
 				mystream << "}";
 			}
-			++lap;
+			++nbLap;
 		}
 		mystream << ");" << std::endl << std::endl;
 
@@ -215,13 +215,13 @@ namespace output
 		
 		int i = 0;
 		laps = session->getLaps();
-		std::list<Lap*>::iterator itLaps = laps.begin();
+		auto itLaps = laps.begin();
 		std::list<uint32_t> lapsList;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(const auto& point : points)
 		{
 			if(itLaps == laps.end())
 				break;
-			while((*itLaps)->getEndPoint() == *it)
+			while((*itLaps)->getEndPoint() == point)
 			{
 				lapsList.push_back(i);
 				itLaps++;
@@ -232,9 +232,9 @@ namespace output
 		}
 		
 		mystream << "var laps = [";
-		for(std::list<uint32_t>::iterator it = lapsList.begin(); it != lapsList.end(); ++it)
+		for(auto it = lapsList.begin(); it != lapsList.end(); ++it)
 		{
-		        if(it !=  lapsList.begin()) {
+      if(it !=  lapsList.begin()) {
 			   mystream << ",";
 			}
 			mystream << *it;
