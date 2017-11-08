@@ -24,6 +24,7 @@ script:
 # - ulimit -c unlimited
 # - sudo sysctl kernel.core_pattern=core
  - make debug
+ - make clang-tidy
 #To uncomment in case a core occurs:
 # - find ./ -name 'core*'
 # - for i in $(find ./ -name 'core*' -print); do gdb kalenji_reader $i -ex "thread apply all bt" -ex "set pagination 0" -batch; done;
