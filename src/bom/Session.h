@@ -29,12 +29,12 @@ class Session
 
 		~Session()
 		{
-			for(std::list<Point*>::iterator it = _points.begin(); it != _points.end(); ++it)
+			for(auto it = _points.begin(); it != _points.end(); ++it)
 			{
 				delete (*it);
 			}
 			_points.clear();
-			for(std::list<Lap*>::iterator it = _laps.begin(); it != _laps.end(); ++it)
+			for(auto it = _laps.begin(); it != _laps.end(); ++it)
 			{
 				delete (*it);
 			}
@@ -90,8 +90,10 @@ class Session
 		uint32_t getNum() const            { return _num; };
 		bool isComplete()                  { return _nb_points == _points.size(); };
 
-		std::list<Lap*> &getLaps()         { return _laps; };
-		std::list<Point*> &getPoints()     { return _points; };
+		std::list<Lap*> &getLaps()                 { return _laps; };
+		const std::list<Lap*> &getLaps() const     { return _laps; };
+		std::list<Point*> &getPoints()             { return _points; };
+		const std::list<Point*> &getPoints() const { return _points; };
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		const SessionId getId() const                  { return _id; };
@@ -124,7 +126,7 @@ class Session
 		{
 			Point* previousPoint = nullptr;
 			double totalDistance = 0; // counter to avoid precision lost (because we round to meter in point::distance;
-			for(std::list<Point*>::iterator it = _points.begin(); it != _points.end(); ++it)
+			for(auto it = _points.begin(); it != _points.end(); ++it)
 			{
 				Point* point = (*it);
 				if(!point->getDistance().isDefined())

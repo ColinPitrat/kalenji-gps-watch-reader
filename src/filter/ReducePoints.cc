@@ -12,21 +12,21 @@ namespace filter
 		Point *point = *itToRemove;
 		// Change lap boundary if it references the point
 		std::list<Lap*> &laps = session->getLaps();
-		for(std::list<Lap*>::iterator it = laps.begin(); it != laps.end(); ++it)
+		for(auto& lap : laps)
 		{
-			if((*it)->getStartPoint() == point)
+			if(lap->getStartPoint() == point)
 			{
-				(*it)->setStartPoint(previousKept);
+				lap->setStartPoint(previousKept);
 			}
-			if((*it)->getEndPoint() == point)
+			if(lap->getEndPoint() == point)
 			{
-				(*it)->setEndPoint(previousKept);
+				lap->setEndPoint(previousKept);
 			}
 		}
 
 		// Remove point from list of points of the session
 		std::list<Point*> &points = session->getPoints();
-		std::list<Point*>::iterator it = points.erase(itToRemove);
+		auto it = points.erase(itToRemove);
 		delete (point);
 
 		return it;
@@ -49,8 +49,8 @@ namespace filter
 		// First pass: remove points that are too close
 		if(minDistBetweenPoints > 0)
 		{
-			std::list<Point*>::iterator it = points.begin();
-			std::list<Point*>::iterator previousKept = it;
+			auto it = points.begin();
+			auto previousKept = it;
 			++it;
 			while(it != points.end())
 			{
@@ -70,11 +70,11 @@ namespace filter
 		uint32_t divider = 64;
 		while(points.size() > maxNbPoints && divider > 4)
 		{
-			std::list<Point*>::iterator it = points.begin();
-			std::list<Point*>::iterator previousKept = it;
+			auto it = points.begin();
+			auto previousKept = it;
 			// Always keep the first point. Always OK because we verified that points.size() > maxNbPoints > 3
 			++it;
-			std::list<Point*>::iterator previousPoint = it;
+			auto previousPoint = it;
 			++it;
 
 			// TODO: A method removePoint in Session would be nice !

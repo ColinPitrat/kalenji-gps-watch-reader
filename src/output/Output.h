@@ -15,18 +15,18 @@ namespace output
 		public:
 			virtual ~Output() = default;
 			// TODO: I don't really like giving the configuration this way. Better way to configure each output ?
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration) = 0;
-			virtual bool exists(Session *session, std::map<std::string, std::string> &configuration) { return false; }
+			virtual void dump(const Session *session, std::map<std::string, std::string> &configuration) = 0;
+			virtual bool exists(const Session *session, std::map<std::string, std::string> &configuration) { return false; }
 			virtual std::string getName() = 0;
 	};
 
 	class FileOutput: public Output
 	{
 		public:
-			std::string getFileName(Session *session, std::map<std::string, std::string> &configuration);
-			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
-			virtual void dumpContent(std::ostream& out, Session *session, std::map<std::string, std::string> &configuration) = 0;
-			bool exists(Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getFileName(const Session *session, std::map<std::string, std::string> &configuration);
+			void dump(const Session *session, std::map<std::string, std::string> &configuration) override;
+			virtual void dumpContent(std::ostream& out, const Session *session, std::map<std::string, std::string> &configuration) = 0;
+			bool exists(const Session *session, std::map<std::string, std::string> &configuration) override;
 			virtual std::string getExt() = 0;
 	};
 }

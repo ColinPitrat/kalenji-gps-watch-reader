@@ -52,7 +52,7 @@ namespace device
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
 			 */ 
-			virtual void exportSession(Session *iSession) = 0;
+			virtual void exportSession(const Session *iSession) = 0;
 
 			/** 
 			  Retrieve details of sessions passed in input/output map

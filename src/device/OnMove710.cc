@@ -38,7 +38,7 @@ namespace device
 		std::ifstream fl(filename.c_str());
 		fl.seekg( 0, std::ios::end );
 		size_t len = fl.tellg();
-		char* buffer = new char[len];
+		auto buffer = new char[len];
 		fl.seekg(0, std::ios::beg);
 		fl.read(buffer, len);
 		fl.close();
@@ -232,7 +232,7 @@ namespace device
 		}
 	}
 
-	void OnMove710::exportSession(Session *iSession)
+	void OnMove710::exportSession(const Session *iSession)
 	{
 		std::string filename;
 		int filenumber = 0;
@@ -259,10 +259,10 @@ namespace device
 		dumpInt4(fl, iSession->getPoints().size());
 		// Then 8 bytes per point: 4 bytes for latitude, 4 bytes for longitude
 		int i = 0;
-		for(std::list<Point*>::iterator it = iSession->getPoints().begin(); it != iSession->getPoints().end(); ++it)
+		for(const auto& point : iSession->getPoints())
 		{
-			unsigned int lat = (*it)->getLatitude() * 1000000;
-			unsigned int lon = (*it)->getLongitude() * 1000000;
+			unsigned int lat = point->getLatitude() * 1000000;
+			unsigned int lon = point->getLongitude() * 1000000;
 			dumpInt4(fl, lat);
 			dumpInt4(fl, lon);
 			++i;
@@ -302,7 +302,7 @@ namespace device
 			uint16_t heartRate = (unsigned char)chunk[12];//bytesToInt(chunk[12]),
 			uint16_t status = chunk[13];//bytesToInt(chunk[13]),
 			//TODO: Don't know what at 14-15
-			Point *p = new Point(latitude, longitude, altitude, speed, current_time, cumulated_tenth*100, heartRate, status);
+			auto p = new Point(latitude, longitude, altitude, speed, current_time, cumulated_tenth*100, heartRate, status);
 			session->addPoint(p);
 			// cumulated_tenth contains delay before next point
 			cumulated_tenth += bytesToInt4(chunk[16],chunk[17],chunk[18],chunk[19]);//bytesToInt(chunk.slice(16, 20))//[s/10]
@@ -381,7 +381,7 @@ namespace device
 			  uint32_t grams;
 			  uint32_t descent;
 			  uint32_t ascent;*/
-			Lap *l = new Lap(startPoint, endPoint, totalTime, totalDistance, maxSpeed, averageSpeed, maxHeartRate, averageHeartRate, averageCalory, weightLoss, averageDescent, averageAscent);
+			auto l = new Lap(startPoint, endPoint, totalTime, totalDistance, maxSpeed, averageSpeed, maxHeartRate, averageHeartRate, averageCalory, weightLoss, averageDescent, averageAscent);
 			session->addLap(l);
 		}
 	}

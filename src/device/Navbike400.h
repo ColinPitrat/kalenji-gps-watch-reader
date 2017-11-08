@@ -38,7 +38,7 @@ namespace device
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
 			 */ 
-			void exportSession(Session *iSession) override;
+			void exportSession(const Session *iSession) override;
 
 			/** 
 			  Retrieve details of sessions passed in input/output map

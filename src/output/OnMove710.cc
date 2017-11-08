@@ -11,7 +11,7 @@ namespace output
 {
 	REGISTER_OUTPUT(OnMove710);
 
-	void OnMove710::dump(Session *session, std::map<std::string, std::string> &configuration)
+	void OnMove710::dump(const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		source::Source *dataSource = new source::USB();
 		device::Device *dev = new device::OnMove710();

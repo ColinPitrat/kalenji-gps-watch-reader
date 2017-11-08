@@ -14,13 +14,13 @@ namespace output
 {
 	REGISTER_OUTPUT(GoogleMap);
 
-	void GoogleMap::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
+	void GoogleMap::dumpContent(std::ostream& mystream, const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		if(configuration.find("google_api_key") == configuration.end()) {
 			std::cerr << "Using GoogleMap output requires a Google API Key. You can get one from https://developers.google.com/maps/documentation/javascript/get-api-key" << std::endl;
 			return;
 		}
-		session->ensurePointDistanceAreOk();
+		const_cast<Session*>(session)->ensurePointDistanceAreOk();
 
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(8);

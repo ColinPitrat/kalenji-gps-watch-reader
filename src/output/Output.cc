@@ -7,7 +7,7 @@
 
 namespace output
 {
-	std::string FileOutput::getFileName(Session *session, std::map<std::string, std::string> &configuration)
+	std::string FileOutput::getFileName(const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		std::ostringstream filename;
 		filename << configuration["directory"] << "/";
@@ -28,7 +28,7 @@ namespace output
 		return filename.str();
 	}
 
-	void FileOutput::dump(Session *session, std::map<std::string, std::string> &configuration)
+	void FileOutput::dump(const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		std::string filename(getFileName(session, configuration));
 		std::ofstream mystream(filename.c_str());
@@ -37,7 +37,7 @@ namespace output
 		mystream.close();
 	}
 
-	bool FileOutput::exists(Session *session, std::map<std::string, std::string> &configuration)
+	bool FileOutput::exists(const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		return access(getFileName(session, configuration).c_str(), F_OK) == 0;
 	}

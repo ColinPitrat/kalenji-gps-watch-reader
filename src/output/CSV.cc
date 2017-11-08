@@ -9,7 +9,7 @@ namespace output
 {
 	REGISTER_OUTPUT(CSV);
 
-	void CSV::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
+	void CSV::dumpContent(std::ostream& mystream, const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
 		mystream.precision(8);

@@ -180,9 +180,9 @@ bool readConf(std::map<std::string, std::string>& options)
 		}
 	}
 	// Now override configuration with options given by the users
-	for(std::map<std::string, std::string>::iterator it = options.begin(); it != options.end(); ++it)
+	for(const auto& option : options)
 	{
-		configuration[it->first] = it->second;
+		configuration[option.first] = option.second;
 	}
 	return true;
 }
@@ -218,13 +218,13 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 	{
 		// Display sessions that can be imported, prompt for list of sessions to import
 		std::cout << "Sessions available for import:" << std::endl;
-		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
+		for(const auto& session : *sessions)
 		{
 			// TODO: Use a Session method instead !
-			std::cout << std::setw(5) << it->second.getNum() << " - " << it->second.getBeginTime(true);
-			std::cout << " " << std::setw(5) << it->second.getNbLaps() << " laps ";
-			std::cout << std::setw(10) << (double)it->second.getDistance() / 1000 << " km ";
-			std::cout << std::setw(15) << durationAsString(it->second.getDuration()) << std::endl;
+			std::cout << std::setw(5) << session.second.getNum() << " - " << session.second.getBeginTime(true);
+			std::cout << " " << std::setw(5) << session.second.getNbLaps() << " laps ";
+			std::cout << std::setw(10) << (double)session.second.getDistance() / 1000 << " km ";
+			std::cout << std::setw(15) << durationAsString(session.second.getDuration()) << std::endl;
 		}
 		std::cout << "List of sessions to import (space separated - 'all' to import everything - 'new' to import only new sessions): " << std::endl;
 
@@ -241,21 +241,21 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 	if(to_import_string == "new")
 	{
 		std::ostringstream to_import;
-		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); ++it)
+		for(const auto& session : *sessions)
 		{
 			bool import = false;
-			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
+			for(const auto& outputName : outputs)
 			{
-				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
-				if(output && !output->exists(&(it->second), configuration))
+				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(outputName);
+				if(output && !output->exists(&(session.second), configuration))
 				{
-					to_import << " " << it->second.getNum();
+					to_import << " " << session.second.getNum();
 					import = true;
 					break;
 				}
 			}
 			if(!import)
-				std::cout << " session " << it->second.getNum() << " already imported" << std::endl;
+				std::cout << " session " << session.second.getNum() << " already imported" << std::endl;
 		}
 		to_import_string = to_import.str();
 	}
@@ -268,12 +268,12 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 		// TODO: Check for error in user entry. Re-ask if there is one !
 
 		// Remove sessions that are not in the list of selected sessions
-		for(SessionsMap::iterator it = sessions->begin(); it != sessions->end(); )
+		for(auto it = sessions->begin(); it != sessions->end(); )
 		{
 			bool keep = false;
-			for(std::vector<uint32_t>::iterator it2 = to_import.begin(); it2 != to_import.end(); ++it2)
+			for(uint32_t id : to_import)
 			{
-				if(it->second.getNum() == *it2)
+				if(it->second.getNum() == id)
 				{
 					keep = true;
 				}
@@ -410,7 +410,7 @@ int main(int argc, char *argv[])
 
 		// TODO: Cleaner, modular way to include it ?
 		// Remove empty sessions, most likely they were not imported when using a file so we don't want to export them
-		for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); )
+		for(auto it = sessions.begin(); it != sessions.end(); )
 		{
 			if(it->second.getPoints().empty())
 				sessions.erase(it++);
@@ -419,38 +419,38 @@ int main(int argc, char *argv[])
 
 		std::list<std::string> filters = splitString(configuration["filters"]);
 
-		for(SessionsMap::iterator it = sessions.begin(); it != sessions.end(); ++it)
+		for(auto& session : sessions)
 		{
-			for(std::list<std::string>::iterator it2 = filters.begin(); it2 != filters.end(); ++it2)
+			for(const auto& filterName : filters)
 			{
-				filter::Filter *filter = LayerRegistry<filter::Filter>::getInstance()->getObject(*it2);
+				filter::Filter *filter = LayerRegistry<filter::Filter>::getInstance()->getObject(filterName);
 				if(filter)
 				{
-					std::cout << "  Applying filter " << *it2 << std::endl;
-					filter->filter(&(it->second), configuration);
+					std::cout << "  Applying filter " << filterName << std::endl;
+					filter->filter(&(session.second), configuration);
 				}
 				else
 				{
-					std::cout << "Filter does not exist: " << *it2 << std::endl;
+					std::cout << "Filter does not exist: " << filterName << std::endl;
 				}
 			}
-			for(std::list<std::string>::iterator it2 = outputs.begin(); it2 != outputs.end(); ++it2)
+			for(const auto& outputName : outputs)
 			{
-				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(*it2);
+				output::Output *output = LayerRegistry<output::Output>::getInstance()->getObject(outputName);
 				if(output)
 				{
 					try
 					{
-						output->dump(&(it->second), configuration);
+						output->dump(&(session.second), configuration);
 					}
 					catch(std::exception &e)
 					{
-						std::cerr << "Error: couldn't export to output " << *it2 << ":" << e.what() << std::endl;
+						std::cerr << "Error: couldn't export to output " << outputName << ":" << e.what() << std::endl;
 					}
 				}
 				else
 				{
-					std::cout << "Output does not exist: " << *it2 << std::endl;
+					std::cout << "Output does not exist: " << outputName << std::endl;
 				}
 			}
 		}

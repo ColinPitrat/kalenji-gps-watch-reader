@@ -112,7 +112,7 @@ namespace device
 			}
 			else if(xmlStrcmp(cur->name, (const xmlChar *) "Lap") == 0)
 			{
-				Lap *aLap = new Lap();
+				auto aLap = new Lap();
 				aLap->setLapNum(lapNum++);
 				parseLap(oSession, aLap, cur);
 				oSession->addLap(aLap);
@@ -218,7 +218,7 @@ namespace device
 		{
 			if (xmlStrcmp(cur->name, (const xmlChar *) "Trackpoint") == 0)
 			{
-				Point *aPoint = new Point();
+				auto aPoint = new Point();
 				parseTrackpoint(aPoint, cur);
 				oSession->addPoint(aPoint);
 				if(oLap->getStartPoint() == nullptr)

@@ -476,7 +476,7 @@ namespace device
 		}
 	}
 
-	void CWKalenji500SD::exportSession(Session *iSession)
+	void CWKalenji500SD::exportSession(const Session *iSession)
 	{
 		std::cerr << "Unsupported export of session with CW Kalenji 500 SD" << std::endl;
 	}

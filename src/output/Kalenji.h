@@ -9,7 +9,7 @@ namespace output
 	class Kalenji : public Output
 	{
 		public:
-			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
+			void dump(const Session *session, std::map<std::string, std::string> &configuration) override;
 			std::string getName() override { return "Kalenji"; };
 
 		private:

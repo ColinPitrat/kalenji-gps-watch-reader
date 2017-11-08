@@ -269,7 +269,7 @@ namespace device
         prevElapsed = elapsed;
         prevDistance = distance;
         // TODO: Find out altitude, speed
-        Point *myPoint = new Point(latitude, longitude, elevation, speed, start_time+elapsed, 0, FieldUndef, 3);
+        auto myPoint = new Point(latitude, longitude, elevation, speed, start_time+elapsed, 0, FieldUndef, 3);
         session->addPoint(myPoint);
         READ_MORE_DATA;
       }
@@ -283,7 +283,7 @@ namespace device
   {
   }
 
-  void Navbike400::exportSession(Session *iSession)
+  void Navbike400::exportSession(const Session *iSession)
   {
     std::cerr << "Unsupported export of session with Navbike 400" << std::endl;
   }

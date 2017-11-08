@@ -11,7 +11,7 @@ namespace output
 {
 	REGISTER_OUTPUT(Kalenji);
 
-	void Kalenji::dump(Session *session, std::map<std::string, std::string> &configuration)
+	void Kalenji::dump(const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		source::Source *dataSource = new source::USB();
 		device::Device *dev = new device::Kalenji();

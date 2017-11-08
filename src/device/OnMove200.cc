@@ -37,7 +37,7 @@ namespace device
     std::ifstream fl(filename.c_str());
     fl.seekg( 0, std::ios::end );
     size_t len = fl.tellg();
-    char* buffer = new char[len];
+    auto buffer = new char[len];
     fl.seekg(0, std::ios::beg);
     fl.read(buffer, len);
     fl.close();
@@ -194,7 +194,7 @@ namespace device
     }
   }
 
-  void OnMove200::exportSession(Session *iSession)
+  void OnMove200::exportSession(const Session *iSession)
   {
     std::cerr << "Unsupported export session for OnMove200" << std::endl;
   }
@@ -255,7 +255,7 @@ namespace device
       // Heart rate for points of lines n and n+1 are on line n+2 (the every other 3 line that doesn't contain coordinates)
       uint32_t hr = chunk[46];
       if(numPoints % 3 == 2) hr = chunk[36];
-      Point *p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, hr, 3);
+      auto p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, hr, 3);
       p->setDistance(distance);
       session->addPoint(p);
     }

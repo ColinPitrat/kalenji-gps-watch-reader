@@ -250,7 +250,7 @@ namespace device
 				double speed = (distance * 3.6) / elapsed;
 				if(elapsed == 0) speed = 0;
 				// TODO: Find out altitude, speed
-				Point *myPoint = new Point(latitude, longitude, FieldUndef, speed, current_time+elapsed, hundredth*10, FieldUndef, 3);
+				auto myPoint = new Point(latitude, longitude, FieldUndef, speed, current_time+elapsed, hundredth*10, FieldUndef, 3);
 				session->addPoint(myPoint);
 				READ_MORE_DATA;
 			}
@@ -264,7 +264,7 @@ namespace device
 	{
 	}
 
-	void OnMove100::exportSession(Session *iSession)
+	void OnMove100::exportSession(const Session *iSession)
 	{
 		std::cerr << "Unsupported export of session with OnMove 100" << std::endl;
 	}

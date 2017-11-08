@@ -162,7 +162,7 @@ namespace device
 				double lat = ((line[0] << 16) + (line[1] << 8) + line[2]) / 60000.0;
 				double lon = - ((line[3] << 16) + (line[4] << 8) + line[5]) / 60000.0;
 				int16_t alt = ((line[7] << 8) + line[6]) - 18384;
-				Point *point = new Point(lat, lon, alt, FieldUndef, current_time, 0, 0, 3);
+				auto point = new Point(lat, lon, alt, FieldUndef, current_time, 0, 0, 3);
 				currentSession->addPoint(point);
 				current_time += 10;
 			}

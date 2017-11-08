@@ -8,7 +8,7 @@ namespace output
 {
 	REGISTER_OUTPUT(GPX);
 
-	void GPX::dumpContent(std::ostream& mystream, Session *session, std::map<std::string, std::string> &configuration)
+	void GPX::dumpContent(std::ostream& mystream, const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		bool gpxdata_ext = configuration["gpx_extensions"].find("gpxdata") != std::string::npos;
 		bool gpxtpx_ext = configuration["gpx_extensions"].find("gpxtpx") != std::string::npos;

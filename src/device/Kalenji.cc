@@ -428,7 +428,7 @@ namespace device
 		while(responseData[0] != 0x8A);
 	}
 
-	void Kalenji::exportSession(Session *iSession)
+	void Kalenji::exportSession(const Session *iSession)
 	{
 		unsigned int nbPoints = iSession->getPoints().size();
 		if(nbPoints > KALENJI_EXPORT_MAX_POINTS)
@@ -487,29 +487,29 @@ namespace device
 		unsigned int i = 0;
 		unsigned int k = 0;
 		Point* prevPoint = *(iSession->getPoints().begin());
-		for(std::list<Point*>::iterator it = iSession->getPoints().begin(); it != iSession->getPoints().end(); ++it)
+		for(const auto& point : iSession->getPoints())
 		{
-			unsigned int lat = (*it)->getLatitude() * 1000000;
+			unsigned int lat = point->getLatitude() * 1000000;
 			buffer[headerSize+4+i++] = lat % 256;
 			buffer[headerSize+4+i++] = (lat / 256) % 256;
 			buffer[headerSize+4+i++] = (lat / (256*256)) % 256;
 			buffer[headerSize+4+i++] = (lat / (256*256*256)) % 256;
-			unsigned int lon = (*it)->getLongitude() * 1000000;
+			unsigned int lon = point->getLongitude() * 1000000;
 			buffer[headerSize+4+i++] = lon % 256;
 			buffer[headerSize+4+i++] = (lon / 256) % 256;
 			buffer[headerSize+4+i++] = (lon / (256*256)) % 256;
 			buffer[headerSize+4+i++] = (lon / (256*256*256)) % 256;
 			if(type == Keymaze700Trail)
 			{
-				int dist = distanceEarth(**it, *prevPoint);
-				unsigned int alt = (*it)->getAltitude();
+				int dist = distanceEarth(*point, *prevPoint);
+				unsigned int alt = point->getAltitude();
 				buffer[headerSize+4+i++] = alt % 256;
 				buffer[headerSize+4+i++] = (alt / 256) % 256;
 				buffer[headerSize+4+i++] = dist % 256;
 				buffer[headerSize+4+i++] = (dist / 256) % 256;
 				k++;
 			}
-			prevPoint = *it;
+			prevPoint = point;
 		}
 
 		unsigned char checksum = 0;

@@ -9,7 +9,7 @@ namespace output
 	class OnMove710 : public Output
 	{
 		public:
-			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
+			void dump(const Session *session, std::map<std::string, std::string> &configuration) override;
 			std::string getName() override { return "OnMove710"; };
 
 		private:
