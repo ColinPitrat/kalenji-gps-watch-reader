@@ -9,8 +9,8 @@ namespace output
 	class OnMove710 : public Output
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "OnMove710"; };
+			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "OnMove710"; };
 
 		private:
 			DECLARE_OUTPUT(OnMove710);

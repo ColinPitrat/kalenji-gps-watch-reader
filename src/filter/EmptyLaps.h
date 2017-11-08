@@ -8,8 +8,8 @@ namespace filter
 	class EmptyLaps : public Filter
 	{
 		public:
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "EmptyLaps"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "EmptyLaps"; };
 
 			DECLARE_FILTER(EmptyLaps);
 	};

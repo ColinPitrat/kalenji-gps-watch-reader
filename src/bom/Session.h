@@ -21,7 +21,7 @@ class Session
 		{ }
 
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) :
-			         _id(id), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
+			         _id(std::move(id)), _name("No name"), _num(num), _local_time(std::move(time)), _nb_points(nb_points), _duration(duration), _distance(distance),
 				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
 			convertToGMT();

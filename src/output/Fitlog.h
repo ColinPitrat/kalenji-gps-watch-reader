@@ -9,9 +9,9 @@ namespace output
 	class Fitlog : public FileOutput
 	{
 		public:
-			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "Fitlog"; };
-			virtual std::string getExt() { return "fit"; };
+			void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "Fitlog"; };
+			std::string getExt() override { return "fit"; };
 
 		private:
 			DECLARE_OUTPUT(Fitlog);

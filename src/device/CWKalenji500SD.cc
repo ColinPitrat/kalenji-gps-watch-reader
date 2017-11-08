@@ -413,7 +413,7 @@ namespace device
 				total_distance += distance;
 				total_duration += duration;
 				offset += 16;
-				Lap *l = new Lap(0, 0, duration, distance, max_speed, 0, max_hr, avg_hr, 0, 0, 0, 0);
+				auto l = new Lap(0, 0, duration, distance, max_speed, 0, max_hr, avg_hr, 0, 0, 0, 0);
 				it->second.addLap(l);
 			}
 			it->second.setDistance(total_distance);
@@ -440,7 +440,7 @@ namespace device
 				uint32_t hr = point[0];
 				double speed = (point[1] + 256.0*point[2]) / 100;
 
-				Point *p = new Point(FieldUndef, FieldUndef, FieldUndef, speed, current_time + 5*nb_points, 0, hr, 3);
+				auto p = new Point(FieldUndef, FieldUndef, FieldUndef, speed, current_time + 5*nb_points, 0, hr, 3);
 				it->second.addPoint(p);
 
 				if(nb_points == 0)

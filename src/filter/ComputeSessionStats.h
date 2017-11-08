@@ -8,8 +8,8 @@ namespace filter
 	class ComputeSessionStats : public Filter
 	{
 		public:
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "ComputeSessionStats"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "ComputeSessionStats"; };
 
 		private:
 			DECLARE_FILTER(ComputeSessionStats);

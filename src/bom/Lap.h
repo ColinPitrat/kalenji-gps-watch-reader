@@ -25,10 +25,10 @@ class Lap
 		                                                         _firstPointId(firstPointId), _lastPointId(lastPointId),
 									 _start(nullptr), _end(nullptr),
 									 _duration(duration), _distance(distance),
-									 _max_speed(max_speed), _avg_speed(avg_speed),
-									 _max_hr(max_hr), _avg_hr(avg_hr),
-									 _calories(calories), _grams(grams),
-									 _ascent(ascent), _descent(descent)
+									 _max_speed(std::move(max_speed)), _avg_speed(std::move(avg_speed)),
+									 _max_hr(std::move(max_hr)), _avg_hr(std::move(avg_hr)),
+									 _calories(std::move(calories)), _grams(std::move(grams)),
+									 _ascent(std::move(ascent)), _descent(std::move(descent))
 		{ };
 
 		void setLapNum(uint32_t lapNum)         { _lapNum = lapNum; };

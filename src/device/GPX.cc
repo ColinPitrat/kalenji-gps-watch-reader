@@ -167,7 +167,7 @@ namespace device
 	void GPX::parseWayPoint(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlChar *data;
-		Point *aPoint = new Point();
+		auto aPoint = new Point();
 
 		data = xmlGetProp(rootNode, (xmlChar*)"lat");
 		aPoint->setLatitude(atof((char*)data));
@@ -277,7 +277,7 @@ namespace device
 	void GPX::parseLap(Session *oSession, xmlNodePtr rootNode)
 	{
 		xmlChar *data;
-		Lap *aLap = new Lap();
+		auto aLap = new Lap();
 
 		xmlNodePtr cur = rootNode->xmlChildrenNode;
 

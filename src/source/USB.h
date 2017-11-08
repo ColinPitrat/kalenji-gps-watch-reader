@@ -16,18 +16,18 @@ namespace source
 	{
 		public:
 			// TODO: configurable timeout ?
-			USB() : _USBContext(nullptr), _device(nullptr), _timeout(5000) = default;
+			USB() : _USBContext(nullptr), _device(nullptr), _timeout(5000) {};
 			~USB() override = default;
 
 			/** 
 			  Initialize the source. Any action that needs to be taken before using the source.
 			 */ 
-			virtual void init(uint32_t vendorId, uint32_t productId);
+			void init(uint32_t vendorId, uint32_t productId) override;
 
 			/** 
 			  Release the source. Any action that needs to be taken once the source is not needed anymore.
 			 */ 
-			virtual void release();
+			void release() override;
 
 			/** 
 			  Read data from source. Handle associated memory. 
@@ -35,14 +35,16 @@ namespace source
 			  @param oData Address of a pointer that will be set to point to read data after the call
 			  @param oLength Address of a variable that will contain the size of the data after the call
 			 */ 
-			virtual bool read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength);
+			bool read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength) override;
+
 			/** 
 			  Send data to the source. 
 			  @param iEndPoint End point to which the data will be sent
 			  @param iData A pointer to data to be sent
 			  @param iLength Size of the data to be sent
 			 */ 
-			virtual void write_data(unsigned char iEndPoint, unsigned char *iData, size_t iLength);
+			void write_data(unsigned char iEndPoint, unsigned char *iData, size_t iLength) override;
+
 			/** 
 			  Send control transfer to the source. 
 			  @param iRequestType
@@ -53,9 +55,9 @@ namespace source
 			  @param iLength
 			 */ 
 			 // TODO: doxygen !
-			virtual void control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength);
+			void control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength) override;
 
-			virtual std::string getName() { return "USB"; };
+			std::string getName() override { return "USB"; };
 
 		protected:
 			const char *getUSBErrorMessage(int rc);

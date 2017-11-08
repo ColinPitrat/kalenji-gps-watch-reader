@@ -8,8 +8,8 @@ namespace filter
 	class NullHeartrate : public Filter
 	{
 		public:
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "NullHeartrate"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "NullHeartrate"; };
 
 			DECLARE_FILTER(NullHeartrate);
 	};

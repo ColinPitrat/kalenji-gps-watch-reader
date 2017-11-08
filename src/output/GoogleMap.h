@@ -9,9 +9,9 @@ namespace output
 	class GoogleMap : public FileOutput
 	{
 		public:
-			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "GoogleMap"; };
-			virtual std::string getExt() { return "html"; };
+			void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "GoogleMap"; };
+			std::string getExt() override { return "html"; };
 
 		private:
 			DECLARE_OUTPUT(GoogleMap);

@@ -24,9 +24,9 @@ namespace output
 	{
 		public:
 			std::string getFileName(Session *session, std::map<std::string, std::string> &configuration);
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
+			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
 			virtual void dumpContent(std::ostream& out, Session *session, std::map<std::string, std::string> &configuration) = 0;
-			virtual bool exists(Session *session, std::map<std::string, std::string> &configuration);
+			bool exists(Session *session, std::map<std::string, std::string> &configuration) override;
 			virtual std::string getExt() = 0;
 	};
 }

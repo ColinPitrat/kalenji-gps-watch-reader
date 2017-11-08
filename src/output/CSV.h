@@ -9,9 +9,9 @@ namespace output
 	class CSV : public FileOutput
 	{
 		public:
-			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "CSV"; };
-			virtual std::string getExt() { return "csv"; };
+			void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "CSV"; };
+			std::string getExt() override { return "csv"; };
 
 		private:
 			DECLARE_OUTPUT(CSV);

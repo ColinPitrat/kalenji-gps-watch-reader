@@ -17,7 +17,7 @@ class Point
 		{ };
 
                 Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t millis, Field<uint16_t> bpm, uint16_t fiability) 
-		  : _time(time), _millis(millis), _lat(lat), _lon(lon), _alt(alt), _speed(speed), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
+		  : _time(time), _millis(millis), _lat(std::move(lat)), _lon(std::move(lon)), _alt(std::move(alt)), _speed(std::move(speed)), _bpm(std::move(bpm)), _fiability(fiability), _important(false), _distance(FieldUndef)
 		{ };
 
 		void setLatitude(Field<double> lat)        { _lat = lat; };

@@ -8,8 +8,8 @@ namespace filter
 	class UnreliablePoints : public Filter
 	{
 		public:
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "UnreliablePoints"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "UnreliablePoints"; };
 
 		private:
 			DECLARE_FILTER(UnreliablePoints);

@@ -9,8 +9,8 @@ namespace output
 	class Kalenji : public Output
 	{
 		public:
-			virtual void dump(Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "Kalenji"; };
+			void dump(Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "Kalenji"; };
 
 		private:
 			DECLARE_OUTPUT(Kalenji);

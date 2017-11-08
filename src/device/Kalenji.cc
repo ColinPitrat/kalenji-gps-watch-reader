@@ -306,7 +306,7 @@ namespace device
 						firstPoint = line[26] + (line[27] << 8);
 						lastPoint = line[28] + (line[29] << 8);
 					}
-					Lap *lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
+					auto lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
 					session->addLap(lap);
 				}
 				_dataSource->write_data(0x03, dataMore, lengthDataMore);
@@ -387,7 +387,7 @@ namespace device
 							current_time += cumulated_tenth / 100;
 							cumulated_tenth = cumulated_tenth % 100;
 						}
-						Point *point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth*100, bpm, fiability);
+						auto point = new Point(lat, lon, alt, speed, current_time, cumulated_tenth*100, bpm, fiability);
 						session->addPoint(point);
 					}
 					if(lap != session->getLaps().end() && id_point == (*lap)->getFirstPointId())
@@ -446,7 +446,7 @@ namespace device
 		}
 		unsigned int payloadSize = headerSize + pointSize*nbPoints + 1;
 		unsigned int bufferSize = payloadSize + 4;
-		unsigned char *buffer = new unsigned char[bufferSize];
+		auto buffer = new unsigned char[bufferSize];
 		buffer[0] = 0x02;
 		buffer[1] = payloadSize / 256;
 		buffer[2] = payloadSize % 256;

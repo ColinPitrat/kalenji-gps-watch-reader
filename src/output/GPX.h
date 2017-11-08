@@ -9,9 +9,9 @@ namespace output
 	class GPX : public FileOutput
 	{
 		public:
-			virtual void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration);
-			virtual std::string getName() { return "GPX"; };
-			virtual std::string getExt() { return "gpx"; };
+			void dumpContent(std::ostream &out, Session *session, std::map<std::string, std::string> &configuration) override;
+			std::string getName() override { return "GPX"; };
+			std::string getExt() override { return "gpx"; };
 
 		private:
 			DECLARE_OUTPUT(GPX);

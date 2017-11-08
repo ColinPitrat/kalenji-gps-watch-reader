@@ -8,8 +8,8 @@ namespace filter
 	class ReducePoints : public Filter
 	{
 		public:
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "ReducePoints"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "ReducePoints"; };
 
 		private:
 			DECLARE_FILTER(ReducePoints);

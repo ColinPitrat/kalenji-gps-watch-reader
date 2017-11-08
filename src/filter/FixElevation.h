@@ -10,8 +10,8 @@ namespace filter
 		public:
 			static size_t copyHTTPData(void *ptr, size_t size, size_t nmemb, FILE *stream);
 			bool parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last);
-			virtual void filter(Session *session, std::map<std::string, std::string> configuration);
-			virtual std::string getName() { return "FixElevation"; };
+			void filter(Session *session, std::map<std::string, std::string> configuration) override;
+			std::string getName() override { return "FixElevation"; };
 
 		private:
 			static std::string HTTPdata;
