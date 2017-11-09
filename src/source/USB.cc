@@ -95,7 +95,7 @@ namespace source
 		{
 			rc = libusb_release_interface(_device, 0);
 			checkUSBOperation(rc);
-			if(_hasInterface1 == true)
+			if(_hasInterface1)
 			{
 				rc = libusb_release_interface(_device, 1);
 				checkUSBOperation(rc);

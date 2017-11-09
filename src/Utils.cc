@@ -77,18 +77,12 @@ int testDir(std::string path, bool create_if_not_exist)
     struct stat fileStat;
     if(stat(path.c_str(), &fileStat) == 0)
     {
-        if(fileStat.st_mode & S_IFDIR)
-        {
-            return 0;
-        }
-        else
-        {
-            std::cerr << "Error: " << path << " is not a directory" << std::endl;
-            return -1;
-        }
+        if(fileStat.st_mode & S_IFDIR) return 0;
+        std::cerr << "Error: " << path << " is not a directory" << std::endl;
+        return -1;
     }
     std::cerr << "Error: Unexpected issue (" << errno << ":" << strerror(errno) << ") when calling stat on " << path << std::endl;
-	return -1;
+    return -1;
 }
 
 void trimString(std::string &toTrim)

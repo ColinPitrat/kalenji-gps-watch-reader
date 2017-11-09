@@ -154,14 +154,14 @@ TEST_F(UtilsTest, testDirDoesntExistDoNotCreate)
 {
     checkTestFile();
 
-    ASSERT_EQ(-1, testDir(_testFileName.c_str(), false));
+    ASSERT_EQ(-1, testDir(_testFileName, false));
 }
 
 TEST_F(UtilsTest, testDirDoesntExistCreate)
 {
     checkTestFile();
 
-    ASSERT_EQ(1, testDir(_testFileName.c_str(), true));
+    ASSERT_EQ(1, testDir(_testFileName, true));
 }
 
 TEST_F(UtilsTest, testDirNoPermissions)
@@ -179,7 +179,7 @@ TEST_F(UtilsTest, testDirWithParentDirARegularFile)
     fclose(f);
     _testFileName += "/UtilsTest";
 
-    ASSERT_EQ(-1, testDir(_testFileName.c_str(), true));
+    ASSERT_EQ(-1, testDir(_testFileName, true));
 }
 
 TEST_F(UtilsTest, testDirOnRegularFile)
@@ -189,5 +189,5 @@ TEST_F(UtilsTest, testDirOnRegularFile)
     FILE* f = fopen(_testFileName.c_str(), "w+");
     fclose(f);
 
-    ASSERT_EQ(-1, testDir(_testFileName.c_str(), true));
+    ASSERT_EQ(-1, testDir(_testFileName, true));
 }

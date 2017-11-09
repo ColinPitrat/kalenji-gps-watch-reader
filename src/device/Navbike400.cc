@@ -165,7 +165,7 @@ namespace device
         // Ignore second line (for now ?)
         READ_MORE_DATA;
       }
-      catch(std::runtime_error e)
+      catch(std::runtime_error &e)
       {
         LOG_VERBOSE("Navbike400: read_data failed: " << e.what() << " - Retrying a get data.");
         _dataSource->write_data(0x01, getData, lengthGetData);

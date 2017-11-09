@@ -23,7 +23,7 @@
 #include "Utils.h"
 
 #undef LOG_VERBOSE
-#define LOG_VERBOSE(x) if(configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };
+#define LOG_VERBOSE(x) if(configuration["verbose"] == "true") { std::cout << __FILE__ << ":" << __LINE__ << ": " << x << std::endl; };  // NOLINT: parenthesis around 'x' would prevent using << in THROW_STREAM
 
 std::map<std::string, std::string> configuration;
 
@@ -33,8 +33,7 @@ bool checkAndCreateDir(std::string path)
 	int dir_status = testDir(path, true);
 	// If dir was tentatively created, second attempt
 	if(dir_status > 0) dir_status = testDir(path, false);
-	if(dir_status < 0) return false;
-	return true;
+	return dir_status >= 0;
 }
 
 void usage(char *progname)

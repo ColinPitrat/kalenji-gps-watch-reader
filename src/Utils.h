@@ -20,7 +20,7 @@ time_t mktime_utc(struct tm *tm);
 
 class Point;
 
-#define THROW_STREAM(stream) throw std::runtime_error(Formatter() << stream);
+#define THROW_STREAM(stream) throw std::runtime_error(Formatter() << stream);  // NOLINT: parenthesis around 'stream' would prevent using << in THROW_STREAM
 
 class Formatter
 {

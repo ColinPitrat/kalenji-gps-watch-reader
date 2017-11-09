@@ -29,7 +29,7 @@ endif
 SOURCES:=$(shell find src test -name \*.cc)
 CLANG_TIDY=clang-tidy-3.8
 #CLANG_CHECKS=modernize-*,performance-*,misc-*,-misc-definitions-in-headers,readability-*,-readability-implicit-bool-cast,-readability-braces-around-statements
-CLANG_CHECKS=modernize-*,performance-*
+CLANG_CHECKS=modernize-*,performance-*,misc-*,-misc-move-const-arg,-misc-unused-parameters,readability-*,-readability-braces-around-statements,-readability-inconsistent-declaration-parameter-name,-readability-implicit-bool-cast
 
 debug: ADD_CFLAGS=$(DEBUG_ADD_CFLAGS)
 
