@@ -9,11 +9,11 @@ namespace output
 {
 	REGISTER_OUTPUT(CSV);
 
-	void CSV::dumpContent(std::ostream& mystream, const Session *session, std::map<std::string, std::string> &configuration)
+	void CSV::dumpContent(std::ostream& out, const Session *session, std::map<std::string, std::string> &configuration)
 	{
 		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
-		mystream.precision(8);
-		mystream << "Time (s),Distance " << session->getName() << " (m)" << ",Altitude " << session->getName() << " (m)" << std::endl;
+		out.precision(8);
+		out << "Time (s),Distance " << session->getName() << " (m)" << ",Altitude " << session->getName() << " (m)" << std::endl;
 
 		uint32_t distance = 0;
 		std::list<Point*> points = session->getPoints();
@@ -45,9 +45,9 @@ namespace output
 			prevPoint = point;
 			// ->8---
 			uint32_t time = point->getTime() - time_begin;
-			mystream << time << ",";
-			mystream << distance << ",";
-      mystream << point->getAltitude() << std::endl;
+			out << time << ",";
+			out << distance << ",";
+      out << point->getAltitude() << std::endl;
 		}
 	}
 }

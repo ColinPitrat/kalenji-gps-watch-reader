@@ -32,24 +32,24 @@ namespace device
 		DEBUG_CMD(std::cout << std::endl);
 	}
 
-	void Keymaze::readMessage(unsigned char **buffer, size_t *index)
+	void Keymaze::readMessage(unsigned char **buffer, size_t *size)
 	{
 		DEBUG_CMD(std::cout << "Keymaze::readMessage()" << std::endl);
 		unsigned char* responseData;
-		*index = 0;
+		*size = 0;
 		size_t transferred = 0;
 		size_t full_size = 0;
 		// full_size + 4 because there are 4 additional bytes to the payload (1B for header, 2B for size and 2B for checksum)
 		do
 		{
 			_dataSource->read_data(0x83, &responseData, &transferred);
-			memcpy(&(message[*index]), responseData, transferred);
-			*index += transferred;
-			if(full_size == 0 && (*index) >= 3)
+			memcpy(&(message[*size]), responseData, transferred);
+			*size += transferred;
+			if(full_size == 0 && (*size) >= 3)
 				full_size = (message[1] << 8) + message[2];
 		}
-		while((*index) < (full_size + 4) || (*index) < 3);
-		DEBUG_CMD(std::cout << "Read a total size of " << *index << " - expected: " << full_size + 4 << std::endl;);
+		while((*size) < (full_size + 4) || (*size) < 3);
+		DEBUG_CMD(std::cout << "Read a total size of " << *size << " - expected: " << full_size + 4 << std::endl;);
 		*buffer = message;
 	}
 

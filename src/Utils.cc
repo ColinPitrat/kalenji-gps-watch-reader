@@ -187,9 +187,9 @@ uint32_t str_to_int(std::string intAsString)
  *
  * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code>
  */
-double distanceEarth(double lat1,double long1,double lat2,double long2)
+double distanceEarth(double lat1,double lon1,double lat2,double lon2)
 {
-  return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, long1,lat2,long2);
+  return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, lon1, lat2, lon2);
 }
 
 double distanceEarth(const Point& p1, const Point& p2)

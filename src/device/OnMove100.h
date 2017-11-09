@@ -16,7 +16,7 @@ namespace device
 			/** 
 			  Dump a message on stdout
 			 */ 
-			void dump(unsigned char *iData, int iLength);
+			void dump(unsigned char *data, int length);
 
 			/** 
 			  Initialize the device. 
@@ -44,7 +44,7 @@ namespace device
 			  Retrieve details of sessions passed in input/output map
 			  @param ioSessions The sessions to import, the function enrich it with details
 			 */ 
-			void getSessionsDetails(SessionsMap *ioSessions) override;
+			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "OnMove100"; };
       DeviceId getDeviceId() override { return { 0x10C4, 0xEA61 }; };

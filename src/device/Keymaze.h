@@ -23,7 +23,7 @@ namespace device
 			/** 
 			  Read a full message doing as much roundtrips as necessary
 			 */ 
-			void readMessage(unsigned char **buffer, size_t *transferred);
+			void readMessage(unsigned char **buffer, size_t *size);
 
 			/** 
 			  Release the device. 

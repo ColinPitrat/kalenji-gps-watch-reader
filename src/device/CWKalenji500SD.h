@@ -16,7 +16,7 @@ namespace device
 			/** 
 			  Dump a message on stdout
 			 */ 
-			void dump(unsigned char *iData, int iLength);
+			void dump(unsigned char *data, int length);
 
 			/** 
 			  Receive an answer, checking it's value and ignoring broadcast messages

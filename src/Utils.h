@@ -52,7 +52,7 @@ std::list<std::string> splitString(std::string toSplit, std::string separator = 
 
 uint32_t str_to_int(std::string intAsString);
 
-double distanceEarth(double lat1d, double lon1d, double lat2d, double lon2d);
+double distanceEarth(double lat1, double lon1, double lat2, double lon2);
 double distanceEarth(const Point& p1, const Point& p2);
 
 #endif

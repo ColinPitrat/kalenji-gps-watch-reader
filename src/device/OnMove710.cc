@@ -211,22 +211,22 @@ namespace device
 		}
 	}
 
-	void OnMove710::dumpInt2(std::ostream &oStream, unsigned int aInt)
+	void OnMove710::dumpInt2(std::ostream &oStream, unsigned int iInt)
 	{
-		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8);
+		oStream << (char)(iInt & 0xFF) << (char)((iInt & 0xFF00) >> 8);
 	}
 
-	void OnMove710::dumpInt4(std::ostream &oStream, unsigned int aInt)
+	void OnMove710::dumpInt4(std::ostream &oStream, unsigned int iInt)
 	{
-		oStream << (char)(aInt & 0xFF) << (char)((aInt & 0xFF00) >> 8) << (char)((aInt & 0xFF0000) >> 16) << (char)((aInt & 0xFF000000) >> 24);
+		oStream << (char)(iInt & 0xFF) << (char)((iInt & 0xFF00) >> 8) << (char)((iInt & 0xFF0000) >> 16) << (char)((iInt & 0xFF000000) >> 24);
 	}
 
-	void OnMove710::dumpString(std::ostream &oStream, const std::string &aString, size_t aLength)
+	void OnMove710::dumpString(std::ostream &oStream, const std::string &iString, size_t iLength)
 	{
-		size_t toCopy = aString.length();
-		if(aLength <= toCopy) toCopy = aLength - 1;
-		oStream.write(aString.c_str(), toCopy);
-		for(size_t i = toCopy; i < aLength; ++i)
+		size_t toCopy = iString.length();
+		if(iLength <= toCopy) toCopy = iLength - 1;
+		oStream.write(iString.c_str(), toCopy);
+		for(size_t i = toCopy; i < iLength; ++i)
 		{
 			oStream.put('\0');
 		}
