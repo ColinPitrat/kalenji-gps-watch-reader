@@ -18,17 +18,17 @@ class Lap
 
 		Lap(uint32_t firstPointId,    uint32_t lastPointId,
 		    double duration,          uint32_t distance,
-		    Field<double> max_speed,  Field<double> avg_speed,
-		    Field<double> max_hr,     Field<double> avg_hr,
-		    Field<uint32_t> calories, Field<uint32_t> grams,
-		    Field<uint32_t> descent,  Field<uint32_t> ascent) :  _lapNum(0),
-		                                                         _firstPointId(firstPointId), _lastPointId(lastPointId),
-									 _start(nullptr), _end(nullptr),
-									 _duration(duration), _distance(distance),
-									 _max_speed(std::move(max_speed)), _avg_speed(std::move(avg_speed)),
-									 _max_hr(std::move(max_hr)), _avg_hr(std::move(avg_hr)),
-									 _calories(std::move(calories)), _grams(std::move(grams)),
-									 _ascent(std::move(ascent)), _descent(std::move(descent))
+		    Field<double> max_speed,  Field<double> avg_speed, // NOLINT: incorrectly advise to move Field
+		    Field<double> max_hr,     Field<double> avg_hr, // NOLINT: incorrectly advise to move Field
+		    Field<uint32_t> calories, Field<uint32_t> grams, // NOLINT: incorrectly advise to move Field
+		    Field<uint32_t> descent,  Field<uint32_t> ascent) // NOLINT: incorrectly advise to move Field
+        :  _lapNum(0), _firstPointId(firstPointId), _lastPointId(lastPointId),
+           _start(nullptr), _end(nullptr),
+           _duration(duration), _distance(distance),
+           _max_speed(max_speed), _avg_speed(avg_speed),
+           _max_hr(max_hr), _avg_hr(avg_hr),
+           _calories(calories), _grams(grams),
+           _ascent(ascent), _descent(descent)
 		{ };
 
 		void setLapNum(uint32_t lapNum)         { _lapNum = lapNum; };

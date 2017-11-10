@@ -1,7 +1,7 @@
 #ifndef _SOURCE_SOURCE_HPP_
 #define _SOURCE_SOURCE_HPP_
 
-#include <stdint.h>
+#include <cstdint>
 #include <string>
 
 namespace source

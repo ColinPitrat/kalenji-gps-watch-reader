@@ -4,7 +4,7 @@
 #include <vector>
 #include <list>
 #include <map>
-#include <stdint.h>
+#include <cstdint>
 #include <ctime>
 #include <cstring>
 #include "../bom/Lap.h"
@@ -21,7 +21,7 @@ class Session
 		{ }
 
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) :
-			         _id(std::move(id)), _name("No name"), _num(num), _local_time(std::move(time)), _nb_points(nb_points), _duration(duration), _distance(distance),
+			         _id(std::move(id)), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
 				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
 			convertToGMT();
@@ -58,23 +58,23 @@ class Session
 
 		void setId(SessionId id)                   { _id = id; };
 		void setNum(uint32_t num)                  { _num = num; };
-		void setName(std::string name)             { _name = name; };
+		void setName(const std::string& name)      { _name = name; };
     // TODO(cpitrat): Convert to a single setter/source of truth for time
 		void setTime(tm time)                      { _local_time = time; convertToGMT(); };
     void setTimeT(time_t time)                 { _time_t = time; timesFromTimeT(); };
 		void setNbPoints(uint32_t nbPoints)        { _nb_points = nbPoints; };
 		void setNbLaps(uint32_t nbLaps)            { _nb_laps = nbLaps; };
 
-		void setDuration(double duration)          { _duration = duration; };
-		void setDistance(uint32_t distance)        { _distance = distance; };
-		void setMaxSpeed(double max_speed)         { _max_speed = max_speed; };
-		void setAvgSpeed(double avg_speed)         { _avg_speed = avg_speed; };
-		void setMaxHr(Field<uint32_t> max_hr)      { _max_hr = max_hr; };
-		void setAvgHr(Field<uint32_t> avg_hr)      { _avg_hr = avg_hr; };
-		void setCalories(Field<uint32_t> calories) { _calories = calories; };
-		void setGrams(Field<uint32_t> grams)       { _grams = grams; };
-		void setAscent(Field<uint32_t> ascent)     { _ascent = ascent; };
-		void setDescent(Field<uint32_t> descent)   { _descent = descent; };
+		void setDuration(double duration)                 { _duration = duration; };
+		void setDistance(uint32_t distance)               { _distance = distance; };
+		void setMaxSpeed(double max_speed)                { _max_speed = max_speed; };
+		void setAvgSpeed(double avg_speed)                { _avg_speed = avg_speed; };
+		void setMaxHr(const Field<uint32_t>& max_hr)      { _max_hr = max_hr; };
+		void setAvgHr(const Field<uint32_t>& avg_hr)      { _avg_hr = avg_hr; };
+		void setCalories(const Field<uint32_t>& calories) { _calories = calories; };
+		void setGrams(const Field<uint32_t>& grams)       { _grams = grams; };
+		void setAscent(const Field<uint32_t>& ascent)     { _ascent = ascent; };
+		void setDescent(const Field<uint32_t>& descent)   { _descent = descent; };
 
 		// TODO: As for time manipulation done in Point, to move in a "utils" part
 		const std::string getBeginTime(bool human_readable=false) const

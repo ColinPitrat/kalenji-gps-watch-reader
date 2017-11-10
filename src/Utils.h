@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <sstream>
 #include <memory>
-#include <stdint.h>
+#include <cstdint>
 
 #ifdef WINDOWS
 #include <ctime>
@@ -44,13 +44,13 @@ class Formatter
         std::stringstream _stream;
 };
 
-int testDir(std::string path, bool create_if_not_exist);
+int testDir(const std::string& path, bool create_if_not_exist);
 
 void trimString(std::string &toTrim);
 std::string durationAsString(double sec, bool with_millis = false);
 std::list<std::string> splitString(std::string toSplit, std::string separator = ",");
 
-uint32_t str_to_int(std::string intAsString);
+uint32_t str_to_int(const std::string& intAsString);
 
 double distanceEarth(double lat1, double lon1, double lat2, double lon2);
 double distanceEarth(const Point& p1, const Point& p2);

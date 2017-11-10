@@ -54,8 +54,8 @@ namespace device
 
 			int bytesToInt2(unsigned char b0, unsigned char b1);
 			int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
-			unsigned char* readAllBytes(std::string filename, size_t& size);
-			bool fileExists(std::string filename);
+			unsigned char* readAllBytes(const std::string& filename, size_t& size);
+			bool fileExists(const std::string& filename);
 
 			std::string getName() override { return "OnMove200"; };
       DeviceId getDeviceId() override { return { 0x283E, 0x0009 }; };

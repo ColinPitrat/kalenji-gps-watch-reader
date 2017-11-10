@@ -24,7 +24,7 @@ class LayerRegistry
 			}
 			_objects.clear();
 		}
-		void registerObject(std::string objectName, LayerType *object)
+		void registerObject(const std::string& objectName, LayerType *object)
 		{
 			std::pair<typename std::map<std::string, LayerType*>::iterator, bool> result;
 			result = _objects.insert(std::pair<std::string, LayerType*>(objectName, object));
@@ -36,7 +36,7 @@ class LayerRegistry
 			}
 		}
 		// TODO: What if filter is not registered ?
-		LayerType *getObject(std::string objectName) { return _objects[objectName]; };
+		LayerType *getObject(const std::string& objectName) { return _objects[objectName]; };
 		std::map<std::string, LayerType*> &getObjects() { return _objects; };
 
 	private:

@@ -28,7 +28,7 @@
 std::map<std::string, std::string> configuration;
 
 // TODO: move as much functions as possible in src/Utils or another separated file - unit test them
-bool checkAndCreateDir(std::string path)
+bool checkAndCreateDir(const std::string& path)
 {
 	int dir_status = testDir(path, true);
 	// If dir was tentatively created, second attempt

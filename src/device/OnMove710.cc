@@ -33,7 +33,7 @@ namespace device
 		return Int;
 	}
 
-	unsigned char* OnMove710::readAllBytes(std::string filename, size_t& size)
+	unsigned char* OnMove710::readAllBytes(const std::string& filename, size_t& size)
 	{
 		std::ifstream fl(filename.c_str());
 		fl.seekg( 0, std::ios::end );
@@ -46,13 +46,13 @@ namespace device
 		return (unsigned char*)buffer;
 	}
 
-	bool OnMove710::fileExists(std::string filename)
+	bool OnMove710::fileExists(const std::string& filename)
 	{
 		struct stat fileInfo;
 		return stat(filename.c_str(), &fileInfo) == 0;
 	}
 
-	tm OnMove710::parseFilename(std::string filename)
+	tm OnMove710::parseFilename(const std::string& filename)
 	{
 		std::string yearStr = filename.substr(0,1);
 		std::string monthStr = filename.substr(1,1);

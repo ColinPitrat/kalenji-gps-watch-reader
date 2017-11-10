@@ -32,7 +32,7 @@ namespace device
     return Int;
   }
 
-  unsigned char* OnMove200::readAllBytes(std::string filename, size_t& size)
+  unsigned char* OnMove200::readAllBytes(const std::string& filename, size_t& size)
   {
     std::ifstream fl(filename.c_str());
     fl.seekg( 0, std::ios::end );
@@ -45,7 +45,7 @@ namespace device
     return (unsigned char*)buffer;
   }
 
-  bool OnMove200::fileExists(std::string filename)
+  bool OnMove200::fileExists(const std::string& filename)
   {
     struct stat fileInfo;
     return stat(filename.c_str(), &fileInfo) == 0;

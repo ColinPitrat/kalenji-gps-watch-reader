@@ -3,7 +3,7 @@
 
 #include <sstream>
 #include <iomanip>
-#include <stdint.h>
+#include <cstdint>
 #include <cmath>
 #include <cerrno>
 #include <cstdlib>
@@ -38,7 +38,7 @@ Formatter::operator std::string() const
     return _stream.str();
 }
 
-int testDir(std::string path, bool create_if_not_exist)
+int testDir(const std::string& path, bool create_if_not_exist)
 {
     // First verify that write access is granted
 	if(access(path.c_str(), W_OK) != 0)
@@ -175,7 +175,7 @@ double ArcInRadians(double lat1,double long1,double lat2,double long2)
 	return 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH));
 }
 
-uint32_t str_to_int(std::string intAsString)
+uint32_t str_to_int(const std::string& intAsString)
 {
 	std::istringstream iss(intAsString);
 	uint32_t result(0);

@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iostream>
 #include <ctime>
-#include <stdint.h>
+#include <cstdint>
 #include <iomanip>
 #include "../Utils.h"
 #include "../bom/Field.h"
@@ -13,22 +13,22 @@ class Point
 {
 	public:
 		// TODO: Improve the way fiability is handled (0 / 3 doesn't make sense)
-                Point() : _time(0), _millis(0), _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef) 
+		Point() : _time(0), _millis(0), _lat(FieldUndef), _lon(FieldUndef), _alt(FieldUndef), _speed(FieldUndef), _bpm(FieldUndef), _fiability(3), _important(false), _distance(FieldUndef)
 		{ };
 
-                Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t millis, Field<uint16_t> bpm, uint16_t fiability) 
-		  : _time(time), _millis(millis), _lat(std::move(lat)), _lon(std::move(lon)), _alt(std::move(alt)), _speed(std::move(speed)), _bpm(std::move(bpm)), _fiability(fiability), _important(false), _distance(FieldUndef)
+		Point(Field<double> lat, Field<double> lon, Field<int16_t> alt, Field<double> speed, time_t time, uint32_t millis, Field<uint16_t> bpm, uint16_t fiability)
+			: _time(time), _millis(millis), _lat(lat), _lon(lon), _alt(alt), _speed(speed), _bpm(bpm), _fiability(fiability), _important(false), _distance(FieldUndef)
 		{ };
 
-		void setLatitude(Field<double> lat)        { _lat = lat; };
-		void setLongitude(Field<double> lon)       { _lon = lon; };
-		void setAltitude(Field<int16_t> alt)       { _alt = alt; };
-		void setSpeed(Field<double> speed)         { _speed = speed; };
-		void setHeartRate(Field<uint16_t> bpm)     { _bpm = bpm; };
-		void setFiability(uint16_t f)              { _fiability = f; };
-		void setImportant(bool i)                  { _important = i; };
-		void setTime(time_t time)                  { _time = time; };
-		void setDistance(Field<uint32_t> distance) { _distance = distance;} 
+		void setLatitude(const Field<double>& lat)        { _lat = lat; };
+		void setLongitude(const Field<double>& lon)       { _lon = lon; };
+		void setAltitude(const Field<int16_t>& alt)       { _alt = alt; };
+		void setSpeed(const Field<double>& speed)         { _speed = speed; };
+		void setHeartRate(const Field<uint16_t>& bpm)     { _bpm = bpm; };
+		void setFiability(uint16_t f)                     { _fiability = f; };
+		void setImportant(bool i)                         { _important = i; };
+		void setTime(time_t time)                         { _time = time; };
+		void setDistance(const Field<uint32_t>& distance) { _distance = distance;}
 		
 		const Field<double>& getLatitude() const    { return _lat; };
 		const Field<double>& getLongitude() const   { return _lon; };
