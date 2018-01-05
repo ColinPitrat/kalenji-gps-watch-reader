@@ -100,6 +100,7 @@ namespace output
 			out << "distance:" << (*it)->getDistance() << ", ";
 			out << "color: \"#";
 			double speed = (*it)->getSpeed();
+			if(std::isnan(speed) || !(*it)->getSpeed().isDefined()) speed = 0;
 			double sp;
 			if (speed > avg_speed)
 			  sp = (speed - avg_speed) * max_speed_factor;
@@ -120,7 +121,6 @@ namespace output
 			out << ", elapsed: " << elapsed;
 			out << ", time: \"" << (*it)->getTimeAsString(true, true) << "\""; //TODO
 			out << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
-			if(std::isnan(speed) || !(*it)->getSpeed().isDefined()) speed = 0;
 			out << ", speed: " << speed;
 			out << ", heartrate: ";
 			if((*it)->getHeartRate().isDefined())
