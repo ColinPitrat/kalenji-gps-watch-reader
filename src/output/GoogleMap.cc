@@ -64,6 +64,30 @@ namespace output
 		out << "pointsList = Array(" << std::endl;
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
+		// Average speed is green
+		// speed above replace green by red
+		// speed below replace green by blue
+		double avg_speed = session->getAvgSpeed();
+		double min_speed;
+		double max_speed;
+		// let's cap the 10% extreme values to remove samples with
+		// potential artifacts
+		// sort the list of speed for that
+		{
+		  std::list<double> speedList;
+		  int pointCnt=0;
+		  for(auto it = points.begin(); it != points.end(); ++it) {
+		    speedList.push_back((*it)->getSpeed());
+		    pointCnt++;
+		  }
+		  speedList.sort();
+		  auto it = std::next(speedList.begin(), pointCnt/10);
+		  min_speed = (*it);
+		  it = std::prev(speedList.end(), pointCnt/10);
+		  max_speed = (*it);
+		}
+		double max_speed_factor = (double)0xFF / (max_speed - avg_speed);
+		double min_speed_factor = (double)0xFF / (avg_speed - min_speed);
 		for(auto it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
@@ -75,22 +99,27 @@ namespace output
 			out << "lat:" << (*it)->getLatitude() << ", long:" << (*it)->getLongitude() << ", ";
 			out << "distance:" << (*it)->getDistance() << ", ";
 			out << "color: \"#";
-			// Max speed is bright red, 5 km/h or less is black
-			// TODO: Dynamic way to find lower bound ?
-			double min_speed = 5;
-			double speed_factor = (double)0xFF / (session->getMaxSpeed() - min_speed);
-			int16_t sp = ((*it)->getSpeed() - min_speed) * speed_factor;
-			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
+			double speed = (*it)->getSpeed();
+			double sp;
+			if (speed > avg_speed)
+			  sp = (speed - avg_speed) * max_speed_factor;
+			else
+			  sp = (avg_speed - speed) * min_speed_factor;
 			if(sp < 0) sp = 0;
-			if(sp > 0xFF) sp = 0xFF;
-			out << std::hex << std::setw(2) << std::setfill('0') << sp;
-			out << "0000\"" << std::dec << std::setw(0) << std::setfill(' ');
+			if(sp > 0xff) sp = 0xFF;
+
+			uint32_t color; // red green blue
+			color = (256-(int)sp) << 8; /* green part */;
+			color += (int)sp << (speed > avg_speed ? 16  /* red part if above avg */
+			                                       :  0); /* blue part if below avg*/
+			out << std::hex << std::setw(6) << std::setfill('0') << color;
+			out << "\"" << std::dec << std::setw(0) << std::setfill(' ');
 			// TODO: Use max hr and min hr to determine the width range
 
+			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
 			out << ", elapsed: " << elapsed;
 			out << ", time: \"" << (*it)->getTimeAsString(true, true) << "\""; //TODO
 			out << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
-			double speed = (*it)->getSpeed();
 			if(std::isnan(speed)) speed = 0;
 			out << ", speed: " << speed;
 			out << ", heartrate: ";
