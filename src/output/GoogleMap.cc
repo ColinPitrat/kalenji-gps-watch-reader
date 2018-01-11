@@ -376,6 +376,31 @@ namespace output
 		out << "    <input id=\"xAxisAttributeDistance\" type=\"radio\" name=\"group1\" value=\"distance\" onChange=\"loadGraph();\">Distance</input>" << std::endl;
 		out << "  </div>" << std::endl;
 
+		out << "<div id=\"summary\" style=\"width: 100% ; text-align:left\">" << std::endl;
+		out << "<b>Session summary:</b><br>" << std::endl;
+		out << "Time: " << durationAsString(session->getDuration()) << ", ";
+		out << "Distance: " << session->getDistance()/1000.0 << " km, ";
+		out << "MaxSpeed: " << session->getMaxSpeed() << " km/h, ";
+		out << "AvgSpeed: " << session->getAvgSpeed() << " km/h. ";
+		out << "</div>" << std::endl;
+		laps = session->getLaps();
+		out << "<div id=\"lap_info\" style=\"width: 100% ; text-align:left\">" << std::endl;
+		out << "<b>Lap details:</b><br>" << std::endl;
+		out << "<table border='1'><tr><th>lap</th><th>time</th><th>distance</th><th>average speed</th><th>max speed</th><th>average hearthate</th><th>max hearthate</th></tr>" << std::endl;
+		for(const auto& lap : laps)
+		{
+		  out << "<tr>";
+		  out << "<td>" << std::setw(3)  << lap->getLapNum() + 1                 << "</td>";
+		  out << "<td>" << std::setw(10) << durationAsString(lap->getDuration()) << "</td>";
+		  out << "<td>" << std::setw(4)  << lap->getDistance()/1000.0            << " km</td>";
+		  out << "<td>" << std::setw(6)  << lap->getAvgSpeed()                   << " km/h</td>";
+		  out << "<td>" << std::setw(6)  << lap->getMaxSpeed()                   << " km/h</td>";
+		  out << "<td>" << std::setw(4)  << lap->getAvgHeartrate()               << " bpm</td>";
+		  out << "<td>" << std::setw(4)  << lap->getMaxHeartrate()               << " bpm</td>";
+		  out << "</tr>" << std::endl;
+		}
+		out << "</table></div>" << std::endl;
+
 		out << "</div>" << std::endl;
 		out << "</body>" << std::endl;
 		out << "</html>" << std::endl;
