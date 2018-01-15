@@ -22,7 +22,7 @@ namespace output
 		}
 		const_cast<Session*>(session)->ensurePointDistanceAreOk();
 
-		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
+		// Latitude and longitude retrieved from the GPS has 6 decimals and can have 2 digits before decimal point
 		out.precision(8);
 		out << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" << std::endl;
 		out << "<html xmlns=\"http://www.w3.org/1999/xhtml\"  xmlns:v=\"urn:schemas-microsoft-com:vml\">" << std::endl;
