@@ -227,8 +227,8 @@ namespace device
     session->setTime(time);
     session->setDistance(distance);
     session->setDuration(duration);
-    session->setAvgSpeed(avgSpeed);
-    session->setMaxSpeed(maxSpeed);
+    session->setAvgSpeed(avgSpeed / 100.0);
+    session->setMaxSpeed(maxSpeed / 100.0);
     session->setCalories(energy);
     session->setAvgHr(avgHeartRate);
     session->setMaxHr(maxHeartRate);
