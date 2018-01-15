@@ -157,7 +157,7 @@ namespace output
 			        out << "{";
 				out << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap;
 				out << ", infos: \"";
-				out << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap+1 << "</h3>";
+				out << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap->getLapNum() + 1 << "</h3>";
 				out << "<b>Distance:</b> " << lap->getDistance()/1000.0 << " km<br/>";
 				out << "<b>Time:</b> " << durationAsString(lap->getDuration()) << "<br/>";
 				out << lap->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
