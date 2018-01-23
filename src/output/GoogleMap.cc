@@ -1,6 +1,7 @@
 #include "GoogleMap.h"
 #include "../Utils.h"
 #include <sstream>
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -73,18 +74,19 @@ namespace output
 		// let's cap the 10% extreme values to remove samples with
 		// potential artifacts
 		// sort the list of speed for that
+		if (points.size() > 1)
 		{
-		  std::list<double> speedList;
-		  int pointCnt=0;
-		  for(auto it = points.begin(); it != points.end(); ++it) {
-		    speedList.push_back((*it)->getSpeed());
-		    pointCnt++;
-		  }
-		  speedList.sort();
-		  auto it = std::next(speedList.begin(), pointCnt/10);
-		  min_speed = (*it);
-		  it = std::prev(speedList.end(), pointCnt/10);
-		  max_speed = (*it);
+		  std::vector<double> speeds;
+		  std::transform(points.begin(), points.end(), std::back_inserter(speeds),
+		      [](const Point* p) -> double { return p->getSpeed(); });
+
+		  std::sort(speeds.begin(), speeds.end());
+		  min_speed = speeds[speeds.size() * 0.1];
+		  max_speed = speeds[speeds.size() * 0.9];
+		}
+		else
+		{
+		  min_speed = max_speed = avg_speed;
 		}
 		double max_speed_factor = (double)0xFF / (max_speed - avg_speed);
 		double min_speed_factor = (double)0xFF / (avg_speed - min_speed);
