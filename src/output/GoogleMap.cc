@@ -157,7 +157,7 @@ namespace output
 			       addComa = true;
 
 			        out << "{";
-				out << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap;
+				out << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap->getLapNum() + 1;
 				out << ", infos: \"";
 				out << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap->getLapNum() + 1 << "</h3>";
 				out << "<b>Distance:</b> " << lap->getDistance()/1000.0 << " km<br/>";
