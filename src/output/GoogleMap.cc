@@ -1,6 +1,7 @@
 #include "GoogleMap.h"
 #include "../Utils.h"
 #include <sstream>
+#include <algorithm>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -22,7 +23,7 @@ namespace output
 		}
 		const_cast<Session*>(session)->ensurePointDistanceAreOk();
 
-		// Latitude and longitude retrieved from the GPS has 6 decimals and can habe 2 digits before decimal point
+		// Latitude and longitude retrieved from the GPS has 6 decimals and can have 2 digits before decimal point
 		out.precision(8);
 		out << "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">" << std::endl;
 		out << "<html xmlns=\"http://www.w3.org/1999/xhtml\"  xmlns:v=\"urn:schemas-microsoft-com:vml\">" << std::endl;
@@ -64,6 +65,31 @@ namespace output
 		out << "pointsList = Array(" << std::endl;
 		std::list<Point*> points = session->getPoints();
 		uint32_t point = 0;
+		// Average speed is green
+		// speed above replace green by red
+		// speed below replace green by blue
+		double avg_speed = session->getAvgSpeed();
+		double min_speed;
+		double max_speed;
+		// let's cap the 10% extreme values to remove samples with
+		// potential artifacts
+		// sort the list of speed for that
+		if (points.size() > 1)
+		{
+		  std::vector<double> speeds;
+		  std::transform(points.begin(), points.end(), std::back_inserter(speeds),
+		      [](const Point* p) -> double { return p->getSpeed(); });
+
+		  std::sort(speeds.begin(), speeds.end());
+		  min_speed = speeds[speeds.size() * 0.1];
+		  max_speed = speeds[speeds.size() * 0.9];
+		}
+		else
+		{
+		  min_speed = max_speed = avg_speed;
+		}
+		double max_speed_factor = (double)0xFF / (max_speed - avg_speed);
+		double min_speed_factor = (double)0xFF / (avg_speed - min_speed);
 		for(auto it = points.begin(); it != points.end(); ++it)
 		{
 			// Point is latitude, longitude, color
@@ -75,23 +101,28 @@ namespace output
 			out << "lat:" << (*it)->getLatitude() << ", long:" << (*it)->getLongitude() << ", ";
 			out << "distance:" << (*it)->getDistance() << ", ";
 			out << "color: \"#";
-			// Max speed is bright red, 5 km/h or less is black
-			// TODO: Dynamic way to find lower bound ?
-			double min_speed = 5;
-			double speed_factor = (double)0xFF / (session->getMaxSpeed() - min_speed);
-			int16_t sp = ((*it)->getSpeed() - min_speed) * speed_factor;
-			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
+			double speed = (*it)->getSpeed();
+			if(std::isnan(speed) || !(*it)->getSpeed().isDefined()) speed = 0;
+			double sp;
+			if (speed > avg_speed)
+			  sp = (speed - avg_speed) * max_speed_factor;
+			else
+			  sp = (avg_speed - speed) * min_speed_factor;
 			if(sp < 0) sp = 0;
-			if(sp > 0xFF) sp = 0xFF;
-			out << std::hex << std::setw(2) << std::setfill('0') << sp;
-			out << "0000\"" << std::dec << std::setw(0) << std::setfill(' ');
+			if(sp > 0xff) sp = 0xFF;
+
+			uint32_t color; // red green blue
+			color = (256-(int)sp) << 8; /* green part */;
+			color += (int)sp << (speed > avg_speed ? 16  /* red part if above avg */
+			                                       :  0); /* blue part if below avg*/
+			out << std::hex << std::setw(6) << std::setfill('0') << color;
+			out << "\"" << std::dec << std::setw(0) << std::setfill(' ');
 			// TODO: Use max hr and min hr to determine the width range
 
+			uint32_t elapsed = ((*it)->getTime() - session->getTime()) * 1000; // in ms
 			out << ", elapsed: " << elapsed;
 			out << ", time: \"" << (*it)->getTimeAsString(true, true) << "\""; //TODO
 			out << ", duration: \"" << durationAsString((*it)->getTime() - session->getTime()) << "\"";
-			double speed = (*it)->getSpeed();
-			if(std::isnan(speed) || !(*it)->getSpeed().isDefined()) speed = 0;
 			out << ", speed: " << speed;
 			out << ", heartrate: ";
 			if((*it)->getHeartRate().isDefined())
@@ -126,9 +157,9 @@ namespace output
 			       addComa = true;
 
 			        out << "{";
-				out << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap;
+				out << "lat:" << lap->getEndPoint()->getLatitude() << ", long:" << lap->getEndPoint()->getLongitude() << ", lap:" << lap->getLapNum() + 1;
 				out << ", infos: \"";
-				out << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap+1 << "</h3>";
+				out << "<h3 style=\\\"padding:0; margin:0\\\">Lap " << lap->getLapNum() + 1 << "</h3>";
 				out << "<b>Distance:</b> " << lap->getDistance()/1000.0 << " km<br/>";
 				out << "<b>Time:</b> " << durationAsString(lap->getDuration()) << "<br/>";
 				out << lap->getAvgSpeed().toStream("<b>Average speed:</b> ", " km/h<br/>");
@@ -375,6 +406,31 @@ namespace output
 		out << "    <input id=\"xAxisAttributeTime\" type=\"radio\" name=\"group1\" value=\"elapsed\" checked onChange=\"loadGraph();\">Time</input>" << std::endl;
 		out << "    <input id=\"xAxisAttributeDistance\" type=\"radio\" name=\"group1\" value=\"distance\" onChange=\"loadGraph();\">Distance</input>" << std::endl;
 		out << "  </div>" << std::endl;
+
+		out << "<div id=\"summary\" style=\"width: 100% ; text-align:left\">" << std::endl;
+		out << "<b>Session summary:</b><br>" << std::endl;
+		out << "Time: " << durationAsString(session->getDuration()) << ", ";
+		out << "Distance: " << session->getDistance()/1000.0 << " km, ";
+		out << "MaxSpeed: " << session->getMaxSpeed() << " km/h, ";
+		out << "AvgSpeed: " << session->getAvgSpeed() << " km/h. ";
+		out << "</div>" << std::endl;
+		laps = session->getLaps();
+		out << "<div id=\"lap_info\" style=\"width: 100% ; text-align:left\">" << std::endl;
+		out << "<b>Lap details:</b><br>" << std::endl;
+		out << "<table border='1'><tr><th>lap</th><th>time</th><th>distance</th><th>average speed</th><th>max speed</th><th>average hearthate</th><th>max hearthate</th></tr>" << std::endl;
+		for(const auto& lap : laps)
+		{
+		  out << "<tr>";
+		  out << "<td>" << std::setw(3)  << lap->getLapNum() + 1                 << "</td>";
+		  out << "<td>" << std::setw(10) << durationAsString(lap->getDuration()) << "</td>";
+		  out << "<td>" << std::setw(4)  << lap->getDistance()/1000.0            << " km</td>";
+		  out << "<td>" << std::setw(6)  << lap->getAvgSpeed()                   << " km/h</td>";
+		  out << "<td>" << std::setw(6)  << lap->getMaxSpeed()                   << " km/h</td>";
+		  out << "<td>" << std::setw(4)  << lap->getAvgHeartrate()               << " bpm</td>";
+		  out << "<td>" << std::setw(4)  << lap->getMaxHeartrate()               << " bpm</td>";
+		  out << "</tr>" << std::endl;
+		}
+		out << "</table></div>" << std::endl;
 
 		out << "</div>" << std::endl;
 		out << "</body>" << std::endl;
