@@ -13,6 +13,8 @@ namespace output
 			std::string getName() override { return "GoogleMap"; };
 			std::string getExt() override { return "html"; };
 
+			void dumpSessionSummary(std::ostream &out, const Session *session);
+
 		private:
 			DECLARE_OUTPUT(GoogleMap);
 	};

@@ -16,13 +16,17 @@ typedef std::vector<char> SessionId;
 class Session
 {
 	public:
-		Session() : _id(0), _name("No name"), _num(0), _nb_points(0), _duration(0), _distance(0),
-			    _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(0)
+		Session() : _id(0), _name("No name"), _num(0), _nb_points(0),
+		            _duration(0), _distance(0), _max_speed(FieldUndef), _avg_speed(FieldUndef),
+			    _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef),
+			    _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(0)
 		{ }
 
 		Session(SessionId id, uint32_t num, tm time, uint32_t nb_points, double duration, uint32_t distance, uint32_t nb_laps) :
-			         _id(std::move(id)), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points), _duration(duration), _distance(distance),
-				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef), _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
+			         _id(std::move(id)), _name("No name"), _num(num), _local_time(time), _nb_points(nb_points),
+				 _duration(duration), _distance(distance), _max_speed(FieldUndef), _avg_speed(FieldUndef),
+				 _max_hr(FieldUndef), _avg_hr(FieldUndef), _calories(FieldUndef), _grams(FieldUndef),
+				 _ascent(FieldUndef), _descent(FieldUndef), _nb_laps(nb_laps)
 		{
 			convertToGMT();
 		}
@@ -50,25 +54,25 @@ class Session
 			gmtime_r(&_time_t, &_time);
 		}
 
-    void timesFromTimeT()
-    {
-      localtime_r(&_time_t, &_local_time);
-      gmtime_r(&_time_t, &_time);
-    }
+		void timesFromTimeT()
+		{
+			localtime_r(&_time_t, &_local_time);
+			gmtime_r(&_time_t, &_time);
+		}
 
 		void setId(SessionId id)                   { _id = id; };
 		void setNum(uint32_t num)                  { _num = num; };
 		void setName(const std::string& name)      { _name = name; };
-    // TODO(cpitrat): Convert to a single setter/source of truth for time
+		// TODO(cpitrat): Convert to a single setter/source of truth for time
 		void setTime(tm time)                      { _local_time = time; convertToGMT(); };
-    void setTimeT(time_t time)                 { _time_t = time; timesFromTimeT(); };
+		void setTimeT(time_t time)                 { _time_t = time; timesFromTimeT(); };
 		void setNbPoints(uint32_t nbPoints)        { _nb_points = nbPoints; };
 		void setNbLaps(uint32_t nbLaps)            { _nb_laps = nbLaps; };
 
 		void setDuration(double duration)                 { _duration = duration; };
 		void setDistance(uint32_t distance)               { _distance = distance; };
-		void setMaxSpeed(double max_speed)                { _max_speed = max_speed; };
-		void setAvgSpeed(double avg_speed)                { _avg_speed = avg_speed; };
+		void setMaxSpeed(const Field<double>& max_speed)  { _max_speed = max_speed; };
+		void setAvgSpeed(const Field<double>& avg_speed)  { _avg_speed = avg_speed; };
 		void setMaxHr(const Field<uint32_t>& max_hr)      { _max_hr = max_hr; };
 		void setAvgHr(const Field<uint32_t>& avg_hr)      { _avg_hr = avg_hr; };
 		void setCalories(const Field<uint32_t>& calories) { _calories = calories; };
@@ -107,8 +111,8 @@ class Session
 
 		double getDuration() const                     { return _duration; };
 		uint32_t getDistance() const                   { return _distance; };
-		double getMaxSpeed() const                     { return _max_speed; };
-		double getAvgSpeed() const                     { return _avg_speed; };
+		const Field<double>& getMaxSpeed() const       { return _max_speed; };
+		const Field<double>& getAvgSpeed() const       { return _avg_speed; };
 		const Field<uint32_t>& getMaxHeartrate() const { return _max_hr; };
 		const Field<uint32_t>& getAvgHeartrate() const { return _avg_hr; };
 		const Field<uint32_t>& getCalories() const     { return _calories; };
@@ -157,8 +161,8 @@ class Session
 
 		double _duration;
 		uint32_t _distance;
-		double _max_speed;
-		double _avg_speed;
+		Field<double> _max_speed;
+		Field<double> _avg_speed;
 		Field<uint32_t> _max_hr;
 		Field<uint32_t> _avg_hr;
 		Field<uint32_t> _calories;
