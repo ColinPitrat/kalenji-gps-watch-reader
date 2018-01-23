@@ -420,7 +420,7 @@ namespace output
 		out << "<b>Session summary:</b><br>" << std::endl;
 		out << "Time: " << durationAsString(session->getDuration()) << ", ";
 		out << "Distance: " << session->getDistance()/1000.0 << " km";
-		out << session->getMaxSpeed().toStream(", MaxSpeed: ", " km/h,");
+		out << session->getMaxSpeed().toStream(", MaxSpeed: ", " km/h");
 		out << session->getAvgSpeed().toStream(", AvgSpeed: ", " km/h");
 		out << ".</div>" << std::endl;
 		auto laps = session->getLaps();
