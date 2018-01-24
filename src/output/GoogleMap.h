@@ -15,6 +15,9 @@ namespace output
 
 			void dumpSessionSummary(std::ostream &out, const Session *session);
 
+			template <typename T>
+			void displayOptionalValue(std::ostream &out, Field<T> f, int width, const std::string& units) const;
+
 		private:
 			DECLARE_OUTPUT(GoogleMap);
 	};

@@ -19,7 +19,7 @@ class Lap
 		Lap(uint32_t firstPointId,    uint32_t lastPointId,
 		    double duration,          uint32_t distance,
 		    Field<double> max_speed,  Field<double> avg_speed, // NOLINT: incorrectly advise to move Field
-		    Field<double> max_hr,     Field<double> avg_hr, // NOLINT: incorrectly advise to move Field
+		    Field<uint32_t> max_hr,   Field<uint32_t> avg_hr, // NOLINT: incorrectly advise to move Field
 		    Field<uint32_t> calories, Field<uint32_t> grams, // NOLINT: incorrectly advise to move Field
 		    Field<uint32_t> descent,  Field<uint32_t> ascent) // NOLINT: incorrectly advise to move Field
         :  _lapNum(0), _firstPointId(firstPointId), _lastPointId(lastPointId),

@@ -414,6 +414,18 @@ namespace output
 		out << "</html>" << std::endl;
 	}
 
+	template <typename T>
+	void GoogleMap::displayOptionalValue(std::ostream &out, Field<T> f, int width, const std::string& units) const
+	{
+		out << "<td>" << std::setw(width);
+		if (f.isDefined()) {
+			out << f << " " << units;
+		} else {
+			out << "N/A";
+		}
+		out << "</td>";
+	}
+
 	void GoogleMap::dumpSessionSummary(std::ostream &out, const Session* session)
 	{
 		out << "<div id=\"summary\" style=\"width: 100% ; text-align:left\">" << std::endl;
@@ -435,10 +447,10 @@ namespace output
 				out << "<td>" << std::setw(3)  << lap->getLapNum() + 1                 << "</td>";
 				out << "<td>" << std::setw(10) << durationAsString(lap->getDuration()) << "</td>";
 				out << "<td>" << std::setw(4)  << lap->getDistance()/1000.0            << " km</td>";
-				out << "<td>" << std::setw(6)  << lap->getAvgSpeed()                   << " km/h</td>";
-				out << "<td>" << std::setw(6)  << lap->getMaxSpeed()                   << " km/h</td>";
-				out << "<td>" << std::setw(4)  << lap->getAvgHeartrate()               << " bpm</td>";
-				out << "<td>" << std::setw(4)  << lap->getMaxHeartrate()               << " bpm</td>";
+				displayOptionalValue(out, lap->getAvgSpeed(), 6, "km/h");
+				displayOptionalValue(out, lap->getMaxSpeed(), 6, "km/h");
+				displayOptionalValue(out, lap->getAvgHeartrate(), 4, "bpm");
+				displayOptionalValue(out, lap->getMaxHeartrate(), 4, "bpm");
 				out << "</tr>" << std::endl;
 			}
 			out << "</table></div>";
