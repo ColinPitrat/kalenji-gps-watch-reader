@@ -69,6 +69,7 @@ A functionality is missing ? You found a bug ? Please go in issues and open one.
 # Supporting
 
 You can support kalenji_reader on Liberapay:
+
 [<img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg">](https://liberapay.com/ColinPitrat/donate)
 
 # Install and use
