@@ -102,6 +102,7 @@ class Session
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		const SessionId getId() const                  { return _id; };
 		const std::string getName() const              { return _name; };
+		void getSummary(std::ostream& os) const;
 		int getYear() const                            { return _local_time.tm_year + 1900; };
 		int getMonth() const                           { return _local_time.tm_mon + 1; };
 		int getDay() const                             { return _local_time.tm_mday; };
@@ -174,6 +175,8 @@ class Session
 		std::list<Lap*> _laps;
 		std::list<Point*> _points;
 };
+
+std::ostream& operator<<(std::ostream& os, const Session&);
 
 typedef std::map<SessionId, Session> SessionsMap;
 typedef std::pair<SessionId, Session> SessionsMapElement;

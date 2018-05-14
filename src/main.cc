@@ -220,10 +220,7 @@ std::string filterSessionsToImport(SessionsMap *sessions, std::list<std::string>
 		for(const auto& session : *sessions)
 		{
 			// TODO: Use a Session method instead !
-			std::cout << std::setw(5) << session.second.getNum() << " - " << session.second.getBeginTime(true);
-			std::cout << " " << std::setw(5) << session.second.getNbLaps() << " laps ";
-			std::cout << std::setw(10) << (double)session.second.getDistance() / 1000 << " km ";
-			std::cout << std::setw(15) << durationAsString(session.second.getDuration()) << std::endl;
+			std::cout << session.second << std::endl;
 		}
 		std::cout << "List of sessions to import (space separated - 'all' to import everything - 'new' to import only new sessions): " << std::endl;
 

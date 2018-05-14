@@ -130,6 +130,7 @@ namespace device
 				mySession.setMaxHr(maxHR);
 			}
 			oSessions->insert(SessionsMapElement(id, mySession));
+			LOG_VERBOSE("Kalenji::getSessionsList() session: " << mySession);
 		}
 	}
 
@@ -190,6 +191,7 @@ namespace device
 				SessionId id(responseData + 3, responseData + 19);
 				// TODO: This find can fail (already occured: communication error ? - kalenji_reader_20150606_212854.log (next attempt succeeded)) 
 				Session *session = &(oSessions->find(id)->second);
+				LOG_VERBOSE("Kalenji::getSessionsDetails() Filling session header: " << *session);
 				double max_speed = (responseData[55] + (responseData[56] << 8)) / 100.0;
 				double avg_speed = (responseData[57] + (responseData[58] << 8)) / 100.0;
 				session->setMaxSpeed(max_speed);
@@ -220,6 +222,7 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 19);
 				Session *session = &(oSessions->find(id)->second);
+				LOG_VERBOSE("Kalenji::getSessionsDetails() Filling session laps: " << *session);
 				size_t sizeRecord = 24;
 				size_t sizeLap = 44;
 				if (type == Keymaze700Trail)
@@ -335,11 +338,13 @@ namespace device
 				}
 				SessionId id(responseData + 3, responseData + 19);
 				session = &(oSessions->find(id)->second);
+				LOG_VERBOSE("Kalenji::getSessionsDetails() Filling session points: " << *session);
 				std::list<Point*> points = session->getPoints();
 				time_t current_time = session->getTime();
 				if(!points.empty())
 				{
 					current_time = points.back()->getTime();
+					LOG_VERBOSE("current_time = " << points.back()->getTimeAsString());
 				}
 				size_t sizeRecord = 24;
 				size_t sizePoint = 20;
@@ -404,9 +409,9 @@ namespace device
 						}
 						(*lap)->setEndPoint(session->getPoints().back());
 						++lap;
-						//std::cout << "Calling setStartPoint for " << id_point << "on lap (" << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 						if(lap != session->getLaps().end())
 						{
+							//std::cout << "Calling setStartPoint for " << id_point << "on lap (" << (*lap)->getFirstPointId() << " - " << (*lap)->getLastPointId() << ")" << std::endl;
 							(*lap)->setStartPoint(session->getPoints().back());
 						}
 					}
@@ -416,7 +421,10 @@ namespace device
 				if(keep_going)
 				{
 					_dataSource->write_data(0x03, dataMore, lengthDataMore);
-					_dataSource->read_data(0x81, &responseData, &received);
+					if (!_dataSource->read_data(0x81, &responseData, &received)) {
+						std::cerr << "ERROR: Couldn't read more data !" << std::endl;
+						break;
+					}
 				}
 			}
 			if(session) std::cout << "Retrieved session from " << session->getBeginTime() << std::endl;
