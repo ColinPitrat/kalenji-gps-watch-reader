@@ -176,7 +176,7 @@ class Session
 		std::list<Point*> _points;
 };
 
-std::ostream& operator<<(std::ostream& os, const Session&);
+std::ostream& operator<<(std::ostream& os, const Session& session);
 
 typedef std::map<SessionId, Session> SessionsMap;
 typedef std::pair<SessionId, Session> SessionsMapElement;
