@@ -217,12 +217,12 @@ namespace device
     //uint32_t fileNum = static_cast<uint32_t>(bytes[19]);
 
     tm time;
+    memset(&time, 0, sizeof(time));
     time.tm_year  = 100 + year;// In tm, year is year since 1900. GPS returns year since 2000
     time.tm_mon   = month - 1;// In tm, month is between 0 and 11.
     time.tm_mday  = day;
     time.tm_hour  = hour;
     time.tm_min   = minute;
-    time.tm_sec   = 0;
     time.tm_isdst = -1;
     session->setTime(time);
     session->setDistance(distance);

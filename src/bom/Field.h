@@ -17,7 +17,7 @@ class Field
 		Field(T value) : _defined(true), _value(value) {};
 
 		// Constructor of an invalid field, using the constant defined above.
-		Field(TFieldUndef unused) : _defined(false) {};
+		Field(TFieldUndef unused) : _defined(false), _value(T()) {};
 
 		bool isDefined() const { return _defined; };
 		const T& getValue() const { return _value; };
