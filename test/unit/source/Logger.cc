@@ -51,15 +51,15 @@ TEST_F(LoggerTest, ForwardsRelease)
 void LoggerTest::TestForwardReadData(bool rc, unsigned char* expected_data, size_t expected_length) {
 	unsigned char ep = 0x42;
 	unsigned char *data = nullptr;
-	size_t len = 42;
+	size_t length = 42;
 
-	EXPECT_CALL(_src, read_data(ep, &data, &len))
+	EXPECT_CALL(_src, read_data(ep, &data, &length))
 			.WillOnce(DoAll(
 					testing::SetArgPointee<1>(expected_data),
 					testing::SetArgPointee<2>(expected_length),
 					testing::Return(rc)));
 
-	EXPECT_EQ(rc, _logger.read_data(ep, &data, &len));
+	EXPECT_EQ(rc, _logger.read_data(ep, &data, &length));
 }
 
 TEST_F(LoggerTest, ForwardsReadDataReturningTrueNoData)
@@ -78,12 +78,12 @@ TEST_F(LoggerTest, ForwardsReadDataReturningFalseWithData)
 	TestForwardReadData(false, data.data(), data.size());
 }
 
-void LoggerTest::TestForwardWriteData(unsigned char* data, size_t len) {
+void LoggerTest::TestForwardWriteData(unsigned char* data, size_t length) {
 	unsigned char ep = 0x42;
 
-	EXPECT_CALL(_src, write_data(ep, data, len));
+	EXPECT_CALL(_src, write_data(ep, data, length));
 
-	_logger.write_data(ep, data, len);
+	_logger.write_data(ep, data, length);
 }
 
 TEST_F(LoggerTest, ForwardsWriteData)
