@@ -24,7 +24,7 @@ class LoggerTest : public testing::Test
 
  protected:
   void TestForwardReadData(bool rc, unsigned char* expected_data, size_t expected_length);
-  void TestForwardWriteData(unsigned char* expected_data, size_t expected_length);
+  void TestForwardWriteData(unsigned char* data, size_t length);
 
   MockSource _src;
   source::Logger _logger;
