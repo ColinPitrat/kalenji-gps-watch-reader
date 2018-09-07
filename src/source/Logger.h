@@ -1,6 +1,7 @@
 #ifndef _SOURCE_LOGGER_HPP_
 #define _SOURCE_LOGGER_HPP_
 
+#include <stdexcept>
 #include <string>
 #include "Source.h"
 
@@ -12,7 +13,10 @@ namespace source
 	class Logger : public Source
 	{
 		public:
-			Logger(Source *source, std::string logfilename) : _logfilename(std::move(logfilename)), _truesource(source) {};
+			Logger(Source *source, std::string logfilename) : _logfilename(std::move(logfilename)), _truesource(source) 
+			{
+				if(_truesource == nullptr) throw std::invalid_argument("Source passed to Logger is NULL");
+			};
 			/** 
 			  Initialize the source. Any action that needs to be taken before using the source.
 			 */ 

@@ -12,9 +12,10 @@ WININCPATH=-I$(MINGW_PATH)/include/libusb-1.0/ -I$(MINGW_PATH)/include/libxml2/
 WINLIBS=$(MINGW_PATH)/lib/libusb-1.0.dll.a $(MINGW_PATH)/lib/libxml2.dll.a $(MINGW_PATH)/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
 GTEST_DIR=googletest/googletest/
-TEST_CFLAGS=-I$(GTEST_DIR)/include -I$(GTEST_DIR) -I.
+GMOCK_DIR=googletest/googlemock/
+TEST_CFLAGS=-I$(GTEST_DIR)/include -I$(GTEST_DIR) -I$(GMOCK_DIR)/include -I$(GMOCK_DIR) -I.
 TEST_TARGET=test/unit/unit_tester
-TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') $(GTEST_DIR)/src/gtest-all.o
+TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') $(GTEST_DIR)/src/gtest-all.o $(GMOCK_DIR)/src/gmock-all.o
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 ifndef CXX
