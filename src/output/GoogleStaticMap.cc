@@ -18,8 +18,8 @@ namespace output
                 // So we have to filter points so that 22 * lap + 107 + 22 * remaining_points < 2048 (hoping we don't have too much laps !)
 		// i.e. remaining_points < 89 - lap
 		// and remaining_points = points / filter => filter = points / (89 - lap) (plus one for rounding)
-		std::list<Point*> points = session->getPoints();
-		std::list<Lap*> laps = session->getLaps();
+		std::vector<Point*> points = session->getPoints();
+		std::vector<Lap*> laps = session->getLaps();
 		uint32_t filter = 1 + points.size() / (89 - laps.size());
 		uint32_t filter_index = 0;
 		for(const auto& point : points)

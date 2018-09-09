@@ -27,7 +27,7 @@ namespace output
 			out << "/>" << std::endl;
 		}
 		out << "   <Laps>" << std::endl;
-		std::list<Lap*> laps = session->getLaps();
+		std::vector<Lap*> laps = session->getLaps();
 		for(const auto& lap : laps)
 		{
 			out << "    <Lap StartTime=\"" << lap->getStartPoint()->getTimeAsString() << "\" DurationSeconds=\"" << lap->getDuration() << "\" >" << std::endl;
@@ -40,7 +40,7 @@ namespace output
 
 		// TODO: Verify the format !
 		out << "   <Track StartTime=\"" << session->getBeginTime() << "\">" << std::endl;
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		time_t prev_time = (*points.begin())->getTime();
 		time_t first_time = (*points.begin())->getTime();
 		double total_dist = 0;

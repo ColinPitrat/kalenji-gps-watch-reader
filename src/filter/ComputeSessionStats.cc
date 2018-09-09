@@ -8,7 +8,7 @@ namespace filter
 
 	void ComputeSessionStats::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		uint32_t ascent = 0;
 		uint32_t descent = 0;
 		uint32_t distance = 0;

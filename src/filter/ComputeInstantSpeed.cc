@@ -8,7 +8,7 @@ namespace filter
 
 	void ComputeInstantSpeed::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		Point* prevPoint = nullptr;
 
 		auto it = points.begin();

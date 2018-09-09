@@ -63,7 +63,7 @@ namespace output
 		out << "}" << std::endl;
 
 		out << "pointsList = Array(" << std::endl;
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		uint32_t point = 0;
 		// Average speed is green
 		// speed above replace green by red
@@ -140,7 +140,7 @@ namespace output
 		}
 		out << ");" << std::endl;
 
-		std::list<Lap*> laps = session->getLaps();
+		std::vector<Lap*> laps = session->getLaps();
 		uint32_t nbLap = 0;
 		bool addComa = false;
 		out << "waypointsList = Array (";

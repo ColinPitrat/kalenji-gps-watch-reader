@@ -37,7 +37,7 @@ namespace output
 		mystream << std::hex;
 		// TODO: dataLength
 		mystream << "02";
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		int nbPoints = points.size();
 		mystream << std::setw(4) << 27 + (15 * nbPoints);
 		mystream << "91"; // 90 for the first one ?!
@@ -50,7 +50,7 @@ namespace output
 		mystream << std::setw(8) << nbPoints;
 		mystream << std::setw(4) << 0; //firstPoint;
 		mystream << std::setw(4) << 0; //lastPoint;
-		for(std::list<Point*>::iterator it = points.begin(); it != points.end(); ++it)
+		for(std::vector<Point*>::iterator it = points.begin(); it != points.end(); ++it)
 		{
 			// TODO: track points
 			mystream << std::setw(8) << (*it)->getLatitude() * 1000000;

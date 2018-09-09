@@ -16,7 +16,7 @@ namespace output
 		out << "Time (s),Distance " << session->getName() << " (m)" << ",Altitude " << session->getName() << " (m)" << std::endl;
 
 		uint32_t distance = 0;
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		Point *prevPoint = nullptr;
 		uint32_t time_begin = (*points.begin())->getTime();
 		for(const auto& point : points)

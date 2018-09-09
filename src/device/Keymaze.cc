@@ -353,7 +353,7 @@ namespace device
 				if(it != oSessions->end())
 				{
 					session = &(it->second);
-					std::list<Point*> points = session->getPoints();
+					std::vector<Point*> points = session->getPoints();
 					time_t current_time = session->getTime();
 					if(!points.empty())
 					{

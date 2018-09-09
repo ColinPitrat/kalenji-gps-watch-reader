@@ -6,7 +6,7 @@ namespace filter
 
 	void EmptyLaps::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
-		std::list<Lap*> &laps = session->getLaps();
+		std::vector<Lap*> &laps = session->getLaps();
 		for(auto it = laps.begin(); it != laps.end(); )
 		{
 			if((*it)->getDistance() == 0 or (*it)->getDuration() == 0 or (*it)->getStartPoint() == (*it)->getEndPoint())

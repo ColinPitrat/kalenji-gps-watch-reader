@@ -256,7 +256,7 @@ namespace device
 					uint32_t avg_hr = line[21];
 					uint32_t calories = line[26] + (line[27] << 8);
 					// Calories for lap given by watch is the sum of all past laps (this looks like a bug ?! this may change with later firmwares !)
-					std::list<Lap*> laps = session->getLaps();
+					std::vector<Lap*> laps = session->getLaps();
 					if(laps.empty())
 					{
 						sum_calories = 0;
@@ -339,7 +339,7 @@ namespace device
 				SessionId id(responseData + 3, responseData + 19);
 				session = &(oSessions->find(id)->second);
 				LOG_VERBOSE("Kalenji::getSessionsDetails() Filling session points: " << *session);
-				std::list<Point*> points = session->getPoints();
+				std::vector<Point*> points = session->getPoints();
 				time_t current_time = session->getTime();
 				if(!points.empty())
 				{

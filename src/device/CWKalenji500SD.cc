@@ -421,7 +421,7 @@ namespace device
 			offset += 16;
 			int nb_points = 0;
 			std::cout << std::dec; 
-			std::list<Lap*> laps = session.second.getLaps();
+			std::vector<Lap*> laps = session.second.getLaps();
 			auto it_lap = laps.begin();
 			double cumulated_duration = 0;
 			DEBUG_CMD(std::cout << "Points ..." << std::endl);

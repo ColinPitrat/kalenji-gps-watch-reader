@@ -39,7 +39,7 @@ namespace output
 
 		out << "  <trk>" << std::endl;
 		out << "    <trkseg>" << std::endl;
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		for(const auto& point : points)
 		{
 			out << "      <trkpt ";
@@ -72,7 +72,7 @@ namespace output
 		{
 			out << "  <extensions>" << std::endl;
 			int nbLap = 0;
-			std::list<Lap*> laps = session->getLaps();
+			std::vector<Lap*> laps = session->getLaps();
 			for(const auto& lap : laps)
 			{
 				// TODO: Remove this check (could be moved to the getters) ?

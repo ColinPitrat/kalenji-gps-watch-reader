@@ -55,7 +55,7 @@ namespace output
 		out << "</LineStyle>" << std::endl;
 		out << "</Style>" << std::endl;
 
-		std::list<Lap*> laps = session->getLaps();
+		std::vector<Lap*> laps = session->getLaps();
 		uint32_t i = 0;
 		for(const auto& lap : laps)
 		{
@@ -86,7 +86,7 @@ namespace output
 		out << "<LineString>" << std::endl;
 		out << "<tessellate>1</tessellate>" << std::endl;
 		out << "<coordinates>" << std::endl;
-		std::list<Point*> points = session->getPoints();
+		std::vector<Point*> points = session->getPoints();
 		for(const auto& point : points)
 		{
 			out << point->getLongitude() << "," << point->getLatitude() << "," << point->getAltitude() << " ";

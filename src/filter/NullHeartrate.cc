@@ -8,7 +8,7 @@ namespace filter
 	{
 		// TODO: If first heartrates are 0, they will stay 0
 		uint16_t previousHeartrate = 0;
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		for(const auto& point : points)
 		{
 			if(point->getHeartRate() == 0)

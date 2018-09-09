@@ -7,11 +7,11 @@ namespace filter
 {
 	REGISTER_FILTER(ReducePoints);
 
-	std::list<Point*>::iterator removePoint(Session *session, std::list<Point*>::iterator itToRemove, Point *previousKept)
+	std::vector<Point*>::iterator removePoint(Session *session, std::vector<Point*>::iterator itToRemove, Point *previousKept)
 	{
 		Point *point = *itToRemove;
 		// Change lap boundary if it references the point
-		std::list<Lap*> &laps = session->getLaps();
+		std::vector<Lap*> &laps = session->getLaps();
 		for(auto& lap : laps)
 		{
 			if(lap->getStartPoint() == point)
@@ -25,7 +25,7 @@ namespace filter
 		}
 
 		// Remove point from list of points of the session
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		auto it = points.erase(itToRemove);
 		delete (point);
 
@@ -34,7 +34,7 @@ namespace filter
 
 	void ReducePoints::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		uint32_t nbPointsOri = points.size();
 		
 		uint32_t maxNbPoints = str_to_int(configuration["reduce_points_max"]);
@@ -103,12 +103,13 @@ namespace filter
 				   && distanceEarth(**previousKept, **it) <= maxDistBetweenPoints)
 				{
 					previousPoint = removePoint(session, previousPoint, *previousKept);
+          it = previousPoint;
 				}
 				else
 				{
 					previousKept = previousPoint;
+          previousPoint = it;
 				}
-				previousPoint = it;
 				++it;
 			}
 			divider--;

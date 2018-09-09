@@ -19,7 +19,7 @@ namespace filter
 		return size*nmemb;
 	}
 
-	bool FixElevation::parseHTTPData(Session *session, std::list<Point*>::iterator first, std::list<Point*>::iterator last)
+	bool FixElevation::parseHTTPData(Session *session, std::vector<Point*>::iterator first, std::vector<Point*>::iterator last)
 	{
 		int elevation;
 		std::list<std::string> lines = splitString(HTTPdata, "\n");
@@ -94,13 +94,13 @@ namespace filter
 		curl_easy_setopt(curl, CURLOPT_NOPROGRESS, 1);
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, &FixElevation::copyHTTPData);
 
-		std::list<Point*> &points = session->getPoints();
+		std::vector<Point*> &points = session->getPoints();
 		//std::cout << "Retrieving elevation for " << points.size() << " points" << std::endl;
 
 		// Retrieve points elevation 87 by 87 (max url length = 2048 => (2048 - 119) / 22 = 87)
 		int i = 0;
 		auto request_first = points.begin();
-		std::list<Point*>::iterator request_last;
+		std::vector<Point*>::iterator request_last;
 		std::stringstream urlparams;
 		for(auto it = points.begin(); it != points.end(); )
 		{

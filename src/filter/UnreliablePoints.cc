@@ -6,8 +6,8 @@ namespace filter
 
 	void UnreliablePoints::filter(Session *session, std::map<std::string, std::string> configuration)
 	{
-		std::list<Point*> &points = session->getPoints();
-		std::list<Lap*> &laps = session->getLaps();
+		std::vector<Point*> &points = session->getPoints();
+		std::vector<Lap*> &laps = session->getLaps();
 		Point *previousValid = nullptr;
 
 		// Find first reliable point. We'll need it to adjust laps if first points are not reliable.

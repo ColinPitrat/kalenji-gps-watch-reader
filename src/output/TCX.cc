@@ -22,8 +22,8 @@ namespace output
 		out << " <Activities>" << std::endl;
 		out << "  <Activity Sport=\"" << configuration["tcx_sport"] << "\">" << std::endl;
 		out << "   <Id>" << session->getBeginTime() << "</Id>" << std::endl;
-		std::list<Lap*> laps = session->getLaps();
-		std::list<Point*> points = session->getPoints();
+		std::vector<Lap*> laps = session->getLaps();
+		std::vector<Point*> points = session->getPoints();
 		auto pit = points.begin();
 		uint32_t point_id = 0;
 		for(const auto& lap : laps)

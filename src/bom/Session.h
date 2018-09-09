@@ -94,10 +94,10 @@ class Session
 		uint32_t getNum() const            { return _num; };
 		bool isComplete()                  { return _nb_points == _points.size(); };
 
-		std::list<Lap*> &getLaps()                 { return _laps; };
-		const std::list<Lap*> &getLaps() const     { return _laps; };
-		std::list<Point*> &getPoints()             { return _points; };
-		const std::list<Point*> &getPoints() const { return _points; };
+		std::vector<Lap*> &getLaps()                 { return _laps; };
+		const std::vector<Lap*> &getLaps() const     { return _laps; };
+		std::vector<Point*> &getPoints()             { return _points; };
+		const std::vector<Point*> &getPoints() const { return _points; };
 
 		// TODO: Check what is used, what is not, what should be added (like getLastPointTime() that would check if Point is empty) ...
 		const SessionId getId() const                  { return _id; };
@@ -172,8 +172,8 @@ class Session
 		Field<uint32_t> _descent;
 
 		uint32_t _nb_laps;
-		std::list<Lap*> _laps;
-		std::list<Point*> _points;
+		std::vector<Lap*> _laps;
+		std::vector<Point*> _points;
 };
 
 std::ostream& operator<<(std::ostream& os, const Session& session);
