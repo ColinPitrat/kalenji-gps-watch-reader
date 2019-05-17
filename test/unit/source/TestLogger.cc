@@ -5,6 +5,8 @@
 #include <stdexcept>
 #include <source/Source.h>
 
+using testing::DoAll;
+
 class MockSource : public source::Source
 {
  public:
