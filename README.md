@@ -74,6 +74,16 @@ You can support kalenji_reader on Liberapay:
 
 # Install and use
 
+## Dependencies
+
+To be able to build kalenji_reader, you'll need the following dependencies:
+
+ - libusb 1.0
+ - libxml 2
+ - libcurl
+
+## Building and using
+
 From the directory containing this README.txt:
 
     make
