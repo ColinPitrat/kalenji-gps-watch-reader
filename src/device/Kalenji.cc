@@ -310,6 +310,7 @@ namespace device
 						lastPoint = line[28] + (line[29] << 8);
 					}
 					auto lap = new Lap(firstPoint, lastPoint, duration, length, max_speed, avg_speed, max_hr, avg_hr, calories, grams, descent, ascent);
+          lap->setLapNum(i);
 					session->addLap(lap);
 				}
 				_dataSource->write_data(0x03, dataMore, lengthDataMore);
