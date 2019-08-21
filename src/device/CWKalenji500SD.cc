@@ -414,6 +414,7 @@ namespace device
 				total_duration += duration;
 				offset += 16;
 				auto l = new Lap(0, 0, duration, distance, max_speed, 0, max_hr, avg_hr, 0, 0, 0, 0);
+        l->setLapNum(i);
 				session.second.addLap(l);
 			}
 			session.second.setDistance(total_distance);
