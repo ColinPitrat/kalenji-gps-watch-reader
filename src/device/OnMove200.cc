@@ -6,6 +6,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+//#define _BSD_SOURCE // already declared
+#include <endian.h>
+
 
 #include <dirent.h>
 #include <sys/stat.h>
@@ -227,37 +230,193 @@ namespace device
     session->setTime(time);
     session->setDistance(distance);
     session->setDuration(duration);
-    session->setAvgSpeed(avgSpeed);
-    session->setMaxSpeed(maxSpeed);
+    session->setAvgSpeed(avgSpeed / 100.0);
+    session->setMaxSpeed(maxSpeed / 100.0);
     session->setCalories(energy);
     session->setAvgHr(avgHeartRate);
     session->setMaxHr(maxHeartRate);
   }
 
+  enum OmdType
+  {
+    GPS_POINT = 0xf1,
+    GPS_META  = 0xf2
+  };
+
+  struct __attribute__((__packed__)) OmdGpsPoint
+  {
+    uint32_t lat;
+    uint32_t lon;
+    uint32_t dist;
+
+    uint16_t time;
+    uint8_t gpsStatus;
+    uint16_t alt; // not sure the altitude is on 16 or 8bits. Let's assume 16bit and wait for a montain trip to confirm
+
+    uint8_t unknown_17;
+    uint8_t unknown_18;
+    uint8_t id;
+    // size: 20 bytes
+  };
+
+  struct __attribute__((__packed__)) OmdGpsMetaSingle
+  {
+    uint16_t time;
+    uint16_t speed;
+    uint16_t kcal;
+    uint8_t hr;
+    uint8_t lap;
+    uint8_t cad;
+  };
+
+  struct __attribute__((__packed__)) OmdGpsMeta
+  {
+    struct OmdGpsMetaSingle p0;
+    uint8_t pad;
+
+    struct OmdGpsMetaSingle p1;
+    uint8_t id;
+  };
+
+
+  // make sure structure size are equal to 20
+  // by defining a negative bitfield
+  struct size_checker {
+    char t : sizeof(OmdGpsPoint) == 20 && sizeof(OmdGpsMeta) ? 1 : -1;
+  };
+
+  static void recordOneMeta(Point *p, struct OmdGpsMetaSingle *s, time_t startTime, uint8_t *maxHr, double *maxSpeed)
+  {
+    // normally, we can't have a META before we have seen 2 points,
+    // so, previous and current points are already created
+    // but, we can do the check anyway
+
+    // also when a lap is recorded, we can have duplicate entries,
+    // it is better to match the time of the meta data and the points
+    double speed = ((double) le16toh(s->speed)) / 100.0;
+    if (p != NULL &&
+	p->getTime() == le16toh(s->time) + startTime) {
+      p->setSpeed(speed);
+      p->setHeartRate(s->hr);
+    }
+
+    if (*maxHr < s->hr)
+      *maxHr = s->hr;
+    if (*maxSpeed < speed)
+      *maxSpeed = speed;
+  }
+
   void OnMove200::parseOMDFile(const unsigned char* bytes, int length, Session *session)
   {
-    const unsigned char* chunk;
-    int numPoints = 0;
     time_t startTime = session->getTime();
-    // We remove 20 bytes from the length because the last line is always a 'metadata' one, 
-    // even if there's been only one 'data' line since the last one.
-    for(int i = 0; i < (length-20); i += 20)
+
+    struct OmdGpsPoint *omdPoint;
+    struct OmdGpsMeta *omdMeta;
+
+    uint32_t prev_time = 0xffffffff;
+    Point *currPoint = NULL, *prevPoint = NULL;
+
+    // for lap creation
+    Point *lapStart = NULL;
+    uint32_t lapStartIdx = 0;
+    uint32_t lapEndIdx = 0;
+    uint32_t lapCount = 0;
+    uint8_t maxHr = 0;
+    double maxSpeed = 0;
+
+    for(int i = 0; i < length; i += 20)
     {
-      numPoints++;
-      // Every other 3 line doesn't contain coordinates ('metadata')
-      if(numPoints % 3 == 0) continue;
-      chunk = &bytes[i];
-      double latitude = ((double) bytesToInt4(chunk[0], chunk[1], chunk[2], chunk[3])) / 1000000.;
-      double longitude = ((double) bytesToInt4(chunk[4], chunk[5], chunk[6], chunk[7])) / 1000000.;
-      // Not sure if distance is really on 4 bytes or only on 2, but 2 would seem limited (65 km, can be short for a bike session)
-      uint32_t distance = bytesToInt4(chunk[8], chunk[9], chunk[10], chunk[11]);
-      uint32_t time = bytesToInt2(chunk[12], chunk[13]);
-      // Heart rate for points of lines n and n+1 are on line n+2 (the every other 3 line that doesn't contain coordinates)
-      uint32_t hr = chunk[46];
-      if(numPoints % 3 == 2) hr = chunk[36];
-      auto p = new Point(latitude, longitude, FieldUndef, FieldUndef, startTime + time, 0, hr, 3);
-      p->setDistance(distance);
-      session->addPoint(p);
+      omdPoint = (struct OmdGpsPoint* ) &bytes[i];
+      omdMeta = (struct OmdGpsMeta* ) &bytes[i];
+      if (omdPoint->id == GPS_POINT)
+      {
+        double latitude         = ((double) le32toh(omdPoint->lat)) / 1000000.;
+        double longitude        = ((double) le32toh(omdPoint->lon)) / 1000000.;
+        uint32_t distance       = le32toh(omdPoint->dist);
+        uint32_t time           = le16toh(omdPoint->time);
+        uint32_t alt            = le16toh(omdPoint->alt);
+
+        if (time == prev_time) // a lap records multiple identical points, let's skip them
+          continue;
+        prev_time = time;
+
+	// don't record altitude if it is 0
+	Field<int16_t> alt_def(FieldUndef);
+	if (alt != 0)
+	  alt_def = alt;
+	else
+	  alt_def = FieldUndef;
+
+        auto p = new Point(latitude, longitude, alt_def, FieldUndef, startTime + time, 0, FieldUndef, 3);
+        p->setDistance(distance);
+        session->addPoint(p);
+
+        // keep record of the last 2 points to update them with meta data
+        prevPoint = currPoint;
+        currPoint = p;
+
+        lapEndIdx++;
+        if (lapStart == NULL) // first point starts the first lap
+          lapStart = p;
+
+      }
+      else if (omdMeta->id == GPS_META)
+      {
+        // first entry is for the older point (previous), second entry for the
+        // more recent (current)
+        recordOneMeta(prevPoint, &omdMeta->p0, startTime, &maxHr, &maxSpeed);
+        recordOneMeta(currPoint, &omdMeta->p1, startTime, &maxHr, &maxSpeed);
+      }
+
+      // handle new lap and end of parsing here
+      if (omdMeta->id == GPS_META &&
+          (
+            // laps are always on 2 meta data, so it is ok to check both
+            (omdMeta->p0.lap != 0 && omdMeta->p1.lap != 0 && lapEndIdx > 0) ||
+          // create a lap for the last point, but only if a lap has already been
+          // created
+          (i+20 == length && lapCount > 0)
+	 ))
+      {
+        uint32_t totalDistance = currPoint->getDistance() - lapStart->getDistance();
+        uint32_t totalTime     = currPoint->getTime() - lapStart->getTime();
+        double avgSpeed;
+        double avgHr;
+        if (totalTime != 0)
+          avgSpeed = 3.6 * totalDistance / totalTime;
+        else
+          avgSpeed = 0;
+
+        std::list<Point*> points = session->getPoints();
+        int hr = 0;
+        int cnt=0;
+        // having a vector for points would help here
+        for(auto it = points.begin(); it != points.end(); ++it)
+        {
+          if (cnt == 0 && (*it) != lapStart)
+            continue;
+          hr += (*it)->getHeartRate();
+          cnt++;
+          if ((*it) == currPoint)
+            break;
+        }
+        if (cnt > 0)
+          avgHr = hr / cnt;
+        else
+          avgHr = 0;
+
+        auto l = new Lap(lapStartIdx, lapEndIdx-1, totalTime, totalDistance, maxSpeed, avgSpeed, maxHr, avgHr, 0, 0, 0, 0);
+        l->setLapNum(lapCount++);
+        l->setStartPoint(lapStart);
+        l->setEndPoint(currPoint);
+
+        session->addLap(l);
+
+        lapStartIdx = lapEndIdx-1;
+        lapStart = currPoint;
+        maxSpeed = 0;
+        maxHr = 0;
+      }
     }
   }
 }
