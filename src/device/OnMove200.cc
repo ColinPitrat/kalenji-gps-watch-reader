@@ -224,6 +224,13 @@ namespace device
     time.tm_hour  = hour;
     time.tm_min   = minute;
     time.tm_isdst = -1;
+
+    // Since start time is in fact time when save was pressed...
+    // assuming that save is pressed very quickly when the session ended,
+    // simply subtract the session duration from the start time to fix it.
+    time_t t = mktime(&time) - duration;
+    memcpy( &time, localtime(&t), sizeof(tm));
+
     session->setTime(time);
     session->setDistance(distance);
     session->setDuration(duration);
