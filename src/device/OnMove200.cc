@@ -85,7 +85,7 @@ namespace device
 
   void OnMove200::getSessionsList(SessionsMap *oSessions)
   {
-    DEBUG_CMD(std::cout << "OnMove200: Get sessions list !" << std::endl);
+    LOG_VERBOSE("OnMove200: Retrieve sessions list from '" << getPath() << "'");
 
     DIR* folder = nullptr;
     struct dirent* file = nullptr;
