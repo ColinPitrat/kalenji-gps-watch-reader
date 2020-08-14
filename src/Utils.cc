@@ -19,7 +19,7 @@ void locatime_r (const time_t *timer, struct tm *result)
 
 void gmtime_r (const time_t *timer, struct tm *result)
 {
-  *result = gmtime(timer);
+  *result = *gmtime(timer);
 }
 
 void setenv(const char* var, const char* value, int overwrite)
