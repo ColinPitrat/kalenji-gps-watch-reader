@@ -40,14 +40,14 @@
 <LineString>
 <tessellate>1</tessellate>
 <coordinates>
-103.77837,1.2994383,15 103.77807,1.2993467,16 103.77803,1.2993117,16 103.77799,1.2992683,16 103.77797,1.29922,17 103.77796,1.2991733,17 103.77796,1.2991217,17 103.77796,1.2990667,18 103.77796,1.2990117,18 103.77797,1.298955,19 103.77797,1.2989033,20 103.77798,1.2988517,20 103.77798,1.2987967,21 103.77799,1.2987483,21 103.77799,1.2986933,22 103.77799,1.2986417,22 103.778,1.2985883,23 103.77801,1.2985283,24 </coordinates>
+103.77837,1.2994383,13 103.77807,1.2993467,13 103.77803,1.2993117,13 103.77799,1.2992683,13 103.77797,1.29922,13 103.77796,1.2991733,13 103.77796,1.2991217,13 103.77796,1.2990667,13 103.77796,1.2990117,13 103.77797,1.298955,13 103.77797,1.2989033,13 103.77798,1.2988517,13 103.77798,1.2987967,13 103.77799,1.2987483,13 103.77799,1.2986933,13 103.77799,1.2986417,13 103.778,1.2985883,13 103.77801,1.2985283,13 </coordinates>
 </LineString>
 </Placemark>
 <Placemark>
 <name>Runner</name>
 <styleUrl>kalenji_runner</styleUrl>
 <Point id="runner">
-<coordinates>103.77837,1.2994383,15</coordinates>
+<coordinates>103.77837,1.2994383,13</coordinates>
 </Point>
 </Placemark>
 
@@ -60,7 +60,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77837,1.2994383,15</coordinates> 
+<coordinates>103.77837,1.2994383,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -76,7 +76,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77807,1.2993467,16</coordinates> 
+<coordinates>103.77807,1.2993467,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -92,7 +92,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77803,1.2993117,16</coordinates> 
+<coordinates>103.77803,1.2993117,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -108,7 +108,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77799,1.2992683,16</coordinates> 
+<coordinates>103.77799,1.2992683,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -124,7 +124,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77797,1.29922,17</coordinates> 
+<coordinates>103.77797,1.29922,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -140,7 +140,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77796,1.2991733,17</coordinates> 
+<coordinates>103.77796,1.2991733,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -156,7 +156,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77796,1.2991217,17</coordinates> 
+<coordinates>103.77796,1.2991217,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -172,7 +172,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77796,1.2990667,18</coordinates> 
+<coordinates>103.77796,1.2990667,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -188,7 +188,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77796,1.2990117,18</coordinates> 
+<coordinates>103.77796,1.2990117,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -204,7 +204,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77797,1.298955,19</coordinates> 
+<coordinates>103.77797,1.298955,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -220,7 +220,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77797,1.2989033,20</coordinates> 
+<coordinates>103.77797,1.2989033,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -236,7 +236,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77798,1.2988517,20</coordinates> 
+<coordinates>103.77798,1.2988517,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -252,7 +252,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77798,1.2987967,21</coordinates> 
+<coordinates>103.77798,1.2987967,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -268,7 +268,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77799,1.2987483,21</coordinates> 
+<coordinates>103.77799,1.2987483,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -284,7 +284,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77799,1.2986933,22</coordinates> 
+<coordinates>103.77799,1.2986933,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -300,7 +300,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77799,1.2986417,22</coordinates> 
+<coordinates>103.77799,1.2986417,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -316,7 +316,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.778,1.2985883,23</coordinates> 
+<coordinates>103.778,1.2985883,13</coordinates> 
 </Point>
 </Change> 
 </Update>
@@ -332,7 +332,7 @@
 <targetHref></targetHref>
 <Change>
 <Point targetId="runner"> 
-<coordinates>103.77801,1.2985283,24</coordinates> 
+<coordinates>103.77801,1.2985283,13</coordinates> 
 </Point>
 </Change> 
 </Update>
