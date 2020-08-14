@@ -86,7 +86,7 @@ windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libxml2-2.dll win/
 	cp $(MINGW_PATH)/bin/ssleay32.dll win/ || true
 	cp $(MINGW_PATH)/bin/zlib1.dll win/
-	cp $(MINGW_PATH)/bin/libgcc_s_sjlj-1.dll win/
+	cp $(MINGW_PATH)/bin/libgcc_s_sjlj-1.dll win/ || true
 	cp $(MINGW_PATH)/bin/libstdc++-6.dll win/
 
 check_deps:
