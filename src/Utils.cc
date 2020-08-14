@@ -12,6 +12,16 @@
 #include <sys/stat.h>
 
 #ifdef WINDOWS
+struct tm * locatime_r (const time_t *timer, struct tm *result)
+{
+  *result = *localtime();
+}
+
+struct tm * gmtime_r (const time_t *timer, struct tm *result)
+{
+  *result = gmtime();
+}
+
 void setenv(const char* var, const char* value, int overwrite)
 {
   std::string expr = std::string(var) + "=" + std::string(value);
