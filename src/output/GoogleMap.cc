@@ -108,13 +108,14 @@ namespace output
 			  sp = (speed - avg_speed) * max_speed_factor;
 			else
 			  sp = (avg_speed - speed) * min_speed_factor;
-			if(sp < 0) sp = 0;
-			if(sp > 0xff) sp = 0xFF;
+			int isp = (int) sp;
+			if(isp < 0) isp = 0;
+			if(isp > 0xff) isp = 0xFF;
 
 			uint32_t color; // red green blue
-			color = (256-(int)sp) << 8; /* green part */;
-			color += (int)sp << (speed > avg_speed ? 16  /* red part if above avg */
-			                                       :  0); /* blue part if below avg*/
+			color = (256-isp) << 8; /* green part */;
+			color += isp << (speed > avg_speed ? 16   /* red part if above avg */
+			                                   :  0); /* blue part if below avg*/
 			out << std::hex << std::setw(6) << std::setfill('0') << color;
 			out << "\"" << std::dec << std::setw(0) << std::setfill(' ');
 			// TODO: Use max hr and min hr to determine the width range
@@ -265,7 +266,7 @@ namespace output
 		out << "var laps = [";
 		for(auto it = lapsList.begin(); it != lapsList.end(); ++it)
 		{
-      if(it !=  lapsList.begin()) {
+			if(it !=  lapsList.begin()) {
 			   out << ",";
 			}
 			out << *it;
