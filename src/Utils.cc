@@ -12,7 +12,7 @@
 #include <sys/stat.h>
 
 #ifdef WINDOWS
-void locatime_r (const time_t *timer, struct tm *result)
+void localtime_r (const time_t *timer, struct tm *result)
 {
   *result = *localtime(timer);
 }
