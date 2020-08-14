@@ -86,8 +86,17 @@ windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libxml2-2.dll win/
 	cp $(MINGW_PATH)/bin/ssleay32.dll win/ || true
 	cp $(MINGW_PATH)/bin/zlib1.dll win/
-	cp $(MINGW_PATH)/bin/libgcc_s_sjlj-1.dll win/ || true
+	cp $(MINGW_PATH)/bin/libgcc_*.dll win/ || true
 	cp $(MINGW_PATH)/bin/libstdc++-6.dll win/
+	cp $(MINGW_PATH)/bin/libbrotlidec.dll win/
+	cp $(MINGW_PATH)/bin/libcrypto-1_1-x64.dll win/
+	cp $(MINGW_PATH)/bin/libidn2-0.dll win/
+	cp $(MINGW_PATH)/bin/liblzma-5.dll win/
+	cp $(MINGW_PATH)/bin/libnghttp2-14.dll win/
+	cp $(MINGW_PATH)/bin/libpsl-5.dll win/
+	cp $(MINGW_PATH)/bin/libssh2-1.dll win/
+	cp $(MINGW_PATH)/bin/libssl-1_1-x64.dll win/
+	cp $(MINGW_PATH)/bin/libwinpthread-1.dll win/
 
 check_deps:
 	@pkg-config --libs libusb-1.0 >/dev/null 2>&1 || (echo "Error: missing dependency libusb-1.0. Try installing libusb development package (e.g: libusb libusb-1 libusb-1.0.0-dev ...)" && false)
