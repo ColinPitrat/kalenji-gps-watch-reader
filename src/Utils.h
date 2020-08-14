@@ -12,8 +12,8 @@
 #include <ctime>
 #include <cstring>
 
-struct tm * localtime_r (const time_t *timer, struct tm *result);
-struct tm * gmtime_r (const time_t *timer, struct tm *result);
+void localtime_r (const time_t *timer, struct tm *result);
+void gmtime_r (const time_t *timer, struct tm *result);
 #endif
 
 time_t mktime_utc(struct tm *tm);

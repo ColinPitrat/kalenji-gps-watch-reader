@@ -12,12 +12,12 @@
 #include <sys/stat.h>
 
 #ifdef WINDOWS
-struct tm * locatime_r (const time_t *timer, struct tm *result)
+void locatime_r (const time_t *timer, struct tm *result)
 {
   *result = *localtime();
 }
 
-struct tm * gmtime_r (const time_t *timer, struct tm *result)
+void gmtime_r (const time_t *timer, struct tm *result)
 {
   *result = gmtime();
 }
