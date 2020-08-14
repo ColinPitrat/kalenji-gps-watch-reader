@@ -14,12 +14,12 @@
 #ifdef WINDOWS
 void locatime_r (const time_t *timer, struct tm *result)
 {
-  *result = *localtime();
+  *result = *localtime(timer);
 }
 
 void gmtime_r (const time_t *timer, struct tm *result)
 {
-  *result = gmtime();
+  *result = gmtime(timer);
 }
 
 void setenv(const char* var, const char* value, int overwrite)
