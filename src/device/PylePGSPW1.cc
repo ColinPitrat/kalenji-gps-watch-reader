@@ -121,7 +121,7 @@ namespace device
 			unsigned char *line = &responseData[8*i + 24];
 			// Header of session
 			if(line[0] == 0xFF && line[1] == 0xFF && line[2] == 0xFF && line[3] == 0xFF && line[4] == 0xFF && line[5] == 0xFF)
-			{ 
+			{
 				first_lap = true;
 				SessionId id = SessionId(line+6, line+8);
 				Session mySession;
