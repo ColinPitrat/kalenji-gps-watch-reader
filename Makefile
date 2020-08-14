@@ -76,6 +76,7 @@ win:
 $(TARGET).exe: $(WINOBJECTS) win
 	$(WINCXX) $(CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
 
+
 windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libcurl-4.dll win/
 	cp $(MINGW_PATH)/bin/libeay32.dll win/ || true
@@ -89,8 +90,10 @@ windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libgcc_*.dll win/ || true
 	cp $(MINGW_PATH)/bin/libstdc++-6.dll win/
 	cp $(MINGW_PATH)/bin/libbrotlidec.dll win/
+	cp $(MINGW_PATH)/bin/libbrotlicommon.dll win/
 	cp $(MINGW_PATH)/bin/libcrypto-1_1-x64.dll win/
 	cp $(MINGW_PATH)/bin/libidn2-0.dll win/
+	cp $(MINGW_PATH)/bin/libunistring-2.dll win/
 	cp $(MINGW_PATH)/bin/liblzma-5.dll win/
 	cp $(MINGW_PATH)/bin/libnghttp2-14.dll win/
 	cp $(MINGW_PATH)/bin/libpsl-5.dll win/
