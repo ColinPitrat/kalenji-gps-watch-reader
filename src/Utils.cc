@@ -11,6 +11,18 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
+#ifdef WINDOWS
+void setenv(const char* var, const char* value, int overwrite)
+{
+  putenv(std::string(var) + "=" + std::string(value))
+}
+
+void unsetenv(const char* var)
+{
+  putenv(var);
+}
+#endif
+
 time_t mktime_utc(struct tm *tm)
 {
   time_t ret;
