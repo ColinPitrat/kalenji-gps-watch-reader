@@ -52,7 +52,7 @@ before_build:
 - echo "NUMBER_OF_PROCESSORS=%NUMBER_OF_PROCESSORS%"
 
 build_script:
- - msys64\usr\bin\bash -lc "ls /usr/%MSYS2_ARCH%-w64-mingw*/bin/"
+ - msys64\usr\bin\bash -lc "ls /mingw*/bin/"
  - msys64\usr\bin\bash -lc "cd c:/projects/kalenji-gps-watch-reader && PATH=$PATH:%MINGW_DIR%/bin /usr/bin/make ARCH=%WINARCH% MINGW_PATH=\"%MINGW_DIR%\" WINE=\"\" windows"
  - msys64\usr\bin\bash -lc "mv win/ kalenji_reader-%WINARCH%"
  - msys64\usr\bin\bash -lc "zip -r kalenji_reader-%WINARCH% kalenji_reader-%WINARCH%.zip"
