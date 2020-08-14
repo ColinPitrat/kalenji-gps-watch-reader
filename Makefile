@@ -10,19 +10,13 @@ DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -O0 -g -coverage -pthread
 ARCH ?= linux
 ifeq ($(ARCH),win64)
 MINGW_PATH=/usr/x86_64-w64-mingw32
-ifndef WINCXX
 WINCXX=x86_64-w64-mingw32-g++
-endif
 else ifeq($(ARCH),win32)
 MINGW_PATH=/usr/i686-w64-mingw32
-ifndef WINCXX
 WINCXX=i686-w64-mingw32-g++
-endif
 else ifeq($(ARCH),linux)
 MINGW_PATH=/usr/i686-w64-mingw32
-ifndef WINCXX
 WINCXX=i686-w64-mingw32-g++
-endif
 else
 $(error Unknown ARCH. Supported ones are linux, win32 and win64.)
 endif
