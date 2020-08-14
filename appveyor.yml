@@ -55,7 +55,7 @@ build_script:
  - msys64\usr\bin\bash -lc "ls /mingw*/bin/"
  - msys64\usr\bin\bash -lc "cd c:/projects/kalenji-gps-watch-reader && PATH=$PATH:%MINGW_DIR%/bin /usr/bin/make ARCH=%WINARCH% MINGW_PATH=\"%MINGW_DIR%\" WINE=\"\" windows"
  - msys64\usr\bin\bash -lc "cd c:/projects/kalenji-gps-watch-reader && mv win/ kalenji_reader-%WINARCH%"
- - msys64\usr\bin\bash -lc "cd c:/projects/kalenji-gps-watch-reader && zip -r kalenji_reader-%WINARCH% kalenji_reader-%WINARCH%.zip"
+ - msys64\usr\bin\bash -lc "cd c:/projects/kalenji-gps-watch-reader && zip -r kalenji_reader-%WINARCH%.zip kalenji_reader-%WINARCH%"
 # Delete and recreate latest tag to trigger the 2nd build that will update the release date (https://github.com/appveyor/ci/issues/827)
 # Only do it for build on master branch to avoid looping !
  - ps: |
