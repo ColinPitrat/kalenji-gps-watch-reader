@@ -78,7 +78,7 @@ $(TARGET).exe: $(WINOBJECTS) win
 
 windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libcurl-4.dll win/
-	cp $(MINGW_PATH)/bin/libeay32.dll win/
+	cp $(MINGW_PATH)/bin/libeay32.dll win/ || true
 	cp $(MINGW_PATH)/bin/libiconv-2.dll win/
 	cp $(MINGW_PATH)/bin/libidn-11.dll win/
 	cp $(MINGW_PATH)/bin/libintl-8.dll win/
