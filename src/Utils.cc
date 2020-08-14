@@ -14,7 +14,7 @@
 #ifdef WINDOWS
 void setenv(const char* var, const char* value, int overwrite)
 {
-  putenv(std::string(var) + "=" + std::string(value))
+  putenv(std::string(var) + std::string("=") + std::string(value))
 }
 
 void unsetenv(const char* var)
