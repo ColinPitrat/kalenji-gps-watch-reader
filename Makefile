@@ -7,7 +7,25 @@ HEADERS=$(shell find src -name \*.h)
 CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++11
 ADD_CFLAGS=-O2
 DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -O0 -g -coverage -pthread
+ARCH ?= linux
+ifeq ($(ARCH),win64)
+MINGW_PATH=/usr/x86_64-w64-mingw32
+ifndef WINCXX
+WINCXX=x86_64-w64-mingw32-g++
+endif
+else ifeq($(ARCH),win32)
 MINGW_PATH=/usr/i686-w64-mingw32
+ifndef WINCXX
+WINCXX=i686-w64-mingw32-g++
+endif
+else ifeq($(ARCH),linux)
+MINGW_PATH=/usr/i686-w64-mingw32
+ifndef WINCXX
+WINCXX=i686-w64-mingw32-g++
+endif
+else
+$(error Unknown ARCH. Supported ones are linux, win32 and win64.)
+endif
 WININCPATH=-I$(MINGW_PATH)/include/libusb-1.0/ -I$(MINGW_PATH)/include/libxml2/
 WINLIBS=$(MINGW_PATH)/lib/libusb-1.0.dll.a $(MINGW_PATH)/lib/libxml2.dll.a $(MINGW_PATH)/lib/libcurl.dll.a
 WINCFLAGS=-DWINDOWS
@@ -20,9 +38,6 @@ TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
 LAST_BUILD_IN_DEBUG=$(shell [ -e .debug ] && echo 1 || echo 0)
 ifndef CXX
 CXX=g++
-endif
-ifndef WINCXX
-WINCXX=i686-w64-mingw32-g++
 endif
 ifndef COV
 COV=gcov
