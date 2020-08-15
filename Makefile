@@ -11,10 +11,10 @@ ARCH ?= linux
 ifeq ($(ARCH),win64)
 MINGW_PATH=/usr/x86_64-w64-mingw32
 WINCXX=x86_64-w64-mingw32-g++
-else ifeq($(ARCH),win32)
+else ifeq ($(ARCH),win32)
 MINGW_PATH=/usr/i686-w64-mingw32
 WINCXX=i686-w64-mingw32-g++
-else ifeq($(ARCH),linux)
+else ifeq ($(ARCH),linux)
 MINGW_PATH=/usr/i686-w64-mingw32
 WINCXX=i686-w64-mingw32-g++
 else
