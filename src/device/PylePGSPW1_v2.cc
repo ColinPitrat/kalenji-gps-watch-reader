@@ -96,8 +96,8 @@ namespace device
     time_t current_time = 0;
     for (int m = 0; m < 5; m++)
     {
-      dataList[6] = m && 0xFF;
-      dataList[7] = (m && 0xFF00) >> 8;
+      dataList[6] = m & 0xFF;
+      dataList[7] = (m & 0xFF00) >> 8;
       _dataSource->write_data(0x01, dataList, lengthDataList);
       readMessage(&responseData, &received);
 
