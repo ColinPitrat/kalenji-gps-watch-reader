@@ -382,7 +382,7 @@ namespace device
 			  uint32_t descent;
 			  uint32_t ascent;*/
 			auto l = new Lap(startPoint, endPoint, totalTime, totalDistance, maxSpeed, averageSpeed, maxHeartRate, averageHeartRate, averageCalory, weightLoss, averageDescent, averageAscent);
-      l->setLapNum(i);
+			l->setLapNum(i);
 			session->addLap(l);
 		}
 	}
