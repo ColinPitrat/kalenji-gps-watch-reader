@@ -103,12 +103,12 @@ namespace filter
 				   && distanceEarth(**previousKept, **it) <= maxDistBetweenPoints)
 				{
 					previousPoint = removePoint(session, previousPoint, *previousKept);
-          it = previousPoint;
+					it = previousPoint;
 				}
 				else
 				{
 					previousKept = previousPoint;
-          previousPoint = it;
+					previousPoint = it;
 				}
 				++it;
 			}

@@ -43,7 +43,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "TCX"; };
-      DeviceId getDeviceId() override { return { 0x0, 0x0 }; };
+			DeviceId getDeviceId() override { return { 0x0, 0x0 }; };
 
 		private:
 			bool openDoc();

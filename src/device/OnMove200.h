@@ -58,7 +58,7 @@ namespace device
 			bool fileExists(const std::string& filename);
 
 			std::string getName() override { return "OnMove200"; };
-      DeviceId getDeviceId() override { return { 0x283E, 0x0009 }; };
+			DeviceId getDeviceId() override { return { 0x283E, 0x0009 }; };
 
 		private:
 			std::string getPath();

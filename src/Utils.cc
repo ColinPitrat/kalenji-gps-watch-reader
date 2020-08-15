@@ -14,56 +14,56 @@
 #ifdef WINDOWS
 void localtime_r (const time_t *timer, struct tm *result)
 {
-  *result = *localtime(timer);
+	*result = *localtime(timer);
 }
 
 void gmtime_r (const time_t *timer, struct tm *result)
 {
-  *result = *gmtime(timer);
+	*result = *gmtime(timer);
 }
 
 void setenv(const char* var, const char* value, int overwrite)
 {
-  std::string expr = std::string(var) + "=" + std::string(value);
-  putenv(expr.c_str());
+	std::string expr = std::string(var) + "=" + std::string(value);
+	putenv(expr.c_str());
 }
 
 void unsetenv(const char* var)
 {
-  putenv(var);
+	putenv(var);
 }
 #endif
 
 time_t mktime_utc(struct tm *tm)
 {
-  time_t ret;
-  char *tz;
+	time_t ret;
+	char *tz;
 
-  tz = getenv("TZ");
-  setenv("TZ", "", 1);
-  tzset();
-  ret = mktime(tm);
-  if (tz)
-    setenv("TZ", tz, 1);
-  else
-    unsetenv("TZ");
-  tzset();
-  return ret;
+	tz = getenv("TZ");
+	setenv("TZ", "", 1);
+	tzset();
+	ret = mktime(tm);
+	if (tz)
+		setenv("TZ", tz, 1);
+	else
+		unsetenv("TZ");
+	tzset();
+	return ret;
 }
 
 std::string Formatter::str() const
 {
-    return _stream.str();
+	return _stream.str();
 }
 
 Formatter::operator std::string() const
 {
-    return _stream.str();
+	return _stream.str();
 }
 
 int testDir(const std::string& path, bool create_if_not_exist)
 {
-    // First verify that write access is granted
+	// First verify that write access is granted
 	if(access(path.c_str(), W_OK) != 0)
 	{
 		switch(errno)
@@ -96,16 +96,16 @@ int testDir(const std::string& path, bool create_if_not_exist)
 		}
 	}
 
-    // Then check this is a directory
-    struct stat fileStat;
-    if(stat(path.c_str(), &fileStat) == 0)
-    {
-        if(fileStat.st_mode & S_IFDIR) return 0;
-        std::cerr << "Error: " << path << " is not a directory" << std::endl;
-        return -1;
-    }
-    std::cerr << "Error: Unexpected issue (" << errno << ":" << strerror(errno) << ") when calling stat on " << path << std::endl;
-    return -1;
+	// Then check this is a directory
+	struct stat fileStat;
+	if(stat(path.c_str(), &fileStat) == 0)
+	{
+		if(fileStat.st_mode & S_IFDIR) return 0;
+		std::cerr << "Error: " << path << " is not a directory" << std::endl;
+		return -1;
+	}
+	std::cerr << "Error: Unexpected issue (" << errno << ":" << strerror(errno) << ") when calling stat on " << path << std::endl;
+	return -1;
 }
 
 void trimString(std::string &toTrim)
@@ -149,21 +149,21 @@ std::string durationAsString(double sec, bool with_millis)
 
 std::list<std::string> splitString(std::string toSplit, std::string separator)
 {
-    std::list<std::string> result;
-    size_t begin = 0;
-    size_t end = 0;
-    while(end != std::string::npos)
-    {
-        end = toSplit.find(separator, begin);
-        std::string value = toSplit.substr(begin, end-begin);
-        begin = end + separator.length();
-	// none is a special value to specify empty lists
-	if(value != "none")
+	std::list<std::string> result;
+	size_t begin = 0;
+	size_t end = 0;
+	while(end != std::string::npos)
 	{
-		result.push_back(value);
+		end = toSplit.find(separator, begin);
+		std::string value = toSplit.substr(begin, end-begin);
+		begin = end + separator.length();
+		// none is a special value to specify empty lists
+		if(value != "none")
+		{
+			result.push_back(value);
+		}
 	}
-    }
-    return result;
+	return result;
 }
 
 static const double PI = 3.14159265358979323846;
@@ -171,21 +171,20 @@ static const double DEG_TO_RAD = PI / 180.0;
 /// Earth's quatratic mean radius for WGS-84
 static const double EARTH_RADIUS_IN_METERS = 6372797.560856;
 
-/** Computes the arc, in radian, between two WGS-84 positions.
- *
- * The result is equal to <code>Distance(from,to)/EARTH_RADIUS_IN_METERS</code>
- *    <code>= 2*asin(sqrt(h(d/EARTH_RADIUS_IN_METERS )))</code>
- *
- * where:<ul>
- *    <li>d is the distance in meters between 'from' and 'to' positions.</li>
- *    <li>h is the haversine function: <code>h(x)=sin²(x/2)</code></li>
- * </ul>
- *
- * The haversine formula gives:
- *    <code>h(d/R) = h(from.lat-to.lat)+h(from.lon-to.lon)+cos(from.lat)*cos(to.lat)</code>
- *
- * http://en.wikipedia.org/wiki/Law_of_haversines
- */ 
+// Computes the arc, in radian, between two WGS-84 positions.
+//
+// The result is equal to Distance(from,to)/EARTH_RADIUS_IN_METERS
+//    = 2*asin(sqrt(h(d/EARTH_RADIUS_IN_METERS )))
+//
+// where:
+//  - d is the distance in meters between 'from' and 'to' positions.
+//  - h is the haversine function: h(x)=sin²(x/2)
+//
+// The haversine formula gives:
+//    h(d/R) = h(from.lat-to.lat)+h(from.lon-to.lon)+cos(from.lat)*cos(to.lat)
+//
+// http://en.wikipedia.org/wiki/Law_of_haversines
+///
 double ArcInRadians(double lat1,double long1,double lat2,double long2)
 {
 	double latitudeArc  = (lat1 - lat2) * DEG_TO_RAD;
@@ -206,13 +205,11 @@ uint32_t str_to_int(const std::string& intAsString)
 	return result;
 }
 
-/** Computes the distance, in meters, between two WGS-84 positions.
- *
- * The result is equal to <code>EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)</code>
- */
+// Computes the distance, in meters, between two WGS-84 positions.
+// The result is equal to EARTH_RADIUS_IN_METERS*ArcInRadians(from,to)
 double distanceEarth(double lat1,double lon1,double lat2,double lon2)
 {
-  return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, lon1, lat2, lon2);
+	return EARTH_RADIUS_IN_METERS*ArcInRadians(lat1, lon1, lat2, lon2);
 }
 
 double distanceEarth(const Point& p1, const Point& p2)

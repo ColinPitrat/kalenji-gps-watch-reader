@@ -15,11 +15,11 @@
 
 namespace device
 {
-  struct DeviceId
-  {
-    unsigned int vendorId;
-    unsigned int productId;
-  };
+	struct DeviceId
+	{
+		unsigned int vendorId;
+		unsigned int productId;
+	};
 
 	/**
 	  An interface for a GPS device. 

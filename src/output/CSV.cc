@@ -47,7 +47,7 @@ namespace output
 			uint32_t time = point->getTime() - time_begin;
 			out << time << ",";
 			out << distance << ",";
-      out << point->getAltitude() << std::endl;
+			out << point->getAltitude() << std::endl;
 		}
 	}
 }

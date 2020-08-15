@@ -22,13 +22,13 @@ class Lap
 		    Field<uint32_t> max_hr,   Field<uint32_t> avg_hr, // NOLINT: incorrectly advise to move Field
 		    Field<uint32_t> calories, Field<uint32_t> grams, // NOLINT: incorrectly advise to move Field
 		    Field<uint32_t> descent,  Field<uint32_t> ascent) // NOLINT: incorrectly advise to move Field
-        :  _lapNum(0), _firstPointId(firstPointId), _lastPointId(lastPointId),
-           _start(nullptr), _end(nullptr),
-           _duration(duration), _distance(distance),
-           _max_speed(max_speed), _avg_speed(avg_speed),
-           _max_hr(max_hr), _avg_hr(avg_hr),
-           _calories(calories), _grams(grams),
-           _ascent(ascent), _descent(descent)
+			: _lapNum(0), _firstPointId(firstPointId), _lastPointId(lastPointId),
+				_start(nullptr), _end(nullptr),
+				_duration(duration), _distance(distance),
+				_max_speed(max_speed), _avg_speed(avg_speed),
+				_max_hr(max_hr), _avg_hr(avg_hr),
+				_calories(calories), _grams(grams),
+				_ascent(ascent), _descent(descent)
 		{ };
 
 		void setLapNum(uint32_t lapNum)         { _lapNum = lapNum; };

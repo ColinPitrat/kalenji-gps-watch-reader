@@ -50,7 +50,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "Keymaze"; };
-      DeviceId getDeviceId() override { return { 0x067B, 0x2303 }; };
+			DeviceId getDeviceId() override { return { 0x067B, 0x2303 }; };
 
 		private:
 			DECLARE_DEVICE(Keymaze);

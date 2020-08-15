@@ -52,7 +52,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "CWKalenji500SD"; };
-      DeviceId getDeviceId() override { return { 0x0FCF, 0x1008 }; };
+			DeviceId getDeviceId() override { return { 0x0FCF, 0x1008 }; };
 
 		private:
 			DECLARE_DEVICE(CWKalenji500SD);

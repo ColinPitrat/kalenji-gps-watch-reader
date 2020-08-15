@@ -47,7 +47,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "Navbike400"; };
-      DeviceId getDeviceId() override { return { 0x10C4, 0xEA61 }; };
+			DeviceId getDeviceId() override { return { 0x10C4, 0xEA61 }; };
 
 		private:
 			double decodeCoordinate(unsigned char *buffer);

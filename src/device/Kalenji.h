@@ -44,7 +44,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "Kalenji"; };
-      DeviceId getDeviceId() override { return { 0x0483, 0x5740 }; };
+			DeviceId getDeviceId() override { return { 0x0483, 0x5740 }; };
 
 		private:
 			DECLARE_DEVICE(Kalenji);

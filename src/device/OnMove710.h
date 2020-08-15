@@ -55,14 +55,14 @@ namespace device
 
 
 			std::string getName() override { return "OnMove710"; };
-      DeviceId getDeviceId() override { return { 0x283E, 0x0007 }; };
+			DeviceId getDeviceId() override { return { 0x283E, 0x0007 }; };
 
 		private:
-      int bytesToInt2(unsigned char b0, unsigned char b1);
-      int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
-      unsigned char* readAllBytes(const std::string& filename, size_t& size);
-      bool fileExists(const std::string& filename);
-      tm parseFilename(const std::string& filename);
+			int bytesToInt2(unsigned char b0, unsigned char b1);
+			int bytesToInt4(unsigned char b0, unsigned char b1, unsigned char b2, unsigned char b3);
+			unsigned char* readAllBytes(const std::string& filename, size_t& size);
+			bool fileExists(const std::string& filename);
+			tm parseFilename(const std::string& filename);
 
 			std::string getPath();
 

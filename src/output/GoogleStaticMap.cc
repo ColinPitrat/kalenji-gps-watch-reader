@@ -15,7 +15,7 @@ namespace output
 		out << "http://maps.googleapis.com/maps/api/staticmap?size=640x640&maptype=hybrid&sensor=true&path=weight:5";
 		// Google static maps can't support more than 2048 char
 		// URL size is 98 + 22 per point + 9 + 22 per lap 
-                // So we have to filter points so that 22 * lap + 107 + 22 * remaining_points < 2048 (hoping we don't have too much laps !)
+		// So we have to filter points so that 22 * lap + 107 + 22 * remaining_points < 2048 (hoping we don't have too much laps !)
 		// i.e. remaining_points < 89 - lap
 		// and remaining_points = points / filter => filter = points / (89 - lap) (plus one for rounding)
 		std::vector<Point*> points = session->getPoints();
@@ -31,14 +31,14 @@ namespace output
 		out << "&markers=";
 		for(const auto& lap : laps)
 		{
-            if(lap->getStartPoint() != nullptr)
-            {
-                out << "%7C" << lap->getStartPoint()->getLatitude() << "," << lap->getStartPoint()->getLongitude();
-            }
-            else
-            {
-                std::cerr << "Start point of lap is nullptr - This deserves a bug report !" << std::endl;
-            }
+			if(lap->getStartPoint() != nullptr)
+			{
+				out << "%7C" << lap->getStartPoint()->getLatitude() << "," << lap->getStartPoint()->getLongitude();
+			}
+			else
+			{
+				std::cerr << "Start point of lap is nullptr - This deserves a bug report !" << std::endl;
+			}
 		}
 		out << std::endl;
 	}

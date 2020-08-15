@@ -347,7 +347,7 @@ int main(int argc, char *argv[])
 					auto devices = LayerRegistry<device::Device>::getInstance()->getObjects();
 					for(const auto& device : devices)
 					{
-            auto deviceId = device.second->getDeviceId();
+						auto deviceId = device.second->getDeviceId();
 						if(deviceId.vendorId == deviceDescriptor.idVendor && deviceId.productId == deviceDescriptor.idProduct)
 						{
 							configuration["device"] = device.second->getName();
