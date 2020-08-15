@@ -385,7 +385,7 @@ namespace device
 
 	void TCX::init(const DeviceId& deviceId)
 	{
-    _dataSource->init(deviceId.vendorId, deviceId.productId);
+		_dataSource->init(deviceId.vendorId, deviceId.productId);
 		std::string fileContent;
 		unsigned char* line;
 		size_t length;
