@@ -84,7 +84,9 @@ namespace source
 		libusb_free_device_list(listOfDevices, 1);
 		if(!found)
 		{
-			throw std::runtime_error("USB device not found !");
+			std::ostringstream oss;
+			oss << "Usb device not found: " << std::hex << vendorId << "/" << productId;
+			throw std::runtime_error(oss.str());
 		}
 	}
 
