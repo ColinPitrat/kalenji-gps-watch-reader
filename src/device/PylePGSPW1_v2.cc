@@ -94,7 +94,7 @@ namespace device
     int32_t numSess = 0;
     bool first_lap = false;
     time_t current_time = 0;
-    for (int m = 0; m < 5; m++)
+    for (int m = 0; m < 100; m++)
     {
       dataList[6] = m & 0xFF;
       dataList[7] = (m & 0xFF00) >> 8;
