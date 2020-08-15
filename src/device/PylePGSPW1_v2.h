@@ -50,7 +50,7 @@ namespace device
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "PylePGSPW1_v2"; };
-      DeviceId getDeviceId() override { return { 0x10C4, 0xEA62 }; };
+      DeviceId getDeviceId() override { return { 0x10C4, 0xEA61 }; };
 
 		private:
 			DECLARE_DEVICE(PylePGSPW1_v2);
