@@ -62,7 +62,7 @@ namespace device
 
 			virtual std::string getName() = 0;
 
-      virtual DeviceId getDeviceId() = 0;
+			virtual DeviceId getDeviceId() = 0;
 
 		protected:
 			std::map<std::string, std::string> _configuration;
