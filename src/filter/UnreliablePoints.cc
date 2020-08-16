@@ -13,7 +13,7 @@ namespace filter
 		// Find first reliable point. We'll need it to adjust laps if first points are not reliable.
 		for(auto it = points.begin(); it != points.end(); ++it)
 		{
-			if((*it)->getFiability() == 3) 
+			if((*it)->getFiability() == 3)
 			{
 				previousValid = *it;
 				break;
@@ -25,7 +25,7 @@ namespace filter
 		// TODO: A method removePoint in Session would be nice !
 		for(auto it = points.begin(); it != points.end(); )
 		{
-			if((*it)->getFiability() != 3) 
+			if((*it)->getFiability() != 3)
 			{
 				for(auto it2 = laps.begin(); it2 != laps.end(); ++it2)
 				{

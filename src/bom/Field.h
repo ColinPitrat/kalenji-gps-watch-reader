@@ -1,7 +1,7 @@
 #ifndef _BOM_FIELD_H
 #define _BOM_FIELD_H
 
-class TFieldUndef 
+class TFieldUndef
 {
 	public:
 		TFieldUndef() = default;
@@ -27,13 +27,13 @@ class Field
 
 		// A function to be able to print a string containing the value only if field is defined
 		std::string toStream(const std::string& before = "", const std::string& after = "") const
-		{ 
-			if (_defined) 
+		{
+			if (_defined)
 			{
 				std::ostringstream oss;
 				oss.precision(8);
 				oss << before << _value << after;
-				return oss.str(); 
+				return oss.str();
 			}
 			return "";
 		}

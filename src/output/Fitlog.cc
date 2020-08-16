@@ -23,7 +23,7 @@ namespace output
 		{
 			out << "   <HeartRate ";
 			out << session->getAvgHeartrate().toStream("AverageBPM=\"", "\" ");
-			out << session->getMaxHeartrate().toStream("MaximumBPM=\"", "\" "); 
+			out << session->getMaxHeartrate().toStream("MaximumBPM=\"", "\" ");
 			out << "/>" << std::endl;
 		}
 		out << "   <Laps>" << std::endl;

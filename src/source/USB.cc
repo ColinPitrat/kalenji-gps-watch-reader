@@ -52,7 +52,7 @@ namespace source
 
 			if (rc > 0)
 			{
-				rc = libusb_detach_kernel_driver(_device, 0); 
+				rc = libusb_detach_kernel_driver(_device, 0);
 				found = found && checkUSBOperation(rc);
 				_kernelDriver0 = true;
 			}
@@ -71,7 +71,7 @@ namespace source
 
 				if (rc > 0)
 				{
-					rc = libusb_detach_kernel_driver(_device, 1); 
+					rc = libusb_detach_kernel_driver(_device, 1);
 					found = found && checkUSBOperation(rc);
 					_kernelDriver1 = true;
 				}
@@ -93,7 +93,7 @@ namespace source
 	void USB::release()
 	{
 		int rc;
-		if (_device) 
+		if (_device)
 		{
 			rc = libusb_release_interface(_device, 0);
 			checkUSBOperation(rc);

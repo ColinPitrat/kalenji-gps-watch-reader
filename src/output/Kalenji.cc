@@ -26,8 +26,8 @@ namespace output
 	{
 		// TODO: Send the content to USB instead of a file
 		std::stringstream filename;
-		filename << configuration["directory"] << "/"; 
-		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_"; 
+		filename << configuration["directory"] << "/";
+		filename << session->getYear() << std::setw(2) << std::setfill('0') << session->getMonth() << std::setw(2) << std::setfill('0') << session->getDay() << "_";
 		filename << std::setw(2) << std::setfill('0') << session->getHour() << std::setw(2) << std::setfill('0') << session->getMinutes() << std::setw(2) << std::setfill('0') << session->getSeconds() << ".data";
 		std::cout << "Creating " << filename.str() << std::endl;
 

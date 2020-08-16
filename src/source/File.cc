@@ -23,15 +23,15 @@ namespace source
 				}
 				inputfile.close();
 			}
-			else 
+			else
 			{
 				std::cerr << "Unable to open " << _filename << std::endl;
 				// TODO: Throw an exception
 			}
 		}
-		else 
+		else
 		{
-			std::cerr << "Unable to access " << _filename << ": file doesn't exist or is not readable" << std::endl; 
+			std::cerr << "Unable to access " << _filename << ": file doesn't exist or is not readable" << std::endl;
 			// TODO: Throw an exception
 		}
 	}

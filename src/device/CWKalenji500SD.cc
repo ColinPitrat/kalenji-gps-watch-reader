@@ -372,10 +372,10 @@ namespace device
 					// Ignore broadcast messages
 					//DEBUG_CMD(std::cout << "Received 0x4E - ignored" << std::endl);
 				}
-				else if(responseData[2] == 0x50 && 
-					(responseData[3] == 0x00 || responseData[3] == 0x20 || 
-					 responseData[3] == 0x40 || responseData[3] == 0x60 || 
-					 responseData[3] == 0xA0 || responseData[3] == 0xC0 || 
+				else if(responseData[2] == 0x50 &&
+					(responseData[3] == 0x00 || responseData[3] == 0x20 ||
+					 responseData[3] == 0x40 || responseData[3] == 0x60 ||
+					 responseData[3] == 0xA0 || responseData[3] == 0xC0 ||
 					 responseData[3] == 0xE0 ))
 				{
 					ligne++;
@@ -391,7 +391,7 @@ namespace device
 					}
 				}
 			} while (no_burst < 3);
-			// I first thought it ends with a line beginning with C0 and ending with FF 
+			// I first thought it ends with a line beginning with C0 and ending with FF
 			// while (responseData[2] != 0x50 || responseData[3] != 0xC0 || responseData[11] != 0xFF );
 
 			// end point on end of data
@@ -403,7 +403,7 @@ namespace device
 			{
 				DEBUG_CMD(std::cout << "Lap " << i << std::endl);
 				unsigned char *lap = &buffer[offset];
-				double duration = ((lap[1] % 16) + 10.0*(lap[1] / 16)) / 100 
+				double duration = ((lap[1] % 16) + 10.0*(lap[1] / 16)) / 100
 				                + ((lap[2] % 16) + 10.0*(lap[2] / 16))
 				             + 60*((lap[3] % 16) + 10.0*(lap[3] / 16));
 				unsigned int distance = lap[5] + 256 * lap[6] + 256 * 256 * lap[7];
@@ -421,7 +421,7 @@ namespace device
 			session.second.setDuration(total_duration);
 			offset += 16;
 			int nb_points = 0;
-			std::cout << std::dec; 
+			std::cout << std::dec;
 			std::vector<Lap*> laps = session.second.getLaps();
 			auto it_lap = laps.begin();
 			double cumulated_duration = 0;

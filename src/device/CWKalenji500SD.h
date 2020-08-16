@@ -6,49 +6,49 @@
 namespace device
 {
 	/**
-	  The interface for W Kalenji 300 GPS and CW Kalenji 700 GPS. 
+	  The interface for W Kalenji 300 GPS and CW Kalenji 700 GPS.
 	 */
 	class CWKalenji500SD : public Device
 	{
 		public:
 			CWKalenji500SD() {};
 
-			/** 
+			/**
 			  Dump a message on stdout
-			 */ 
+			 */
 			void dump(unsigned char *data, int length);
 
-			/** 
+			/**
 			  Receive an answer, checking it's value and ignoring broadcast messages
-			 */ 
+			 */
 			bool receive(unsigned char iEndPoint, unsigned char **oData, size_t* oLength, char iMessage = 0, char iMessageAnswered = 0, char iError = 0);
 
-			/** 
-			  Initialize the device. 
-			 */ 
+			/**
+			  Initialize the device.
+			 */
 			void init(const DeviceId& deviceId) override;
 
-			/** 
-			  Release the device. 
-			 */ 
+			/**
+			  Release the device.
+			 */
 			void release() override;
 
-			/** 
+			/**
 			  Read list of sessions from the device.
 			  @param oSessions The list of sessions to fill
-			 */ 
+			 */
 			void getSessionsList(SessionsMap *oSessions) override;
 
-			/** 
+			/**
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
-			 */ 
+			 */
 			void exportSession(const Session *iSession) override;
 
-			/** 
-			  Send data to the source. 
+			/**
+			  Send data to the source.
 			  @param iData A pointer to data to be sent
-			 */ 
+			 */
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "CWKalenji500SD"; };

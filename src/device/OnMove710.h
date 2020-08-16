@@ -6,47 +6,47 @@
 namespace device
 {
 	/**
-	  The interface for OnMove 710 GPS watch. 
+	  The interface for OnMove 710 GPS watch.
 	 */
 	class OnMove710 : public Device
 	{
 		public:
 			OnMove710() {};
 
-			/** 
+			/**
 			  Dump a message on stdout
-			 */ 
+			 */
 			void dump(unsigned char *data, int length);
 
-			/** 
-			  Initialize the device. 
-			 */ 
+			/**
+			  Initialize the device.
+			 */
 			void init(const DeviceId& deviceId) override;
 
-			/** 
-			  Release the device. 
-			 */ 
+			/**
+			  Release the device.
+			 */
 			void release() override;
 
-			/** 
+			/**
 			  Read list of sessions from the device.
 			  @param oSessions The list of sessions to fill
-			 */ 
+			 */
 			void getSessionsList(SessionsMap *oSessions) override;
 
 			void dumpInt2(std::ostream &oStream, unsigned int iInt);
 			void dumpInt4(std::ostream &oStream, unsigned int iInt);
 			void dumpString(std::ostream &oStream, const std::string &iString, size_t iLength);
-			/** 
+			/**
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
-			 */ 
+			 */
 			void exportSession(const Session *iSession) override;
 
-			/** 
-			  Send data to the source. 
+			/**
+			  Send data to the source.
 			  @param iData A pointer to data to be sent
-			 */ 
+			 */
 			void getSessionsDetails(SessionsMap *oSessions) override;
 			
 			void parseGHTFile(const unsigned char* bytes,Session* session);

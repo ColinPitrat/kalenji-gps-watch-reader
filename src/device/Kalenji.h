@@ -6,41 +6,41 @@
 namespace device
 {
 	/**
-	  The interface for W Kalenji 300 GPS and CW Kalenji 700 GPS. 
+	  The interface for W Kalenji 300 GPS and CW Kalenji 700 GPS.
 	 */
 	class Kalenji : public Device
 	{
 		public:
 			Kalenji() {};
 
-			/** 
-			  Initialize the device. 
-			 */ 
+			/**
+			  Initialize the device.
+			 */
 			void init(const DeviceId& deviceId) override;
 
-			/** 
-			  Release the device. 
-			 */ 
+			/**
+			  Release the device.
+			 */
 			// TODO: Do something in it ?!
 			// TODO: In case of error we should finish reading until getting 8Axxx so that the device is in a clean state. What if no error ?
 			void release() override {};
 
-			/** 
+			/**
 			  Read list of sessions from the device.
 			  @param oSessions The list of sessions to fill
-			 */ 
+			 */
 			void getSessionsList(SessionsMap *oSessions) override;
 
-			/** 
+			/**
 			  Export a session from the computer to the watch
 			  @param iSession The session to export
-			 */ 
+			 */
 			void exportSession(const Session *iSession) override;
 
-			/** 
-			  Send data to the source. 
+			/**
+			  Send data to the source.
 			  @param iData A pointer to data to be sent
-			 */ 
+			 */
 			void getSessionsDetails(SessionsMap *oSessions) override;
 
 			std::string getName() override { return "Kalenji"; };

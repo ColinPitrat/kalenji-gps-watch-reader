@@ -13,44 +13,44 @@ namespace source
 	class Logger : public Source
 	{
 		public:
-			Logger(Source *source, std::string logfilename) : _logfilename(std::move(logfilename)), _truesource(source) 
+			Logger(Source *source, std::string logfilename) : _logfilename(std::move(logfilename)), _truesource(source)
 			{
 				if(_truesource == nullptr) throw std::invalid_argument("Source passed to Logger is NULL");
 			};
-			/** 
+			/**
 			  Initialize the source. Any action that needs to be taken before using the source.
-			 */ 
+			 */
 			void init(uint32_t vendorId, uint32_t productId) override;
 
-			/** 
+			/**
 			  Release the source. Any action that needs to be taken once the source is not needed anymore.
-			 */ 
+			 */
 			void release() override;
 
-			/** 
-			  Read data from source. Handle associated memory. 
+			/**
+			  Read data from source. Handle associated memory.
 			  @param iEndPoint Ignored
 			  @param oData Address of a pointer that will be set to point to read data after the call
 			  @param oLength Address of a variable that will contain the size of the data after the call
-			 */ 
+			 */
 			bool read_data(unsigned char iEndPoint, unsigned char **oData, size_t *oLength) override;
 
-			/** 
-			  Send data to the source. 
+			/**
+			  Send data to the source.
 			  @param iEndPoint Ignored
 			  @param iData A pointer to data to be sent
 			  @param iLength Size of the data to be sent
-			 */ 
+			 */
 			void write_data(unsigned char iEndPoint, unsigned char *iData, size_t iLength) override;
-			/** 
-			  Send control transfer to the source. 
+			/**
+			  Send control transfer to the source.
 			  @param iRequestType
 			  @param iRequest
 			  @param iValue
 			  @param iIndex
 			  @param iData
 			  @param iLength
-			 */ 
+			 */
 			 // TODO: doxygen !
 			void control_transfer(unsigned char iRequestType, unsigned char iRequest, unsigned short iValue, unsigned short iIndex, unsigned char *iData, unsigned short iLength) override;
 
