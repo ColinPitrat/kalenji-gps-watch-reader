@@ -21,17 +21,6 @@ void gmtime_r (const time_t *timer, struct tm *result)
 {
 	*result = *gmtime(timer);
 }
-
-void setenv(const char* var, const char* value, int overwrite)
-{
-	std::string expr = std::string(var) + "=" + std::string(value);
-	putenv(expr.c_str());
-}
-
-void unsetenv(const char* var)
-{
-	putenv(var);
-}
 #endif
 
 // timegm is available only in GNU libc. Provide a non-thread safe version for Windows.
