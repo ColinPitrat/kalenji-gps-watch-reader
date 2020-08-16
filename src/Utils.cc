@@ -37,7 +37,11 @@ void unsetenv(const char* var)
 // timegm is available only in GNU libc. Provide a non-thread safe version for Windows.
 time_t mktime_utc(struct tm *tm)
 {
+#ifdef WINDOWS
+  return _mkgmtime(tm);
+#else
   return timegm(tm);
+#endif
 }
 
 std::string Formatter::str() const
