@@ -1,6 +1,6 @@
 directory=/tmp/kalenji_reader_test/case9
 source=Path
-path=/tmp
+path=/dummy
 import=all
 trigger=distance
 log_transactions=no
