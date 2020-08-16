@@ -27,9 +27,9 @@ void gmtime_r (const time_t *timer, struct tm *result)
 time_t mktime_utc(struct tm *tm)
 {
 #ifdef WINDOWS
-  return _mkgmtime(tm);
+	return _mkgmtime(tm);
 #else
-  return timegm(tm);
+	return timegm(tm);
 #endif
 }
 

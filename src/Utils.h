@@ -24,24 +24,24 @@ class Point;
 
 class Formatter
 {
-    public:
-        Formatter() = default;
-        ~Formatter() = default;
-        Formatter(const Formatter &) = delete;
-        Formatter & operator= (Formatter &) = delete;
+	public:
+		Formatter() = default;
+		~Formatter() = default;
+		Formatter(const Formatter &) = delete;
+		Formatter & operator= (Formatter &) = delete;
 
-        template <typename Type>
-        Formatter & operator<< (const Type & value)
-        {
-            _stream << value;
-            return *this;
-        }
+		template <typename Type>
+			Formatter & operator<< (const Type & value)
+			{
+				_stream << value;
+				return *this;
+			}
 
-        std::string str() const;
-        operator std::string() const;
+		std::string str() const;
+		operator std::string() const;
 
-    private:
-        std::stringstream _stream;
+	private:
+		std::stringstream _stream;
 };
 
 int testDir(const std::string& path, bool create_if_not_exist);
