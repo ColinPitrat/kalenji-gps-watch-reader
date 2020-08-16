@@ -95,7 +95,7 @@ namespace device
 		bool first_lap = false;
 		time_t current_time = 0;
 		bool finished = false;
-		while(!finished)
+		for(int m = 0; !finished; ++m)
 		{
 			dataList[6] = m & 0xFF;
 			dataList[7] = (m & 0xFF00) >> 8;
