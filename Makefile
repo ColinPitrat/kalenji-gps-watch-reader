@@ -116,6 +116,7 @@ $(WINOBJECTS): %.os:%.cc $(HEADERS)
 unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
 	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
 	./$(TEST_TARGET) --gtest_shuffle
+	./test/validate_src_format.sh
 
 test: $(TARGET) unit_test
 	rm -f /tmp/20[0-9][0-9][0-9][0-9][0-9][0-9]_[0-9][0-9][0-9][0-9][0-9][0-9].* /tmp/E9HG*.GHR
