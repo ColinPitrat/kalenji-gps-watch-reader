@@ -94,7 +94,8 @@ namespace device
 		int32_t numSess = 0;
 		bool first_lap = false;
 		time_t current_time = 0;
-		for (int m = 0; m < 100; m++)
+		bool finished = false;
+		while(!finished)
 		{
 			dataList[6] = m & 0xFF;
 			dataList[7] = (m & 0xFF00) >> 8;
@@ -131,12 +132,14 @@ namespace device
 						<< static_cast<int>(line[7])
 						<< std::dec << std::endl;
 						);
-				// Header of session
+				// No data
 				if(line[0] == 0xFF && line[1] == 0xFF && line[2] == 0xFF && line[3] == 0xFF && line[4] == 0xFF && line[5] == 0xFF && line[6] == 0xFF && line[7] == 0xFF)
 				{
-					// Ignore
-					DEBUG_CMD(std::cout << "Skip" << std::endl);
+					// Ignore if m == 0 (this seems that the pages start at 1 but we still query starting at 0 just in case ...)
+					// If m > 0, we suppose this marks the end of the data.
+					if (m > 0) finished = true;
 				}
+				// Header of session
 				else if(line[0] == 0xFF && line[1] == 0xFF && line[2] == 0xFF && line[3] == 0xFF && line[4] == 0xFF && line[5] == 0xFF)
 				{
 					DEBUG_CMD(std::cout << "Session start" << std::endl);
