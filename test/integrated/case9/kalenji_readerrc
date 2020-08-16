@@ -1,4 +1,4 @@
-directory=/tmp/case9
+directory=/tmp/kalenji_reader_test/case9
 source=Path
 path=/tmp
 import=all

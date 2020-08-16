@@ -1,4 +1,4 @@
-directory=/tmp/case5
+directory=/tmp/kalenji_reader_test/case5
 source=Path
 import=all
 trigger=distance
