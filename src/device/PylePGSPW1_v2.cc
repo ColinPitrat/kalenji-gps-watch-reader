@@ -176,11 +176,22 @@ namespace device
 
 					// TODO: Code lap decoding and addition
 				}
-				// Cardio of the past 5 points
+				// Cardio of the past 6 points
 				else if(line[0] == 0xFF && line[1] == 0xE0)
 				{
-					DEBUG_CMD(std::cout << "Cardio (not decoded yet)" << std::endl);
-					// TODO: Cardio decoding and filling the last 5 points
+					auto points = currentSession->getPoints();
+					size_t offset = 0;
+					// Contains cardio for up to 6 points
+					for (int i = 6; i > 0; --i) {
+						int16_t cardio = line[i+2];
+						if (cardio == 0xff) continue;
+						if (points.size() < offset + 1) {
+							std::cerr << "Not enough points in session to fill cardio data: " << points.size() << " points in session, need " << offset + 1 << std::endl;
+						}
+						std::cout << "Set heart rate: " << cardio << std::endl;
+						points.rbegin()[offset]->setHeartRate(cardio);
+						offset++;
+					}
 				}
 				// Point
 				else
