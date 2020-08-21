@@ -188,7 +188,7 @@ namespace device
 						if (points.size() < offset + 1) {
 							std::cerr << "Not enough points in session to fill cardio data: " << points.size() << " points in session, need " << offset + 1 << std::endl;
 						}
-						std::cout << "Set heart rate: " << cardio << std::endl;
+						DEBUG_CMD(std::cout << "Heart rate: " << cardio << std::endl);
 						points.rbegin()[offset]->setHeartRate(cardio);
 						offset++;
 					}
