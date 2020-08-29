@@ -1,0 +1,6 @@
+directory=/tmp/kalenji_reader_test/case13
+import=all
+trigger=distance
+log_transactions=no
+filters=none
+outputs=GPX
