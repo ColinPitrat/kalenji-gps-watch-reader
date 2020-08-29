@@ -166,11 +166,11 @@ namespace device
 					time.tm_isdst = -1;
 					DEBUG_CMD(std::cout << "Header for lap " << (uint32_t) line[6] << "-" << (uint32_t) line[7] << " = " << time.tm_year << "-" << time.tm_mon << "-" << time.tm_mday << std::endl);
 
-					current_time = mktime(&time);
+					current_time = mktime_utc(&time);
 
 					if(first_lap)
 					{
-						currentSession->setTime(time);
+						currentSession->setTimeT(current_time);
 						first_lap = false;
 					}
 
