@@ -96,7 +96,7 @@ windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libusb-1.0.dll win/
 	cp $(MINGW_PATH)/bin/libwinpthread-1.dll win/
 	cp $(MINGW_PATH)/bin/libxml2-2.dll win/
-	cp $(MINGW_PATH)/bin/libzstd.dll win/
+	#cp $(MINGW_PATH)/bin/libzstd.dll win/
 	cp $(MINGW_PATH)/bin/ssleay32.dll win/ || true
 	cp $(MINGW_PATH)/bin/zlib1.dll win/
 
