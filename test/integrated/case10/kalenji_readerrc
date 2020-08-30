@@ -1,4 +1,4 @@
-directory=/tmp/kalenji_reader_test/case10
+directory=%TMPDIR%/case10
 import=all
 trigger=distance
 log_transactions=no

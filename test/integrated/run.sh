@@ -2,11 +2,18 @@
 
 export TZ="Europe/Paris"
 
-TMPDIR=`mktemp -d`
+TMPDIR=`mktemp -d -t kalenji_reader_test.XXXXXXXXXX`
 RESULT_FILE=${TMPDIR}/test_result_`date +%Y-%m-%d_%H-%M-%S`.log
+BINARY=`pwd`/../../kalenji_reader
 OK_CASES=0
 KO_CASES=0
 diff_command=""
+
+mkdir ${TMPDIR}/cases
+cp -r cas* ${TMPDIR}/cases
+pushd ${TMPDIR}/cases
+sed -i "s,%TMPDIR%,${TMPDIR}," ${TMPDIR}/cases/cas*/{run.sh,kalenji_readerrc}
+sed -i "s,%KALENJI_READER%,${BINARY}," ${TMPDIR}/cases/cas*/run.sh
 
 echo "" > $RESULT_FILE
 for c in cas*
@@ -62,3 +69,5 @@ then
 	echo ""
 	exit 1
 fi
+
+popd
