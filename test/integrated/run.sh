@@ -2,14 +2,13 @@
 
 export TZ="Europe/Paris"
 
-RESULT_FILE=`pwd`/test_result_`date +%Y-%m-%d_%H-%M-%S`.log 
+TMPDIR=`mktemp -d`
+RESULT_FILE=${TMPDIR}/test_result_`date +%Y-%m-%d_%H-%M-%S`.log
 OK_CASES=0
 KO_CASES=0
 diff_command=""
 
 echo "" > $RESULT_FILE
-rm -rf /tmp/kalenji_reader_test
-mkdir -p /tmp/kalenji_reader_test
 for c in cas*
 do
 	echo " ===== Case $c =====" >> $RESULT_FILE
@@ -18,7 +17,7 @@ do
 	pushd results > /dev/null
 	for result in *
 	do
-		diff $result /tmp/kalenji_reader_test/$c/$result >> $RESULT_FILE
+		diff $result ${TMPDIR}/$c/$result >> $RESULT_FILE
 		if [ $? -eq 0 ]
 		then
 			echo "OK - $c - $result" | tee -a $RESULT_FILE
@@ -26,17 +25,17 @@ do
 		else
 			echo "KO - $c - $result" | tee -a $RESULT_FILE
 			diff_command="$diff_command
-vi -d `pwd`/$result /tmp/kalenji_reader_test/$c/$result"
+vi -d `pwd`/$result ${TMPDIR}/$c/$result"
 			let KO_CASES=$KO_CASES+1
-			if [ ! -z "$TRAVIS" -a -f /tmp/kalenji_reader_test/$c/$result ]
+			if [ ! -z "$TRAVIS" -a -f ${TMPDIR}/$c/$result ]
 			then
 				echo "travis_fold:start:test_error$KO_CASES"
-				diff -u `pwd`/$result /tmp/kalenji_reader_test/$c/$result | head -n 100
+				diff -u `pwd`/$result ${TMPDIR}/$c/$result | head -n 100
 				echo "travis_fold:end:test_error$KO_CASES"
 				echo "travis_fold:start:test_error_hex$KO_CASES"
 				hexdump -C `pwd`/$result > `pwd`/${result}.hex
-				hexdump -C /tmp/kalenji_reader_test/$c/$result > /tmp/kalenji_reader_test/$c/${result}.hex
-				diff -u `pwd`/${result}.hex /tmp/kalenji_reader_test/$c/${result}.hex | head -n 100
+				hexdump -C ${TMPDIR}/$c/$result > ${TMPDIR}/$c/${result}.hex
+				diff -u `pwd`/${result}.hex ${TMPDIR}/$c/${result}.hex | head -n 100
 				echo "travis_fold:end:test_error_hex$KO_CASES"
 			fi
 		fi
