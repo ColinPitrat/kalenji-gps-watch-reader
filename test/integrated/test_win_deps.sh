@@ -14,8 +14,9 @@ then
   exit 0
 fi
 
+# All dependencies should be resolved in the ./win/ directory. If anything is in
+# mingw, that's a missing dependency.
 cat << EOF > ${EXPECTED}
-TODO: Fill the list of libs
 EOF
 
 echo "ldd output:"
