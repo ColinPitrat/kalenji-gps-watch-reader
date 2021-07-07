@@ -10,15 +10,15 @@ addons:
    - libusb-1.0-0-dev
    - libcurl4-openssl-dev
    - libgtest-dev
-   - gcc-4.8
-   - g++-4.8
-   - clang-3.8
-   - clang-tidy-3.8
+   - gcc-9
+   - g++-9
+   - clang-5.0
+   - clang-tidy-5.0
 #To uncomment in case a core occurs:
 #   - gdb
 before_script:
- - export CXX=g++-4.8
- - export COV=gcov-4.8
+ - export CXX=g++-9
+ - export COV=gcov-9
 script: 
 #To uncomment in case a core occurs:
 # - ulimit -c unlimited
