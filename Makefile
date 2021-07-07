@@ -26,7 +26,7 @@ WINLIBS=$(MINGW_PATH)/lib/libusb-1.0.dll.a $(MINGW_PATH)/lib/libxml2.dll.a $(MIN
 WINCFLAGS=-DWINDOWS
 GTEST_DIR=googletest/googletest/
 GMOCK_DIR=googletest/googlemock/
-TEST_CFLAGS=-I$(GTEST_DIR)/include -I$(GTEST_DIR) -I$(GMOCK_DIR)/include -I$(GMOCK_DIR) -I.
+TEST_INCLUDES=-I$(GTEST_DIR)/include -I$(GTEST_DIR) -I$(GMOCK_DIR)/include -I$(GMOCK_DIR) -I.
 TEST_TARGET=test/unit/unit_tester
 TEST_OBJECTS=$(shell find test/unit -name \*.cc | sed 's/.cc/.o/') $(GTEST_DIR)/src/gtest-all.o $(GMOCK_DIR)/src/gmock-all.o
 TESTED_OBJECTS=$(shell find src -name \*.cc | grep -v main.cc | sed 's/.cc/.o/')
@@ -54,7 +54,7 @@ all: build
 endif
 
 # gtest doesn't build with warnings flags
-TEST_CFLAGS=$(CFLAGS) $(ADD_CFLAGS)
+TEST_CFLAGS=$(CFLAGS) $(ADD_CFLAGS) $(TEST_INCLUDES)
 BUILD_CFLAGS=$(CFLAGS) $(WARNINGS)
 
 # the (read ...) part sorts the output except for the first line. The tac between and after make it sort the output except for the last line.
@@ -114,13 +114,13 @@ $(OBJECTS): %.o:%.cc $(HEADERS)
 	$(CXX) $(BUILD_CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
-	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
 	$(WINCXX) $(BUILD_CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
-	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
+	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
 	./$(TEST_TARGET) --gtest_shuffle
 	./test/validate_src_format.sh
 
