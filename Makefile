@@ -4,7 +4,8 @@ LIBS=$(shell pkg-config --libs libusb-1.0) $(shell pkg-config --libs libxml-2.0)
 WINOBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.os/')
 OBJECTS=$(shell find src -name \*.cc | sed 's/.cc/.o/')
 HEADERS=$(shell find src -name \*.h)
-CFLAGS=-Wall -Wextra -Wno-unused-parameter -std=c++11
+CFLAGS=-std=c++11
+WARNINGS=-Wall -Wextra -Wno-unused-parameter
 ADD_CFLAGS=-O2
 DEBUG_ADD_CFLAGS=-D DEBUG=1 -D _GLIBCXX_DEBUG -O0 -g -coverage -pthread
 ARCH ?= linux
@@ -52,6 +53,10 @@ else
 all: build
 endif
 
+# gtest doesn't build with warnings flags
+TEST_CFLAGS=$(CFLAGS) $(ADD_CFLAGS)
+BUILD_CFLAGS=$(CFLAGS) $(WARNINGS)
+
 # the (read ...) part sorts the output except for the first line. The tac between and after make it sort the output except for the last line.
 debug: debug_flag gtest build unit_test test tags
 	$(COV) -p -r `find src -name \*.cc` | sed '/File/N;s/\n/ - /g' | grep -v Creating | grep -v "^$$" | tac | (read line; printf "%s\n" "$$line"; sort -k 2 -t : -g) | tac
@@ -68,13 +73,13 @@ tags:
 build: $(TARGET)
 
 $(TARGET): check_deps $(OBJECTS)
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
+	$(CXX) $(BUILD_CFLAGS) $(ADD_CFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS)
 
 win:
 	mkdir -p win
 
 $(TARGET).exe: $(WINOBJECTS) win
-	$(WINCXX) $(CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
+	$(WINCXX) $(BUILD_CFLAGS) $(WINCFLAGS) -o win/$(TARGET).exe $(WINOBJECTS) $(WINLIBS)
 
 
 windows: $(TARGET).exe win
@@ -106,16 +111,16 @@ check_deps:
 	@pkg-config --libs libcurl >/dev/null 2>&1 || (echo "Error: missing dependency libcurl. Try installing libcurl development package (e.g: libcurl-dev libcurl4-gnutls-dev ...)" && false)
 
 $(OBJECTS): %.o:%.cc $(HEADERS)
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(BUILD_CFLAGS) $(ADD_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(TEST_OBJECTS): %.o:%.cc $(HEADERS)
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
+	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -c $(INCPATH) -o $@ $<
 
 $(WINOBJECTS): %.os:%.cc $(HEADERS)
-	$(WINCXX) $(CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
+	$(WINCXX) $(BUILD_CFLAGS) $(WINCFLAGS) -c $(WININCPATH) -o $@ $<
 
 unit_test: $(TEST_OBJECTS) $(TESTED_OBJECTS)
-	$(CXX) $(CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
+	$(CXX) $(TEST_CFLAGS) $(ADD_CFLAGS) $(TEST_CFLAGS) -o $(TEST_TARGET) $(TEST_OBJECTS) $(TESTED_OBJECTS) $(LIBS)
 	./$(TEST_TARGET) --gtest_shuffle
 	./test/validate_src_format.sh
 
@@ -124,7 +129,7 @@ test: $(TARGET) unit_test
 	cd test/integrated/ && ./run.sh && cd ..
 
 clang-tidy:
-	if $(CLANG_TIDY) -checks=-*,$(CLANG_CHECKS) $(SOURCES) -header-filter=src/* -- $(CFLAGS) $(ADD_CFLAGS) $(INCPATH) $(TEST_CFLAGS) | grep "."; then false; fi
+	if $(CLANG_TIDY) -checks=-*,$(CLANG_CHECKS) $(SOURCES) -header-filter=src/* -- $(BUILD_CFLAGS) $(ADD_CFLAGS) $(INCPATH) $(TEST_CFLAGS) | grep "."; then false; fi
 
 cleancov:
 	find . '(' -name \*.gcda -or -name \*.gcov ')' -exec rm '{}' \;
