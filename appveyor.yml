@@ -6,7 +6,7 @@ branches:
 
 environment:
   access_token:
-    secure: xEnxvlt8zNDwbgUO0uVJMmQGJS7k3sl28jxyJkLCRxGwnVgd49hkVqukPq2X4TpB
+	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
   MSYS2_BASEVER: 20210604
   MSYS2_ARCH: x86_64
   MSYS2_URL: "http://repo.msys2.org/distrib/%MSYS2_ARCH%/msys2-base-%MSYS2_ARCH%-%MSYS2_BASEVER%.tar.xz"
@@ -88,7 +88,7 @@ deploy:
   description: "Latest build of Kalenji Redaer, with the newest cool features and the most recent bugs."
   provider: GitHub
   auth_token:
-    secure: xEnxvlt8zNDwbgUO0uVJMmQGJS7k3sl28jxyJkLCRxGwnVgd49hkVqukPq2X4TpB
+	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
   artifact: kalenji_reader-%WINARCH%.zip
   draft: false
   prerelease: false
@@ -101,7 +101,7 @@ deploy:
   tag: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
-    secure: xEnxvlt8zNDwbgUO0uVJMmQGJS7k3sl28jxyJkLCRxGwnVgd49hkVqukPq2X4TpB
+	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
   artifact: kalenji_reader-%WINARCH%.zip
   draft: false
   prerelease: false
