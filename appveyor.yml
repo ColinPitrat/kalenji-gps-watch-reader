@@ -6,30 +6,30 @@ branches:
 
 environment:
   access_token:
-	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
-  MSYS2_BASEVER: 20210604
-  MSYS2_ARCH: x86_64
+    secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
+  MSYS2_BASEVER: "20210604"
+  MSYS2_ARCH: "x86_64"
   MSYS2_URL: "http://repo.msys2.org/distrib/%MSYS2_ARCH%/msys2-base-%MSYS2_ARCH%-%MSYS2_BASEVER%.tar.xz"
-  MSYS2_ARCHIVE: msys2.tar.xz
-  MSYS2_SUBARCHIVE: msys2.tar
+  MSYS2_ARCHIVE: "msys2.tar.xz"
+  MSYS2_SUBARCHIVE: "msys2.tar"
   IPF_LINUX_URL: "http://www.softpres.org/_media/files:ipflib42_linux-i686.tar.gz"
   PACKAGES: "ctags make zip diffutils %ARCH_PACKAGES%"
   matrix:
     - MINGW_DIR: "/mingw64"
-      WINARCH: win64
+      WINARCH: "win64"
       ARCH_PACKAGES: "mingw-w64-x86_64-ctags mingw-w64-x86_64-make mingw-w64-x86_64-gcc mingw-w64-x86_64-libxml2 mingw-w64-x86_64-curl mingw-w64-x86_64-libusb mingw-w64-x86_64-openssl"
       IPF_WIN_URL: "http://www.softpres.org/_media/files:ipflib42_win_x64.zip"
       IPF_DLL_SRC: "CAPSImg_x64.dll"
       IPF_LICENCE_SRC: "LICENSE.txt"
-      RUN_E2E: true
+      RUN_E2E: "true"
     - MINGW_DIR: "/mingw32"
-      WINARCH: win32
+      WINARCH: "win32"
       ARCH_PACKAGES: "mingw-w64-i686-ctags mingw-w64-i686-make mingw-w64-i686-gcc mingw-w64-i686-libxml2 mingw-w64-i686-curl mingw-w64-i686-libusb mingw-w64-i686-openssl"
       IPF_WIN_URL: "http://www.softpres.org/_media/files:ipflib42_w32.zip"
       IPF_DLL_SRC: "ipflib42_w32/CAPSImg.dll"
       IPF_LICENCE_SRC: "ipflib42_w32/LICENSE.txt"
       # I'm not sure why, e2e tests do not work on win32 (binary doesn't seem to work), only on win64 ...
-      RUN_E2E: false
+      RUN_E2E: "false"
 
 install:
 - if not exist "%MSYS2_ARCHIVE%" appveyor DownloadFile "%MSYS2_URL%" -FileName "%MSYS2_ARCHIVE%"
@@ -88,7 +88,7 @@ deploy:
   description: "Latest build of Kalenji Redaer, with the newest cool features and the most recent bugs."
   provider: GitHub
   auth_token:
-	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
+    secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
   artifact: kalenji_reader-%WINARCH%.zip
   draft: false
   prerelease: false
@@ -101,7 +101,7 @@ deploy:
   tag: "%APPVEYOR_REPO_TAG_NAME%"
   provider: GitHub
   auth_token:
-	  secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
+    secure: SN30dOmmZdach6lDGgQDtNFwnpp7cGnXgXorPjXUiYg758Wa0hoQXDoSYzVrG9yW
   artifact: kalenji_reader-%WINARCH%.zip
   draft: false
   prerelease: false
