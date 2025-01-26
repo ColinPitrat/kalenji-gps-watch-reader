@@ -97,7 +97,7 @@ windows: $(TARGET).exe win
 	cp $(MINGW_PATH)/bin/libssh2-1.dll win/
 	cp $(MINGW_PATH)/bin/libssl*.dll win/
 	cp $(MINGW_PATH)/bin/libstdc++-6.dll win/
-	cp $(MINGW_PATH)/bin/libunistring-2.dll win/
+	cp $(MINGW_PATH)/bin/libunistring-2.dll win/ || true
 	cp $(MINGW_PATH)/bin/libusb-1.0.dll win/
 	cp $(MINGW_PATH)/bin/libwinpthread-1.dll win/
 	cp $(MINGW_PATH)/bin/libxml2-2.dll win/
